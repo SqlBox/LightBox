@@ -17,10 +17,8 @@ namespace Firedump.usercontrols
 {
     public sealed partial class TableView : UserControlReference
     {
-        public TableView(IParentRef parent):base(parent)
-        {
-            InitializeComponent();
-        }
+
+        public TableView() { InitializeComponent(); }
 
         internal sealed override void onConnected()
         {

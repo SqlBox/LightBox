@@ -13,11 +13,15 @@ namespace Firedump.usercontrols
     {
         // One readonly list, all tabs have reference to this list!
         private readonly List<AutocompleteItem> menuItems = new List<AutocompleteItem>();
-        public Editor(IParentRef parent):base(parent)
-        { 
-            InitializeComponent();
-        }
 
+
+        public Editor() { InitializeComponent(); }
+
+        internal override void Init()
+        {
+            //Sample Dummy sql data
+            this.AddQueryTab(Properties.Resources.sample);
+        }
 
         internal sealed override void dataReceived(ITriplet<UserControlReference, UserControlReference, object> triplet)
         {

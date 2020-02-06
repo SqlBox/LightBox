@@ -17,19 +17,28 @@ namespace Firedump
         private sqlservers server;
         private bool showSystemDatabases = false;
 
-        // read only
-        public List<UserControlReference> ChildControls { get; }
+        public List<UserControlReference> ChildControls;
 
         public MainHome()
         {
             InitializeComponent();
             Text = "LightHouse Editor";
-            ChildControls = new List<UserControlReference>();
-            ChildControls.AddRange(new UserControlReference[]{dataView1,editor1,tableView1,tabView1});
+            this.InitChildControls();
             this.InitControlEvents();
             this.InitHomeEvents();
             this.openDatabaseWindow();
         }
+
+        private void InitChildControls()
+        {
+            ChildControls = new List<UserControlReference>();
+            ChildControls.AddRange(new UserControlReference[] { dataView1, editor1, tableView1, tabView1 });
+            foreach (UserControlReference uc in ChildControls)
+            {
+                uc.InitComponent(this);
+            }
+        }
+
 
         private void InitHomeEvents()
         {
@@ -248,6 +257,12 @@ namespace Firedump
         public sqlservers GetServer()
         {
             return this.server;
+        }
+
+
+        private void ContentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

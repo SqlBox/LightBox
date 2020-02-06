@@ -481,6 +481,38 @@ namespace Firedump.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SELECT COUNT(price), price FROM orders 
+        ///WHERE price &lt; 70 GROUP BY price ORDER BY price
+        ///
+        ////* This query below is commented so it won&apos;t execute*/
+        ////*
+        ///SELECT item FROM Orders 
+        ///WHERE date ALL = (SELECT Order_ID FROM Orders
+        ///WHERE quantity &gt; 50)
+        ///*/
+        /// 
+        ////* the sql query below the will be executed 
+        ///ignoring the text after &quot;--&quot;
+        ///*/
+        /// 
+        ///SELECT item -- single comment  
+        ///FROM Orders -- another single comment
+        ///WHERE id 
+        ///ALL = (SELECT ID FROM Orders
+        ///WHERE quantity &gt; 25)
+        ///
+        ///SELECT eno,
+        ///dno,
+        ///salary,
+        ///DENSE_RANK( [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string sample {
+            get {
+                return ResourceManager.GetString("sample", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap save_icon {

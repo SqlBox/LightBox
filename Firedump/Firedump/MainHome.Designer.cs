@@ -144,10 +144,10 @@ namespace Firedump
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.tabView1 = new Firedump.usercontrols.TabView(this);// IoT pattern
-            this.editor1 = new Firedump.usercontrols.Editor(this);
-            this.dataView1 = new Firedump.usercontrols.DataView(this);
-            this.tableView1 = new Firedump.usercontrols.TableView(this);
+            this.tabView1 = new Firedump.usercontrols.TabView();
+            this.editor1 = new Firedump.usercontrols.Editor();
+            this.dataView1 = new Firedump.usercontrols.DataView();
+            this.tableView1 = new Firedump.usercontrols.TableView();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();

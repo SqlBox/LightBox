@@ -371,6 +371,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="resources\sample.txt" />
     <None Include="resources\icons\Database-128.png" />
     <None Include="resources\dropboxicon.png" />
     <None Include="resources\ftpicon.png" />

@@ -12,11 +12,8 @@ namespace Firedump.usercontrols
 {
     public partial class DataView : UserControlReference
     {
-        public DataView(IParentRef parent):base(parent)
-        {
-            InitializeComponent();
-        }
 
+        public DataView() { InitializeComponent(); }
        
     }
 }

@@ -12,7 +12,7 @@ namespace Firedump.usercontrols
     public  class UserControlReference : UserControl
     {
         // Composition
-        private readonly IParentRef parent;
+        private IParentRef parent;
 
         // this default constructor exists only for the visual studio incapability 
         // and bugs causing missing and error forms render in editor
@@ -20,11 +20,18 @@ namespace Firedump.usercontrols
         {
         }
 
-        // IoT
         public UserControlReference(IParentRef parentRef) : this()
         {
             this.parent = parentRef;
         }
+
+        internal void InitComponent(IParentRef parentRef)
+        {
+            this.parent = parentRef;
+            this.Init();
+        }
+
+        internal virtual void Init() { }
 
         internal bool isConnected()
         {

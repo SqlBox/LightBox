@@ -16,8 +16,8 @@ namespace Firedump.usercontrols
 {
     public sealed partial class TabView : UserControlReference
     {
-       
-        public TabView(IParentRef parent):base(parent)
+
+        public TabView()
         {
             InitializeComponent();
         }
