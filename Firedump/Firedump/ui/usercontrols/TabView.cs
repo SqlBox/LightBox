@@ -57,8 +57,7 @@ namespace Firedump.usercontrols
         {
             if (this.checkConnection())
             {
-                string tab = tabControl1.SelectedTab.Text;
-                switch(tab)
+                switch(tabControl1.SelectedTab.Text)
                 {
                     case "Tables":
                         this.setDatagridviewTables();
@@ -93,10 +92,8 @@ namespace Firedump.usercontrols
 
         private void setDatagridviewTables()
         {
-            SqlBuilderFactory sqlFactory = new SqlBuilderFactory(GetServer());
-            ISqlBuilder sqlBuilder = sqlFactory.Create(GetSqlConnection().Database);
-            dataGridViewTables.DataSource = DbUtils.getDataTableData(GetSqlConnection(),
-                sqlBuilder.getDatabaseTables());
+            ISqlBuilder sqlBuilder = new SqlBuilderFactory(GetServer()).Create(GetSqlConnection().Database);
+            dataGridViewTables.DataSource = DbUtils.getDataTableData(GetSqlConnection(),sqlBuilder.getDatabaseTables());
         }
     
 

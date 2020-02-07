@@ -259,10 +259,5 @@ namespace Firedump
             return this.server;
         }
 
-
-        private void ContentsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

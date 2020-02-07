@@ -118,7 +118,5 @@ namespace Firedump.core.parsers
             return tablelist;
         }
 
-
-
     }
 }

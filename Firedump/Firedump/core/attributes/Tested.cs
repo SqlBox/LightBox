@@ -8,6 +8,7 @@ namespace Firedump.core.attributes
 {
     public class ForTest : BaseAttr
     {
+        public ForTest() : base() { }
         public ForTest(string label) : base(label) { }
     }
 }

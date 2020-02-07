@@ -6,6 +6,7 @@ using Firedump.models;
 using Firedump.models.events;
 using Firedump.core;
 using Firedump.core.db;
+using Firedump.core.parsers;
 
 namespace Firedump.usercontrols
 {
@@ -90,10 +91,13 @@ namespace Firedump.usercontrols
         internal void ExecuteScript()
         {
             var tb = GetSelectedTabEditor();
-            if(tb != null)
+            if(tb != null && this.checkConnection())
             {
-                string sql = tb.Text;
+                string sqlToBeExecuted = EditorUtils.SelectedTextOrTabText(tb.SelectedText, tb.Text);
+                if(string.IsNullOrWhiteSpace(sqlToBeExecuted))
+                {
 
+                }
             }
         }
     }

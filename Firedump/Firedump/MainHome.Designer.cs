@@ -337,12 +337,14 @@ namespace Firedump
             this.findToolStripMenuItem1.Name = "findToolStripMenuItem1";
             this.findToolStripMenuItem1.Size = new System.Drawing.Size(164, 22);
             this.findToolStripMenuItem1.Text = "Find";
+            this.findToolStripMenuItem1.Click += new System.EventHandler(this.OnSearchClick);
             // 
             // findAndReplaceToolStripMenuItem
             // 
             this.findAndReplaceToolStripMenuItem.Name = "findAndReplaceToolStripMenuItem";
             this.findAndReplaceToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.findAndReplaceToolStripMenuItem.Text = "Find and Replace";
+            this.findAndReplaceToolStripMenuItem.Click += new System.EventHandler(this.OnReplaceClick);
             // 
             // formatToolStripMenuItem
             // 
@@ -366,12 +368,14 @@ namespace Firedump
             this.uPCASEToolStripMenuItem.Name = "uPCASEToolStripMenuItem";
             this.uPCASEToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.uPCASEToolStripMenuItem.Text = "UPCASE";
+            this.uPCASEToolStripMenuItem.Click += new System.EventHandler(this.ToUpperClick);
             // 
             // lOWERCASEToolStripMenuItem
             // 
             this.lOWERCASEToolStripMenuItem.Name = "lOWERCASEToolStripMenuItem";
             this.lOWERCASEToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.lOWERCASEToolStripMenuItem.Text = "lowercase";
+            this.lOWERCASEToolStripMenuItem.Click += new System.EventHandler(this.ToLowerClick);
             // 
             // toolStripSeparator9
             // 
@@ -825,6 +829,7 @@ namespace Firedump
             this.toolStripButtonExecute.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonExecute.Text = "toolStripButtonExecute";
             this.toolStripButtonExecute.ToolTipText = "Execute script";
+            this.toolStripButtonExecute.Click += new System.EventHandler(this.ExecuteScript);
             // 
             // toolStripButtonExecCurrent
             // 

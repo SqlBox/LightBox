@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace Firedump.core.parsers
 {
+    [Obsolete]
     public enum StatementType : int
     {
         SELECT = 1,
         OTHER = 20
     }
 
+    [Obsolete]
     public sealed class StatementTypeResolver
     {
         public static StatementType Resolve(string sql)

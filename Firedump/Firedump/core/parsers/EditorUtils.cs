@@ -40,7 +40,7 @@ namespace Firedump.core.parsers
             try
             {
                 var formatter = new Formatter();
-                formatter.Format(sql);
+                formatter.Format(new StringBuilder(sql).ToString());
                 if (formatter.Success)
                 {
                     return formatter.LastResult;
@@ -52,6 +52,21 @@ namespace Firedump.core.parsers
             }
             //Return the orignal sql
             return sql;
+        }
+
+
+        /**
+         * 
+         * Get the sql to be executed
+         * So its either gonna be the user selected area from tab editor
+         * Or if its empty(that means the user just clicked on the tab but didnt select any text)
+         * its the whole tab text
+         * and if the tab text is null or empty
+         **/
+        [ForTest]
+        internal static string SelectedTextOrTabText(string selectedText, string tabText)
+        {
+            return !string.IsNullOrEmpty(selectedText) ? selectedText : !string.IsNullOrEmpty(tabText) ? tabText : null;
         }
 
     }
