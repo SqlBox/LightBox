@@ -142,11 +142,10 @@ namespace Firedump
             this.toolStripTextBoxSearch = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripButton19 = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.tabView1 = new Firedump.usercontrols.TabView();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.tabView1 = new Firedump.usercontrols.TabView();
             this.editor1 = new Firedump.usercontrols.Editor();
-            this.dataView1 = new Firedump.usercontrols.DataView();
             this.tableView1 = new Firedump.usercontrols.TableView();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -161,7 +160,6 @@ namespace Firedump
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
-            this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1111,6 +1109,14 @@ namespace Firedump
             this.splitContainer1.SplitterDistance = 250;
             this.splitContainer1.TabIndex = 2;
             // 
+            // tabView1
+            // 
+            this.tabView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabView1.Location = new System.Drawing.Point(0, 0);
+            this.tabView1.Name = "tabView1";
+            this.tabView1.Size = new System.Drawing.Size(248, 577);
+            this.tabView1.TabIndex = 0;
+            // 
             // splitContainer2
             // 
             this.splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -1140,37 +1146,17 @@ namespace Firedump
             // splitContainer3.Panel1
             // 
             this.splitContainer3.Panel1.Controls.Add(this.editor1);
-            // 
-            // splitContainer3.Panel2
-            // 
-            this.splitContainer3.Panel2.Controls.Add(this.dataView1);
             this.splitContainer3.Size = new System.Drawing.Size(728, 579);
-            this.splitContainer3.SplitterDistance = 378;
+            this.splitContainer3.SplitterDistance = 549;
             this.splitContainer3.TabIndex = 0;
-            // 
-            // tabView1
-            // 
-            this.tabView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabView1.Location = new System.Drawing.Point(0, 0);
-            this.tabView1.Name = "tabView1";
-            this.tabView1.Size = new System.Drawing.Size(248, 577);
-            this.tabView1.TabIndex = 0;
             // 
             // editor1
             // 
             this.editor1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.editor1.Location = new System.Drawing.Point(0, 0);
             this.editor1.Name = "editor1";
-            this.editor1.Size = new System.Drawing.Size(726, 376);
+            this.editor1.Size = new System.Drawing.Size(726, 547);
             this.editor1.TabIndex = 0;
-            // 
-            // dataView1
-            // 
-            this.dataView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataView1.Location = new System.Drawing.Point(0, 0);
-            this.dataView1.Name = "dataView1";
-            this.dataView1.Size = new System.Drawing.Size(726, 195);
-            this.dataView1.TabIndex = 0;
             // 
             // tableView1
             // 
@@ -1207,7 +1193,6 @@ namespace Firedump
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
-            this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -1248,7 +1233,6 @@ namespace Firedump
         private usercontrols.TabView tabView1;
         private usercontrols.Editor editor1;
         private usercontrols.TableView tableView1;
-        private usercontrols.DataView dataView1;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openSqlFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;

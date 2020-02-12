@@ -12,21 +12,18 @@ namespace Firedump.models
     public sealed class TabPageHolder : TabPage
     {
         private readonly AutocompleteMenu menu;
+        private readonly FastColoredTextBox fastColoredTextBox;
 
-        public TabPageHolder(Panel panel,ImageList imageList, List<AutocompleteItem> menuItems) :base()
+        public TabPageHolder(FastColoredTextBox fastColoredTextBox, AutocompleteMenu menu)
         {
-            this.Controls.Add(panel);
-            this.menu = EditorUtils.CreateAutoCompleteMenu(this.GetFastColoredTextBox(), imageList);
-            this.menu.Items.SetAutocompleteItems(menuItems);
-            this.menu.Items.MaximumSize = new System.Drawing.Size(300, 400);
-            this.menu.AutoSize = true;
-            this.menu.Items.AutoSize = true;
-            this.menu.Items.Width = 300;
+            this.fastColoredTextBox = fastColoredTextBox;
+            this.menu = menu;
         }
+        
 
         public FastColoredTextBox GetFastColoredTextBox()
         {
-            return (FastColoredTextBox)this.Controls[0].Controls[0];
+            return fastColoredTextBox;
         }
 
         public AutocompleteMenu GetAutocompleteMenu()

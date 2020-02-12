@@ -1,6 +1,17 @@
 SELECT COUNT(price), price FROM orders 
 WHERE price < 70 GROUP BY price ORDER BY price
 
+select * from (
+    select rownum offset, rs.* from (
+       SELECT MAX(t.category) as category, 
+              COUNT(t.category) as count 
+         FROM tb_test_1 t 
+        GROUP BY t.category
+        /* add order by clause here if needed */
+   ) rs
+) where rownum <= 10 /* limit */
+    and offset >= 0 /* offset */
+
 /* This query below is commented so it won't execute*/
 /*
 SELECT item FROM Orders 

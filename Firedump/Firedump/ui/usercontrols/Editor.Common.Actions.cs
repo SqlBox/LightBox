@@ -102,7 +102,7 @@ namespace Firedump.usercontrols
             var editor = GetSelectedTabEditor();
             if (editor != null)
             {
-                editor.Text = EditorUtils.FormatSql(editor.Text);
+                editor.Text = StringUtils.FormatSql(editor.Text);
             }
         }
 

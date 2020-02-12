@@ -35,7 +35,7 @@ namespace Firedump.usercontrols
         internal sealed override void onConnected()
         {
             base.onConnected();
-            if(!string.IsNullOrEmpty(GetSqlConnection().Database) && this.tabControl1.Controls.Count == 0)
+            if (!string.IsNullOrEmpty(GetSqlConnection().Database) && this.tabControl1.Controls.Count == 0)
             {
                 this.AddQueryTab();
             }
@@ -45,11 +45,9 @@ namespace Firedump.usercontrols
         internal void AddQueryTab(string sql = "  ")
         {
             this.SuspendLayout();
-            TabPageHolder myQueryTab = TabBuilder<TabControl, Editor>.With(this.tabControl1)
-               .And(imageList1)
-               .createQueryTab(menuItems,sql);
+            TabPageHolder myQueryTab = EditorAdapter.CreateQueryTab(this.tabControl1, imageList1, menuItems, sql);
             tabControl1.Controls.Add(myQueryTab);
-            SetEditorEvents(myQueryTab);
+            myQueryTab.GetFastColoredTextBox().KeyDown += fctb_KeyDown;
             this.ResumeLayout();
         }
 
@@ -63,11 +61,6 @@ namespace Firedump.usercontrols
                 e.Handled = true;
             }
         }       
-
-        private void SetEditorEvents(TabPage queryTab) 
-        {
-            queryTab.Controls[0].Controls[0].KeyDown += fctb_KeyDown;
-        }
 
         private FastColoredTextBox GetSelectedTabEditor()
         {
@@ -93,7 +86,7 @@ namespace Firedump.usercontrols
             var tb = GetSelectedTabEditor();
             if(tb != null && this.checkConnection())
             {
-                string sqlToBeExecuted = EditorUtils.SelectedTextOrTabText(tb.SelectedText, tb.Text);
+                string sqlToBeExecuted = StringUtils.SelectedTextOrTabText(tb.SelectedText, tb.Text);
                 if(string.IsNullOrWhiteSpace(sqlToBeExecuted))
                 {
 
