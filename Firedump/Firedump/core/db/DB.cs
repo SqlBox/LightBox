@@ -55,14 +55,6 @@ namespace Firedump.core.db
             }
         }
 
-        internal static void SetAutoCommit(DbConnection con, bool autoCommit)
-        {
-            using (var command = new DbCommandFactory(con, "set autocommit=" + (autoCommit == true ? "1" : "0")).Create())
-            {
-                command.ExecuteNonQuery();
-            }
-        }
-
         internal static void Rollback(DbConnection con)
         {
             using (var command = new DbCommandFactory(con, "rollback").Create())

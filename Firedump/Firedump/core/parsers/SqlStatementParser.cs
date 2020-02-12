@@ -19,6 +19,7 @@ namespace Firedump.core.parsers
         }
     }
 
+    [Obsolete]
     class SqlStatementParser
     {
         private string originalSql;

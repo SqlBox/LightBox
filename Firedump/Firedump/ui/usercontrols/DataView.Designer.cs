@@ -38,8 +38,8 @@
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.firedumpdbDataSetBindingSource)).BeginInit();
@@ -127,19 +127,19 @@
             this.toolStripLabel4.Size = new System.Drawing.Size(61, 22);
             this.toolStripLabel4.Text = "History";
             // 
-            // toolStripLabel3
-            // 
-            this.toolStripLabel3.Image = global::Firedump.Properties.Resources.html_icon;
-            this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(50, 22);
-            this.toolStripLabel3.Text = "Html";
-            // 
             // toolStripLabel5
             // 
             this.toolStripLabel5.Image = global::Firedump.Properties.Resources.print_icon;
             this.toolStripLabel5.Name = "toolStripLabel5";
             this.toolStripLabel5.Size = new System.Drawing.Size(48, 22);
             this.toolStripLabel5.Text = "Print";
+            // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Image = global::Firedump.Properties.Resources.html_icon;
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(50, 22);
+            this.toolStripLabel3.Text = "Html";
             // 
             // DataView
             // 

@@ -19,14 +19,5 @@ namespace Firedump.core
             return true;
         }
 
-        // Change the case for every format,prettyfy?
-        // user should choose between auto upper,auto lower
-        // or default is nothing text stays the same.
-        // Should refactor return type of method to Enum like eg( UPPER,LOWER,DEFAULT ...).
-        // bool is not enough.
-        internal static bool changeTextCase()
-        {
-            return true;
-        }
     }
 }

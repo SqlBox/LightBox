@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Firedump.core.parsers
 {
-    // https://github.com/mitchavines/SQL_Formatter
+    //Special thanks to https://github.com/mitchavines/SQL_Formatter
     //An Experimental sql formatter
     class Formatter
     {

@@ -8,6 +8,9 @@ using Firedump.core.attributes;
 using Firedump.core.sql;
 using Firedump.core.security;
 using Firedump.models;
+using System.Text;
+using System.Diagnostics;
+using System.Threading;
 
 namespace Firedump.core.db
 {
@@ -45,6 +48,7 @@ namespace Firedump.core.db
             }
             return getStringData(con, new SqlBuilderFactory(con).Create(database).showTablesSql());
         }
+
 
         public static List<string> getTables(DbConnection con)
         {
@@ -108,7 +112,6 @@ namespace Firedump.core.db
             }
             return data;
         }
-
 
         internal static int getIntSingleResult(DbConnection con, string sql)
         {

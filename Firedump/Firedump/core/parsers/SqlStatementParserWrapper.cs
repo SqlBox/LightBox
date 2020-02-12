@@ -8,6 +8,7 @@ using static Firedump.core.parsers.SqlStatementParser;
 
 namespace Firedump.core.parsers
 {
+    [Obsolete]
     public class SqlStatementParserWrapper
     {
         private readonly string sql;

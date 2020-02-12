@@ -23,17 +23,6 @@ namespace Firedump.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("data source=\"C:\\Users\\piper\\Documents\\Visual Studio 2019\\Projects\\firedump\\Firedu" +
-            "mp\\Firedump\\resources\\db\\firedumpdb.db\"")]
-        public string firedumpdbConnectionString {
-            get {
-                return ((string)(this["firedumpdbConnectionString"]));
-            }
-        }
-        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -52,6 +41,16 @@ namespace Firedump.Properties {
         public string firedumpConString {
             get {
                 return ((string)(this["firedumpConString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("data source=\"resources\\db\\firedumpdb.db\"")]
+        public string firedumpdbConnectionString {
+            get {
+                return ((string)(this["firedumpdbConnectionString"]));
             }
         }
     }

@@ -32,7 +32,7 @@ namespace Firedump
         private void InitChildControls()
         {
             ChildControls = new List<UserControlReference>();
-            ChildControls.AddRange(new UserControlReference[] { dataView1, editor1, tableView1, tabView1 });
+            ChildControls.AddRange(new UserControlReference[] {  editor1, tableView1, tabView1 });
             foreach (UserControlReference uc in ChildControls)
             {
                 uc.InitComponent(this);
@@ -117,7 +117,7 @@ namespace Firedump
             if(this.server != null && !this.isConnected(this.con))
             {
                 this.con = DB.connect(this.server);
-                DB.SetAutoCommit(this.con, true);
+                DbSessionSettings.SetAutoCommit(this.con, true);
                 this.pushConnection();
                 this.EnableDisable(true);
             } else if(!this.isConnected(this.con))
@@ -142,7 +142,6 @@ namespace Firedump
             };
             databaseConnector.FormClosed += (sender,e) => this.EnableDisable(true);
         }
-
 
 
         private void setHomeConnectionStatus()
@@ -217,7 +216,7 @@ namespace Firedump
         {
             if(isConnected(con))
             {
-                DB.SetAutoCommit(con,false);
+                DbSessionSettings.SetAutoCommit(con,false);
             }
         }
 
@@ -259,10 +258,5 @@ namespace Firedump
             return this.server;
         }
 
-
-        private void ContentsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
