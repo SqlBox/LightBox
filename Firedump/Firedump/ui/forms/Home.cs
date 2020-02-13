@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using Firedump.Forms.mysql;
 using MySql.Data.MySqlClient;
 using Firedump.core.db;
+using Firedump.core.sql;
 
 namespace Firedump
 {
@@ -62,11 +63,8 @@ namespace Firedump
             if (result.wasSuccessful)
             {
                 MySqlConnection con = (MySqlConnection)DB.connect(server);
-                List<string> databases = DbUtils.getDatabases(server, con);//con.getDatabases();
-                if (hideSystemDatabases)
-                {
-                    databases = DbUtils.removeSystemDatabases(databases);
-                }              
+                List<string> databases = new SqlBuilderFactory(server)
+                        .Create(null).removeSystemDatabases(DbUtils.getDatabases(server, con), !hideSystemDatabases);
                 foreach (string database in databases)
                 {
                     this.Invoke((MethodInvoker)delegate () {

@@ -12,6 +12,7 @@ using Firedump.core;
 using Firedump.models.events;
 using Firedump.models;
 using Firedump.core.db;
+using Firedump.core.sql;
 
 namespace Firedump.usercontrols
 {
@@ -25,7 +26,8 @@ namespace Firedump.usercontrols
             base.onConnected();
             if(this.checkConnection())
             {
-                List<string> tables = DbUtils.removeSystemDatabases(DbUtils.getTables(base.GetSqlConnection()),false);
+                List<string> tables = new SqlBuilderFactory(base.GetSqlConnection())
+                        .Create(null).removeSystemDatabases(DbUtils.getTables(base.GetSqlConnection()), false);
                 OnSend(this, (object)new GenericEventArg<ITriplet<Editor, TableView, List<string>>>
                     (new TripletEventArgs<Editor, TableView, List<string>>(tables)));
                 this.setRootTablesIntoTreeView(tables);

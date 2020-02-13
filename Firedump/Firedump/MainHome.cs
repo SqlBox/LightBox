@@ -1,4 +1,5 @@
 ﻿using Firedump.core.db;
+using Firedump.core.sql;
 using Firedump.Forms.mysql;
 using Firedump.Forms.mysql.connect;
 using Firedump.models.events;
@@ -153,7 +154,8 @@ namespace Firedump
         private void setConnectionAndServerToUserControls()
         {
             this.pushConnection();
-            this.tabView1.setServerDataToComboBox(DbUtils.removeSystemDatabases(DbUtils.getDatabases(this.server, this.con),this.showSystemDatabases));
+            this.tabView1.setServerDataToComboBox(new SqlBuilderFactory(GetServer())
+                .Create(null).removeSystemDatabases(DbUtils.getDatabases(this.server, this.con), this.showSystemDatabases));
         }
 
         private void pushConnection()
@@ -180,8 +182,8 @@ namespace Firedump
         {
             if(this.isConnected(this.con))
             {
-                this.tabView1.setServerDataToComboBox(DbUtils.removeSystemDatabases(DbUtils
-                .getDatabases(this.server, this.con), this.showSystemDatabases = !this.showSystemDatabases));
+                this.tabView1.setServerDataToComboBox(new SqlBuilderFactory(GetServer())
+                .Create(null).removeSystemDatabases(DbUtils.getDatabases(this.server, this.con), this.showSystemDatabases = !this.showSystemDatabases));
             }
         }
 

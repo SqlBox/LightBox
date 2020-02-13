@@ -15,7 +15,6 @@ namespace Firedump.usercontrols
         // One readonly list, all tabs have reference to this list!
         private readonly List<AutocompleteItem> menuItems = new List<AutocompleteItem>();
 
-
         public Editor() { InitializeComponent(); }
 
         internal override void Init()
@@ -66,7 +65,7 @@ namespace Firedump.usercontrols
         {
             if(tabControl1.SelectedTab != null)
             {
-               return (FastColoredTextBox)tabControl1.SelectedTab.Controls[0].Controls[0];
+               return (FastColoredTextBox)((TabPageHolder)tabControl1.SelectedTab).GetFastColoredTextBox();
             }
             return null;
         }

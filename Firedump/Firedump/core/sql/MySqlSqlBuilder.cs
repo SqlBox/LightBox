@@ -61,27 +61,18 @@ namespace Firedump.core.sql
             " INNER JOIN information_schema.TABLE_CONSTRAINTS con ON con.constraint_name = tab.constraint_name AND con.constraint_type = 'FOREIGN KEY' " +
             " WHERE tab.table_schema = '" + Database + "'";
 
-        public string getAllFieldsFromAllTablesInDb()
-        {
-            return "SELECT " + getUpperOrLower("c.table_name") + " , " + getUpperOrLower("c.column_name") +
+        public string getAllFieldsFromAllTablesInDb() =>
+            "SELECT " + getUpperOrLower("c.table_name") + " , " + getUpperOrLower("c.column_name") +
                 " , " + getUpperOrLower("c.data_type") + " , " + getUpperOrLower("c.is_nullable") + " , c.character_maximum_length " +
                 "   FROM information_schema.columns c " +
                 "   WHERE c.table_schema = '" + Database + "' order by c.column_name,c.table_name,c.ordinal_position";
-        }
 
-        private string getUpperOrLower(string field)
-        {
-            if (IsUpper)
-            {
-                return " UPPER(" + field + ") ";
-            }
-            return " LOWER(" + field + ") ";
-        }
 
-        public string getDatabases()
-        {
-            return "show databases;";
-        }
+        private string getUpperOrLower(string field) => IsUpper ? " UPPER(" + field + ") " : " LOWER(" + field + ") ";
+
+
+        public string getDatabases() => "show databases;";
+
 
         public List<string> getTables()
         {
@@ -93,23 +84,20 @@ namespace Firedump.core.sql
             throw new NotImplementedException();
         }
 
-        public List<string> removeSystemDatabases(List<string> databases, bool showSystemDb = false)
-        {
-            throw new NotImplementedException();
-        }
+        /**
+         * !Only For MySql Database!
+         */
+        public List<string> removeSystemDatabases(List<string> databases, bool showSystemDb = false) =>
+            !showSystemDb
+                ? databases.Where(i => i != "sys".ToUpper() && i != "performance_schema".ToUpper() && i != "mysql".ToUpper() && i != "information_schema".ToUpper()).ToList()
+                : databases;
 
-        public string showTablesSql()
-        {
-            return "show tables from " + Database + ";";
-        }
+        public string showTablesSql() => "show tables from " + Database + ";";
+
 
         [Implement("Need model for describe output and implementation")]
-        public string describeTableSql(string table)
-        {
-            return "DESCRIBE " + table;
-            //throw new NotImplementedException();
-        }
-    }
+        public string describeTableSql(string table) => "DESCRIBE " + table;
 
+    }
 
 }

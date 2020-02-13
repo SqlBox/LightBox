@@ -142,21 +142,7 @@ namespace Firedump.core.db
         }
 
 
-        /**
-         * !Only For MySql Database!
-         * could improved in futture like, categorized system databases, user/schema databases , databases per configuration/permission and other.
-         * Now its Just KSERO PSOMI
-         */
-        [Deprecated("Dont event know if this is needed for other databases except MySql")]
-        internal static List<string> removeSystemDatabases(List<string> databases, bool showSystemDb = false)
-        {
-            if (!showSystemDb)
-            {
-                return databases.Where(i => i != "sys".ToUpper() && i != "performance_schema".ToUpper() && i != "mysql".ToUpper() && i != "information_schema".ToUpper()).ToList();
-            }
-            return databases;
-        }
-
+        
         internal static sqlservers getSqlServerFromTable(DataTable table, ListControl control)
         {
             return new sqlservers((string)table.Rows[control.SelectedIndex]["host"], unchecked((int)(long)table.Rows[control.SelectedIndex]["port"]),
