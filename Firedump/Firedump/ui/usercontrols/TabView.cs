@@ -55,7 +55,7 @@ namespace Firedump.usercontrols
         // On tab select set the data.
         private void initTabControl()
         {
-            if (this.checkConnection())
+            if (DbUtils.IsConnectedToDatabase(base.GetSqlConnection()))
             {
                 switch(tabControl1.SelectedTab.Text)
                 {

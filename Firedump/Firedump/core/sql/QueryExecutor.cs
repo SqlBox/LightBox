@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Firedump.core.sql
 {
-    class SqlExecutor
+    public class QueryExecutor
     {
-        public SqlExecutor() { }
+        public QueryExecutor() { }
     }
 }

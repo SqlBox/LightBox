@@ -163,9 +163,6 @@
   <data name="dropboximage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\icons\dropboximage.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="firedump" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\firedump.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ftpimage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\icons\ftpimage.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

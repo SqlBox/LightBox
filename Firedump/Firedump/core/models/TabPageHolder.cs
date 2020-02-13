@@ -1,5 +1,6 @@
 ﻿using FastColoredTextBoxNS;
 using Firedump.core.parsers;
+using Firedump.usercontrols;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,13 @@ namespace Firedump.models
     {
         private readonly AutocompleteMenu menu;
         private readonly FastColoredTextBox fastColoredTextBox;
+        private readonly DataView dataView;
 
-        public TabPageHolder(FastColoredTextBox fastColoredTextBox, AutocompleteMenu menu)
+        public TabPageHolder(FastColoredTextBox fastColoredTextBox, AutocompleteMenu menu,DataView dataView)
         {
             this.fastColoredTextBox = fastColoredTextBox;
             this.menu = menu;
+            this.dataView = dataView;
         }
         
 
@@ -29,6 +32,11 @@ namespace Firedump.models
         public AutocompleteMenu GetAutocompleteMenu()
         {
             return menu;
+        }
+
+        public DataView GetDataView()
+        {
+            return this.dataView;
         }
 
     }

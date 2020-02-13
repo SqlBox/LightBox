@@ -58,17 +58,6 @@
     <Reference Include="Google.Protobuf, Version=3.8.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.8.0\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
-    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.WindowsAPICodePack-Shell.1.1.0.0\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.WindowsAPICodePack.ShellExtensions, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.WindowsAPICodePack-Shell.1.1.0.0\lib\Microsoft.WindowsAPICodePack.ShellExtensions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="MySql.Data, Version=8.0.17.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.0.17\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
@@ -147,7 +136,7 @@
     <Compile Include="core\exceptions\EntityException.cs" />
     <Compile Include="core\exceptions\EntityNotExistsException.cs" />
     <Compile Include="core\exceptions\SqlException.cs" />
-    <Compile Include="core\sql\SqlExecutor.cs" />
+    <Compile Include="core\sql\QueryExecutor.cs" />
     <Compile Include="sqlitetables\backup_locations.cs" />
     <Compile Include="sqlitetables\DbTypeEnum.cs" />
     <Compile Include="sqlitetables\firedumpDataModel.Context.cs" />
@@ -217,7 +206,6 @@
     <Compile Include="MainHome.Designer.cs">
       <DependentUpon>MainHome.cs</DependentUpon>
     </Compile>
-    <Compile Include="resources\db\InitDb.cs" />
     <Compile Include="core\models\configuration\CredentialsConfig.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -437,7 +425,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="resources\mycomputericon.png" />
-    <None Include="resources\firedump.png" />
     <Content Include="resources\icons\sqlselecticon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

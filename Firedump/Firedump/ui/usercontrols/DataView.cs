@@ -8,11 +8,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using Firedump.core.sql;
+using Firedump.models.events;
+using System.Data.Common;
+using Firedump.core.db;
 
 namespace Firedump.usercontrols
 {
-    public partial class DataView : UserControlReference
+    public partial class DataView : UserControl
     {
-        public DataView() { InitializeComponent(); }   
+        private QueryExecutor executor;
+
+        public DataView() { InitializeComponent(); }
+
+        internal void ExecuteQuery(string query, DbConnection con)
+        {
+            if(DbUtils.IsConnectedToDatabase(con))
+            {
+                this.executor = new QueryExecutor();
+            }
+        }
     }
 }

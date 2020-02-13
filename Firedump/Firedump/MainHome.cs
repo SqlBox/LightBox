@@ -33,7 +33,7 @@ namespace Firedump
         private void InitChildControls()
         {
             ChildControls = new List<UserControlReference>();
-            ChildControls.AddRange(new UserControlReference[] {  editor1, tableView1, tabView1 });
+            ChildControls.AddRange(new UserControlReference[] { editor1, tableView1, tabView1 });
             foreach (UserControlReference uc in ChildControls)
             {
                 uc.InitComponent(this);

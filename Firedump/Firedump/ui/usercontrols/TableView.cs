@@ -24,7 +24,7 @@ namespace Firedump.usercontrols
         internal sealed override void onConnected()
         {
             base.onConnected();
-            if(this.checkConnection())
+            if(DbUtils.IsConnectedToDatabase(base.GetSqlConnection()))
             {
                 List<string> tables = new SqlBuilderFactory(base.GetSqlConnection())
                         .Create(null).removeSystemDatabases(DbUtils.getTables(base.GetSqlConnection()), false);

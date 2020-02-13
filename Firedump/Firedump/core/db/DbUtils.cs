@@ -141,12 +141,22 @@ namespace Firedump.core.db
             return data;
         }
 
-
         
         internal static sqlservers getSqlServerFromTable(DataTable table, ListControl control)
         {
             return new sqlservers((string)table.Rows[control.SelectedIndex]["host"], unchecked((int)(long)table.Rows[control.SelectedIndex]["port"]),
                 (string)table.Rows[control.SelectedIndex]["username"], EncryptionUtils.sDecrypt((string)table.Rows[control.SelectedIndex]["password"]));
+        }
+
+        
+        internal static bool IsConnected(DbConnection con)
+        {
+            return con != null && con.State == System.Data.ConnectionState.Open;
+        }
+
+        internal static bool IsConnectedToDatabase(DbConnection con)
+        {
+            return IsConnected(con) && !string.IsNullOrEmpty(con.Database);
         }
     }
 }

@@ -83,12 +83,23 @@ namespace Firedump.usercontrols
         internal void ExecuteScript()
         {
             var tb = GetSelectedTabEditor();
-            if(tb != null && this.checkConnection())
+            if (tb != null && DbUtils.IsConnectedToDatabase(base.GetSqlConnection()))
             {
                 string sqlToBeExecuted = StringUtils.SelectedTextOrTabText(tb.SelectedText, tb.Text);
-                if(string.IsNullOrWhiteSpace(sqlToBeExecuted))
+                if (!string.IsNullOrWhiteSpace(sqlToBeExecuted))
                 {
+                    //1 the point that user press execute button or something similar like execute next,current,selectedText
+                    //2 This sql needs to be added in the tabs history
+                    //3 there is already a history with the previous sql that executed
+                    //4 So probably there is a live task with a cursor/reader waiting for the result scroll to hit bottom to grub the next N results Or not
+                    //5 stop/kill the task and start a another one
+                    //6 reset the query results
 
+                    // send the query to the dataview control
+                    if (tabControl1.SelectedTab != null)
+                    {
+                        ((TabPageHolder)tabControl1.SelectedTab).GetDataView().ExecuteQuery(sqlToBeExecuted,base.GetSqlConnection());
+                    }
                 }
             }
         }

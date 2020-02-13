@@ -49,16 +49,13 @@ namespace Firedump
         }
 
         private void fillTreeView()
-        {
-           
+        {  
             if (cmbServers.Items.Count == 0) { return; } //ama den iparxei kanenas server den to kanei
             sqlservers server = null;
             this.Invoke((MethodInvoker)delegate ()
             {
                 server = DbUtils.getSqlServerFromTable(serverData,cmbServers);
             });
-
-            //edw prepei na bei to database kai mia if then else apo katw analoga ama kanei OldMySqlConnect se server i se database
             ConnectionResultSet result = DB.TestConnection(server);
             if (result.wasSuccessful)
             {

@@ -1,4 +1,5 @@
-﻿using Firedump.models.events;
+﻿using Firedump.core.db;
+using Firedump.models.events;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -33,22 +34,10 @@ namespace Firedump.usercontrols
 
         internal virtual void Init() { }
 
-        internal bool isConnected()
-        {
-            return parent.GetConnection() != null && parent.GetConnection().State == System.Data.ConnectionState.Open;
-        }
-
-        /**
-         * Global method, will show warn dialog,(not connected...)
-         */
-        internal bool checkConnection()
-        {
-            return this.isConnected() && !string.IsNullOrEmpty(parent.GetConnection().Database);
-        }
 
         internal void changeDatabase(string database)
         {
-            if(this.isConnected())
+            if(DbUtils.IsConnected(parent.GetConnection()))
             {
                 parent.GetConnection().ChangeDatabase(database);
                 this.OnConnectionChanged(this,new ConChangedEventArgs(parent.GetConnection()));

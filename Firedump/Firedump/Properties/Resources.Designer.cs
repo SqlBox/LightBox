@@ -213,16 +213,6 @@ namespace Firedump.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap firedump {
-            get {
-                object obj = ResourceManager.GetObject("firedump", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap ftpicon {
             get {
                 object obj = ResourceManager.GetObject("ftpicon", resourceCulture);
@@ -484,27 +474,21 @@ namespace Firedump.Properties {
         ///   Looks up a localized string similar to SELECT COUNT(price), price FROM orders 
         ///WHERE price &lt; 70 GROUP BY price ORDER BY price
         ///
+        ///select * from (
+        ///    select rownum offset, rs.* from (
+        ///       SELECT MAX(t.category) as category, 
+        ///              COUNT(t.category) as count 
+        ///         FROM tb_test_1 t 
+        ///        GROUP BY t.category
+        ///        /* add order by clause here if needed */
+        ///   ) rs
+        ///) where rownum &lt;= 10 /* limit */
+        ///    and offset &gt;= 0 /* offset */
+        ///
         ////* This query below is commented so it won&apos;t execute*/
         ////*
         ///SELECT item FROM Orders 
-        ///WHERE date ALL = (SELECT Order_ID FROM Orders
-        ///WHERE quantity &gt; 50)
-        ///*/
-        /// 
-        ////* the sql query below the will be executed 
-        ///ignoring the text after &quot;--&quot;
-        ///*/
-        /// 
-        ///SELECT item -- single comment  
-        ///FROM Orders -- another single comment
-        ///WHERE id 
-        ///ALL = (SELECT ID FROM Orders
-        ///WHERE quantity &gt; 25)
-        ///
-        ///SELECT eno,
-        ///dno,
-        ///salary,
-        ///DENSE_RANK( [rest of string was truncated]&quot;;.
+        ///WHERE [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string sample {
             get {

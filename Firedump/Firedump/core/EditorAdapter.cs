@@ -26,7 +26,8 @@ namespace Firedump.core
             }
             fastColoredTextBox1.Text = sql;
 
-            var tabPage = new TabPageHolder(fastColoredTextBox1, ControlBuilder.CreateAutoCompleteMenu(fastColoredTextBox1, imageList1, menuItems))
+            var tabPage = new TabPageHolder(fastColoredTextBox1, ControlBuilder.CreateAutoCompleteMenu(fastColoredTextBox1, imageList1, menuItems), 
+                ControlBuilder.CreateDataView())
             {
                 Name = "tabPageQuery" + (Control.Controls.Count + 1),
                 Text = "Tab" + (Control.Controls.Count + 1),
@@ -34,11 +35,10 @@ namespace Firedump.core
                 TabIndex = Control.Controls.Count,
                 Location = new System.Drawing.Point(4, 22)
             };
-            tabPage.Controls.Add(fastColoredTextBox1);
 
             var splitContainer = ControlBuilder.CreateSplitContainer();
-            splitContainer.Panel1.Controls.Add(fastColoredTextBox1);
-            splitContainer.Panel2.Controls.Add(ControlBuilder.CreateDataView());
+            splitContainer.Panel1.Controls.Add(tabPage.GetFastColoredTextBox());
+            splitContainer.Panel2.Controls.Add(tabPage.GetDataView());
             tabPage.Controls.Add(splitContainer);
             return tabPage;
         }
