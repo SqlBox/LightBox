@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using FastColoredTextBoxNS;
 using Firedump.core.parsers;
+using Firedump.core.sql;
 using Firedump.models;
 
 namespace Firedump.core
@@ -16,7 +17,7 @@ namespace Firedump.core
     {
 
         // The order of declarations and 'Add's' Matters
-        internal static TabPageHolder  CreateQueryTab<C>(C Control, ImageList imageList1, List<AutocompleteItem> menuItems, string sql)
+        internal static TabPageHolder  CreateQueryTab<C>(C Control, ImageList imageList1, List<AutocompleteItem> menuItems,QueryExecutor qe, string sql)
             where C : Control
         {
             var fastColoredTextBox1 = ControlBuilder.CreateFastColoredTextBox(Control);
@@ -27,7 +28,7 @@ namespace Firedump.core
             fastColoredTextBox1.Text = sql;
 
             var tabPage = new TabPageHolder(fastColoredTextBox1, ControlBuilder.CreateAutoCompleteMenu(fastColoredTextBox1, imageList1, menuItems), 
-                ControlBuilder.CreateDataView())
+                ControlBuilder.CreateDataView(qe))
             {
                 Name = "tabPageQuery" + (Control.Controls.Count + 1),
                 Text = "Tab" + (Control.Controls.Count + 1),

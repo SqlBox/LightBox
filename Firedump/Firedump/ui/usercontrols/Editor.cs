@@ -7,6 +7,8 @@ using Firedump.models.events;
 using Firedump.core;
 using Firedump.core.db;
 using Firedump.core.parsers;
+using Firedump.core.sql;
+using System.Data.Common;
 
 namespace Firedump.usercontrols
 {
@@ -14,7 +16,7 @@ namespace Firedump.usercontrols
     {
         // One readonly list, all tabs have reference to this list!
         private readonly List<AutocompleteItem> menuItems = new List<AutocompleteItem>();
-
+        
         public Editor() { InitializeComponent(); }
 
         internal override void Init()
@@ -44,7 +46,7 @@ namespace Firedump.usercontrols
         internal void AddQueryTab(string sql = "  ")
         {
             this.SuspendLayout();
-            TabPageHolder myQueryTab = EditorAdapter.CreateQueryTab(this.tabControl1, imageList1, menuItems, sql);
+            TabPageHolder myQueryTab = EditorAdapter.CreateQueryTab(this.tabControl1, imageList1, menuItems,new QueryExecutor(),sql);
             tabControl1.Controls.Add(myQueryTab);
             myQueryTab.GetFastColoredTextBox().KeyDown += fctb_KeyDown;
             this.ResumeLayout();
@@ -88,14 +90,6 @@ namespace Firedump.usercontrols
                 string sqlToBeExecuted = StringUtils.SelectedTextOrTabText(tb.SelectedText, tb.Text);
                 if (!string.IsNullOrWhiteSpace(sqlToBeExecuted))
                 {
-                    //1 the point that user press execute button or something similar like execute next,current,selectedText
-                    //2 This sql needs to be added in the tabs history
-                    //3 there is already a history with the previous sql that executed
-                    //4 So probably there is a live task with a cursor/reader waiting for the result scroll to hit bottom to grub the next N results Or not
-                    //5 stop/kill the task and start a another one
-                    //6 reset the query results
-
-                    // send the query to the dataview control
                     if (tabControl1.SelectedTab != null)
                     {
                         ((TabPageHolder)tabControl1.SelectedTab).GetDataView().ExecuteQuery(sqlToBeExecuted,base.GetSqlConnection());

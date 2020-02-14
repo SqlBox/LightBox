@@ -21,11 +21,17 @@ namespace Firedump.usercontrols
 
         public DataView() { InitializeComponent(); }
 
+        public DataView(QueryExecutor qe) : this()
+        {
+            this.executor = qe;
+        }
+
+
         internal void ExecuteQuery(string query, DbConnection con)
         {
             if(DbUtils.IsConnectedToDatabase(con))
             {
-                this.executor = new QueryExecutor();
+                this.executor.StartExecution(query, con);
             }
         }
     }

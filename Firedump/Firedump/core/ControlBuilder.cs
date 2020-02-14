@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Firedump.core.parsers;
 using System.Drawing;
+using Firedump.core.sql;
 
 namespace Firedump.core
 {
@@ -69,9 +70,9 @@ namespace Firedump.core
             return menu;
         }
 
-        internal static DataView CreateDataView()
+        internal static DataView CreateDataView(QueryExecutor qe)
         {
-            return new DataView()
+            return new DataView(qe)
             {
                 Dock = DockStyle.Fill,
                 Location = new System.Drawing.Point(0, 0),
