@@ -12,6 +12,7 @@ namespace Firedump.sqlitetables
         MARIADB = 1,
         ORACLE = 2,
         POSTGRES = 3,
-        SQLSERVER = 4
+        SQLSERVER = 4,
+        SQLITE = 5
     }
 }

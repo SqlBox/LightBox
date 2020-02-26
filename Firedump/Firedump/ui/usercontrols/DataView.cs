@@ -34,5 +34,15 @@ namespace Firedump.usercontrols
                 this.executor.StartExecution(query, con);
             }
         }
+
+        private void FetchNext(object sender, EventArgs e)
+        {
+            this.executor.FetchNext(100);
+        }
+
+        internal void StopRunningQuery()
+        {
+            this.executor.Stop();
+        }
     }
 }

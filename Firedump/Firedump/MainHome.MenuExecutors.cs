@@ -152,7 +152,9 @@ namespace Firedump
 
         private void ExecuteScript(object sender,EventArgs e)
         {
+            this.toolStripButtonExecute.Enabled = false;
             GetEditor().ExecuteScript();
+            this.toolStripButtonExecute.Enabled = true;
         }
     }
 }

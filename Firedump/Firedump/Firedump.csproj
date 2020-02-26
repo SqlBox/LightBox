@@ -126,6 +126,11 @@
     <Compile Include="core\db\DbConnectionFactory.cs" />
     <Compile Include="core\db\DbSessionSettings.cs" />
     <Compile Include="core\EditorAdapter.cs" />
+    <Compile Include="core\parsers\MySqlStatementParser.cs" />
+    <Compile Include="core\parsers\PostgreSqlStatementParser.cs" />
+    <Compile Include="core\parsers\SqlLiteSqlStatementParser.cs" />
+    <Compile Include="core\parsers\SqlStatementParserFactory.cs" />
+    <Compile Include="core\parsers\StatementEntry.cs" />
     <Compile Include="core\sql\executor\BaseThread.cs" />
     <Compile Include="core\sql\executor\ExecutorThread.cs" />
     <Compile Include="core\sql\ISqlBuilder.cs" />

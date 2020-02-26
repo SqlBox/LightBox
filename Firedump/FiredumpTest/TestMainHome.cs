@@ -11,7 +11,7 @@ namespace FiredumpTest
         public void Init()
         {
             MainHome mainHome = new MainHome();
-            Assert.AreEqual(4, mainHome.ChildControls.Count);
+            Assert.AreEqual(3, mainHome.ChildControls.Count);
             mainHome.Dispose();
         }
     }

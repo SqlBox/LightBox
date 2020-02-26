@@ -11,6 +11,7 @@ namespace Firedump.core.sql.executor
     public class ExecutorThread : BaseThread
     {
         private int _fetchLimit = 200;
+        public bool _Alive = true;
 
         public ExecutorThread() : base()
         {
@@ -21,7 +22,6 @@ namespace Firedump.core.sql.executor
             this._fetchLimit = fetchLimit;
         }
 
-
         public override void run()
         {
             try
@@ -29,11 +29,25 @@ namespace Firedump.core.sql.executor
                 Console.WriteLine(base.Query());
                 using (var reader = new DbCommandFactory(Con(), Query()).Create().ExecuteReader())
                 {
-                    while (reader.Read())
+                    Console.WriteLine("READING RESULTS...................");
+                    int _limit_pointer = 0;
+                    _Alive = true;
+                    while (_Alive && reader.Read())
                     {
-                        Console.WriteLine(reader[0]);
+                        _limit_pointer++;
+                        Console.WriteLine("row:" + _limit_pointer + "," + reader[0]);
+                        if (_limit_pointer >= this._fetchLimit)
+                        {
+                            lock (this)
+                            {
+                                Monitor.Wait(this);
+                                _limit_pointer = 0;
+                            }
+                        }
                     }
+                    Console.WriteLine("FINISHED READING RESULTS");
                 }
+                Console.WriteLine("READER CLOSED");
             }
             catch (DbException ex)
             {
@@ -43,12 +57,24 @@ namespace Firedump.core.sql.executor
             {
                 Console.WriteLine(ex.Message);
             }
+            
         }
 
-        public override void FetchLimit(int fetchLimit)
+
+        public override void SetFetchLimit(int fetchLimit)
         {
             this._fetchLimit = fetchLimit;
         }
 
+
+        public override void Stop()
+        {
+            this._Alive = false;
+            lock (this)
+            {
+                Monitor.PulseAll(this);
+            }
+            base.Join();
+        }
     }
 }

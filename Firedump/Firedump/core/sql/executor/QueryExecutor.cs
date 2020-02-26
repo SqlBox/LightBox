@@ -27,5 +27,18 @@ namespace Firedump.core.sql
             this.queryThread.Start(query, con);
         }
 
+        internal void FetchNext(int limit)
+        {
+            this.queryThread.SetFetchLimit(limit);
+            lock(this.queryThread)
+            {
+                Monitor.Pulse(this.queryThread);
+            }
+        }
+
+        internal  void Stop() { 
+            this.queryThread.Stop();
+        }
+
     }
 }

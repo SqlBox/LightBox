@@ -40,6 +40,7 @@
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabel6 = new System.Windows.Forms.ToolStripLabel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.firedumpdbDataSetBindingSource)).BeginInit();
@@ -99,7 +100,8 @@
             this.toolStripLabel2,
             this.toolStripLabel4,
             this.toolStripLabel5,
-            this.toolStripLabel3});
+            this.toolStripLabel3,
+            this.toolStripLabel6});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(604, 25);
@@ -141,6 +143,14 @@
             this.toolStripLabel3.Size = new System.Drawing.Size(50, 22);
             this.toolStripLabel3.Text = "Html";
             // 
+            // toolStripLabel6
+            // 
+            this.toolStripLabel6.Name = "toolStripLabel6";
+            this.toolStripLabel6.RightToLeftAutoMirrorImage = true;
+            this.toolStripLabel6.Size = new System.Drawing.Size(28, 22);
+            this.toolStripLabel6.Text = "Test";
+            this.toolStripLabel6.Click += new System.EventHandler(this.FetchNext);
+            // 
             // DataView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -172,5 +182,6 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel3;
         private System.Windows.Forms.ToolStripLabel toolStripLabel4;
         private System.Windows.Forms.ToolStripLabel toolStripLabel5;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel6;
     }
 }

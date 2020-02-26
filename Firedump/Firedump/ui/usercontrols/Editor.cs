@@ -9,6 +9,7 @@ using Firedump.core.db;
 using Firedump.core.parsers;
 using Firedump.core.sql;
 using System.Data.Common;
+using Firedump.core.sql.executor;
 
 namespace Firedump.usercontrols
 {
@@ -92,10 +93,23 @@ namespace Firedump.usercontrols
                 {
                     if (tabControl1.SelectedTab != null)
                     {
-                        ((TabPageHolder)tabControl1.SelectedTab).GetDataView().ExecuteQuery(sqlToBeExecuted,base.GetSqlConnection());
+                        stopAnyRunningQuery();
+                        ((TabPageHolder)tabControl1.SelectedTab).GetDataView().ExecuteQuery(sqlToBeExecuted, base.GetSqlConnection());
                     }
                 }
             }
         }
+
+
+        //Stop any running/open readers from all the tabs
+        //and then...
+        private void stopAnyRunningQuery()
+        {
+            foreach (TabPageHolder tab in tabControl1.Controls)
+            {
+                tab.GetDataView().StopRunningQuery();
+            }
+        }
+
     }
 }

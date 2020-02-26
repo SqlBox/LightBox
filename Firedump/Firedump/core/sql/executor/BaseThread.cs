@@ -13,7 +13,7 @@ namespace Firedump.core.sql.executor
         private Thread _thread;
         private string _query;
         private DbConnection _con;
-        
+
         public BaseThread()
         {
         }
@@ -23,15 +23,28 @@ namespace Firedump.core.sql.executor
 
         public void Start(string query,DbConnection con)
         {
-            this._query = query;
-            this._con = con;
-            this._thread = new Thread(new ThreadStart(run));
-            this._thread.Start();
+            if(this._thread == null || (this._thread != null && this._thread.ThreadState == ThreadState.Stopped))
+            {
+                this._query = query;
+                this._con = con;
+                this._thread = new Thread(new ThreadStart(run));
+                this._thread.Start();
+            }
         }
 
         public bool IsAlive() => this._thread.IsAlive;
+
+        public void Join()
+        {
+            if(this._thread != null)
+            {
+                this._thread.Join(2500);
+            }
+        }
+
+        public abstract  void Stop();
         public abstract void run();
-        public abstract void FetchLimit(int fetchLimit);
+        public abstract void SetFetchLimit(int fetchLimit);
     }
 
 }
