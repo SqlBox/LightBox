@@ -130,7 +130,7 @@
     <Compile Include="core\parsers\PostgreSqlStatementParser.cs" />
     <Compile Include="core\parsers\SqlLiteSqlStatementParser.cs" />
     <Compile Include="core\parsers\SqlStatementParserFactory.cs" />
-    <Compile Include="core\parsers\StatementEntry.cs" />
+    <Compile Include="core\parsers\StatementRange.cs" />
     <Compile Include="core\sql\executor\BaseThread.cs" />
     <Compile Include="core\sql\executor\ExecutorThread.cs" />
     <Compile Include="core\sql\ISqlBuilder.cs" />

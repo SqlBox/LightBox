@@ -139,7 +139,7 @@ namespace Firedump.core.parsers
                                 StringBuilder delimiterBuilder = new StringBuilder();
                                 while (run < end && *run != '\n' && *run != '\0')
                                 {
-                                    if (*run != ' ')
+                                    if (*run != ' ' && *run != 13)
                                     {
                                         delimiterBuilder.Append(*run);
                                     }
@@ -205,11 +205,13 @@ namespace Firedump.core.parsers
                             ;
                         if (count == 0)
                         {
+
                             // Multi char delimiter is complete. Tail still points to the start of the delimiter.
                             // Run points to the first character after the delimiter.
                             head = skip_leading_whitespace(head, tail);
                             if (head < tail)
                             {
+                                
                                 long startT = head - (char*)sql;
                                 long endT = tail - head;
                                 if (includeInRange(startT, endT))

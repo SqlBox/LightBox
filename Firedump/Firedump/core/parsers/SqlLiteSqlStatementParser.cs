@@ -6,15 +6,11 @@ using System.Threading.Tasks;
 
 namespace Firedump.core.parsers
 {
-    class SqlLiteSqlStatementParser : SqlStatementParser
+    // At the moment Mysql is a superSet for sqlite and the parser has a completly coverage
+    class SqlLiteSqlStatementParser : MySqlStatementParser
     {
-        public SqlLiteSqlStatementParser(string originalSqlRef) : base(originalSqlRef)
+        public SqlLiteSqlStatementParser(string originalSqlRef) : base(originalSqlRef,false)
         {
-        }
-
-        internal override unsafe void determineStatementRanges(char* sql, int length, string initial_delimiter, List<StatementRange> ranges, string line_break)
-        {
-            throw new NotImplementedException();
         }
     }
 }

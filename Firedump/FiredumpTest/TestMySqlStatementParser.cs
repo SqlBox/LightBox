@@ -9,6 +9,7 @@ namespace FiredumpTest
 
     [TestFixture(typeof(DbTypeEnum), DbTypeEnum.MARIADB)]
     [TestFixture(typeof(DbTypeEnum), DbTypeEnum.MYSQL)]
+    [TestFixture(typeof(DbTypeEnum), DbTypeEnum.SQLITE)]
     public class TestMySqlStatementParser<T>
     {
         private readonly DbTypeEnum dbType;
@@ -17,7 +18,7 @@ namespace FiredumpTest
             this.dbType = (DbTypeEnum)(object)t;
         }
 
-        [Test,TestCaseSource(typeof(MySqlRepoProvider),"statementProvider")]
+        [Test, TestCaseSource(typeof(MySqlRepoProvider), "statementProvider")]
         public void TestParser(string sql,int expectedStatements)
         {
             Assert.AreEqual(expectedStatements, new SqlStatementParserWrapper(sql, dbType).Parse().Count);
