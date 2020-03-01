@@ -75,6 +75,9 @@
     <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
       <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
     </Reference>
+    <Reference Include="SqlStatementParser, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\protectsoft.SqlStatementParser.1.0.3\lib\netstandard2.0\SqlStatementParser.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -126,11 +129,6 @@
     <Compile Include="core\db\DbConnectionFactory.cs" />
     <Compile Include="core\db\DbSessionSettings.cs" />
     <Compile Include="core\EditorAdapter.cs" />
-    <Compile Include="core\parsers\MySqlStatementParser.cs" />
-    <Compile Include="core\parsers\PostgreSqlStatementParser.cs" />
-    <Compile Include="core\parsers\SqlLiteSqlStatementParser.cs" />
-    <Compile Include="core\parsers\SqlStatementParserFactory.cs" />
-    <Compile Include="core\parsers\StatementRange.cs" />
     <Compile Include="core\sql\executor\BaseThread.cs" />
     <Compile Include="core\sql\executor\ExecutorThread.cs" />
     <Compile Include="core\sql\ISqlBuilder.cs" />
@@ -178,7 +176,6 @@
     </Compile>
     <Compile Include="core\models\events\ConChangedEventArgs.cs" />
     <Compile Include="core\models\FinalImageIndex.cs" />
-    <Compile Include="core\models\sql\SQL.cs" />
     <Compile Include="core\models\TabPageHolder.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -259,13 +256,9 @@
     <Compile Include="core\AutoMenuItemBuilder.cs" />
     <Compile Include="core\EditorConfig.cs" />
     <Compile Include="core\security\EncryptionUtils.cs" />
-    <Compile Include="core\parsers\Formatter.cs" />
-    <Compile Include="core\parsers\LIB.cs" />
     <Compile Include="core\exceptions\MyFormatterException.cs" />
     <Compile Include="core\OS.cs" />
     <Compile Include="core\sql\MySqlSqlBuilder.cs" />
-    <Compile Include="core\parsers\SqlStatementParser.cs" />
-    <Compile Include="core\parsers\SqlStatementParserWrapper.cs" />
     <Compile Include="core\parsers\StatementType.cs" />
     <Compile Include="core\parsers\StringUtils.cs" />
     <EmbeddedResource Include="ui\forms\connect\DatabaseConnect.resx">
@@ -439,6 +432,7 @@
     <None Include="resources\sqlselecticon.png.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="core\models\sql\" />
     <Folder Include="resources\mysqldump\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,4 +1,5 @@
-﻿using Firedump.core.parsers;
+﻿using com.protectsoft.SqlStatementParser;
+using Firedump.core.parsers;
 using Firedump.sqlitetables;
 using System;
 using System.Collections.Generic;
@@ -28,14 +29,14 @@ namespace Firedump
                         END WHILE;
                     END $$
                 DELIMITER ;";
-            List<StatementRange> ranges = new SqlStatementParserWrapper(sql, DbTypeEnum.MYSQL).Parse();
+            List<StatementRange> ranges = new SqlStatementParserWrapper(sql, DbType.MYSQL).Parse();
             foreach(StatementRange r in ranges)
             {
                 Console.WriteLine(sql.Substring((int)r.start, (int)r.end));
             }
             
-            //Application.EnableVisualStyles();
-            //Application.Run(new MainHome());
+            Application.EnableVisualStyles();
+            Application.Run(new MainHome());
         }
 
     }

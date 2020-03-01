@@ -1,4 +1,5 @@
-﻿using System;
+﻿using com.protectsoft.SqlStatementParser;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,11 @@ namespace Firedump.sqlitetables
 {
     public enum DbTypeEnum : int
     {
-        MYSQL = 0,
-        MARIADB = 1,
-        ORACLE = 2,
-        POSTGRES = 3,
-        SQLSERVER = 4,
-        SQLITE = 5
+        MYSQL = DbType.MYSQL,
+        MARIADB = DbType.MARIADB,
+        ORACLE = DbType.ORACLE,
+        POSTGRES = DbType.POSTGRES,
+        SQLSERVER = DbType.SQLSERVER,
+        SQLITE = DbType.SQLITE
     }
 }

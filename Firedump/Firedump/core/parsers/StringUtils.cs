@@ -1,4 +1,5 @@
-﻿using Firedump.core.attributes;
+﻿using com.protectsoft.SqlStatementParser.formatter;
+using Firedump.core.attributes;
 using Firedump.core.exceptions;
 using Firedump.core.parsers;
 using System;
