@@ -4,6 +4,7 @@ using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,10 @@ namespace Firedump.core.db
             else if (c is OracleConnection)
             {
                 return DbTypeEnum.ORACLE;
+            }
+            else if(c is SQLiteConnection)
+            {
+                return DbTypeEnum.SQLITE;
             }
             throw new Exception("Database Vendor Not Supported!");
         }

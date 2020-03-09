@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Firedump.core.models.events;
+using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
@@ -11,21 +12,25 @@ namespace Firedump.core.sql.executor
     abstract public class BaseThread
     {
         private Thread _thread;
-        private string _query;
+        private List<string> statements;
         private DbConnection _con;
+
+        //Event handlers
+        public event EventHandler Finished;
+        public event EventHandler<ExecutionEventArgs> StatementExecuted;
 
         public BaseThread()
         {
         }
 
-        public string Query() => this._query;
+        public List<string> Statements() => this.statements;
         public DbConnection Con() => this._con;
 
-        public void Start(string query,DbConnection con)
+        public void Start(List<string> statements,DbConnection con)
         {
             if(this._thread == null || (this._thread != null && this._thread.ThreadState == ThreadState.Stopped))
             {
-                this._query = query;
+                this.statements = statements;
                 this._con = con;
                 this._thread = new Thread(new ThreadStart(run));
                 this._thread.Start();
@@ -45,6 +50,17 @@ namespace Firedump.core.sql.executor
         public abstract  void Stop();
         public abstract void run();
         public abstract void SetFetchLimit(int fetchLimit);
+
+
+        //EVENTS
+        protected virtual void OnFinished(object t, EventArgs e)
+        {
+            Finished?.Invoke(t, e);
+        }
+        protected virtual void OnStatementExecuted(object t, ExecutionEventArgs e)
+        {
+            StatementExecuted?.Invoke(t, e);
+        }
     }
 
 }

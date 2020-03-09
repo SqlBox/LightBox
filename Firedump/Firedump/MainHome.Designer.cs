@@ -201,7 +201,7 @@ namespace Firedump
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.newToolStripMenuItem.Text = "New Query Tab";
+            this.newToolStripMenuItem.Text = "New Statements Tab";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.addNewQueryTab);
             // 
             // openSqlFileToolStripMenuItem

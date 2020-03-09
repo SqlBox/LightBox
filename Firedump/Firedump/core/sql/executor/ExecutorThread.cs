@@ -1,4 +1,5 @@
 ﻿using Firedump.core.db;
+using Firedump.core.models.events;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -26,28 +27,45 @@ namespace Firedump.core.sql.executor
         {
             try
             {
-                Console.WriteLine(base.Query());
-                using (var reader = new DbCommandFactory(Con(), Query()).Create().ExecuteReader())
+                List<string> statements = base.Statements();
+                if(statements != null && statements.Count > 0)
                 {
-                    Console.WriteLine("READING RESULTS...................");
-                    int _limit_pointer = 0;
-                    _Alive = true;
-                    while (_Alive && reader.Read())
+                    for(int i=0; i < statements.Count; i++)
                     {
-                        _limit_pointer++;
-                        Console.WriteLine("row:" + _limit_pointer + "," + reader[0]);
-                        if (_limit_pointer >= this._fetchLimit)
+                        string statement = statements[i];
+                        using (var reader = new DbCommandFactory(Con(), statement).Create().ExecuteReader())
                         {
-                            lock (this)
+                            Console.WriteLine("READING RESULTS...................");
+                            int _limit_pointer = 0;
+                            _Alive = true;
+                            while (_Alive && reader.Read())
                             {
-                                Monitor.Wait(this);
-                                _limit_pointer = 0;
+                                if (statements.Count == i)
+                                {
+                                    _limit_pointer++;
+                                    Console.WriteLine("row:" + _limit_pointer + "," + reader[0]);
+                                    if (_limit_pointer >= this._fetchLimit)
+                                    {
+                                        OnFinished(this, EventArgs.Empty);
+                                        lock (this)
+                                        {
+                                            Monitor.Wait(this);
+                                            _limit_pointer = 0;
+                                        }
+                                    }
+                                }
+                                if(!_Alive)
+                                {
+                                    break;
+                                }
                             }
+                            OnStatementExecuted(this, new ExecutionEventArgs());
                         }
                     }
-                    Console.WriteLine("FINISHED READING RESULTS");
+                } else
+                {
+                    OnFinished(this, EventArgs.Empty);
                 }
-                Console.WriteLine("READER CLOSED");
             }
             catch (DbException ex)
             {
@@ -73,8 +91,11 @@ namespace Firedump.core.sql.executor
             lock (this)
             {
                 Monitor.PulseAll(this);
+                OnFinished(this, EventArgs.Empty);
             }
             base.Join();
         }
+
+
     }
 }

@@ -10,6 +10,7 @@ using Firedump.core.parsers;
 using Firedump.core.sql;
 using System.Data.Common;
 using Firedump.core.sql.executor;
+using com.protectsoft.SqlStatementParser;
 
 namespace Firedump.usercontrols
 {
@@ -89,13 +90,13 @@ namespace Firedump.usercontrols
             if (tb != null && DbUtils.IsConnectedToDatabase(base.GetSqlConnection()))
             {
                 string sqlToBeExecuted = StringUtils.SelectedTextOrTabText(tb.SelectedText, tb.Text);
-                if (!string.IsNullOrWhiteSpace(sqlToBeExecuted))
+                if (!string.IsNullOrWhiteSpace(sqlToBeExecuted) && tabControl1.SelectedTab != null)
                 {
-                    if (tabControl1.SelectedTab != null)
-                    {
-                        stopAnyRunningQuery();
-                        ((TabPageHolder)tabControl1.SelectedTab).GetDataView().ExecuteQuery(sqlToBeExecuted, base.GetSqlConnection());
-                    }
+                    stopAnyRunningQuery();
+
+                    var parser = new SqlStatementParserWrapper(sqlToBeExecuted,(DbType)(int)_DbUtils.GetDbTypeEnum(base.GetSqlConnection()));
+                    List<string> statementList = SqlStatementParserWrapper.convert(sqlToBeExecuted, parser.Parse());
+                    ((TabPageHolder)tabControl1.SelectedTab).GetDataView().ExecuteStatement(statementList, base.GetSqlConnection());
                 }
             }
         }
@@ -111,5 +112,10 @@ namespace Firedump.usercontrols
             }
         }
 
+
+        //sql could be single or multi statement
+        void temp(string sql)
+        {
+        }
     }
 }
