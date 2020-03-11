@@ -1,4 +1,5 @@
 ﻿using Firedump.core.db;
+using Firedump.core.models.dbinfo;
 using Firedump.core.models.events;
 using System;
 using System.Collections.Generic;
@@ -40,13 +41,14 @@ namespace Firedump.core.sql.executor
                             _Alive = true;
                             while (_Alive && reader.Read())
                             {
-                                if (statements.Count == i)
+                                //we want to read and show data only from the last statement
+                                if (statements.Count-1 == i)
                                 {
                                     _limit_pointer++;
                                     Console.WriteLine("row:" + _limit_pointer + "," + reader[0]);
                                     if (_limit_pointer >= this._fetchLimit)
                                     {
-                                        OnFinished(this, EventArgs.Empty);
+                                        OnStatementExecuted(this, new ExecutionEventArgs<string>(Status.WAITING));
                                         lock (this)
                                         {
                                             Monitor.Wait(this);
@@ -54,26 +56,28 @@ namespace Firedump.core.sql.executor
                                         }
                                     }
                                 }
-                                if(!_Alive)
-                                {
-                                    break;
-                                }
                             }
-                            OnStatementExecuted(this, new ExecutionEventArgs());
+                            if(_Alive)
+                            {
+                                OnStatementExecuted(this, new ExecutionEventArgs<string>(Status.SUCCESS));
+                            }
                         }
                     }
-                } else
+                }
+                if(_Alive)
                 {
-                    OnFinished(this, EventArgs.Empty);
+                    OnStatementExecuted(this, new ExecutionEventArgs<string>(Status.FINISHED));
                 }
             }
             catch (DbException ex)
             {
                 Console.WriteLine(ex.Message);
+                OnStatementExecuted(this, new ExecutionEventArgs<string>(Status.ERROR) { Ex = ex }) ;
             }
             catch (IndexOutOfRangeException ex)
             {
                 Console.WriteLine(ex.Message);
+                OnStatementExecuted(this, new ExecutionEventArgs<string>(Status.ERROR) { Ex = ex });
             }
             
         }
@@ -85,15 +89,15 @@ namespace Firedump.core.sql.executor
         }
 
 
-        public override void Stop()
+        public override void Stop(string query)
         {
             this._Alive = false;
             lock (this)
             {
                 Monitor.PulseAll(this);
-                OnFinished(this, EventArgs.Empty);
             }
             base.Join();
+            OnStatementExecuted(this, new ExecutionEventArgs<string>(Status.STOPPED) { Value = query });
         }
 
 

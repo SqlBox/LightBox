@@ -37,6 +37,10 @@ namespace Firedump
             foreach (UserControlReference uc in ChildControls)
             {
                 uc.InitComponent(this);
+                if(uc is Editor)
+                {
+                    ((Editor)uc).StatementExecuted += OnStatementExecuted;
+                }
             }
         }
 

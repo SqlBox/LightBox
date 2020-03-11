@@ -11,6 +11,8 @@ using Firedump.core.sql;
 using System.Data.Common;
 using Firedump.core.sql.executor;
 using com.protectsoft.SqlStatementParser;
+using Firedump.core.models;
+using Firedump.core.models.events;
 
 namespace Firedump.usercontrols
 {
@@ -18,8 +20,12 @@ namespace Firedump.usercontrols
     {
         // One readonly list, all tabs have reference to this list!
         private readonly List<AutocompleteItem> menuItems = new List<AutocompleteItem>();
-        
-        public Editor() { InitializeComponent(); }
+        public event EventHandler<ExecutionEventArgs<string>> StatementExecuted;
+
+        public Editor()
+        {
+            InitializeComponent();
+        }
 
         internal override void Init()
         {
@@ -51,7 +57,22 @@ namespace Firedump.usercontrols
             TabPageHolder myQueryTab = EditorAdapter.CreateQueryTab(this.tabControl1, imageList1, menuItems,new QueryExecutor(),sql);
             tabControl1.Controls.Add(myQueryTab);
             myQueryTab.GetFastColoredTextBox().KeyDown += fctb_KeyDown;
+            myQueryTab.GetDataView().StatementExecuted += OnStatementExecuted;
             this.ResumeLayout();
+        }
+
+        private void OnStatementExecuted(object sender,ExecutionEventArgs<string> e)
+        {
+            Console.WriteLine("Editor:OnStatementExecuted:" + e.Status);
+            Console.WriteLine("Editor:OnStatementExecuted:" + e.Value);
+            if (e.Value != null)
+            {
+                Console.WriteLine("Execute");
+                Execute(e.Value);
+            } else
+            {
+                StatementExecuted?.Invoke(sender, e);
+            }
         }
 
         private void fctb_KeyDown(object sender, KeyEventArgs e)
@@ -84,38 +105,36 @@ namespace Firedump.usercontrols
             this.ResumeLayout();
         }
 
+
         internal void ExecuteScript()
         {
             var tb = GetSelectedTabEditor();
             if (tb != null && DbUtils.IsConnectedToDatabase(base.GetSqlConnection()))
             {
-                string sqlToBeExecuted = StringUtils.SelectedTextOrTabText(tb.SelectedText, tb.Text);
-                if (!string.IsNullOrWhiteSpace(sqlToBeExecuted) && tabControl1.SelectedTab != null)
+                string query = StringUtils.SelectedTextOrTabText(tb.SelectedText, tb.Text);
+                if (!string.IsNullOrWhiteSpace(query) && tabControl1.SelectedTab != null)
                 {
-                    stopAnyRunningQuery();
-
-                    var parser = new SqlStatementParserWrapper(sqlToBeExecuted,(DbType)(int)_DbUtils.GetDbTypeEnum(base.GetSqlConnection()));
-                    List<string> statementList = SqlStatementParserWrapper.convert(sqlToBeExecuted, parser.Parse());
-                    ((TabPageHolder)tabControl1.SelectedTab).GetDataView().ExecuteStatement(statementList, base.GetSqlConnection());
+                    stopAnyRunningQuery(query);
                 }
             }
         }
 
+        private void Execute(string query)
+        {
+            var parser = new SqlStatementParserWrapper(query, (DbType)(int)_DbUtils.GetDbTypeEnum(base.GetSqlConnection()));
+            List<string> statementList = SqlStatementParserWrapper.convert(parser.sql, parser.Parse());
+            ((TabPageHolder)tabControl1.SelectedTab).GetDataView().ExecuteStatement(statementList, base.GetSqlConnection());
+        }
 
-        //Stop any running/open readers from all the tabs
-        //and then...
-        private void stopAnyRunningQuery()
+
+        //Stop the open read from whatever tab it is
+        private void stopAnyRunningQuery(string query)
         {
             foreach (TabPageHolder tab in tabControl1.Controls)
             {
-                tab.GetDataView().StopRunningQuery();
+                tab.GetDataView().StopRunningQuery(query);
             }
         }
 
-
-        //sql could be single or multi statement
-        void temp(string sql)
-        {
-        }
     }
 }

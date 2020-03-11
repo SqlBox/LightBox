@@ -1,4 +1,5 @@
 ﻿using Firedump.core.db;
+using Firedump.core.models;
 using Firedump.usercontrols;
 using System;
 using System.Collections;
@@ -152,9 +153,16 @@ namespace Firedump
 
         private void ExecuteScript(object sender,EventArgs e)
         {
-            this.toolStripButtonExecute.Enabled = false;
-            GetEditor().ExecuteScript();
-            this.toolStripButtonExecute.Enabled = true;
+            DisableUI();
+            try
+            {
+                GetEditor().ExecuteScript();
+            }
+            catch (Exception ex) {
+                //LOG
+                //If something out of control goes wrong at least re enable the ui
+                EnableUI();
+            }
         }
     }
 }

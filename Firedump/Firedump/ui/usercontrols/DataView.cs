@@ -13,29 +13,27 @@ using Firedump.models.events;
 using System.Data.Common;
 using Firedump.core.db;
 using Firedump.core.models.events;
+using Firedump.core.models.dbinfo;
 
 namespace Firedump.usercontrols
 {
     public partial class DataView : UserControl
     {
         private QueryExecutor executor;
+        public event EventHandler<ExecutionEventArgs<string>> StatementExecuted;
 
         public DataView() { InitializeComponent(); }
 
         public DataView(QueryExecutor qe) : this()
         {
             this.executor = qe;
-            this.executor.Finished += OnFinished;
             this.executor.StatementExecuted += OnStatementExecuted;
         }
 
-        private void OnFinished(object sender,EventArgs e)
-        {
-            //enable action buttons
-        }
 
-        private void OnStatementExecuted(object sender,ExecutionEventArgs e)
+        private void OnStatementExecuted(object sender,ExecutionEventArgs<string> e)
         {
+            StatementExecuted?.Invoke(sender, e);
         }
 
 
@@ -52,9 +50,9 @@ namespace Firedump.usercontrols
             this.executor.FetchNext(100);
         }
 
-        internal void StopRunningQuery()
+        internal void StopRunningQuery(string query)
         {
-            this.executor.Cancel();
+            this.executor.Cancel(query);
         }
     }
 }
