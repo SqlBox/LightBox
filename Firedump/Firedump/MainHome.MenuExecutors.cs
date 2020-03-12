@@ -164,5 +164,10 @@ namespace Firedump
                 EnableUI();
             }
         }
+
+        private void StopRunningQuery(object sender, EventArgs e)
+        {
+            GetEditor().stopAnyRunningQuery();
+        }
     }
 }

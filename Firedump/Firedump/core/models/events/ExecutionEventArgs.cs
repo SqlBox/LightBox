@@ -1,22 +1,22 @@
 ﻿using Firedump.core.models.dbinfo;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Firedump.core.models.events
 {
-    public class ExecutionEventArgs<T> : EventArgs
+    public class ExecutionEventArgs : EventArgs
     {
         public Status Status;
         public Exception Ex;
-        public T Value;
-
+        public DataTable data;
+        public string query;
         public ExecutionEventArgs(Status s):base()
         {
             this.Status = s;
         }
-
     }
 }

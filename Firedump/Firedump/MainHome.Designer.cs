@@ -142,9 +142,9 @@ namespace Firedump
             this.toolStripTextBoxSearch = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripButton19 = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.tabView1 = new Firedump.usercontrols.TabView();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.tabView1 = new Firedump.usercontrols.TabView();
             this.editor1 = new Firedump.usercontrols.Editor();
             this.tableView1 = new Firedump.usercontrols.TableView();
             this.menuStrip1.SuspendLayout();
@@ -200,47 +200,47 @@ namespace Firedump
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.newToolStripMenuItem.Text = "New Statements Tab";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.addNewQueryTab);
             // 
             // openSqlFileToolStripMenuItem
             // 
             this.openSqlFileToolStripMenuItem.Name = "openSqlFileToolStripMenuItem";
-            this.openSqlFileToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.openSqlFileToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.openSqlFileToolStripMenuItem.Text = "Open Sql File";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(152, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(179, 6);
             // 
             // closeTabToolStripMenuItem
             // 
             this.closeTabToolStripMenuItem.Name = "closeTabToolStripMenuItem";
-            this.closeTabToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.closeTabToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.closeTabToolStripMenuItem.Text = "Close Tab";
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(152, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(179, 6);
             // 
             // saveScriptAsToolStripMenuItem
             // 
             this.saveScriptAsToolStripMenuItem.Name = "saveScriptAsToolStripMenuItem";
-            this.saveScriptAsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.saveScriptAsToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.saveScriptAsToolStripMenuItem.Text = "Save Script As";
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(152, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(179, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // editToolStripMenuItem
@@ -863,6 +863,7 @@ namespace Firedump
             this.toolStripButtonStop.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonStop.Text = "toolStripButtonStop";
             this.toolStripButtonStop.ToolTipText = "Stop executing query";
+            this.toolStripButtonStop.Click += new System.EventHandler(this.StopRunningQuery);
             // 
             // toolStripButton11
             // 
@@ -1109,14 +1110,6 @@ namespace Firedump
             this.splitContainer1.SplitterDistance = 250;
             this.splitContainer1.TabIndex = 2;
             // 
-            // tabView1
-            // 
-            this.tabView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabView1.Location = new System.Drawing.Point(0, 0);
-            this.tabView1.Name = "tabView1";
-            this.tabView1.Size = new System.Drawing.Size(248, 577);
-            this.tabView1.TabIndex = 0;
-            // 
             // splitContainer2
             // 
             this.splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -1149,6 +1142,14 @@ namespace Firedump
             this.splitContainer3.Size = new System.Drawing.Size(728, 579);
             this.splitContainer3.SplitterDistance = 549;
             this.splitContainer3.TabIndex = 0;
+            // 
+            // tabView1
+            // 
+            this.tabView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabView1.Location = new System.Drawing.Point(0, 0);
+            this.tabView1.Name = "tabView1";
+            this.tabView1.Size = new System.Drawing.Size(248, 577);
+            this.tabView1.TabIndex = 0;
             // 
             // editor1
             // 

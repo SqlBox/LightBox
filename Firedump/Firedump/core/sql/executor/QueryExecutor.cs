@@ -18,7 +18,7 @@ namespace Firedump.core.sql
         // one instance per tab but different execution life cycles
         private BaseThread queryThread;
 
-        public event EventHandler<ExecutionEventArgs<string>> StatementExecuted;
+        public event EventHandler<ExecutionEventArgs> StatementExecuted;
 
         public QueryExecutor()
         {
@@ -26,7 +26,7 @@ namespace Firedump.core.sql
             this.queryThread.StatementExecuted += OnStatementExecuted;
         }
 
-        internal virtual void OnStatementExecuted(object t,ExecutionEventArgs<string> e)
+        internal virtual void OnStatementExecuted(object t,ExecutionEventArgs e)
         {
             StatementExecuted?.Invoke(t, e);
         }
@@ -37,17 +37,9 @@ namespace Firedump.core.sql
             this.queryThread.Start(statements, con);
         }
 
-        internal void FetchNext(int limit)
-        {
-            this.queryThread.SetFetchLimit(limit);
-            lock(this.queryThread)
-            {
-                Monitor.Pulse(this.queryThread);
-            }
-        }
 
-        internal  void Cancel(string query) { 
-            this.queryThread.Stop(query);
+        internal  void Cancel() { 
+            this.queryThread.Stop();
         }
 
     }

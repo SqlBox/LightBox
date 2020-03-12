@@ -20,7 +20,7 @@ namespace Firedump.usercontrols
     {
         // One readonly list, all tabs have reference to this list!
         private readonly List<AutocompleteItem> menuItems = new List<AutocompleteItem>();
-        public event EventHandler<ExecutionEventArgs<string>> StatementExecuted;
+        public event EventHandler<ExecutionEventArgs> StatementExecuted;
 
         public Editor()
         {
@@ -61,18 +61,9 @@ namespace Firedump.usercontrols
             this.ResumeLayout();
         }
 
-        private void OnStatementExecuted(object sender,ExecutionEventArgs<string> e)
+        private void OnStatementExecuted(object sender,ExecutionEventArgs e)
         {
-            Console.WriteLine("Editor:OnStatementExecuted:" + e.Status);
-            Console.WriteLine("Editor:OnStatementExecuted:" + e.Value);
-            if (e.Value != null)
-            {
-                Console.WriteLine("Execute");
-                Execute(e.Value);
-            } else
-            {
-                StatementExecuted?.Invoke(sender, e);
-            }
+            StatementExecuted?.Invoke(sender, e);
         }
 
         private void fctb_KeyDown(object sender, KeyEventArgs e)
@@ -114,7 +105,7 @@ namespace Firedump.usercontrols
                 string query = StringUtils.SelectedTextOrTabText(tb.SelectedText, tb.Text);
                 if (!string.IsNullOrWhiteSpace(query) && tabControl1.SelectedTab != null)
                 {
-                    stopAnyRunningQuery(query);
+                    Execute(query);
                 }
             }
         }
@@ -127,12 +118,12 @@ namespace Firedump.usercontrols
         }
 
 
-        //Stop the open read from whatever tab it is
-        private void stopAnyRunningQuery(string query)
+        //Stop the open reader from whatever tab it is
+        internal void stopAnyRunningQuery()
         {
             foreach (TabPageHolder tab in tabControl1.Controls)
             {
-                tab.GetDataView().StopRunningQuery(query);
+                tab.GetDataView().StopRunningQuery();
             }
         }
 

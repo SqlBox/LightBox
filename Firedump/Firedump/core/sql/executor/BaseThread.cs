@@ -16,7 +16,7 @@ namespace Firedump.core.sql.executor
         private DbConnection _con;
 
         //Event handlers
-        public event EventHandler<ExecutionEventArgs<string>> StatementExecuted;
+        public event EventHandler<ExecutionEventArgs> StatementExecuted;
 
         public BaseThread()
         {
@@ -38,20 +38,11 @@ namespace Firedump.core.sql.executor
 
         public bool IsAlive() => this._thread.IsAlive;
 
-        public void Join()
-        {
-            if(this._thread != null)
-            {
-                this._thread.Join(2500);
-            }
-        }
 
-        public abstract  void Stop(string query);
+        public abstract  void Stop();
         public abstract void run();
-        public abstract void SetFetchLimit(int fetchLimit);
-
-
-        protected virtual void OnStatementExecuted(object t, ExecutionEventArgs<string> e)
+        
+        protected virtual void OnStatementExecuted(object t, ExecutionEventArgs e)
         {
             StatementExecuted?.Invoke(t, e);
         }

@@ -8,11 +8,8 @@ namespace Firedump.core.models.dbinfo
 {
     public enum Status : int
     {
-        SUCCESS = 100,
         ERROR = 200,
-        STOPPED = 300,
-        CANCELED = 350,
-        WAITING = 400,
+        CANCELED = 300,
         RUNNING = 500,
         FINISHED = 600
     }

@@ -3,6 +3,7 @@ using Firedump.core.models.dbinfo;
 using Firedump.core.models.events;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Linq;
 using System.Text;
@@ -12,92 +13,67 @@ namespace Firedump.core.sql.executor
 {
     public class ExecutorThread : BaseThread
     {
-        private int _fetchLimit = 200;
         public bool _Alive = true;
 
         public ExecutorThread() : base()
         {
         }
 
-        public ExecutorThread(int fetchLimit) : this()
-        {
-            this._fetchLimit = fetchLimit;
-        }
-
         public override void run()
         {
-            try
+            _Alive = true;
+            List<string> statements = base.Statements();
+            var data = new DataTable();
+            for (int i = 0; i < statements.Count; i++)
             {
-                List<string> statements = base.Statements();
-                if(statements != null && statements.Count > 0)
+                try
                 {
-                    for(int i=0; i < statements.Count; i++)
+                    if (!_Alive)
+                        break;
+                    //Execute with adapter if is the last statement to fill the dataTable with data
+                    if (statements.Count - 1 == i)
                     {
-                        string statement = statements[i];
-                        using (var reader = new DbCommandFactory(Con(), statement).Create().ExecuteReader())
+                        using (var adapter = new DbAdapterFactory(Con(), statements[i]).Create())
                         {
-                            Console.WriteLine("READING RESULTS...................");
-                            int _limit_pointer = 0;
-                            _Alive = true;
-                            while (_Alive && reader.Read())
+                            try
                             {
-                                //we want to read and show data only from the last statement
-                                if (statements.Count-1 == i)
-                                {
-                                    _limit_pointer++;
-                                    Console.WriteLine("row:" + _limit_pointer + "," + reader[0]);
-                                    if (_limit_pointer >= this._fetchLimit)
-                                    {
-                                        OnStatementExecuted(this, new ExecutionEventArgs<string>(Status.WAITING));
-                                        lock (this)
-                                        {
-                                            Monitor.Wait(this);
-                                            _limit_pointer = 0;
-                                        }
-                                    }
-                                }
+                                adapter.Fill(data);
+                                OnStatementExecuted(this, new ExecutionEventArgs(Status.FINISHED) { data = data, query = statements[i] });
                             }
-                            if(_Alive)
+                            catch (Exception ex)
                             {
-                                OnStatementExecuted(this, new ExecutionEventArgs<string>(Status.SUCCESS));
+                                Console.WriteLine(ex.Message);
+                                OnStatementExecuted(this, new ExecutionEventArgs(Status.FINISHED) { Ex = ex, query = statements[i] });
                             }
                         }
                     }
+                    else
+                    {
+                        using (var reader = new DbCommandFactory(Con(), statements[i]).Create().ExecuteReader())
+                        {
+                            OnStatementExecuted(this, new ExecutionEventArgs(Status.RUNNING) { query = statements[i] });
+                        }
+                    }
                 }
-                if(_Alive)
+                catch (DbException ex)
                 {
-                    OnStatementExecuted(this, new ExecutionEventArgs<string>(Status.FINISHED));
+                    ///log, add user option to continue or not after error
+                    Console.WriteLine(ex.Message);
+                    OnStatementExecuted(this, new ExecutionEventArgs(Status.RUNNING) { Ex = ex, query = statements[i] });
+                }
+                catch (IndexOutOfRangeException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    OnStatementExecuted(this, new ExecutionEventArgs(Status.RUNNING) { Ex = ex, query = statements[i] });
                 }
             }
-            catch (DbException ex)
-            {
-                Console.WriteLine(ex.Message);
-                OnStatementExecuted(this, new ExecutionEventArgs<string>(Status.ERROR) { Ex = ex }) ;
-            }
-            catch (IndexOutOfRangeException ex)
-            {
-                Console.WriteLine(ex.Message);
-                OnStatementExecuted(this, new ExecutionEventArgs<string>(Status.ERROR) { Ex = ex });
-            }
-            
         }
 
 
-        public override void SetFetchLimit(int fetchLimit)
-        {
-            this._fetchLimit = fetchLimit;
-        }
-
-
-        public override void Stop(string query)
+        public override void Stop()
         {
             this._Alive = false;
-            lock (this)
-            {
-                Monitor.PulseAll(this);
-            }
-            base.Join();
-            OnStatementExecuted(this, new ExecutionEventArgs<string>(Status.STOPPED) { Value = query });
+            OnStatementExecuted(this, new ExecutionEventArgs(Status.CANCELED));
         }
 
 

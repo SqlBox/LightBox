@@ -28,15 +28,13 @@ namespace Firedump
             });
         }
 
-        private void OnStatementExecuted(object sender, ExecutionEventArgs<string> e)
+        private void OnStatementExecuted(object sender, ExecutionEventArgs e)
         {
             switch(e.Status)
             {
                 case Status.CANCELED:
                 case Status.FINISHED:
-                case Status.STOPPED:
                 case Status.ERROR:
-                case Status.WAITING:
                     EnableUI();
                     break;
             }

@@ -30,10 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.firedumpdbDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.firedumpdbDataSet = new Firedump.firedumpdbDataSet();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
@@ -41,16 +38,17 @@
             this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel6 = new System.Windows.Forms.ToolStripLabel();
+            this.firedumpdbDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.firedumpdbDataSet = new Firedump.firedumpdbDataSet();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.firedumpdbDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.firedumpdbDataSet)).BeginInit();
-            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Controls.Add(this.toolStrip1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -59,39 +57,20 @@
             this.panel1.Size = new System.Drawing.Size(604, 452);
             this.panel1.TabIndex = 0;
             // 
-            // textBox1
-            // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.textBox1.Location = new System.Drawing.Point(0, 432);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(604, 20);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.Text = "Results Info/Status";
-            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.DataSource = this.firedumpdbDataSetBindingSource;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 25);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(604, 401);
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.Size = new System.Drawing.Size(604, 427);
             this.dataGridView1.TabIndex = 1;
-            // 
-            // firedumpdbDataSetBindingSource
-            // 
-            this.firedumpdbDataSetBindingSource.DataSource = this.firedumpdbDataSet;
-            this.firedumpdbDataSetBindingSource.Position = 0;
-            // 
-            // firedumpdbDataSet
-            // 
-            this.firedumpdbDataSet.DataSetName = "firedumpdbDataSet";
-            this.firedumpdbDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.dataGridView1.VirtualMode = true;
+            this.dataGridView1.CellValueNeeded += new System.Windows.Forms.DataGridViewCellValueEventHandler(this.dataGridViewCellValueNeeded);
             // 
             // toolStrip1
             // 
@@ -112,7 +91,7 @@
             // 
             this.toolStripLabel1.Image = global::Firedump.Properties.Resources.query_results_icon;
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(55, 22);
+            this.toolStripLabel1.Size = new System.Drawing.Size(82, 22);
             this.toolStripLabel1.Text = "Statements";
             // 
             // toolStripLabel2
@@ -149,7 +128,16 @@
             this.toolStripLabel6.RightToLeftAutoMirrorImage = true;
             this.toolStripLabel6.Size = new System.Drawing.Size(28, 22);
             this.toolStripLabel6.Text = "Test";
-            this.toolStripLabel6.Click += new System.EventHandler(this.FetchNext);
+            // 
+            // firedumpdbDataSetBindingSource
+            // 
+            this.firedumpdbDataSetBindingSource.DataSource = this.firedumpdbDataSet;
+            this.firedumpdbDataSetBindingSource.Position = 0;
+            // 
+            // firedumpdbDataSet
+            // 
+            this.firedumpdbDataSet.DataSetName = "firedumpdbDataSet";
+            this.firedumpdbDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // DataView
             // 
@@ -161,10 +149,10 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.firedumpdbDataSetBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.firedumpdbDataSet)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.firedumpdbDataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.firedumpdbDataSet)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -176,7 +164,6 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.BindingSource firedumpdbDataSetBindingSource;
         private firedumpdbDataSet firedumpdbDataSet;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.ToolStripLabel toolStripLabel3;
