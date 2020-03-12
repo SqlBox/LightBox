@@ -130,7 +130,6 @@
     <Compile Include="Const.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestDbConnection.cs" />
-    <Compile Include="TestMainHome.cs" />
     <Compile Include="TestStatementTypeResolver.cs" />
     <Compile Include="Test_DbUtils.cs" />
   </ItemGroup>
