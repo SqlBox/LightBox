@@ -69,7 +69,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(604, 427);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.VirtualMode = true;
-            this.dataGridView1.CellValueNeeded += new System.Windows.Forms.DataGridViewCellValueEventHandler(this.dataGridViewCellValueNeeded);
             // 
             // toolStrip1
             // 

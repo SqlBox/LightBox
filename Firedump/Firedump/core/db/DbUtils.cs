@@ -149,14 +149,5 @@ namespace Firedump.core.db
         }
 
         
-        internal static bool IsConnected(DbConnection con)
-        {
-            return con != null && con.State == System.Data.ConnectionState.Open;
-        }
-
-        internal static bool IsConnectedToDatabase(DbConnection con)
-        {
-            return IsConnected(con) && !string.IsNullOrEmpty(con.Database);
-        }
     }
 }

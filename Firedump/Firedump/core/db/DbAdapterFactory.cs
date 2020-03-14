@@ -13,10 +13,16 @@ namespace Firedump.core.db
     public class DbAdapterFactory : AbstractDbFactory<DbDataAdapter>
     {
         private string Sql;
+        private DbCommand command;
 
         public DbAdapterFactory(DbConnection c, string sql) : base(c)
         {
             Sql = sql;
+        }
+
+        public DbAdapterFactory(DbCommand command) : base(command.Connection)
+        {
+            this.command = command;
         }
 
         public override sealed DbDataAdapter Create()
@@ -24,13 +30,18 @@ namespace Firedump.core.db
             DbTypeEnum dbType = _DbUtils.GetDbTypeEnum(Connection);
             if (dbType == DbTypeEnum.MYSQL || dbType == DbTypeEnum.MARIADB)
             {
-                return new MySqlDataAdapter(Sql, (MySqlConnection)Connection);
+                if(command != null)
+                    return new MySqlDataAdapter((MySqlCommand)command);
+                else
+                    return new MySqlDataAdapter(Sql, (MySqlConnection)Connection);
             }
             else if (dbType == DbTypeEnum.ORACLE)
             {
-                return new OracleDataAdapter(Sql, (OracleConnection)Connection);
+                if(command != null)
+                    return new OracleDataAdapter(Sql, (OracleConnection)Connection);
+                else
+                    return new OracleDataAdapter((OracleCommand)command);
             }
-
             throw new Exception("Database Vendor Not Supported!");
         }
 

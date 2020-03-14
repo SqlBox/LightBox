@@ -14,6 +14,7 @@ namespace Firedump.core.sql.executor
     public class ExecutorThread : BaseThread
     {
         public bool _Alive = true;
+        private DbCommand Command;
 
         public ExecutorThread() : base()
         {
@@ -24,6 +25,7 @@ namespace Firedump.core.sql.executor
             _Alive = true;
             List<string> statements = base.Statements();
             var data = new DataTable();
+            ExecutionEventArgs eventResult = null;
             for (int i = 0; i < statements.Count; i++)
             {
                 try
@@ -33,46 +35,62 @@ namespace Firedump.core.sql.executor
                     //Execute with adapter if is the last statement to fill the dataTable with data
                     if (statements.Count - 1 == i)
                     {
-                        using (var adapter = new DbAdapterFactory(Con(), statements[i]).Create())
+                        using (Command = new DbCommandFactory(Con(), statements[i]).Create())
                         {
-                            try
+                            using (var adapter = new DbAdapterFactory(Command).Create())
                             {
-                                adapter.Fill(data);
-                                OnStatementExecuted(this, new ExecutionEventArgs(Status.FINISHED) { data = data, query = statements[i] });
-                            }
-                            catch (Exception ex)
-                            {
-                                Console.WriteLine(ex.Message);
-                                OnStatementExecuted(this, new ExecutionEventArgs(Status.FINISHED) { Ex = ex, query = statements[i] });
+                                try
+                                {
+                                    adapter.Fill(data);
+                                    eventResult = new ExecutionEventArgs(Status.FINISHED) { data = data, query = statements[i] };
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine(ex.Message);
+                                    eventResult = new ExecutionEventArgs(Status.FINISHED) { Ex = ex, query = statements[i] };
+                                }
                             }
                         }
+                        FireEvent(eventResult);
                     }
                     else
                     {
-                        using (var reader = new DbCommandFactory(Con(), statements[i]).Create().ExecuteReader())
+                        using (Command = new DbCommandFactory(Con(), statements[i]).Create())
                         {
-                            OnStatementExecuted(this, new ExecutionEventArgs(Status.RUNNING) { query = statements[i] });
+                            using (var reader = Command.ExecuteReader())
+                            {
+                                eventResult = new ExecutionEventArgs(Status.RUNNING) { query = statements[i] };
+                            }
                         }
+                        FireEvent(eventResult);
                     }
                 }
                 catch (DbException ex)
                 {
                     ///log, add user option to continue or not after error
                     Console.WriteLine(ex.Message);
-                    OnStatementExecuted(this, new ExecutionEventArgs(Status.RUNNING) { Ex = ex, query = statements[i] });
+                    FireEvent(new ExecutionEventArgs(Status.RUNNING) { Ex = ex, query = statements[i] });
                 }
                 catch (IndexOutOfRangeException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    OnStatementExecuted(this, new ExecutionEventArgs(Status.RUNNING) { Ex = ex, query = statements[i] });
+                    FireEvent(new ExecutionEventArgs(Status.RUNNING) { Ex = ex, query = statements[i] });
                 }
             }
+        }
+
+
+        private void FireEvent(ExecutionEventArgs e)
+        {
+            if(this._Alive)
+                OnStatementExecuted(this, e);
         }
 
 
         public override void Stop()
         {
             this._Alive = false;
+            Command?.Cancel();
             OnStatementExecuted(this, new ExecutionEventArgs(Status.CANCELED));
         }
 

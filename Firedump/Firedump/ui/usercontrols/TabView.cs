@@ -36,13 +36,8 @@ namespace Firedump.usercontrols
 
         private void ComboBoxServers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.setDatabaseAndInitTabControls(comboBoxServers.SelectedItem.ToString());
-        }
-
-        private void setDatabaseAndInitTabControls(string database)
-        {
-            base.changeDatabase(database);
-            this.initTabControl();
+            base.changeDatabase(comboBoxServers.SelectedItem.ToString());
+            this.initTabControl(comboBoxServers.SelectedItem.ToString());
         }
 
 
@@ -53,9 +48,13 @@ namespace Firedump.usercontrols
 
 
         // On tab select set the data.
-        private void initTabControl()
+        private void initTabControl(string database = null)
         {
-            if (DbUtils.IsConnectedToDatabase(base.GetSqlConnection()))
+            if (database != null && DB.IsConnectedToDatabaseAndAfterReconnect(this))
+            {
+                base.changeDatabase(database);
+            }
+            if (DB.IsConnectedToDatabaseAndAfterReconnect(this))
             {
                 switch(tabControl1.SelectedTab.Text)
                 {

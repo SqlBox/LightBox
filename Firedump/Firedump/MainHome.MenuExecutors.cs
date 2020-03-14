@@ -31,9 +31,7 @@ namespace Firedump
             if (this.server != null)
             {
                 if (this.con != null)
-                {
                     this.con.Close();
-                }
                 onDisconnected(null, null);
                 setConstrolEnableStatus(false);
                 this.ConnectToDbClick(null, null);

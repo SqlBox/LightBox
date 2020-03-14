@@ -12,7 +12,6 @@ namespace Firedump.usercontrols
 {
     public  class UserControlReference : UserControl
     {
-        // Composition
         private IParentRef parent;
 
         // this default constructor exists only for the visual studio incapability 
@@ -37,10 +36,10 @@ namespace Firedump.usercontrols
 
         internal void changeDatabase(string database)
         {
-            if(DbUtils.IsConnected(parent.GetConnection()))
+            if (DB.IsConnected(parent.GetConnection()))
             {
                 parent.GetConnection().ChangeDatabase(database);
-                this.OnConnectionChanged(this,new ConChangedEventArgs(parent.GetConnection()));
+                this.OnConnectionChanged(this, new ConChangedEventArgs(parent.GetConnection()));
             }
         }
 
@@ -60,7 +59,7 @@ namespace Firedump.usercontrols
 
         //Event handlers
         public event EventHandler Disconnected;
-        internal virtual void OnDisconnected(object t, EventArgs e)
+        internal void OnDisconnected(object t, EventArgs e)
         {
             Disconnected?.Invoke(t, e);
         }
@@ -71,16 +70,21 @@ namespace Firedump.usercontrols
         {
         }
 
+        public event EventHandler Reconnect;
+        internal void OnReconnect(object t, EventArgs e)
+        {
+            Reconnect?.Invoke(t, e);
+        }
 
         public event EventHandler<ConChangedEventArgs> ConnectionChanged;
-        internal virtual void OnConnectionChanged(object t, ConChangedEventArgs e)
+        internal void OnConnectionChanged(object t, ConChangedEventArgs e)
         {
             ConnectionChanged?.Invoke(t, e);
         }
 
 
         public event EventHandler<object> Send;
-        internal virtual void OnSend(object sender,object e)
+        internal void OnSend(object sender,object e)
         {
             Send?.Invoke(sender, e);
         }

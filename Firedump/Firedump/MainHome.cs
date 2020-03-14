@@ -40,6 +40,7 @@ namespace Firedump
                 if(uc is Editor)
                 {
                     ((Editor)uc).StatementExecuted += OnStatementExecuted;
+                    ((Editor)uc).DisableUi = DisableUI;
                 }
             }
         }
@@ -90,9 +91,23 @@ namespace Firedump
                     this.DispatchEvent((ITriplet<UserControlReference, UserControlReference, object>)
                     ((IGenericEventArgs<ITriplet<UserControlReference, UserControlReference, object>>)e).GetObject())
                 );
+                uc.Reconnect += (sender, e) => Reconnect(); 
             }
         }
 
+        private void Reconnect()
+        {
+            if(server != null && con != null)
+            {
+                con.Close();
+                ConnectionResultSet result = DB.TestConnection(server);
+                if (result.wasSuccessful)
+                {
+                    var con = DB.connect(server,this.con.Database);
+                    this.SetReconnectionStatus(con);
+                }
+            }
+        }
 
         private void DataToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -119,13 +134,14 @@ namespace Firedump
 
         private void ConnectToDbClick(object sender, EventArgs e)
         {
-            if(this.server != null && !this.isConnected(this.con))
+            if(this.server != null)
             {
                 this.con = DB.connect(this.server);
-                DbSessionSettings.SetAutoCommit(this.con, true);
-                this.pushConnection();
+                SetAutoCommit(this.con);
+                this.setHomeConnectionStatus();
+                this.setConnectionAndServerToUserControls();
                 this.EnableDisable(true);
-            } else if(!this.isConnected(this.con))
+            } else
             {
                 openDatabaseWindow();
             }
@@ -137,15 +153,24 @@ namespace Firedump
             databaseConnector.TopMost = true;
             databaseConnector.Show();
             this.EnableDisable(false);
-            databaseConnector.onConnect += (sender,e)=>
-            {
-                this.con = e.con;
-                SetAutoCommit(con);
-                this.server = e.server;
-                this.setConnectionAndServerToUserControls();
-                this.setHomeConnectionStatus();
-            };
+            databaseConnector.onConnect += (sender, e) => SetInitialConnectionStatus(e);
             databaseConnector.FormClosed += (sender,e) => this.EnableDisable(true);
+        }
+
+        private void SetInitialConnectionStatus(ConnectionEventArgs e)
+        {
+            this.con = e.con;
+            SetAutoCommit(con);
+            this.server = e.server;
+            this.setConnectionAndServerToUserControls();
+            this.setHomeConnectionStatus();
+        }
+
+        private void SetReconnectionStatus(DbConnection con)
+        {
+            this.con = con;
+            SetAutoCommit(this.con);
+            this.setHomeConnectionStatus();
         }
 
 
@@ -171,14 +196,16 @@ namespace Firedump
             }
         }
 
-        // Called/Event fired from child/composit components/userControls when mysqlconnection is disconnected
+        // Called/Event fired from child/composit components/userControls when mysqlconnection is disconnected and after failed reconnect try.
         private void onDisconnected(object sender, EventArgs e)
         {
             this.con = null;
             foreach (UserControlReference f in ChildControls)
             {
+                //also inform all the other child components to update the ui accordingly for offline/disconnected mode
                 f.onDisconnect();
             }
+            // change mainhome/parent ui according to offline/disconnected status here
         }
 
 
@@ -233,7 +260,7 @@ namespace Firedump
 
         private void disconnectEventClick(object sender, EventArgs e)
         {
-            if(isConnected(this.con))
+            if(this.con != null)
             {
                 this.con.Close();
                 onDisconnected(null,null);

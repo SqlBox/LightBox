@@ -17,6 +17,7 @@ namespace Firedump.core.db
         {
             Connection = c;
         }
+
         public abstract T Create();
     }
 }

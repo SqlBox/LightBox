@@ -49,13 +49,19 @@ namespace Firedump.Forms.mysql.connect
                 var server = DbUtils.getSqlServerFromTable(serverData, comboBox1);
                 if (server != null)
                 {
-                    if (DB.TestConnection(server).wasSuccessful)
+                    ConnectionResultSet result = DB.TestConnection(server);
+                    if (result.wasSuccessful)
                     {
                         var con = DB.connect(server);
                         this.OnConnectionChanged(this, new ConnectionEventArgs(con, server));
+                        Close();
+                    }
+                    else
+                    {
+                        this.UseWaitCursor = false;
+                        MessageBox.Show("Connection failed: \n" + result.errorMessage, "Test Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                Close();
             } else
             {
                 WarnNoServersSaved();

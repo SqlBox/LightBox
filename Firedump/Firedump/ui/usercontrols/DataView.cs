@@ -39,18 +39,19 @@ namespace Firedump.usercontrols
             {
                 this.Invoke((MethodInvoker)delegate {
                     this.dataGridView1.DataSource = this.data = e.data;
+                    Console.WriteLine("QUERY EXECUTED:" + e.query);
+                    if(e.Ex != null)
+                    {
+                        Console.WriteLine("ERROR:" + e.Ex.Message);
+                    }
                 });
             }
-            Console.WriteLine("QUERY EXECUTED:" + e.query);
         }
 
 
         internal void ExecuteStatement(List<string> statements, DbConnection con)
         {
-            if(DbUtils.IsConnectedToDatabase(con) && statements != null && statements.Count > 0)
-            {
-                this.executor.Execute(statements, con);
-            }
+            this.executor.Execute(statements, con);
         }
 
 
@@ -59,15 +60,5 @@ namespace Firedump.usercontrols
             this.executor.Cancel();
         }
 
-        private void dataGridViewCellValueNeeded(object sender, DataGridViewCellValueEventArgs e)
-        {
-            if (e.RowIndex >= this.data.Rows.Count)
-                return;
-
-            if (e.ColumnIndex >= this.data.Columns.Count)
-                return;
-
-            e.Value = this.data.Rows[e.RowIndex][e.ColumnIndex];
-        }
     }
 }

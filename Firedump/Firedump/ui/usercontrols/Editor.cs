@@ -21,6 +21,9 @@ namespace Firedump.usercontrols
         // One readonly list, all tabs have reference to this list!
         private readonly List<AutocompleteItem> menuItems = new List<AutocompleteItem>();
         public event EventHandler<ExecutionEventArgs> StatementExecuted;
+        //Run this to execute the disableUi method on mainhome.
+        //necessary when the execution of query starts with F5 key stroke from this controls editor selected tab and not from the main menu run icon.
+        public Action DisableUi;
 
         public Editor()
         {
@@ -43,7 +46,6 @@ namespace Firedump.usercontrols
 
         internal sealed override void onConnected()
         {
-            base.onConnected();
             if (!string.IsNullOrEmpty(GetSqlConnection().Database) && this.tabControl1.Controls.Count == 0)
             {
                 this.AddQueryTab();
@@ -74,6 +76,10 @@ namespace Firedump.usercontrols
                 // forced show (MinFragmentLength will be ignored)
                 ((TabPageHolder)tabControl1.SelectedTab).GetAutocompleteMenu().Show(true);
                 e.Handled = true;
+            } else if(e.KeyData == Keys.F5)
+            {
+                DisableUi();
+                ExecuteScript();
             }
         }       
 
@@ -100,21 +106,20 @@ namespace Firedump.usercontrols
         internal void ExecuteScript()
         {
             var tb = GetSelectedTabEditor();
-            if (tb != null && DbUtils.IsConnectedToDatabase(base.GetSqlConnection()))
+            if (tb != null && DB.IsConnectedToDatabaseAndAfterReconnect(this))
             {
-                string query = StringUtils.SelectedTextOrTabText(tb.SelectedText, tb.Text);
-                if (!string.IsNullOrWhiteSpace(query) && tabControl1.SelectedTab != null)
-                {
-                    Execute(query);
-                }
+                Execute(StringUtils.SelectedTextOrTabText(tb.SelectedText, tb.Text));
             }
         }
 
         private void Execute(string query)
         {
-            var parser = new SqlStatementParserWrapper(query, (DbType)(int)_DbUtils.GetDbTypeEnum(base.GetSqlConnection()));
-            List<string> statementList = SqlStatementParserWrapper.convert(parser.sql, parser.Parse());
-            ((TabPageHolder)tabControl1.SelectedTab).GetDataView().ExecuteStatement(statementList, base.GetSqlConnection());
+            if (!string.IsNullOrWhiteSpace(query))
+            {
+                var parser = new SqlStatementParserWrapper(query, (DbType)(int)_DbUtils.GetDbTypeEnum(base.GetSqlConnection()));
+                List<string> statementList = SqlStatementParserWrapper.convert(parser.sql, parser.Parse());
+                ((TabPageHolder)tabControl1.SelectedTab).GetDataView().ExecuteStatement(statementList, base.GetSqlConnection());
+            }
         }
 
 

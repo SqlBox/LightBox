@@ -1,5 +1,6 @@
 ﻿using Firedump.core.sql;
 using Firedump.models;
+using Firedump.usercontrols;
 using MySql.Data.MySqlClient;
 using System;
 using System.Data;
@@ -36,15 +37,6 @@ namespace Firedump.core.db
             return con;
         }
 
-        internal static DbConnection connect(CredentialsConfig creds, string database = null)
-        {
-            return connect(new sqlservers(creds), database);
-        }
-
-        internal static ConnectionResultSet TestConnection(CredentialsConfig creds, string database = null)
-        {
-            return TestConnection(new sqlservers(creds), database);
-        }
 
 
         internal static void close(DbConnection con)
@@ -69,6 +61,33 @@ namespace Firedump.core.db
             {
                 command.ExecuteNonQuery();
             }
+        }
+
+        internal static bool IsConnected(DbConnection con)
+        {
+            return con != null && con.State == System.Data.ConnectionState.Open;
+        }
+
+        internal static bool IsConnectedToDatabase(DbConnection con)
+        {
+            return IsConnected(con) && !string.IsNullOrEmpty(con.Database);
+        }
+
+
+        // This method will test the connection and if its not open will try to raise a reconnect event without affecting the running/current user query process execution
+        // If the reconnect also fails then it raises a disconnect event for the parent ui components to handle accordingly
+        internal static bool IsConnectedToDatabaseAndAfterReconnect(UserControlReference uc)
+        {
+            if (uc.GetServer() == null)
+                return false;
+            bool is_connected_to_db = IsConnectedToDatabase(uc.GetSqlConnection());
+            if (is_connected_to_db)
+                return true;
+            uc.OnReconnect(uc, new EventArgs());
+            if(IsConnectedToDatabase(uc.GetSqlConnection()))
+                return true;
+            uc.OnDisconnected(uc, new EventArgs());
+            return false;
         }
     }
 }
