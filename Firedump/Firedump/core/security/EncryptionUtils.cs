@@ -78,9 +78,7 @@ namespace Firedump.core.security
             string res = "";
             try
             {
-                byte[] data = Convert.FromBase64String(ciphertext);
-                byte[] decr_data = decryptdata(data, key, iv);
-                res = Encoding.UTF8.GetString(decr_data);
+                res = Encoding.UTF8.GetString(decryptdata(Convert.FromBase64String(ciphertext), key, iv));
             }
             catch (Exception ex)
             {
