@@ -3,6 +3,7 @@ using Firedump.core.sql;
 using Firedump.Forms.mysql;
 using Firedump.Forms.mysql.connect;
 using Firedump.models.events;
+using Firedump.ui.forms;
 using Firedump.usercontrols;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ using System.Windows.Forms;
 
 namespace Firedump
 {
-    public sealed partial class MainHome : Form , IParentRef
+    public sealed partial class MainHome : BaseForm , IParentRef
     {
         private DbConnection con;
         private sqlservers server;
@@ -23,7 +24,7 @@ namespace Firedump
         public MainHome()
         {
             InitializeComponent();
-            Text = "LightHouse Editor";
+            Text = "LightHouse IDE";
             this.InitChildControls();
             this.InitControlEvents();
             this.InitHomeEvents();

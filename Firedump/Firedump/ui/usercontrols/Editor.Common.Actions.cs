@@ -1,4 +1,5 @@
-﻿using FastColoredTextBoxNS;
+﻿using com.protectsoft.SqlStatementParser.formatter;
+using FastColoredTextBoxNS;
 using Firedump.core.parsers;
 using System;
 using System.Collections.Generic;
@@ -102,7 +103,7 @@ namespace Firedump.usercontrols
             var editor = GetSelectedTabEditor();
             if (editor != null)
             {
-                editor.Text = StringUtils.FormatSql(editor.Text);
+                editor.Text = new Formatter().Format(editor.Text);
             }
         }
 

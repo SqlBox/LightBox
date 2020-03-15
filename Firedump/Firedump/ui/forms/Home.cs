@@ -9,10 +9,11 @@ using Firedump.Forms.mysql;
 using MySql.Data.MySqlClient;
 using Firedump.core.db;
 using Firedump.core.sql;
+using Firedump.ui.forms;
 
 namespace Firedump
 {
-    public partial class Home : Form
+    public partial class Home : BaseForm
     {
 
 

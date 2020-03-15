@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Firedump.core.db;
 using Firedump.core.security;
+using Firedump.ui.forms;
 
 namespace Firedump.Forms.mysql
 {
-    public partial class NewSqlServer : Form
+    public partial class NewSqlServer : BaseForm
     {
         public delegate void reloadserverdata(int id);
         public event reloadserverdata ReloadServerData;

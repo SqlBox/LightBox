@@ -142,9 +142,9 @@ namespace Firedump
             this.toolStripTextBoxSearch = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripButton19 = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.tabView1 = new Firedump.usercontrols.TabView();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.tabView1 = new Firedump.usercontrols.TabView();
             this.editor1 = new Firedump.usercontrols.Editor();
             this.tableView1 = new Firedump.usercontrols.TableView();
             this.menuStrip1.SuspendLayout();
@@ -1110,6 +1110,14 @@ namespace Firedump
             this.splitContainer1.SplitterDistance = 250;
             this.splitContainer1.TabIndex = 2;
             // 
+            // tabView1
+            // 
+            this.tabView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabView1.Location = new System.Drawing.Point(0, 0);
+            this.tabView1.Name = "tabView1";
+            this.tabView1.Size = new System.Drawing.Size(248, 577);
+            this.tabView1.TabIndex = 0;
+            // 
             // splitContainer2
             // 
             this.splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -1142,14 +1150,6 @@ namespace Firedump
             this.splitContainer3.Size = new System.Drawing.Size(728, 579);
             this.splitContainer3.SplitterDistance = 549;
             this.splitContainer3.TabIndex = 0;
-            // 
-            // tabView1
-            // 
-            this.tabView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabView1.Location = new System.Drawing.Point(0, 0);
-            this.tabView1.Name = "tabView1";
-            this.tabView1.Size = new System.Drawing.Size(248, 577);
-            this.tabView1.TabIndex = 0;
             // 
             // editor1
             // 

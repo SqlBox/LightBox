@@ -123,28 +123,6 @@ namespace Firedump.core.parsers
         }
 
        
-
-        [ForTest("test success and most importantly test fail and check for sql string imutability")]
-        internal static string FormatSql(string sql)
-        {
-            try
-            {
-                var formatter = new Formatter();
-                formatter.Format(new StringBuilder(sql).ToString());
-                if (formatter.Success)
-                {
-                    return formatter.LastResult;
-                }
-            }
-            catch (MyFormatterException ex)
-            {
-                // Do nothing.
-            }
-            //Return the orignal sql
-            return sql;
-        }
-
-
         /**
          * 
          * Get the sql to be executed

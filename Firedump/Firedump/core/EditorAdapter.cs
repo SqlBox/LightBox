@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using com.protectsoft.SqlStatementParser.formatter;
 using FastColoredTextBoxNS;
 using Firedump.core.parsers;
 using Firedump.core.sql;
@@ -23,7 +24,7 @@ namespace Firedump.core
             var fastColoredTextBox1 = ControlBuilder.CreateFastColoredTextBox(Control);
             if (EditorConfig.isAutoFormatConfigOn())
             {
-                sql = StringUtils.FormatSql(sql);
+                sql = new Formatter().Format(sql);
             }
             fastColoredTextBox1.Text = sql;
 

@@ -157,6 +157,9 @@
     <Compile Include="sqlitetables\sql_servers.cs" />
     <Compile Include="sqlitetables\schedules.cs" />
     <Compile Include="sqlitetables\schedule_save_locations.cs" />
+    <Compile Include="ui\forms\BaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ui\usercontrols\Editor.Common.Actions.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -256,7 +259,6 @@
     <Compile Include="core\EditorConfig.cs" />
     <Compile Include="core\security\EncryptionUtils.cs" />
     <Compile Include="core\exceptions\MyFormatterException.cs" />
-    <Compile Include="core\OS.cs" />
     <Compile Include="core\sql\MySqlSqlBuilder.cs" />
     <Compile Include="core\parsers\StringUtils.cs" />
     <EmbeddedResource Include="ui\forms\connect\DatabaseConnect.resx">

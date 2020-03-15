@@ -11,10 +11,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Firedump.core.db;
+using Firedump.ui.forms;
 
 namespace Firedump.Forms.mysql.connect
 {
-    public partial class DatabaseConnect : Form
+    public partial class DatabaseConnect : BaseForm
     {
         private firedumpdbDataSet.sql_serversDataTable serverData;
         private firedumpdbDataSetTableAdapters.sql_serversTableAdapter mysql_serversAdapter;

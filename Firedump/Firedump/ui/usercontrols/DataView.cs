@@ -29,6 +29,8 @@ namespace Firedump.usercontrols
         {
             this.executor = qe;
             this.executor.StatementExecuted += OnStatementExecuted;
+            this.dataGridView1.RowPostPaint += DataGridViewRowPostPaint;
+            this.dataGridView1.KeyDown += DataGridViewKeyDownEvent;
         }
 
 
@@ -38,14 +40,18 @@ namespace Firedump.usercontrols
             if(e.Status == Status.FINISHED)
             {
                 this.Invoke((MethodInvoker)delegate {
-                    this.dataGridView1.DataSource = this.data = e.data;
-                    Console.WriteLine("QUERY EXECUTED:" + e.query);
+                    if(e.data != null)
+                    {
+                        this.data = e.data;
+                        this.dataGridView1.DataSource = this.data;
+                    }
                     if(e.Ex != null)
                     {
                         Console.WriteLine("ERROR:" + e.Ex.Message);
                     }
                 });
             }
+            Console.WriteLine("QUERY EXECUTED:" + e.query);
         }
 
 
@@ -60,5 +66,27 @@ namespace Firedump.usercontrols
             this.executor.Cancel();
         }
 
+        private void DataGridViewKeyDownEvent(object sender,KeyEventArgs e)
+        {
+            //prevent control+shift+ up or down
+            //that selects all table, in large data it could be very slow to ui not responding at all
+            //datagridview rowheader corner click selects all table that apparently and for some unknown reason is fast even in 10 millions rows
+            if((e.KeyCode == Keys.Up || e.KeyCode == Keys.Down) && (e.Shift && e.Control))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void DataGridViewRowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            DataGridView dg = (DataGridView)sender;
+            // Current row record
+            string rowNumber = (e.RowIndex + 1).ToString();
+            // Position text
+            SizeF size = e.Graphics.MeasureString(rowNumber, this.Font);
+            if (dg.RowHeadersWidth < (int)(size.Width + 10)) dg.RowHeadersWidth = (int)(size.Width + 10);
+            // Draw row number
+            e.Graphics.DrawString(rowNumber, dg.Font, SystemBrushes.WindowText, e.RowBounds.Location.X + 10, e.RowBounds.Location.Y + ((e.RowBounds.Height - size.Height) / 2));
+        }
     }
 }
