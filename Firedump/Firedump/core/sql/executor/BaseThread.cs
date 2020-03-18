@@ -14,6 +14,7 @@ namespace Firedump.core.sql.executor
         private Thread _thread;
         private List<string> statements;
         private DbConnection _con;
+        private int _hash;
 
         //Event handlers
         public event EventHandler<ExecutionEventArgs> StatementExecuted;
@@ -25,19 +26,24 @@ namespace Firedump.core.sql.executor
         public List<string> Statements() => this.statements;
         public DbConnection Con() => this._con;
 
-        public void Start(List<string> statements,DbConnection con)
+        public void Start(List<string> statements,DbConnection con,int hash = 0)
         {
             if(this._thread == null || (this._thread != null && this._thread.ThreadState == ThreadState.Stopped))
             {
+                this._hash = hash;
                 this.statements = statements;
                 this._con = con;
                 this._thread = new Thread(new ThreadStart(run));
                 this._thread.Start();
-            }
+            } 
         }
 
         public bool IsAlive() => this._thread.IsAlive;
 
+        protected int Hash
+        {
+            get { return this._hash; }
+        }
 
         public abstract  void Stop();
         public abstract void run();

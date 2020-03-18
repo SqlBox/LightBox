@@ -88,8 +88,8 @@
             // 
             this.toolStripLabel1.Image = global::Firedump.Properties.Resources.query_results_icon;
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(82, 22);
-            this.toolStripLabel1.Text = "Statements";
+            this.toolStripLabel1.Size = new System.Drawing.Size(60, 22);
+            this.toolStripLabel1.Text = "Results";
             // 
             // toolStripLabel2
             // 

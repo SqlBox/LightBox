@@ -31,7 +31,10 @@ namespace Firedump.core.sql.executor
                 try
                 {
                     if (!_Alive)
+                    {
+                        FireEvent(new ExecutionEventArgs(Status.CANCELED));
                         break;
+                    }
                     //Execute with adapter if is the last statement to fill the dataTable with data
                     if (statements.Count - 1 == i)
                     {
@@ -67,12 +70,14 @@ namespace Firedump.core.sql.executor
                 }
                 catch (DbException ex)
                 {
-                    ///log, add user option to continue or not after error
+                    ///log
                     Console.WriteLine(ex.Message);
+                    //status change in future depending on user selection continue or not after error
                     FireEvent(new ExecutionEventArgs(Status.RUNNING) { Ex = ex, query = statements[i] });
                 }
                 catch (IndexOutOfRangeException ex)
                 {
+                    //better format/handle the sql errors/exceptions
                     Console.WriteLine(ex.Message);
                     FireEvent(new ExecutionEventArgs(Status.RUNNING) { Ex = ex, query = statements[i] });
                 }
@@ -82,18 +87,24 @@ namespace Firedump.core.sql.executor
 
         private void FireEvent(ExecutionEventArgs e)
         {
-            if(this._Alive)
+            if (this._Alive)
+            {
+                e.TAG = this.Hash;
                 OnStatementExecuted(this, e);
+            }
         }
 
 
         public override void Stop()
         {
             this._Alive = false;
-            Command?.Cancel();
+            try
+            {
+                Command?.Cancel();
+            }
+            catch (Exception ex) { /*log*/}
             OnStatementExecuted(this, new ExecutionEventArgs(Status.CANCELED));
         }
-
 
     }
 }

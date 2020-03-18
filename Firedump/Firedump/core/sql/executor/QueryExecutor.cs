@@ -13,11 +13,10 @@ using System.Threading.Tasks;
 
 namespace Firedump.core.sql
 {
+ 
     public class QueryExecutor
     {
-        // one instance per tab but different execution life cycles
         private BaseThread queryThread;
-
         public event EventHandler<ExecutionEventArgs> StatementExecuted;
 
         public QueryExecutor()
@@ -26,15 +25,15 @@ namespace Firedump.core.sql
             this.queryThread.StatementExecuted += OnStatementExecuted;
         }
 
-        internal virtual void OnStatementExecuted(object t,ExecutionEventArgs e)
+        internal void OnStatementExecuted(object t,ExecutionEventArgs e)
         {
             StatementExecuted?.Invoke(t, e);
         }
         
 
-        internal void Execute(List<string> statements, DbConnection con)
+        internal void Execute(List<string> statements, DbConnection con,int hash = 0)
         {
-            this.queryThread.Start(statements, con);
+            this.queryThread.Start(statements, con, hash);
         }
 
 

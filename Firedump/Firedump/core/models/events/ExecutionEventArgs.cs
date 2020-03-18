@@ -14,6 +14,7 @@ namespace Firedump.core.models.events
         public Exception Ex;
         public DataTable data;
         public string query;
+        public int TAG;
         public ExecutionEventArgs(Status s):base()
         {
             this.Status = s;

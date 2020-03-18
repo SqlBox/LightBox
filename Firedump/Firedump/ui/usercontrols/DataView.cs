@@ -19,51 +19,16 @@ namespace Firedump.usercontrols
 {
     public partial class DataView : UserControl
     {
-        private QueryExecutor executor;
-        public event EventHandler<ExecutionEventArgs> StatementExecuted;
-        private DataTable data;
-
-        public DataView() { InitializeComponent(); }
-
-        public DataView(QueryExecutor qe) : this()
+        public DataView() : base()
         {
-            this.executor = qe;
-            this.executor.StatementExecuted += OnStatementExecuted;
+            InitializeComponent();
             this.dataGridView1.RowPostPaint += DataGridViewRowPostPaint;
             this.dataGridView1.KeyDown += DataGridViewKeyDownEvent;
         }
 
-
-        private void OnStatementExecuted(object sender,ExecutionEventArgs e)
+        public void SetData(DataTable data)
         {
-            StatementExecuted?.Invoke(sender, e);
-            if(e.Status == Status.FINISHED)
-            {
-                this.Invoke((MethodInvoker)delegate {
-                    if(e.data != null)
-                    {
-                        this.data = e.data;
-                        this.dataGridView1.DataSource = this.data;
-                    }
-                    if(e.Ex != null)
-                    {
-                        Console.WriteLine("ERROR:" + e.Ex.Message);
-                    }
-                });
-            }
-            Console.WriteLine("QUERY EXECUTED:" + e.query);
-        }
-
-
-        internal void ExecuteStatement(List<string> statements, DbConnection con)
-        {
-            this.executor.Execute(statements, con);
-        }
-
-
-        internal void StopRunningQuery()
-        {
-            this.executor.Cancel();
+            this.dataGridView1.DataSource = data;
         }
 
         private void DataGridViewKeyDownEvent(object sender,KeyEventArgs e)
