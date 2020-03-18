@@ -145,7 +145,9 @@ namespace Firedump
             this.tabView1 = new Firedump.usercontrols.TabView();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.editor1 = new Firedump.usercontrols.Editor();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tableView1 = new Firedump.usercontrols.TableView();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -159,8 +161,9 @@ namespace Firedump
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
-            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -1017,7 +1020,7 @@ namespace Firedump
             // toolStripButtonUpper
             // 
             this.toolStripButtonUpper.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonUpper.Image = global::Firedump.Properties.Resources.case_sensitive_icon;
+            this.toolStripButtonUpper.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonUpper.Image")));
             this.toolStripButtonUpper.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonUpper.Name = "toolStripButtonUpper";
             this.toolStripButtonUpper.Size = new System.Drawing.Size(23, 22);
@@ -1028,7 +1031,7 @@ namespace Firedump
             // toolStripButtonLower
             // 
             this.toolStripButtonLower.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonLower.Image = global::Firedump.Properties.Resources.case_sensitive_icon;
+            this.toolStripButtonLower.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonLower.Image")));
             this.toolStripButtonLower.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonLower.Name = "toolStripButtonLower";
             this.toolStripButtonLower.Size = new System.Drawing.Size(23, 22);
@@ -1144,20 +1147,38 @@ namespace Firedump
             this.splitContainer3.Name = "splitContainer3";
             this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // splitContainer3.Panel1
+            // splitContainer3.Panel2
             // 
-            this.splitContainer3.Panel1.Controls.Add(this.editor1);
+            this.splitContainer3.Panel2.Controls.Add(this.richTextBox1);
+            this.splitContainer3.Panel2.Controls.Add(this.statusStrip1);
             this.splitContainer3.Size = new System.Drawing.Size(728, 579);
-            this.splitContainer3.SplitterDistance = 549;
+            this.splitContainer3.SplitterDistance = 521;
             this.splitContainer3.TabIndex = 0;
             // 
-            // editor1
+            // richTextBox1
             // 
-            this.editor1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.editor1.Location = new System.Drawing.Point(0, 0);
-            this.editor1.Name = "editor1";
-            this.editor1.Size = new System.Drawing.Size(726, 547);
-            this.editor1.TabIndex = 0;
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(726, 30);
+            this.richTextBox1.TabIndex = 1;
+            this.richTextBox1.Text = "Connecting...";
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 30);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(726, 22);
+            this.statusStrip1.TabIndex = 0;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Image = global::Firedump.Properties.Resources.redcircle;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(16, 17);
             // 
             // tableView1
             // 
@@ -1193,9 +1214,12 @@ namespace Firedump
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            this.splitContainer3.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1319,5 +1343,8 @@ namespace Firedump
         private System.Windows.Forms.ToolStripButton toolStripButton19;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator22;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator21;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }

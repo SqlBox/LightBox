@@ -39,6 +39,9 @@
   <PropertyGroup>
     <StartupObject>Firedump.Program</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>lighthouse_logo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
@@ -333,12 +336,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="resources\lighthouse_logo.png" />
+    <None Include="resources\logo.png" />
     <None Include="resources\sample.txt" />
     <None Include="resources\icons\Database-128.png" />
     <None Include="resources\dropboxicon.png" />
     <None Include="resources\ftpicon.png" />
     <None Include="resources\googeldriveicon.png" />
     <None Include="resources\emailicon.png" />
+    <Content Include="lighthouse_logo.ico" />
     <Content Include="resources\icons\databaseimage.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

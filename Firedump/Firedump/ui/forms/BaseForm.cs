@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,8 +12,8 @@ namespace Firedump.ui.forms
     public class BaseForm : Form
     {
         public BaseForm():base()
-        { 
-            this.Icon = Properties.Resources.lighthouse_logo;
+        {
+            this.Icon = Icon.FromHandle(Properties.Resources.lighthouse_logo1.GetHicon());
         }
     }
 }

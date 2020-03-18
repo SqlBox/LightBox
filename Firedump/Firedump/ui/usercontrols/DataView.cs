@@ -24,6 +24,7 @@ namespace Firedump.usercontrols
             InitializeComponent();
             this.dataGridView1.RowPostPaint += DataGridViewRowPostPaint;
             this.dataGridView1.KeyDown += DataGridViewKeyDownEvent;
+            tabPageResult.ImageIndex = 0;
         }
 
         public void SetData(DataTable data)

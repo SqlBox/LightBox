@@ -24,6 +24,13 @@ namespace Firedump
         public MainHome()
         {
             InitializeComponent();
+            this.editor1 = new Firedump.usercontrols.Editor();
+            this.splitContainer3.Panel1.Controls.Add(this.editor1);
+            this.editor1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.editor1.Location = new System.Drawing.Point(0, 0);
+            this.editor1.Name = "editor1";
+            this.editor1.Size = new System.Drawing.Size(726, 547);
+            this.editor1.TabIndex = 0;
             Text = "LightHouse IDE";
             this.InitChildControls();
             this.InitControlEvents();

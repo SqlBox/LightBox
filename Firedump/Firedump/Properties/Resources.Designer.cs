@@ -333,6 +333,16 @@ namespace Firedump.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap lighthouse_logo1 {
+            get {
+                object obj = ResourceManager.GetObject("lighthouse_logo1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap mycomputericon {
             get {
                 object obj = ResourceManager.GetObject("mycomputericon", resourceCulture);
