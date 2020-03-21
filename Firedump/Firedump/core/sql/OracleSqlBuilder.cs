@@ -37,7 +37,7 @@ namespace Firedump.core.sql
             throw new NotImplementedException();
         }
 
-        public string getDatabaseTables()
+        public string getTableInfo(string table)
         {
             throw new NotImplementedException();
         }

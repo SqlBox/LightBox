@@ -37,15 +37,15 @@ namespace Firedump.core.sql
             " ORDER BY tab.table_name";
 
         // Remember If order of named sql column results change in this sql query, remapping is needed for dataSource binding.
-        public string getDatabaseTables() =>
-            "SELECT " + getUpperOrLower("tab.table_name") + "  AS 'Table', tab.TABLE_ROWS AS 'Rows', tab.AVG_ROW_LENGTH AS 'AvgLen', " +
+        public string getTableInfo(string table) =>
+            "SELECT  tab.AVG_ROW_LENGTH AS 'AvgLen', " +
             "  tab.DATA_LENGTH AS 'Length', tab.DATA_FREE AS 'Free', tab.AUTO_INCREMENT 'AI', " + getUpperOrLower("tab.TABLE_COLLATION") + " AS 'Collation' " +
             " FROM information_schema.tables AS tab" +
             "  LEFT OUTER JOIN information_schema.statistics AS sta ON sta.table_schema = tab.table_schema " +
-            "  AND sta.table_name = tab.table_name " +
             "  AND sta.index_name = 'primary'" +
             " WHERE tab.table_schema = '" + Database + "' " +
             "  AND tab.table_type = 'BASE TABLE'" +
+            "  AND tab.table_name = '" + table + "' " +
             " GROUP BY tab.table_name " +
             " ORDER BY tab.table_name";
 

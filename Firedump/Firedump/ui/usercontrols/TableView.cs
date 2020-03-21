@@ -54,7 +54,7 @@ namespace Firedump.usercontrols
             {
                 foreach(string f in fields)
                 {
-                    treeViewTables.Nodes[nodeIndex].Nodes.Add(new TreeNode(f) { ImageIndex = (int) FinalImageIndex.Field });
+                    treeViewTables.Nodes[nodeIndex].Nodes.Add(new TreeNode(f) { ImageIndex = (int) FinalImageIndex.Field,SelectedImageIndex = (int)FinalImageIndex.Field });
                 }
             } else
             {

@@ -18,7 +18,7 @@ namespace Firedump.core.sql
 
         string getDatabasePrimaryKeys();
 
-        string getDatabaseTables();
+        string getTableInfo(string table);
 
         string getDatabaseUniques();
 

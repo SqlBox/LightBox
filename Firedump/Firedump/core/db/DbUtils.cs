@@ -84,6 +84,23 @@ namespace Firedump.core.db
             return data;
         }
 
+        internal static List<string> getTableInfo(DbConnection con,string table)
+        {
+            var data = new List<string>();
+            using (var reader = new DbCommandFactory(con, new SqlBuilderFactory(con).Create(con.Database).getTableInfo(table)).Create().ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    data.Add("AvgLen:"+ (reader.IsDBNull(0) ? "" : reader.GetString(0)));
+                    data.Add("Length:" + (reader.IsDBNull(1) ? "" : reader.GetString(1)));
+                    data.Add("Free:" + (reader.IsDBNull(2) ? "" : reader.GetString(2)));
+                    data.Add("AI:" + (reader.IsDBNull(3) ? "" : reader.GetString(3)));
+                    data.Add("Collation:" + (reader.IsDBNull(4) ? "" : reader.GetString(4)));
+                }
+            }
+            return data;
+        }
+
 
         internal static int getTableRowCount(sqlservers server, string database, string tablename, DbConnection con = null)
         {

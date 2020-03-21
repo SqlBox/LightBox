@@ -36,7 +36,6 @@ namespace Firedump.usercontrols
             this.panel2 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageTables = new System.Windows.Forms.TabPage();
-            this.dataGridViewTables = new System.Windows.Forms.DataGridView();
             this.textBoxTable = new System.Windows.Forms.TextBox();
             this.tabPagePKs = new System.Windows.Forms.TabPage();
             this.dataGridViewPKs = new System.Windows.Forms.DataGridView();
@@ -64,11 +63,12 @@ namespace Firedump.usercontrols
             this.textBoxView = new System.Windows.Forms.TextBox();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.comboBoxServers = new System.Windows.Forms.ComboBox();
+            this.treeViewTables = new System.Windows.Forms.TreeView();
+            this.imageListTableTree = new System.Windows.Forms.ImageList(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageTables.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTables)).BeginInit();
             this.tabPagePKs.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPKs)).BeginInit();
             this.tabPageUKs.SuspendLayout();
@@ -131,7 +131,7 @@ namespace Firedump.usercontrols
             // 
             // tabPageTables
             // 
-            this.tabPageTables.Controls.Add(this.dataGridViewTables);
+            this.tabPageTables.Controls.Add(this.treeViewTables);
             this.tabPageTables.Controls.Add(this.textBoxTable);
             this.tabPageTables.ImageIndex = 5;
             this.tabPageTables.Location = new System.Drawing.Point(4, 61);
@@ -141,20 +141,6 @@ namespace Firedump.usercontrols
             this.tabPageTables.TabIndex = 5;
             this.tabPageTables.Text = "Tables";
             this.tabPageTables.UseVisualStyleBackColor = true;
-            // 
-            // dataGridViewTables
-            // 
-            this.dataGridViewTables.AllowUserToAddRows = false;
-            this.dataGridViewTables.AllowUserToDeleteRows = false;
-            this.dataGridViewTables.AllowUserToOrderColumns = true;
-            this.dataGridViewTables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewTables.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewTables.Location = new System.Drawing.Point(3, 23);
-            this.dataGridViewTables.Name = "dataGridViewTables";
-            this.dataGridViewTables.ReadOnly = true;
-            this.dataGridViewTables.RowHeadersVisible = false;
-            this.dataGridViewTables.Size = new System.Drawing.Size(257, 462);
-            this.dataGridViewTables.TabIndex = 1;
             // 
             // textBoxTable
             // 
@@ -469,6 +455,26 @@ namespace Firedump.usercontrols
             this.comboBoxServers.ValueMember = "host";
             this.comboBoxServers.SelectedIndexChanged += new System.EventHandler(this.ComboBoxServers_SelectedIndexChanged);
             // 
+            // treeViewTables
+            // 
+            this.treeViewTables.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeViewTables.ImageIndex = 0;
+            this.treeViewTables.ImageList = this.imageListTableTree;
+            this.treeViewTables.Location = new System.Drawing.Point(3, 23);
+            this.treeViewTables.Name = "treeViewTables";
+            this.treeViewTables.SelectedImageIndex = 0;
+            this.treeViewTables.Size = new System.Drawing.Size(257, 462);
+            this.treeViewTables.TabIndex = 3;
+            this.treeViewTables.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeViewTables_BeforeExpand);
+            // 
+            // imageListTableTree
+            // 
+            this.imageListTableTree.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListTableTree.ImageStream")));
+            this.imageListTableTree.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListTableTree.Images.SetKeyName(0, "table-icon.png");
+            this.imageListTableTree.Images.SetKeyName(1, "fieldicon.png");
+            this.imageListTableTree.Images.SetKeyName(2, "view-icon.png");
+            // 
             // TabView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -481,7 +487,6 @@ namespace Firedump.usercontrols
             this.tabControl1.ResumeLayout(false);
             this.tabPageTables.ResumeLayout(false);
             this.tabPageTables.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTables)).EndInit();
             this.tabPagePKs.ResumeLayout(false);
             this.tabPagePKs.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPKs)).EndInit();
@@ -537,7 +542,6 @@ namespace Firedump.usercontrols
         private System.Windows.Forms.TextBox textBoxFunction;
         private System.Windows.Forms.TextBox textBoxView;
         private System.Windows.Forms.TextBox textBoxFK;
-        private System.Windows.Forms.DataGridView dataGridViewTables;
         private System.Windows.Forms.DataGridView dataGridViewPKs;
         private System.Windows.Forms.DataGridView dataGridViewIndexes;
         private System.Windows.Forms.DataGridView dataGridViewUnique;
@@ -546,5 +550,7 @@ namespace Firedump.usercontrols
         private System.Windows.Forms.DataGridView dataGridViewProcedures;
         private System.Windows.Forms.DataGridView dataGridViewFunctions;
         private System.Windows.Forms.DataGridView dataGridViewView;
+        private System.Windows.Forms.TreeView treeViewTables;
+        private System.Windows.Forms.ImageList imageListTableTree;
     }
 }

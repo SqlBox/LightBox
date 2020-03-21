@@ -12,6 +12,15 @@ namespace Firedump
     public partial class MainHome
     {
 
+        private void InitEditorComponent()
+        {
+            this.editor1 = new Firedump.usercontrols.Editor();
+            this.splitContainer3.Panel1.Controls.Add(this.editor1);
+            this.editor1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.editor1.Name = "Editor1";
+            this.editor1.TabIndex = 0;
+        }
+
         //Disable ui elements when query is running.
         private void DisableUI()
         {

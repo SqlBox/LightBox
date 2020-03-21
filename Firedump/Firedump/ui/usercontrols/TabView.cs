@@ -11,11 +11,18 @@ using MySql.Data.MySqlClient;
 using Firedump.core;
 using Firedump.core.db;
 using Firedump.core.sql;
+using Firedump.models;
+using Firedump.models.events;
 
 namespace Firedump.usercontrols
 {
     public sealed partial class TabView : UserControlReference
     {
+        private class FieldImageIndex
+        {
+            public string Value;
+            public int Index;
+        }
 
         public TabView()
         {
@@ -45,7 +52,6 @@ namespace Firedump.usercontrols
         {
             this.initTabControl();
         }
-
 
         // On tab select set the data.
         private void initTabControl(string database = null)
@@ -89,10 +95,61 @@ namespace Firedump.usercontrols
             }
         }
 
+        private void setRootTablesIntoTreeView(List<string> tables)
+        {
+            this.treeViewTables.BeginUpdate();
+            treeViewTables.Nodes.Clear();
+            foreach (string t in tables)
+            {
+                TreeNode node = new TreeNode(t) { ImageIndex = 0 };
+                node.Nodes.Add(getDummy());
+                treeViewTables.Nodes.Add(node);
+            }
+            this.treeViewTables.EndUpdate();
+        }
+
+        private void setTableFields(List<FieldImageIndex> fields, int nodeIndex)
+        {
+            this.treeViewTables.BeginUpdate();
+            treeViewTables.Nodes[nodeIndex].Nodes.Clear();
+            if (fields != null && fields.Count > 0)
+            {
+                foreach (FieldImageIndex f in fields)
+                {
+                    treeViewTables.Nodes[nodeIndex].Nodes.Add(new TreeNode(f.Value) { ImageIndex = f.Index, SelectedImageIndex = f.Index });
+                }
+            }
+            else
+            {
+                treeViewTables.Nodes[nodeIndex].Nodes.Add(getDummy());
+            }
+            this.treeViewTables.EndUpdate();
+        }
+
+
+        private void TreeViewTables_BeforeExpand(object sender, TreeViewCancelEventArgs e)
+        {
+            List<string> fields = DbUtils.getTableFields(GetSqlConnection(), e.Node.Text);
+            List<string> fieldsInfo = DbUtils.getTableInfo(GetSqlConnection(),e.Node.Text);
+            List <FieldImageIndex> finalFieldList = new List<FieldImageIndex>();
+            foreach(string f in fields)
+            {
+                finalFieldList.Add(new FieldImageIndex() { Value = f, Index = 1 });
+            }
+            foreach (string f in fieldsInfo)
+            {
+                finalFieldList.Add(new FieldImageIndex() { Value = f, Index = 2 });
+            }
+            this.setTableFields(finalFieldList, e.Node.Index);
+        }
+
+        private TreeNode getDummy() =>
+            new TreeNode() { ImageIndex = 0 };
+
         private void setDatagridviewTables()
         {
-            ISqlBuilder sqlBuilder = new SqlBuilderFactory(GetServer()).Create(GetSqlConnection().Database);
-            dataGridViewTables.DataSource = DbUtils.getDataTableData(GetSqlConnection(),sqlBuilder.getDatabaseTables());
+            setRootTablesIntoTreeView(new SqlBuilderFactory(base.GetSqlConnection())
+                        .Create(null).removeSystemDatabases(DbUtils.getTables(base.GetSqlConnection()), false));
         }
     
 
