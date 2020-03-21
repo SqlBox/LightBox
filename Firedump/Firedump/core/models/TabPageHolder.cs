@@ -1,5 +1,4 @@
 ﻿using FastColoredTextBoxNS;
-using Firedump.core.parsers;
 using Firedump.usercontrols;
 using System;
 using System.Collections.Generic;

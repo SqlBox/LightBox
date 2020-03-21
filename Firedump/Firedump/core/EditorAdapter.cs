@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using com.protectsoft.SqlStatementParser.formatter;
 using FastColoredTextBoxNS;
-using Firedump.core.parsers;
 using Firedump.core.sql;
 using Firedump.models;
 

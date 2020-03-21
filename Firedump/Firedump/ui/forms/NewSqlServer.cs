@@ -8,8 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Firedump.core.db;
-using Firedump.core.security;
 using Firedump.ui.forms;
+using sqlbox.commons;
 
 namespace Firedump.Forms.mysql
 {

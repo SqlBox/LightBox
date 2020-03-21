@@ -25,12 +25,5 @@ namespace FiredumpTest
             Assert.AreEqual(DbTypeEnum.POSTGRES, _DbUtils._convert(3));
             Assert.AreEqual(DbTypeEnum.SQLSERVER, _DbUtils._convert(4));
         }
-
-        [TestMethod]
-        public void TestGetDbTypeEnum()
-        {
-            Assert.AreEqual(DbTypeEnum.MYSQL, _DbUtils.GetDbTypeEnum(new MySqlConnection()));
-            Assert.AreEqual(DbTypeEnum.ORACLE, _DbUtils.GetDbTypeEnum(new OracleConnection()));
-        }
     }
 }

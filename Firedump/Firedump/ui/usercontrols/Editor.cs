@@ -6,7 +6,6 @@ using Firedump.models;
 using Firedump.models.events;
 using Firedump.core;
 using Firedump.core.db;
-using Firedump.core.parsers;
 using Firedump.core.sql;
 using System.Data.Common;
 using Firedump.core.sql.executor;
@@ -14,6 +13,7 @@ using com.protectsoft.SqlStatementParser;
 using Firedump.core.models;
 using Firedump.core.models.events;
 using Firedump.core.models.dbinfo;
+using sqlbox.commons;
 
 namespace Firedump.usercontrols
 {

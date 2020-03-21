@@ -1,6 +1,5 @@
 ﻿using com.protectsoft.SqlStatementParser.formatter;
 using FastColoredTextBoxNS;
-using Firedump.core.parsers;
 using System;
 using System.Collections.Generic;
 using System.IO;

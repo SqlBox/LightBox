@@ -55,10 +55,14 @@ namespace Firedump
                 // Disconnect/close connection when app closes
                 try
                 {
-                    if (this.con != null)
+                    if(this.con != null)
+                    {
                         if (isConnected(con))
+                        {
                             DB.Rollback(con);
-                    this.con.Close();
+                        }
+                        this.con.Close();
+                    }
                 }
                 catch (Exception ex) { }
             };

@@ -3,9 +3,9 @@ using Firedump.models;
 using Firedump.usercontrols;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Firedump.core.parsers;
 using System.Drawing;
 using Firedump.core.sql;
+using sqlbox.commons;
 
 namespace Firedump.core
 {
