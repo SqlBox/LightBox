@@ -14,10 +14,11 @@ namespace Firedump.core.sql.executor
         private Thread _thread;
         private List<string> statements;
         private DbConnection _con;
-        private int _hash;
+        
+        public QueryParams QueryParams;
 
         //Event handlers
-        public event EventHandler<ExecutionEventArgs> StatementExecuted;
+        public event EventHandler<ExecutionQueryEvent> StatementExecuted;
 
         public BaseThread()
         {
@@ -26,11 +27,11 @@ namespace Firedump.core.sql.executor
         public List<string> Statements() => this.statements;
         public DbConnection Con() => this._con;
 
-        public void Start(List<string> statements,DbConnection con,int hash = 0)
+        public void Start(List<string> statements,DbConnection con,QueryParams parameters)
         {
             if(this._thread == null || (this._thread != null && this._thread.ThreadState == ThreadState.Stopped))
             {
-                this._hash = hash;
+                this.QueryParams = parameters;
                 this.statements = statements;
                 this._con = con;
                 this._thread = new Thread(new ThreadStart(run));
@@ -40,18 +41,14 @@ namespace Firedump.core.sql.executor
 
         public bool IsAlive() => this._thread.IsAlive;
 
-        protected int Hash
-        {
-            get { return this._hash; }
-        }
-
         public abstract  void Stop();
         public abstract void run();
         
-        protected virtual void OnStatementExecuted(object t, ExecutionEventArgs e)
+        protected virtual void OnStatementExecuted(object t, ExecutionQueryEvent e)
         {
             StatementExecuted?.Invoke(t, e);
         }
+
     }
 
 }

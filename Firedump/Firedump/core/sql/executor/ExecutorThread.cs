@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -24,72 +25,103 @@ namespace Firedump.core.sql.executor
         {
             _Alive = true;
             List<string> statements = base.Statements();
-            var data = new DataTable();
-            ExecutionEventArgs eventResult = null;
+            ExecutionQueryEvent eventResult = null;
             for (int i = 0; i < statements.Count; i++)
             {
                 try
                 {
                     if (!_Alive)
                     {
-                        FireEvent(new ExecutionEventArgs(Status.CANCELED));
+                        FireEvent(new ExecutionQueryEvent(Status.CANCELED));
                         break;
                     }
                     //Execute with adapter if is the last statement to fill the dataTable with data
-                    if (statements.Count - 1 == i)
+                    Stopwatch stopWatch = new Stopwatch();
+                    stopWatch.Start();
+                    using (Command = new DbCommandFactory(Con(), statements[i]).Create())
                     {
-                        using (Command = new DbCommandFactory(Con(), statements[i]).Create())
+                        using (var reader = Command.ExecuteReader())
                         {
-                            using (var adapter = new DbAdapterFactory(Command).Create())
+                            stopWatch.Stop();
+                            int rows_affected = reader.RecordsAffected;
+                            bool is_last = statements.Count - 1 == i;
+                            bool is_select = Utils.IsShowDataTypeOfCommand(statements[i]);
+                            var resultData = new DataTable();
+                            if (is_last)
                             {
-                                try
+                                using (DataSet ds = new DataSet() { EnforceConstraints = false, CaseSensitive = false })
                                 {
-                                    adapter.Fill(data);
-                                    eventResult = new ExecutionEventArgs(Status.FINISHED) { data = data, query = statements[i] };
+                                    if (is_select && this.QueryParams.Offset > 0)
+                                    {
+                                        //skip, apply offset
+                                        int count = 0;
+                                        while (count++ != this.QueryParams.Offset && reader.Read());
+                                    }
+                                    ds.Tables.Add(resultData);
+                                    if(is_select && this.QueryParams.Limit > 0)
+                                    {
+                                        var schema = reader.GetSchemaTable();
+                                        var listCols = new List<DataColumn>();
+                                        if(schema != null)
+                                        {
+                                            foreach(DataRow row in schema.Rows)
+                                            {
+                                                var column = new DataColumn(System.Convert.ToString(row["ColumnName"]), (Type)(row["DataType"]));
+                                                listCols.Add(column);
+                                                resultData.Columns.Add(column);
+                                            }
+                                        }
+                                        int count = 0;
+                                        while(count++ != this.QueryParams.Limit && reader.Read())
+                                        {
+                                            var row = resultData.NewRow();
+                                            for(int x = 0; x < listCols.Count; x++)
+                                            {
+                                                row[((DataColumn)listCols[x])] = reader[x];
+                                            }
+                                            resultData.Rows.Add(row);
+                                        }
+                                    } else
+                                    {
+                                        resultData.Load(reader, LoadOption.OverwriteChanges);
+                                    }
+                                    ds.Tables.Remove(resultData);
                                 }
-                                catch (Exception ex)
-                                {
-                                    Console.WriteLine(ex.Message);
-                                    eventResult = new ExecutionEventArgs(Status.FINISHED) { Ex = ex, query = statements[i] };
-                                }
-                            }
+                            } 
+                            eventResult = new ExecutionQueryEvent(is_last ? Status.FINISHED : Status.RUNNING) 
+                                { query = statements[i], duration = stopWatch.Elapsed, recordsAffected = rows_affected, data = resultData, QueryParams = this.QueryParams };
                         }
-                        FireEvent(eventResult);
                     }
-                    else
-                    {
-                        using (Command = new DbCommandFactory(Con(), statements[i]).Create())
-                        {
-                            using (var reader = Command.ExecuteReader())
-                            {
-                                eventResult = new ExecutionEventArgs(Status.RUNNING) { query = statements[i] };
-                            }
-                        }
-                        FireEvent(eventResult);
-                    }
+                    FireEvent(eventResult);
                 }
                 catch (DbException ex)
                 {
                     ///log
                     Console.WriteLine(ex.Message);
                     //status change in future depending on user selection continue or not after error
-                    FireEvent(new ExecutionEventArgs(Status.RUNNING) { Ex = ex, query = statements[i] });
+                    FireEvent(new ExecutionQueryEvent(Status.RUNNING) { Ex = ex, query = statements[i] });
                 }
                 catch (IndexOutOfRangeException ex)
                 {
                     //better format/handle the sql errors/exceptions
                     Console.WriteLine(ex.Message);
-                    FireEvent(new ExecutionEventArgs(Status.RUNNING) { Ex = ex, query = statements[i] });
+                    FireEvent(new ExecutionQueryEvent(Status.RUNNING) { Ex = ex, query = statements[i] });
+                }
+                catch(Exception ex)
+                {
+                    // a more generic error
+                    Console.WriteLine(ex.Message);
+                    FireEvent(new ExecutionQueryEvent(Status.RUNNING) { Ex = ex, query = statements[i] });
                 }
             }
         }
 
 
-        private void FireEvent(ExecutionEventArgs e)
+        private void FireEvent(ExecutionQueryEvent e)
         {
             if (this._Alive)
             {
-                e.TAG = this.Hash;
+                e.TAG = this.QueryParams.Hash;
                 OnStatementExecuted(this, e);
             }
         }
@@ -103,7 +135,7 @@ namespace Firedump.core.sql.executor
                 Command?.Cancel();
             }
             catch (Exception ex) { /*log*/}
-            OnStatementExecuted(this, new ExecutionEventArgs(Status.CANCELED));
+            OnStatementExecuted(this, new ExecutionQueryEvent(Status.CANCELED));
         }
 
     }

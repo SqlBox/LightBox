@@ -1,4 +1,5 @@
-﻿using Firedump.core.models.dbinfo;
+﻿using Firedump.core.models;
+using Firedump.core.models.dbinfo;
 using Firedump.core.models.events;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,20 @@ namespace Firedump
 {
     public partial class MainHome
     {
+
+        public int GetLimitFromToolStripComboBoxLimit()
+        {
+            return ((MyToolStripItem)toolStripComboBoxLimit.SelectedItem).Limit;
+        }
+
+        private void InitMainMenuComponents()
+        {
+            toolStripComboBoxLimit.Items.AddRange(new object[] { new MyToolStripItem(100) { }, new MyToolStripItem(200) { }
+            ,new MyToolStripItem(500) { },new MyToolStripItem(1000) { },new MyToolStripItem(5000) { },new MyToolStripItem(10_000) { }
+            ,new MyToolStripItem(50_000) { },new MyToolStripItem(100_000) { },new MyToolStripItem(0) { }});
+            //Selected index should be fetch from what user last selected or options
+            toolStripComboBoxLimit.SelectedIndex = 1;
+        }
 
         private void InitEditorComponent()
         {
@@ -37,7 +52,7 @@ namespace Firedump
             });
         }
 
-        private void OnStatementExecuted(object sender, ExecutionEventArgs e)
+        private void OnStatementExecuted(object sender, ExecutionQueryEvent e)
         {
             switch(e.Status)
             {

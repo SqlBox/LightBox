@@ -154,7 +154,7 @@ namespace Firedump
             DisableUI();
             try
             {
-                GetEditor().ExecuteScript();
+                GetEditor().ExecuteScript(null);
             }
             catch (Exception ex) {
                 //LOG

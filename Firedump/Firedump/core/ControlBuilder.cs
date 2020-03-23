@@ -70,9 +70,9 @@ namespace Firedump.core
             return menu;
         }
 
-        internal static DataView CreateDataView()
+        internal static DataView CreateDataView(Editor editor)
         {
-            return new DataView()
+            return new DataView(editor)
             {
                 Dock = DockStyle.Fill,
                 Location = new System.Drawing.Point(0, 0),

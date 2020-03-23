@@ -17,7 +17,7 @@ namespace Firedump.core.sql
     public class QueryExecutor
     {
         private BaseThread queryThread;
-        public event EventHandler<ExecutionEventArgs> StatementExecuted;
+        public event EventHandler<ExecutionQueryEvent> StatementExecuted;
 
         public QueryExecutor()
         {
@@ -25,15 +25,15 @@ namespace Firedump.core.sql
             this.queryThread.StatementExecuted += OnStatementExecuted;
         }
 
-        internal void OnStatementExecuted(object t,ExecutionEventArgs e)
+        internal void OnStatementExecuted(object t,ExecutionQueryEvent e)
         {
             StatementExecuted?.Invoke(t, e);
         }
         
 
-        internal void Execute(List<string> statements, DbConnection con,int hash = 0)
+        internal void Execute(List<string> statements, DbConnection con,QueryParams qp)
         {
-            this.queryThread.Start(statements, con, hash);
+            this.queryThread.Start(statements, con, qp);
         }
 
 

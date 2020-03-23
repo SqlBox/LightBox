@@ -57,6 +57,11 @@ namespace Firedump.usercontrols
         {
         }
 
+        public int GetLimitFromMenuToolStripCombobox()
+        {
+            return ((MainHome)parent).GetLimitFromToolStripComboBoxLimit();
+        }
+
         //Event handlers
         public event EventHandler Disconnected;
         internal void OnDisconnected(object t, EventArgs e)

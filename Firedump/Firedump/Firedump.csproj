@@ -113,8 +113,10 @@
     <Compile Include="core\EditorAdapter.cs" />
     <Compile Include="core\models\dbinfo\Status.cs" />
     <Compile Include="core\models\events\ExecutionEventArgs.cs" />
+    <Compile Include="core\models\MyToolStripItem.cs" />
     <Compile Include="core\sql\executor\BaseThread.cs" />
     <Compile Include="core\sql\executor\ExecutorThread.cs" />
+    <Compile Include="core\sql\executor\QueryParams.cs" />
     <Compile Include="core\sql\ISqlBuilder.cs" />
     <Compile Include="core\sql\ConnectionStringFactory.cs" />
     <Compile Include="core\sql\MySqlConnectionStringFactory.cs" />
@@ -126,6 +128,7 @@
     <Compile Include="core\exceptions\EntityNotExistsException.cs" />
     <Compile Include="core\exceptions\SqlException.cs" />
     <Compile Include="core\sql\executor\QueryExecutor.cs" />
+    <Compile Include="core\sql\Utils.cs" />
     <Compile Include="MainHome.UI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +145,7 @@
     <Compile Include="ui\forms\BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ui\IconHelper.cs" />
     <Compile Include="ui\usercontrols\Editor.Common.Actions.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -390,6 +394,9 @@
     <None Include="resources\icons\main\undo-icon.png" />
     <None Include="resources\icons\main\execute-current-icon.png" />
     <None Include="resources\icons\main\stop-icon.png" />
+    <None Include="resources\icons\main\status_error.png" />
+    <None Include="resources\icons\main\status_info.png" />
+    <None Include="resources\icons\main\status_ok.png" />
     <Content Include="resources\icons\redcircle.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -411,8 +418,6 @@
     <None Include="resources\sqlselecticon.png.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="core\parsers\" />
-    <Folder Include="core\security\" />
     <Folder Include="resources\mysqldump\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

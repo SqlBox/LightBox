@@ -17,24 +17,25 @@ namespace Firedump
     {
         private DbConnection con;
         private sqlservers server;
-        private bool showSystemDatabases = false;
-
-        public List<UserControlReference> ChildControls;
+        private bool showSystemDatabases;
+        public readonly List<UserControlReference> ChildControls = new List<UserControlReference>();
 
         public MainHome()
         {
             InitializeComponent();
+            this.SuspendLayout();
             Text = "LightHouse IDE";
-            this.InitEditorComponent();
+            this.InitMainMenuComponents();
             this.InitChildControls();
             this.InitControlEvents();
             this.InitHomeEvents();
+            this.ResumeLayout();
             this.openDatabaseWindow();
         }
 
         private void InitChildControls()
         {
-            ChildControls = new List<UserControlReference>();
+            this.InitEditorComponent();
             ChildControls.AddRange(new UserControlReference[] { editor1, tableView1, tabView1 });
             foreach (UserControlReference uc in ChildControls)
             {

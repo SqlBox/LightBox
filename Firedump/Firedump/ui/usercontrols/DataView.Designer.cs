@@ -33,18 +33,21 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageResult = new System.Windows.Forms.TabPage();
-            this.tabPagePlan = new System.Windows.Forms.TabPage();
-            this.tabPageHistory = new System.Windows.Forms.TabPage();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.tabPageHistory = new System.Windows.Forms.TabPage();
+            this.dataGridViewHistory = new System.Windows.Forms.DataGridView();
+            this.tabPagePlan = new System.Windows.Forms.TabPage();
             this.tabPagePrint = new System.Windows.Forms.TabPage();
             this.tabPageHtml = new System.Windows.Forms.TabPage();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.firedumpdbDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.firedumpdbDataSet = new Firedump.firedumpdbDataSet();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageResult.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tabPageHistory.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHistory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.firedumpdbDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.firedumpdbDataSet)).BeginInit();
             this.SuspendLayout();
@@ -87,40 +90,6 @@
             this.tabPageResult.ToolTipText = "tab\'s last query data results";
             this.tabPageResult.UseVisualStyleBackColor = true;
             // 
-            // tabPagePlan
-            // 
-            this.tabPagePlan.ImageIndex = 1;
-            this.tabPagePlan.Location = new System.Drawing.Point(4, 23);
-            this.tabPagePlan.Name = "tabPagePlan";
-            this.tabPagePlan.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePlan.Size = new System.Drawing.Size(596, 425);
-            this.tabPagePlan.TabIndex = 1;
-            this.tabPagePlan.Text = "Plan";
-            this.tabPagePlan.ToolTipText = "Query Plan";
-            this.tabPagePlan.UseVisualStyleBackColor = true;
-            // 
-            // tabPageHistory
-            // 
-            this.tabPageHistory.ImageIndex = 2;
-            this.tabPageHistory.Location = new System.Drawing.Point(4, 23);
-            this.tabPageHistory.Name = "tabPageHistory";
-            this.tabPageHistory.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageHistory.Size = new System.Drawing.Size(596, 425);
-            this.tabPageHistory.TabIndex = 2;
-            this.tabPageHistory.Text = "History";
-            this.tabPageHistory.ToolTipText = "Tab\'s History";
-            this.tabPageHistory.UseVisualStyleBackColor = true;
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "query-results-icon.png");
-            this.imageList1.Images.SetKeyName(1, "plan-icon.png");
-            this.imageList1.Images.SetKeyName(2, "history-icon.png");
-            this.imageList1.Images.SetKeyName(3, "print-icon.png");
-            this.imageList1.Images.SetKeyName(4, "html-icon.png");
-            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
@@ -133,6 +102,43 @@
             this.dataGridView1.Size = new System.Drawing.Size(590, 419);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.VirtualMode = true;
+            this.dataGridView1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dataGridView1_Scroll);
+            // 
+            // tabPageHistory
+            // 
+            this.tabPageHistory.Controls.Add(this.dataGridViewHistory);
+            this.tabPageHistory.ImageIndex = 2;
+            this.tabPageHistory.Location = new System.Drawing.Point(4, 23);
+            this.tabPageHistory.Name = "tabPageHistory";
+            this.tabPageHistory.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageHistory.Size = new System.Drawing.Size(596, 425);
+            this.tabPageHistory.TabIndex = 2;
+            this.tabPageHistory.Text = "History";
+            this.tabPageHistory.ToolTipText = "Tab\'s History";
+            this.tabPageHistory.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewHistory
+            // 
+            this.dataGridViewHistory.AllowUserToAddRows = false;
+            this.dataGridViewHistory.AllowUserToDeleteRows = false;
+            this.dataGridViewHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewHistory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewHistory.Location = new System.Drawing.Point(3, 3);
+            this.dataGridViewHistory.Name = "dataGridViewHistory";
+            this.dataGridViewHistory.Size = new System.Drawing.Size(590, 419);
+            this.dataGridViewHistory.TabIndex = 0;
+            // 
+            // tabPagePlan
+            // 
+            this.tabPagePlan.ImageIndex = 1;
+            this.tabPagePlan.Location = new System.Drawing.Point(4, 23);
+            this.tabPagePlan.Name = "tabPagePlan";
+            this.tabPagePlan.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPagePlan.Size = new System.Drawing.Size(596, 425);
+            this.tabPagePlan.TabIndex = 1;
+            this.tabPagePlan.Text = "Plan";
+            this.tabPagePlan.ToolTipText = "Query Plan";
+            this.tabPagePlan.UseVisualStyleBackColor = true;
             // 
             // tabPagePrint
             // 
@@ -158,6 +164,16 @@
             this.tabPageHtml.ToolTipText = "export to html";
             this.tabPageHtml.UseVisualStyleBackColor = true;
             // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "query-results-icon.png");
+            this.imageList1.Images.SetKeyName(1, "plan-icon.png");
+            this.imageList1.Images.SetKeyName(2, "history-icon.png");
+            this.imageList1.Images.SetKeyName(3, "print-icon.png");
+            this.imageList1.Images.SetKeyName(4, "html-icon.png");
+            // 
             // firedumpdbDataSetBindingSource
             // 
             this.firedumpdbDataSetBindingSource.DataSource = this.firedumpdbDataSet;
@@ -179,6 +195,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPageResult.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.tabPageHistory.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHistory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.firedumpdbDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.firedumpdbDataSet)).EndInit();
             this.ResumeLayout(false);
@@ -198,5 +216,6 @@
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.TabPage tabPagePrint;
         private System.Windows.Forms.TabPage tabPageHtml;
+        private System.Windows.Forms.DataGridView dataGridViewHistory;
     }
 }

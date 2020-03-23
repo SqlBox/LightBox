@@ -141,11 +141,13 @@ namespace Firedump
             this.toolStripButton16 = new System.Windows.Forms.ToolStripButton();
             this.toolStripTextBoxSearch = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripButton19 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripComboBoxLimit = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabView1 = new Firedump.usercontrols.TabView();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tableView1 = new Firedump.usercontrols.TableView();
@@ -163,6 +165,7 @@ namespace Firedump
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -920,7 +923,9 @@ namespace Firedump
             this.toolStripButton15,
             this.toolStripButton16,
             this.toolStripTextBoxSearch,
-            this.toolStripButton19});
+            this.toolStripButton19,
+            this.toolStripComboBoxLimit,
+            this.toolStripButton7});
             this.toolStrip2.Location = new System.Drawing.Point(0, 24);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(1169, 25);
@@ -1095,6 +1100,22 @@ namespace Firedump
             this.toolStripButton19.ToolTipText = "Find Next";
             this.toolStripButton19.Click += new System.EventHandler(this.FindNextClick);
             // 
+            // toolStripComboBoxLimit
+            // 
+            this.toolStripComboBoxLimit.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripComboBoxLimit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.toolStripComboBoxLimit.Name = "toolStripComboBoxLimit";
+            this.toolStripComboBoxLimit.Size = new System.Drawing.Size(121, 25);
+            // 
+            // toolStripButton7
+            // 
+            this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton7.Image")));
+            this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton7.Name = "toolStripButton7";
+            this.toolStripButton7.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton7.Text = "toolStripButton7";
+            // 
             // splitContainer1
             // 
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -1149,20 +1170,20 @@ namespace Firedump
             // 
             // splitContainer3.Panel2
             // 
-            this.splitContainer3.Panel2.Controls.Add(this.richTextBox1);
+            this.splitContainer3.Panel2.Controls.Add(this.dataGridView1);
             this.splitContainer3.Panel2.Controls.Add(this.statusStrip1);
             this.splitContainer3.Size = new System.Drawing.Size(728, 579);
             this.splitContainer3.SplitterDistance = 521;
             this.splitContainer3.TabIndex = 0;
             // 
-            // richTextBox1
+            // dataGridView1
             // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(726, 30);
-            this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "Connecting...";
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(726, 30);
+            this.dataGridView1.TabIndex = 1;
             // 
             // statusStrip1
             // 
@@ -1218,6 +1239,7 @@ namespace Firedump
             this.splitContainer3.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -1343,8 +1365,10 @@ namespace Firedump
         private System.Windows.Forms.ToolStripButton toolStripButton19;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator22;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator21;
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ToolStripComboBox toolStripComboBoxLimit;
+        private System.Windows.Forms.ToolStripButton toolStripButton7;
     }
 }

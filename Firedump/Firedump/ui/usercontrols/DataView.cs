@@ -14,11 +14,14 @@ using System.Data.Common;
 using Firedump.core.db;
 using Firedump.core.models.events;
 using Firedump.core.models.dbinfo;
+using Firedump.core.sql.executor;
 
 namespace Firedump.usercontrols
 {
     public partial class DataView : UserControl
     {
+        private Editor editor;
+        private string SQL;
         public DataView() : base()
         {
             InitializeComponent();
@@ -27,9 +30,42 @@ namespace Firedump.usercontrols
             tabPageResult.ImageIndex = 0;
         }
 
-        public void SetData(DataTable data)
+        public DataView(Editor editor) : this()
         {
+            this.editor = editor;
+        }
+
+        public void SetData(DataTable data,string sql)
+        {
+            this.SuspendLayout();
+            this.dataGridView1.SuspendLayout();
+            this.SQL = sql;
             this.dataGridView1.DataSource = data;
+            this.dataGridView1.ResumeLayout();
+            this.ResumeLayout();
+        }
+
+        public void AppendData(DataTable data)
+        {
+            this.SuspendLayout();
+            this.dataGridView1.SuspendLayout();
+            int firstdisplayidx = this.dataGridView1.FirstDisplayedScrollingRowIndex;
+            ((DataTable)this.dataGridView1.DataSource).Merge(data);
+            this.dataGridView1.FirstDisplayedScrollingRowIndex = firstdisplayidx;
+            this.dataGridView1.ResumeLayout();
+            this.ResumeLayout();
+        }
+
+        internal void Data(ExecutionQueryEvent e)
+        {
+            if (!Utils.IsShowDataTypeOfCommand(e.QueryParams.Sql))
+            {
+                SetData(e.data, e.query);
+            }
+            else
+            {
+                AppendData(e.data);
+            }
         }
 
         private void DataGridViewKeyDownEvent(object sender,KeyEventArgs e)
@@ -53,6 +89,16 @@ namespace Firedump.usercontrols
             if (dg.RowHeadersWidth < (int)(size.Width + 10)) dg.RowHeadersWidth = (int)(size.Width + 10);
             // Draw row number
             e.Graphics.DrawString(rowNumber, dg.Font, SystemBrushes.WindowText, e.RowBounds.Location.X + 10, e.RowBounds.Location.Y + ((e.RowBounds.Height - size.Height) / 2));
+        }
+
+
+        private void dataGridView1_Scroll(object sender, ScrollEventArgs e)
+        {
+            if (e.ScrollOrientation == ScrollOrientation.VerticalScroll && dataGridView1.DisplayedRowCount(false) + dataGridView1.FirstDisplayedScrollingRowIndex
+                >= dataGridView1.RowCount-1)
+            {
+                this.editor.Fetch(new QueryParams() { Limit = this.editor.GetLimitFromMenuToolStripCombobox(), Offset = dataGridView1.RowCount, Hash = this.GetHashCode(),Sql = SQL });
+            }
         }
     }
 }

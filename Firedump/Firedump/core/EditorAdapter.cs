@@ -9,6 +9,7 @@ using com.protectsoft.SqlStatementParser.formatter;
 using FastColoredTextBoxNS;
 using Firedump.core.sql;
 using Firedump.models;
+using Firedump.usercontrols;
 
 namespace Firedump.core
 {
@@ -17,7 +18,7 @@ namespace Firedump.core
     {
 
         // The order of declarations and 'Add's' Matters
-        internal static TabPageHolder  CreateQueryTab<C>(C Control, ImageList imageList1, List<AutocompleteItem> menuItems, string sql)
+        internal static TabPageHolder  CreateQueryTab<C>(C Control, ImageList imageList1, List<AutocompleteItem> menuItems,Editor editor, string sql)
             where C : Control
         {
             var fastColoredTextBox1 = ControlBuilder.CreateFastColoredTextBox(Control);
@@ -28,7 +29,7 @@ namespace Firedump.core
             fastColoredTextBox1.Text = sql;
 
             var tabPage = new TabPageHolder(fastColoredTextBox1, ControlBuilder.CreateAutoCompleteMenu(fastColoredTextBox1, imageList1, menuItems), 
-                ControlBuilder.CreateDataView())
+                ControlBuilder.CreateDataView(editor))
             {
                 Name = "tabPageQuery" + (Control.Controls.Count + 1),
                 Text = "Tab" + (Control.Controls.Count + 1),
