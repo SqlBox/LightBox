@@ -35,7 +35,7 @@ namespace Firedump.core
                 Text = "Tab" + (Control.Controls.Count + 1),
                 UseVisualStyleBackColor = true,
                 TabIndex = Control.Controls.Count,
-                Location = new System.Drawing.Point(4, 22)
+                Location = new System.Drawing.Point(4, 22),
             };
 
             var splitContainer = ControlBuilder.CreateSplitContainer();

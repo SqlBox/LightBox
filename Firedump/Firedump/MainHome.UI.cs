@@ -30,27 +30,33 @@ namespace Firedump
         private void InitEditorComponent()
         {
             this.editor1 = new Firedump.usercontrols.Editor();
-            this.splitContainer3.Panel1.Controls.Add(this.editor1);
+            this.splitContainer2.Panel1.Controls.Add(this.editor1);
             this.editor1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.editor1.Name = "Editor1";
             this.editor1.TabIndex = 0;
         }
 
         //Disable ui elements when query is running.
-        private void DisableUI()
+        private void EnableUi(bool enable)
         {
-            this.Invoke((MethodInvoker)delegate {
-                this.toolStripButtonExecute.Enabled = false;
-            });   
+            Console.WriteLine(enable);
+           this.Invoke((MethodInvoker)delegate {
+                this.SuspendLayout();
+                toolStripProgressBar.Visible = !enable;
+                toolStripProgressBar.Enabled = !enable;
+                this.toolStripButtonExecute.Enabled = enable;
+                this.toolStripButtonShowSysDb.Enabled = enable;
+                this.toolStripButtonConnect.Enabled = enable;
+                toolStripButtonDisconnect.Enabled = enable;
+                toolStripButtonReconnect.Enabled = enable;
+                toolStripButtonCommit.Enabled = enable;
+                toolStripButtonRollback.Enabled = enable;
+                toolStripButtonExecCurrent.Enabled = enable;
+                toolStripButtonExecNext.Enabled = enable;
+               this.ResumeLayout(); 
+           });   
         }
 
-        //ReEnable ui elements , usualy called after query been executed
-        private void EnableUI()
-        {
-            this.Invoke((MethodInvoker)delegate {
-                this.toolStripButtonExecute.Enabled = true;
-            });
-        }
 
         private void OnStatementExecuted(object sender, ExecutionQueryEvent e)
         {
@@ -58,8 +64,9 @@ namespace Firedump
             {
                 case Status.CANCELED:
                 case Status.FINISHED:
+                case Status.HIDDEN:
                 case Status.ERROR:
-                    EnableUI();
+                    EnableUi(true);
                     break;
             }
         }

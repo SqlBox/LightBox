@@ -11,6 +11,7 @@ namespace Firedump.core.models.dbinfo
         ERROR = 200,
         CANCELED = 300,
         RUNNING = 500,
-        FINISHED = 600
+        FINISHED = 600,
+        HIDDEN = -100
     }
 }

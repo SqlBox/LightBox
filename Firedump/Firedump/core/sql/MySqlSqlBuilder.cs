@@ -39,7 +39,7 @@ namespace Firedump.core.sql
         // Remember If order of named sql column results change in this sql query, remapping is needed for dataSource binding.
         public string getTableInfo(string table) =>
             "SELECT  tab.AVG_ROW_LENGTH AS 'AvgLen', " +
-            "  tab.DATA_LENGTH AS 'Length', tab.DATA_FREE AS 'Free', tab.AUTO_INCREMENT 'AI', " + getUpperOrLower("tab.TABLE_COLLATION") + " AS 'Collation' " +
+            "  tab.DATA_LENGTH AS 'Length', tab.DATA_FREE AS 'Free', tab.AUTO_INCREMENT 'AI', " + getUpperOrLower("tab.TABLE_COLLATION") + " AS 'Collation', tab.table_rows as 'rows'" +
             " FROM information_schema.tables AS tab" +
             "  LEFT OUTER JOIN information_schema.statistics AS sta ON sta.table_schema = tab.table_schema " +
             "  AND sta.index_name = 'primary'" +
@@ -48,6 +48,7 @@ namespace Firedump.core.sql
             "  AND tab.table_name = '" + table + "' " +
             " GROUP BY tab.table_name " +
             " ORDER BY tab.table_name";
+
 
         public string getDatabaseUniques() =>
             "SELECT DISTINCT tab.constraint_name AS 'Name', tab.table_name AS 'Table', tab.enforced AS 'Enforced' " +

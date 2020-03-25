@@ -151,7 +151,7 @@ namespace Firedump
 
         private void ExecuteScript(object sender,EventArgs e)
         {
-            DisableUI();
+            EnableUi(false);
             try
             {
                 GetEditor().ExecuteScript(null);
@@ -159,7 +159,7 @@ namespace Firedump
             catch (Exception ex) {
                 //LOG
                 //If something out of control goes wrong at least re enable the ui
-                EnableUI();
+                EnableUi(false);
             }
         }
 

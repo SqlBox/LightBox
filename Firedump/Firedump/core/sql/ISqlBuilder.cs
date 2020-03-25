@@ -24,6 +24,7 @@ namespace Firedump.core.sql
 
         string getDatabaseForeignKeys();
 
+        //gets all table from schema and all columns from all tables for the  database
         string getAllFieldsFromAllTablesInDb();
 
         string showTablesSql();

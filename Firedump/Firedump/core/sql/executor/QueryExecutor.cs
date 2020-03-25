@@ -41,5 +41,10 @@ namespace Firedump.core.sql
             this.queryThread.Stop();
         }
 
+        internal bool IsAlive()
+        {
+            return this.queryThread.IsAlive();
+        }
+
     }
 }

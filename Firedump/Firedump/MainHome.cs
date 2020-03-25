@@ -43,7 +43,7 @@ namespace Firedump
                 if(uc is Editor)
                 {
                     ((Editor)uc).StatementExecuted += OnStatementExecuted;
-                    ((Editor)uc).DisableUi = DisableUI;
+                    ((Editor)uc).EnableUi = EnableUi;
                 }
             }
         }

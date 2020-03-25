@@ -89,7 +89,7 @@ namespace Firedump.core.sql.executor
                                 }
                             } 
                             eventResult = new ExecutionQueryEvent(is_last ? Status.FINISHED : Status.RUNNING) 
-                                { query = statements[i], duration = stopWatch.Elapsed, recordsAffected = rows_affected, data = resultData, QueryParams = this.QueryParams };
+                                { query = statements[i], duration = stopWatch.Elapsed, recordsAffected = rows_affected, data = resultData };
                         }
                     }
                     FireEvent(eventResult);
@@ -99,19 +99,19 @@ namespace Firedump.core.sql.executor
                     ///log
                     Console.WriteLine(ex.Message);
                     //status change in future depending on user selection continue or not after error
-                    FireEvent(new ExecutionQueryEvent(Status.RUNNING) { Ex = ex, query = statements[i] });
+                    FireEvent(new ExecutionQueryEvent(Status.ERROR) { Ex = ex, query = statements[i] });
                 }
                 catch (IndexOutOfRangeException ex)
                 {
                     //better format/handle the sql errors/exceptions
                     Console.WriteLine(ex.Message);
-                    FireEvent(new ExecutionQueryEvent(Status.RUNNING) { Ex = ex, query = statements[i] });
+                    FireEvent(new ExecutionQueryEvent(Status.ERROR) { Ex = ex, query = statements[i] });
                 }
                 catch(Exception ex)
                 {
                     // a more generic error
                     Console.WriteLine(ex.Message);
-                    FireEvent(new ExecutionQueryEvent(Status.RUNNING) { Ex = ex, query = statements[i] });
+                    FireEvent(new ExecutionQueryEvent(Status.ERROR) { Ex = ex, query = statements[i] });
                 }
             }
         }
@@ -121,6 +121,7 @@ namespace Firedump.core.sql.executor
         {
             if (this._Alive)
             {
+                e.QueryParams = this.QueryParams;
                 e.TAG = this.QueryParams.Hash;
                 OnStatementExecuted(this, e);
             }
@@ -135,7 +136,7 @@ namespace Firedump.core.sql.executor
                 Command?.Cancel();
             }
             catch (Exception ex) { /*log*/}
-            OnStatementExecuted(this, new ExecutionQueryEvent(Status.CANCELED));
+            OnStatementExecuted(this, new ExecutionQueryEvent(Status.CANCELED) { QueryParams = this.QueryParams});
         }
 
     }

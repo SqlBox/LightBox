@@ -15,6 +15,7 @@ using Firedump.core.db;
 using Firedump.core.models.events;
 using Firedump.core.models.dbinfo;
 using Firedump.core.sql.executor;
+using Firedump.ui;
 
 namespace Firedump.usercontrols
 {
@@ -26,6 +27,7 @@ namespace Firedump.usercontrols
         {
             InitializeComponent();
             this.dataGridView1.RowPostPaint += DataGridViewRowPostPaint;
+            this.dataGridViewHistory.RowPostPaint += DataGridViewRowPostPaint;
             this.dataGridView1.KeyDown += DataGridViewKeyDownEvent;
             tabPageResult.ImageIndex = 0;
         }
@@ -51,21 +53,30 @@ namespace Firedump.usercontrols
             this.dataGridView1.SuspendLayout();
             int firstdisplayidx = this.dataGridView1.FirstDisplayedScrollingRowIndex;
             ((DataTable)this.dataGridView1.DataSource).Merge(data);
-            this.dataGridView1.FirstDisplayedScrollingRowIndex = firstdisplayidx;
+            if(firstdisplayidx > 1)
+            {
+                this.dataGridView1.FirstDisplayedScrollingRowIndex = firstdisplayidx;
+            }
             this.dataGridView1.ResumeLayout();
             this.ResumeLayout();
         }
 
-        internal void Data(ExecutionQueryEvent e)
+
+        internal void SetHistory(ExecutionQueryEvent e)
         {
-            if (!Utils.IsShowDataTypeOfCommand(e.QueryParams.Sql))
+            this.dataGridViewHistory.SuspendLayout();
+            if (this.dataGridViewHistory.DataSource == null)
             {
-                SetData(e.data, e.query);
+                this.dataGridViewHistory.DataSource = new DataTable();
             }
-            else
+            DataTable data = HistoryDataTableBuilder(e);
+            int firstdisplayidx = this.dataGridViewHistory.FirstDisplayedScrollingRowIndex;
+            ((DataTable)this.dataGridViewHistory.DataSource).Merge(data);
+            if(firstdisplayidx > 1)
             {
-                AppendData(e.data);
+                this.dataGridViewHistory.FirstDisplayedScrollingRowIndex = firstdisplayidx;
             }
+            this.dataGridViewHistory.ResumeLayout();
         }
 
         private void DataGridViewKeyDownEvent(object sender,KeyEventArgs e)
@@ -95,10 +106,51 @@ namespace Firedump.usercontrols
         private void dataGridView1_Scroll(object sender, ScrollEventArgs e)
         {
             if (e.ScrollOrientation == ScrollOrientation.VerticalScroll && dataGridView1.DisplayedRowCount(false) + dataGridView1.FirstDisplayedScrollingRowIndex
-                >= dataGridView1.RowCount-1)
+                >= dataGridView1.RowCount-1 && !this.editor.GetQueryExecutor().IsAlive())
             {
                 this.editor.Fetch(new QueryParams() { Limit = this.editor.GetLimitFromMenuToolStripCombobox(), Offset = dataGridView1.RowCount, Hash = this.GetHashCode(),Sql = SQL });
             }
+        }
+
+
+        private DataTable HistoryDataTableBuilder(ExecutionQueryEvent e)
+        {
+            DataTable data = new DataTable();
+            DataColumn c0 = new DataColumn("Status");
+            DataColumn c1 = new DataColumn("Query");
+            DataColumn c2 = new DataColumn("Rows affected");
+            DataColumn c3 = new DataColumn("Info");
+            DataColumn c4 = new DataColumn("Millis");
+            DataColumn c5 = new DataColumn("Executed At");
+            c0.DataType = System.Type.GetType("System.Byte[]");
+            data.Columns.Add(c0);
+            data.Columns.Add(c1);
+            data.Columns.Add(c2);
+            data.Columns.Add(c3);
+            data.Columns.Add(c4);
+            data.Columns.Add(c5);
+            Icon ico = null;
+            if (e.Ex != null)
+            {
+                ico = IconHelper.status_error;
+            }
+            else if (e.Status == Status.CANCELED)
+            {
+                ico = IconHelper.status_info;
+            }
+            else
+            {
+                ico = IconHelper.status_ok;
+            }
+            DataRow row = data.NewRow();
+            row["Status"] = Utils.IconToBytes(ico);
+            row["Query"] = e.query;
+            row["Rows affected"] = e.recordsAffected;
+            row["Info"] = e.Ex != null ? e.Ex.Message : "";
+            row["Millis"] = e.duration.TotalMilliseconds;
+            row["Executed At"] = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
+            data.Rows.Add(row);
+            return data;
         }
     }
 }

@@ -91,6 +91,7 @@ namespace Firedump.core.db
             {
                 while (reader.Read())
                 {
+                    data.Add("~Rows:"+(reader.IsDBNull(5) ? "" : reader.GetString(5)));
                     data.Add("AvgLen:"+ (reader.IsDBNull(0) ? "" : reader.GetString(0)));
                     data.Add("Length:" + (reader.IsDBNull(1) ? "" : reader.GetString(1)));
                     data.Add("Free:" + (reader.IsDBNull(2) ? "" : reader.GetString(2)));

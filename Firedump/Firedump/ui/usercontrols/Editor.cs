@@ -25,7 +25,7 @@ namespace Firedump.usercontrols
         public event EventHandler<ExecutionQueryEvent> StatementExecuted;
         //Run this to execute the disableUi method on mainhome.
         //necessary when the execution of query starts with F5 key stroke from this controls editor selected tab and not from the main menu run icon.
-        public Action DisableUi;
+        public Action<bool> EnableUi;
 
         public Editor()
         {
@@ -39,11 +39,16 @@ namespace Firedump.usercontrols
             this.AddQueryTab(Properties.Resources.sample);
         }
 
+        internal QueryExecutor GetQueryExecutor()
+        {
+            return this.queryExecutor;
+        }
+
         internal sealed override void dataReceived(ITriplet<UserControlReference, UserControlReference, object> triplet)
         {
             if (triplet.SourceType() == typeof(TableView) && triplet.DataType() == typeof(List<string>))
             {
-                this.UpdateEditor((List<string>)triplet.GetData(), DbUtils.getTablesInfo(this.GetServer(),this.GetSqlConnection()));
+               this.UpdateEditor((List<string>)triplet.GetData(), DbUtils.getTablesInfo(this.GetServer(),this.GetSqlConnection()));
             }
         }
 
@@ -68,18 +73,26 @@ namespace Firedump.usercontrols
         private void OnStatementExecuted(object sender,ExecutionQueryEvent e)
         {
             StatementExecuted?.Invoke(sender, e);
+            if(e.Status == Status.HIDDEN)
+            {
+                return;
+            }
             foreach (TabPageHolder dv in tabControl1.Controls) {
                if(dv.GetDataView().GetHashCode() == e.TAG)
                 {
-                    if (e.Status == Status.FINISHED)
-                    {
-                        this.Invoke((MethodInvoker)delegate {
-                            dv.GetDataView().Data(e);
-                            if (e.Ex != null)
-                            {
-                            }
-                        });
-                    }
+                    this.Invoke((MethodInvoker)delegate {
+                        if (e.Status == Status.FINISHED && e.QueryParams.Sql == null)
+                        {
+                            dv.GetDataView().SetData(e.data,e.query);
+                        } else if(e.Status == Status.FINISHED && e.QueryParams.Sql != null)
+                        {
+                            dv.GetDataView().AppendData(e.data);
+                        }
+                        if(e.QueryParams.Sql == null)
+                        {
+                            dv.GetDataView().SetHistory(e);
+                        }
+                    });
                     break;
                 }
             }
@@ -95,7 +108,7 @@ namespace Firedump.usercontrols
                 e.Handled = true;
             } else if(e.KeyData == Keys.F5)
             {
-                DisableUi();
+                EnableUi(false);
                 ExecuteScript(null);
             }
         }       
@@ -139,7 +152,7 @@ namespace Firedump.usercontrols
 
         internal void Fetch(QueryParams parameters)
         {
-            DisableUi();
+            EnableUi(false);
             this.ExecuteScript(parameters);
         }
 

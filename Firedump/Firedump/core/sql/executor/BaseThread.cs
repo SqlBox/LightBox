@@ -36,10 +36,16 @@ namespace Firedump.core.sql.executor
                 this._con = con;
                 this._thread = new Thread(new ThreadStart(run));
                 this._thread.Start();
+            } else
+            {
+                StatementExecuted?.Invoke(this, new ExecutionQueryEvent(models.dbinfo.Status.HIDDEN) { });
             } 
         }
 
-        public bool IsAlive() => this._thread.IsAlive;
+        public bool IsAlive()
+        {
+            return this._thread != null && this._thread.ThreadState == ThreadState.Running;
+        }
 
         public abstract  void Stop();
         public abstract void run();
