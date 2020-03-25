@@ -1,4 +1,5 @@
 ﻿using com.protectsoft.SqlStatementParser;
+using Firedump.core;
 using Firedump.sqlitetables;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,11 @@ namespace Firedump
 {
     static class Program
     {
+        static Program()
+        {
+            IconHelper.Init();
+        }
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>

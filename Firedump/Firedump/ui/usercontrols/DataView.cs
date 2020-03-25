@@ -15,7 +15,7 @@ using Firedump.core.db;
 using Firedump.core.models.events;
 using Firedump.core.models.dbinfo;
 using Firedump.core.sql.executor;
-using Firedump.ui;
+using Firedump.core;
 
 namespace Firedump.usercontrols
 {
@@ -129,21 +129,19 @@ namespace Firedump.usercontrols
             data.Columns.Add(c3);
             data.Columns.Add(c4);
             data.Columns.Add(c5);
-            Icon ico = null;
+            DataRow row = data.NewRow();
             if (e.Ex != null)
             {
-                ico = IconHelper.status_error;
+                row["Status"] = IconHelper.status_error_arr;
             }
             else if (e.Status == Status.CANCELED)
             {
-                ico = IconHelper.status_info;
+                row["Status"] = IconHelper.status_info_arr;
             }
             else
             {
-                ico = IconHelper.status_ok;
+                row["Status"] = IconHelper.status_ok_arr;
             }
-            DataRow row = data.NewRow();
-            row["Status"] = Utils.IconToBytes(ico);
             row["Query"] = e.query;
             row["Rows affected"] = e.recordsAffected;
             row["Info"] = e.Ex != null ? e.Ex.Message : "";

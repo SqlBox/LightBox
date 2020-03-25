@@ -145,7 +145,7 @@
     <Compile Include="ui\forms\BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ui\IconHelper.cs" />
+    <Compile Include="core\IconHelper.cs" />
     <Compile Include="ui\usercontrols\Editor.Common.Actions.cs">
       <SubType>UserControl</SubType>
     </Compile>
