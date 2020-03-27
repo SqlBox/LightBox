@@ -76,5 +76,10 @@ namespace Firedump.core.sql
         {
             throw new NotImplementedException();
         }
+
+        public string ShowCreateStatement(string table)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

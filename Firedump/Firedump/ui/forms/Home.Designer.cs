@@ -81,9 +81,10 @@
             // cbShowSysDB
             // 
             this.cbShowSysDB.AutoSize = true;
+            this.cbShowSysDB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbShowSysDB.Location = new System.Drawing.Point(135, 13);
             this.cbShowSysDB.Name = "cbShowSysDB";
-            this.cbShowSysDB.Size = new System.Drawing.Size(144, 17);
+            this.cbShowSysDB.Size = new System.Drawing.Size(141, 17);
             this.cbShowSysDB.TabIndex = 5;
             this.cbShowSysDB.Text = "Show System Databases";
             this.cbShowSysDB.UseVisualStyleBackColor = true;
@@ -121,6 +122,7 @@
             // cmbServers
             // 
             this.cmbServers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbServers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbServers.FormattingEnabled = true;
             this.cmbServers.Location = new System.Drawing.Point(6, 65);
             this.cmbServers.Name = "cmbServers";
@@ -142,6 +144,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(310, 430);
             this.Controls.Add(this.gbConnection);
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Home";
             this.Text = "Firedump";

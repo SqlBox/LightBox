@@ -18,7 +18,6 @@ namespace Firedump.core
 
         static IconHelper()
         {
-            Console.WriteLine("Init!");
             using (MemoryStream ms = new MemoryStream())
             {
                 Icon.FromHandle(Properties.Resources.status_ok.GetHicon()).Save(ms);

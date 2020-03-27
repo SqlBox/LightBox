@@ -18,7 +18,7 @@ namespace Firedump.core
     {
 
         // The order of declarations and 'Add's' Matters
-        internal static TabPageHolder  CreateQueryTab<C>(C Control, ImageList imageList1, List<AutocompleteItem> menuItems,Editor editor, string sql)
+        internal static TabPageHolder  CreateQueryTab<C>(C Control, ImageList imageList1, List<AutocompleteItem> menuItems,Editor editor, string sql,string tabname)
             where C : Control
         {
             var fastColoredTextBox1 = ControlBuilder.CreateFastColoredTextBox(Control);
@@ -32,7 +32,7 @@ namespace Firedump.core
                 ControlBuilder.CreateDataView(editor))
             {
                 Name = "tabPageQuery" + (Control.Controls.Count + 1),
-                Text = "Tab" + (Control.Controls.Count + 1),
+                Text = tabname == null ? ("Tab" + (Control.Controls.Count + 1)) : tabname,
                 UseVisualStyleBackColor = true,
                 TabIndex = Control.Controls.Count,
                 Location = new System.Drawing.Point(4, 22),

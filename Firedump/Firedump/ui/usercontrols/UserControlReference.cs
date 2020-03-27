@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Firedump.usercontrols
 {
-    public  class UserControlReference : UserControl
+    public class UserControlReference : UserControl
     {
         private IParentRef parent;
 
@@ -53,13 +53,14 @@ namespace Firedump.usercontrols
             return parent.GetServer();
         }
 
+        [Obsolete]
         internal virtual void dataReceived(ITriplet<UserControlReference, UserControlReference, object> triplet)
         {
         }
 
-        public int GetLimitFromMenuToolStripCombobox()
+        public MainHome GetMainHome()
         {
-            return ((MainHome)parent).GetLimitFromToolStripComboBoxLimit();
+            return (MainHome)parent;
         }
 
         //Event handlers

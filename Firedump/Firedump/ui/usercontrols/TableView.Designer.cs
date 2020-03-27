@@ -57,6 +57,7 @@
             // treeViewTables
             // 
             this.treeViewTables.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeViewTables.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.treeViewTables.ImageIndex = 0;
             this.treeViewTables.ImageList = this.imageList1;
             this.treeViewTables.Location = new System.Drawing.Point(0, 20);

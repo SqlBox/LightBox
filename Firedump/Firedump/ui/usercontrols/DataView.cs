@@ -69,7 +69,7 @@ namespace Firedump.usercontrols
             {
                 this.dataGridViewHistory.DataSource = new DataTable();
             }
-            DataTable data = HistoryDataTableBuilder(e);
+            DataTable data = ControlBuilder.HistoryDataTableBuilder(e);
             int firstdisplayidx = this.dataGridViewHistory.FirstDisplayedScrollingRowIndex;
             ((DataTable)this.dataGridViewHistory.DataSource).Merge(data);
             if(firstdisplayidx > 1)
@@ -108,47 +108,9 @@ namespace Firedump.usercontrols
             if (e.ScrollOrientation == ScrollOrientation.VerticalScroll && dataGridView1.DisplayedRowCount(false) + dataGridView1.FirstDisplayedScrollingRowIndex
                 >= dataGridView1.RowCount-1 && !this.editor.GetQueryExecutor().IsAlive())
             {
-                this.editor.Fetch(new QueryParams() { Limit = this.editor.GetLimitFromMenuToolStripCombobox(), Offset = dataGridView1.RowCount, Hash = this.GetHashCode(),Sql = SQL });
+                this.editor.Fetch(new QueryParams() { Limit = this.editor.GetMainHome().GetLimitFromToolStripComboBoxLimit(), Offset = dataGridView1.RowCount, Hash = this.GetHashCode(),Sql = SQL });
             }
         }
 
-
-        private DataTable HistoryDataTableBuilder(ExecutionQueryEvent e)
-        {
-            DataTable data = new DataTable();
-            DataColumn c0 = new DataColumn("Status");
-            DataColumn c1 = new DataColumn("Query");
-            DataColumn c2 = new DataColumn("Rows affected");
-            DataColumn c3 = new DataColumn("Info");
-            DataColumn c4 = new DataColumn("Millis");
-            DataColumn c5 = new DataColumn("Executed At");
-            c0.DataType = System.Type.GetType("System.Byte[]");
-            data.Columns.Add(c0);
-            data.Columns.Add(c1);
-            data.Columns.Add(c2);
-            data.Columns.Add(c3);
-            data.Columns.Add(c4);
-            data.Columns.Add(c5);
-            DataRow row = data.NewRow();
-            if (e.Ex != null)
-            {
-                row["Status"] = IconHelper.status_error_arr;
-            }
-            else if (e.Status == Status.CANCELED)
-            {
-                row["Status"] = IconHelper.status_info_arr;
-            }
-            else
-            {
-                row["Status"] = IconHelper.status_ok_arr;
-            }
-            row["Query"] = e.query;
-            row["Rows affected"] = e.recordsAffected;
-            row["Info"] = e.Ex != null ? e.Ex.Message : "";
-            row["Millis"] = e.duration.TotalMilliseconds;
-            row["Executed At"] = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
-            data.Rows.Add(row);
-            return data;
-        }
     }
 }

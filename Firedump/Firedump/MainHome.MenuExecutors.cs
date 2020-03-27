@@ -17,7 +17,7 @@ namespace Firedump
     {
         private bool findTextBoxInputChange = false;
 
-        private Editor GetEditor()
+        internal Editor GetEditor()
         {
             foreach (UserControlReference c in ChildControls)
                 if (c is Editor)
@@ -25,6 +25,13 @@ namespace Firedump
             return null;
         }
 
+        private TabView GetTabView()
+        {
+            foreach (UserControlReference c in ChildControls)
+                if (c is TabView)
+                    return (c as TabView);
+            return null;
+        }
 
         private void reconnectEventClick(object sender, EventArgs e)
         {

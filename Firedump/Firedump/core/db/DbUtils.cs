@@ -102,6 +102,18 @@ namespace Firedump.core.db
             return data;
         }
 
+        internal static string getCreateTable(DbConnection con,string table)
+        {
+            string res = "";
+            using (var reader = new DbCommandFactory(con,new SqlBuilderFactory(con).Create(con.Database).ShowCreateStatement(table)).Create().ExecuteReader())
+            {
+                while(reader.Read())
+                {
+                    res = reader.GetString(1);
+                }
+            }
+            return res;
+        }
 
         internal static int getTableRowCount(sqlservers server, string database, string tablename, DbConnection con = null)
         {

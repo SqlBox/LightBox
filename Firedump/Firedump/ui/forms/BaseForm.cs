@@ -15,5 +15,18 @@ namespace Firedump.ui.forms
         {
             this.Icon = Icon.FromHandle(Properties.Resources.lighthouse_logo1.GetHicon());
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // BaseForm
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.Name = "BaseForm";
+            this.ResumeLayout(false);
+
+        }
     }
 }

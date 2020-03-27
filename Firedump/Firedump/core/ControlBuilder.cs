@@ -6,6 +6,10 @@ using System.Windows.Forms;
 using System.Drawing;
 using Firedump.core.sql;
 using sqlbox.commons;
+using System.Data;
+using Firedump.core.models.events;
+using Firedump.core.models.dbinfo;
+using System;
 
 namespace Firedump.core
 {
@@ -70,9 +74,9 @@ namespace Firedump.core
             return menu;
         }
 
-        internal static DataView CreateDataView(Editor editor)
+        internal static usercontrols.DataView CreateDataView(Editor editor)
         {
-            return new DataView(editor)
+            return new usercontrols.DataView(editor)
             {
                 Dock = DockStyle.Fill,
                 Location = new System.Drawing.Point(0, 0),
@@ -90,6 +94,68 @@ namespace Firedump.core
                 SplitterDistance = 200,
                 Orientation = Orientation.Horizontal
             };
+        }
+
+        internal static MenuItem[] TreeTableMenuItemsBuilder(TabView _this)
+        {
+            var items = new List<MenuItem>();
+            foreach(MenuItem menuItem in MenuItemGenerator(_this))
+            {
+                items.Add(menuItem);
+            }
+            return items.ToArray();
+        }
+
+        private static IEnumerable<MenuItem> MenuItemGenerator(TabView _this)
+        {
+            yield return new MenuItem("Show Data", _this.TreeViewTable_MenuItem_ShowData);
+            yield return new MenuItem("Send Create Statement", _this.TreeViewTable_MenuItem_ShowCreate);
+            yield return new MenuItem("-");
+            yield return new MenuItem("Inspect Table", _this.TreeViewTable_MenuItem_Inspect);
+            yield return new MenuItem("-");
+            yield return new MenuItem("Drop Table", _this.TreeViewTable_MenuItem_DropTable);
+            yield return new MenuItem("Truncate Table", _this.TreeViewTable_MenuItem_TruncateTable);
+            yield return new MenuItem("-");
+            yield return new MenuItem("Refresh", _this.TreeViewTable_MenuItem_RefreshTable);
+        }
+
+
+        internal static DataTable HistoryDataTableBuilder(ExecutionQueryEvent e)
+        {
+            DataTable data = new DataTable();
+            DataColumn c0 = new DataColumn("Status");
+            DataColumn c1 = new DataColumn("Query");
+            DataColumn c2 = new DataColumn("Rows affected");
+            DataColumn c3 = new DataColumn("Info");
+            DataColumn c4 = new DataColumn("Millis");
+            DataColumn c5 = new DataColumn("Executed At");
+            c0.DataType = System.Type.GetType("System.Byte[]");
+            data.Columns.Add(c0);
+            data.Columns.Add(c1);
+            data.Columns.Add(c2);
+            data.Columns.Add(c3);
+            data.Columns.Add(c4);
+            data.Columns.Add(c5);
+            DataRow row = data.NewRow();
+            if (e.Ex != null)
+            {
+                row["Status"] = IconHelper.status_error_arr;
+            }
+            else if (e.Status == Status.CANCELED)
+            {
+                row["Status"] = IconHelper.status_info_arr;
+            }
+            else
+            {
+                row["Status"] = IconHelper.status_ok_arr;
+            }
+            row["Query"] = e.query;
+            row["Rows affected"] = e.recordsAffected;
+            row["Info"] = e.Ex != null ? e.Ex.Message : "";
+            row["Millis"] = e.duration.TotalMilliseconds;
+            row["Executed At"] = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
+            data.Rows.Add(row);
+            return data;
         }
 
     }

@@ -19,6 +19,7 @@ namespace Firedump.usercontrols
 {
     public partial class Editor : UserControlReference
     {
+        private readonly ContextMenu tabMenuContext = new ContextMenu();
         // One readonly list, all tabs have reference to this list!
         private readonly List<AutocompleteItem> menuItems = new List<AutocompleteItem>();
         private readonly QueryExecutor queryExecutor = new QueryExecutor();
@@ -44,12 +45,9 @@ namespace Firedump.usercontrols
             return this.queryExecutor;
         }
 
-        internal sealed override void dataReceived(ITriplet<UserControlReference, UserControlReference, object> triplet)
+        internal void UpdateEditor(List<string> tables)
         {
-            if (triplet.SourceType() == typeof(TableView) && triplet.DataType() == typeof(List<string>))
-            {
-               this.UpdateEditor((List<string>)triplet.GetData(), DbUtils.getTablesInfo(this.GetServer(),this.GetSqlConnection()));
-            }
+            this.UpdateEditor(tables, DbUtils.getTablesInfo(this.GetServer(), this.GetSqlConnection()));
         }
 
         internal sealed override void onConnected()
@@ -61,12 +59,13 @@ namespace Firedump.usercontrols
         }
 
 
-        internal void AddQueryTab(string sql = "  ")
+        internal void AddQueryTab(string sql = "  ",string tabname = null)
         {
             this.SuspendLayout();
-            TabPageHolder myQueryTab = EditorAdapter.CreateQueryTab(this.tabControl1, imageList1, menuItems,this,sql);
+            TabPageHolder myQueryTab = EditorAdapter.CreateQueryTab(this.tabControl1, imageList1, menuItems,this,sql, tabname);
             tabControl1.Controls.Add(myQueryTab);
             myQueryTab.GetFastColoredTextBox().KeyDown += fctb_KeyDown;
+            tabControl1.SelectedTab = myQueryTab;
             this.ResumeLayout();
         }
 
@@ -108,7 +107,6 @@ namespace Firedump.usercontrols
                 e.Handled = true;
             } else if(e.KeyData == Keys.F5)
             {
-                EnableUi(false);
                 ExecuteScript(null);
             }
         }       
@@ -138,9 +136,8 @@ namespace Firedump.usercontrols
                 {
                     parameters = new QueryParams()
                     {
-                        Limit = GetLimitFromMenuToolStripCombobox(),
+                        Limit = GetMainHome().GetLimitFromToolStripComboBoxLimit(),
                         Offset = 0,
-                        Hash = ((TabPageHolder)tabControl1.SelectedTab).GetDataView().GetHashCode()
                     };
                 }
                 Execute(StringUtils.SelectedTextOrTabText(tb.SelectedText, tb.Text), parameters);
@@ -152,27 +149,30 @@ namespace Firedump.usercontrols
 
         internal void Fetch(QueryParams parameters)
         {
-            EnableUi(false);
             this.ExecuteScript(parameters);
         }
 
-        private void Execute(string query, QueryParams parameters)
+        internal void Execute(string query, QueryParams parameters)
         {
-            if (!string.IsNullOrWhiteSpace(query))
+            EnableUi(false);
+            parameters.Hash = ((TabPageHolder)tabControl1.SelectedTab).GetDataView().GetHashCode();
+            if (parameters.Sql == null)
             {
-                if(parameters.Sql == null)
+                if (!string.IsNullOrWhiteSpace(query))
                 {
                     var parser = new SqlStatementParserWrapper(query, (DbType)(int)_DbUtils.GetDbTypeEnum(base.GetSqlConnection()));
                     List<string> statementList = SqlStatementParserWrapper.convert(parser.sql, parser.Parse());
                     this.queryExecutor.Execute(statementList, this.GetSqlConnection(), parameters);
-                } else
-                {
-                    //case of lazy fetch
-                    this.queryExecutor.Execute(new List<string>() { parameters.Sql }, this.GetSqlConnection(), parameters);
                 }
-            } else
+                else
+                {
+                    StatementExecuted?.Invoke(this, new ExecutionQueryEvent(Status.FINISHED));
+                }
+            }
+            else
             {
-                StatementExecuted?.Invoke(this, new ExecutionQueryEvent(Status.FINISHED));
+                //case of lazy fetch
+                this.queryExecutor.Execute(new List<string>() { parameters.Sql }, this.GetSqlConnection(), parameters);
             }
         }
 

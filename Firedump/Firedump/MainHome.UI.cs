@@ -39,9 +39,9 @@ namespace Firedump
         //Disable ui elements when query is running.
         private void EnableUi(bool enable)
         {
-            Console.WriteLine(enable);
            this.Invoke((MethodInvoker)delegate {
                 this.SuspendLayout();
+                GetTabView().GetDatabasesCombobox().Enabled = enable;
                 toolStripProgressBar.Visible = !enable;
                 toolStripProgressBar.Enabled = !enable;
                 this.toolStripButtonExecute.Enabled = enable;
@@ -53,7 +53,9 @@ namespace Firedump
                 toolStripButtonRollback.Enabled = enable;
                 toolStripButtonExecCurrent.Enabled = enable;
                 toolStripButtonExecNext.Enabled = enable;
-               this.ResumeLayout(); 
+                toolStripButtonNewTab.Enabled = enable;
+                toolStripButtonCloseTab.Enabled = enable;
+                this.ResumeLayout(); 
            });   
         }
 

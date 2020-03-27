@@ -13,20 +13,29 @@ using Firedump.core.db;
 using Firedump.core.sql;
 using Firedump.models;
 using Firedump.models.events;
+using Firedump.core.sql.executor;
 
 namespace Firedump.usercontrols
 {
     public sealed partial class TabView : UserControlReference
     {
+        private readonly ContextMenu treeTableMenu = new ContextMenu();
         private class FieldImageIndex
         {
             public string Value;
             public int Index;
         }
 
+        
         public TabView()
         {
             InitializeComponent();
+            this.BuildTreeTableMenu();
+        }
+
+        private void BuildTreeTableMenu()
+        {
+            treeTableMenu.MenuItems.AddRange(ControlBuilder.TreeTableMenuItemsBuilder(this));
         }
 
         public void setServerDataToComboBox(List<string> databases)
@@ -50,7 +59,10 @@ namespace Firedump.usercontrols
 
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.initTabControl();
+            if(!GetMainHome().GetEditor().GetQueryExecutor().IsAlive())
+            {
+                this.initTabControl();
+            }
         }
 
         // On tab select set the data.
@@ -102,7 +114,7 @@ namespace Firedump.usercontrols
             foreach (string t in tables)
             {
                 TreeNode node = new TreeNode(t) { ImageIndex = 0 };
-                node.Nodes.Add(getDummy());
+                node.Nodes.Add(getDummy()); 
                 treeViewTables.Nodes.Add(node);
             }
             this.treeViewTables.EndUpdate();
@@ -129,18 +141,21 @@ namespace Firedump.usercontrols
 
         private void TreeViewTables_BeforeExpand(object sender, TreeViewCancelEventArgs e)
         {
-            List<string> fields = DbUtils.getTableFields(GetSqlConnection(), e.Node.Text);
-            List<string> fieldsInfo = DbUtils.getTableInfo(GetSqlConnection(),e.Node.Text);
-            List <FieldImageIndex> finalFieldList = new List<FieldImageIndex>();
-            foreach(string f in fields)
+            if (!GetMainHome().GetEditor().GetQueryExecutor().IsAlive())
             {
-                finalFieldList.Add(new FieldImageIndex() { Value = f, Index = 1 });
+                List<string> fields = DbUtils.getTableFields(GetSqlConnection(), e.Node.Text);
+                List<string> fieldsInfo = DbUtils.getTableInfo(GetSqlConnection(), e.Node.Text);
+                List<FieldImageIndex> finalFieldList = new List<FieldImageIndex>();
+                foreach (string f in fields)
+                {
+                    finalFieldList.Add(new FieldImageIndex() { Value = f, Index = 1 });
+                }
+                foreach (string f in fieldsInfo)
+                {
+                    finalFieldList.Add(new FieldImageIndex() { Value = f, Index = 2 });
+                }
+                this.setTableFields(finalFieldList, e.Node.Index);
             }
-            foreach (string f in fieldsInfo)
-            {
-                finalFieldList.Add(new FieldImageIndex() { Value = f, Index = 2 });
-            }
-            this.setTableFields(finalFieldList, e.Node.Index);
         }
 
         private TreeNode getDummy() =>
@@ -195,6 +210,81 @@ namespace Firedump.usercontrols
         private void setDatagridViews()
         {
             dataGridViewView.DataSource = DbUtils.getDataTableData(GetSqlConnection(), "SHOW FULL TABLES IN "+ GetSqlConnection().Database+" WHERE TABLE_TYPE LIKE 'VIEW';");
+        }
+
+
+        private void treeViewTables_MouseUp(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Right)
+            {
+                Point p = new Point(e.X,e.Y);
+                TreeNode node = treeViewTables.GetNodeAt(p);
+                if (node == null || node.Parent != null) return;
+                treeViewTables.SelectedNode = node;
+                treeTableMenu.Show(this, this.PointToClient(treeViewTables.PointToScreen(p)));
+            }
+        }
+
+
+        internal void TreeViewTable_MenuItem_ShowData(object sender,EventArgs e)
+        {
+            if(IsNodeSelected())
+            {
+                GetMainHome().GetEditor().Execute("SELECT * FROM " + treeViewTables.SelectedNode.Text, new QueryParams()
+                {
+                    Limit = GetMainHome().GetLimitFromToolStripComboBoxLimit(),
+                    Offset = 0,
+                });
+            }
+        }
+
+        internal void TreeViewTable_MenuItem_ShowCreate(object sender, EventArgs e)
+        {
+            if(IsNodeSelected())
+            {
+                if (sender is TreeView)
+                {
+                    if (((TreeView)sender).SelectedNode != null && ((TreeView)sender).SelectedNode.Parent == null)
+                    {
+                        sendCreateToEditor(treeViewTables.SelectedNode.Text);
+                    }
+                }
+                else
+                {
+                    sendCreateToEditor(treeViewTables.SelectedNode.Text);
+                }
+            }
+        }
+
+        private void sendCreateToEditor(string table)
+        {
+            GetMainHome().GetEditor().AddQueryTab(DbUtils.getCreateTable(GetSqlConnection(), table),table);
+        }
+
+        internal void TreeViewTable_MenuItem_DropTable(object sender, EventArgs e)
+        {
+        }
+
+        internal void TreeViewTable_MenuItem_TruncateTable(object sender,EventArgs e)
+        {
+        }
+
+        internal void TreeViewTable_MenuItem_RefreshTable(object sender,EventArgs e)
+        {
+        }
+
+        internal void TreeViewTable_MenuItem_Inspect(object sender,EventArgs e)
+        {
+        }
+
+        private bool IsNodeSelected()
+        {
+            return treeViewTables.SelectedNode != null && treeViewTables.SelectedNode.Text != null;
+        }
+
+        internal ComboBox GetDatabasesCombobox()
+        {
+            return this.comboBoxServers;
         }
     }
 }

@@ -99,6 +99,11 @@ namespace Firedump.core.sql
         [Implement("Need model for describe output and implementation")]
         public string describeTableSql(string table) => "DESCRIBE " + table;
 
+
+        public string ShowCreateStatement(string table)
+        {
+            return "SHOW CREATE TABLE " + table;
+        }
     }
 
 }

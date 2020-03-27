@@ -32,5 +32,7 @@ namespace Firedump.core.sql
         string describeTableSql(string table);
 
         List<string> removeSystemDatabases(List<string> databases, bool showSystemDb = false);
+
+        string ShowCreateStatement(string table);
     }
 }

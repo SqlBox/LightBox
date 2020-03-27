@@ -50,7 +50,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(10, 45);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 13);
+            this.label1.Size = new System.Drawing.Size(59, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Hostname:";
             // 
@@ -59,7 +59,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(10, 71);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(58, 13);
+            this.label2.Size = new System.Drawing.Size(59, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Username:";
             // 
@@ -68,7 +68,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 98);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 13);
+            this.label3.Size = new System.Drawing.Size(57, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "Password:";
             // 
@@ -76,7 +76,7 @@
             // 
             this.tbHost.Location = new System.Drawing.Point(77, 42);
             this.tbHost.Name = "tbHost";
-            this.tbHost.Size = new System.Drawing.Size(191, 20);
+            this.tbHost.Size = new System.Drawing.Size(191, 21);
             this.tbHost.TabIndex = 2;
             // 
             // tbUsername
@@ -101,7 +101,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(274, 45);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 13);
+            this.label4.Size = new System.Drawing.Size(31, 13);
             this.label4.TabIndex = 6;
             this.label4.Text = "Port:";
             // 
@@ -109,7 +109,7 @@
             // 
             this.tbPort.Location = new System.Drawing.Point(306, 42);
             this.tbPort.Name = "tbPort";
-            this.tbPort.Size = new System.Drawing.Size(47, 20);
+            this.tbPort.Size = new System.Drawing.Size(47, 21);
             this.tbPort.TabIndex = 3;
             this.tbPort.Text = "3306";
             // 
@@ -137,7 +137,7 @@
             // 
             this.tbName.Location = new System.Drawing.Point(77, 16);
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(191, 20);
+            this.tbName.Size = new System.Drawing.Size(191, 21);
             this.tbName.TabIndex = 1;
             // 
             // label5
@@ -166,7 +166,7 @@
             // 
             this.tbDatabase.Location = new System.Drawing.Point(77, 122);
             this.tbDatabase.Name = "tbDatabase";
-            this.tbDatabase.Size = new System.Drawing.Size(276, 20);
+            this.tbDatabase.Size = new System.Drawing.Size(276, 21);
             this.tbDatabase.TabIndex = 6;
             // 
             // label6
@@ -174,11 +174,11 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(12, 125);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(56, 13);
+            this.label6.Size = new System.Drawing.Size(57, 13);
             this.label6.TabIndex = 15;
             this.label6.Text = "Database:";
             // 
-            // NewMySQLServer
+            // NewSqlServer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -198,10 +198,11 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "NewMySQLServer";
+            this.Name = "NewSqlServer";
             this.Text = "New MySQL Server";
             this.ResumeLayout(false);
             this.PerformLayout();
