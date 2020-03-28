@@ -54,9 +54,13 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
             this.panel1.Controls.Add(this.tabControl1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.panel1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(604, 452);
             this.panel1.TabIndex = 0;
@@ -69,6 +73,7 @@
             this.tabControl1.Controls.Add(this.tabPagePrint);
             this.tabControl1.Controls.Add(this.tabPageHtml);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.tabControl1.ImageList = this.imageList1;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(0);
@@ -79,27 +84,30 @@
             // 
             // tabPageResult
             // 
+            this.tabPageResult.BackColor = System.Drawing.Color.Transparent;
             this.tabPageResult.Controls.Add(this.dataGridView1);
+            this.tabPageResult.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPageResult.ImageIndex = 0;
             this.tabPageResult.Location = new System.Drawing.Point(4, 23);
+            this.tabPageResult.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageResult.Name = "tabPageResult";
-            this.tabPageResult.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageResult.Size = new System.Drawing.Size(596, 425);
             this.tabPageResult.TabIndex = 0;
             this.tabPageResult.Text = "Results";
             this.tabPageResult.ToolTipText = "tab\'s last query data results";
-            this.tabPageResult.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(0);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(590, 419);
+            this.dataGridView1.Size = new System.Drawing.Size(596, 425);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.VirtualMode = true;
             this.dataGridView1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dataGridView1_Scroll);
@@ -107,10 +115,11 @@
             // tabPageHistory
             // 
             this.tabPageHistory.Controls.Add(this.dataGridViewHistory);
+            this.tabPageHistory.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPageHistory.ImageIndex = 2;
             this.tabPageHistory.Location = new System.Drawing.Point(4, 23);
+            this.tabPageHistory.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageHistory.Name = "tabPageHistory";
-            this.tabPageHistory.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageHistory.Size = new System.Drawing.Size(596, 425);
             this.tabPageHistory.TabIndex = 2;
             this.tabPageHistory.Text = "History";
@@ -122,19 +131,21 @@
             this.dataGridViewHistory.AllowUserToAddRows = false;
             this.dataGridViewHistory.AllowUserToDeleteRows = false;
             this.dataGridViewHistory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewHistory.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
             this.dataGridViewHistory.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewHistory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewHistory.Location = new System.Drawing.Point(3, 3);
+            this.dataGridViewHistory.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewHistory.Margin = new System.Windows.Forms.Padding(0);
             this.dataGridViewHistory.Name = "dataGridViewHistory";
-            this.dataGridViewHistory.Size = new System.Drawing.Size(590, 419);
+            this.dataGridViewHistory.Size = new System.Drawing.Size(596, 425);
             this.dataGridViewHistory.TabIndex = 0;
             // 
             // tabPagePlan
             // 
             this.tabPagePlan.ImageIndex = 1;
             this.tabPagePlan.Location = new System.Drawing.Point(4, 23);
+            this.tabPagePlan.Margin = new System.Windows.Forms.Padding(0);
             this.tabPagePlan.Name = "tabPagePlan";
-            this.tabPagePlan.Padding = new System.Windows.Forms.Padding(3);
             this.tabPagePlan.Size = new System.Drawing.Size(596, 425);
             this.tabPagePlan.TabIndex = 1;
             this.tabPagePlan.Text = "Plan";

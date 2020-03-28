@@ -40,22 +40,23 @@ namespace Firedump
         private void EnableUi(bool enable)
         {
            this.Invoke((MethodInvoker)delegate {
-                this.SuspendLayout();
-                GetTabView().GetDatabasesCombobox().Enabled = enable;
-                toolStripProgressBar.Visible = !enable;
-                toolStripProgressBar.Enabled = !enable;
-                this.toolStripButtonExecute.Enabled = enable;
-                this.toolStripButtonShowSysDb.Enabled = enable;
-                this.toolStripButtonConnect.Enabled = enable;
-                toolStripButtonDisconnect.Enabled = enable;
-                toolStripButtonReconnect.Enabled = enable;
-                toolStripButtonCommit.Enabled = enable;
-                toolStripButtonRollback.Enabled = enable;
-                toolStripButtonExecCurrent.Enabled = enable;
-                toolStripButtonExecNext.Enabled = enable;
-                toolStripButtonNewTab.Enabled = enable;
-                toolStripButtonCloseTab.Enabled = enable;
-                this.ResumeLayout(); 
+               this.SuspendLayout();
+               GetTabView().GetDatabasesCombobox().Enabled = enable;
+               toolStripProgressBar.Visible = !enable;
+               toolStripProgressBar.Enabled = !enable;
+               this.toolStripButtonExecute.Enabled = enable;
+               this.toolStripButtonShowSysDb.Enabled = enable;
+               this.toolStripButtonConnect.Enabled = enable;
+               toolStripButtonDisconnect.Enabled = enable;
+               toolStripButtonReconnect.Enabled = enable;
+               toolStripButtonCommit.Enabled = enable;
+               toolStripButtonRollback.Enabled = enable;
+               toolStripButtonExecCurrent.Enabled = enable;
+               toolStripButtonExecNext.Enabled = enable;
+               toolStripButtonNewTab.Enabled = enable;
+               toolStripButtonCloseTab.Enabled = enable;
+               toolStripButtonEnableAutoCommit.Enabled = enable;
+               this.ResumeLayout();
            });   
         }
 

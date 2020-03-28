@@ -49,6 +49,7 @@
             this.panel1.Controls.Add(this.treeViewTables);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(298, 497);
@@ -56,29 +57,33 @@
             // 
             // treeViewTables
             // 
+            this.treeViewTables.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            this.treeViewTables.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.treeViewTables.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewTables.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.treeViewTables.ImageIndex = 0;
             this.treeViewTables.ImageList = this.imageList1;
-            this.treeViewTables.Location = new System.Drawing.Point(0, 20);
+            this.treeViewTables.Location = new System.Drawing.Point(0, 21);
             this.treeViewTables.Name = "treeViewTables";
             this.treeViewTables.SelectedImageIndex = 0;
-            this.treeViewTables.Size = new System.Drawing.Size(298, 477);
+            this.treeViewTables.Size = new System.Drawing.Size(298, 476);
             this.treeViewTables.TabIndex = 2;
             this.treeViewTables.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeViewTables_BeforeExpand);
             // 
             // textBox1
             // 
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.textBox1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.textBox1.Location = new System.Drawing.Point(0, 0);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(298, 20);
+            this.textBox1.Size = new System.Drawing.Size(298, 21);
             this.textBox1.TabIndex = 1;
             // 
             // TableView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
             this.Controls.Add(this.panel1);
             this.Name = "TableView";
             this.Size = new System.Drawing.Size(298, 497);

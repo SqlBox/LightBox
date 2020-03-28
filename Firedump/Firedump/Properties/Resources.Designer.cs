@@ -193,6 +193,16 @@ namespace Firedump.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap favorite_icon {
+            get {
+                object obj = ResourceManager.GetObject("favorite_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap field_icon {
             get {
                 object obj = ResourceManager.GetObject("field_icon", resourceCulture);
@@ -519,6 +529,16 @@ namespace Firedump.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap save_all_icon {
+            get {
+                object obj = ResourceManager.GetObject("save_all_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap save_icon {
             get {
                 object obj = ResourceManager.GetObject("save_icon", resourceCulture);
@@ -549,16 +569,6 @@ namespace Firedump.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap saveall_icon {
-            get {
-                object obj = ResourceManager.GetObject("saveall_icon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap search_icon {
             get {
                 object obj = ResourceManager.GetObject("search_icon", resourceCulture);
@@ -572,6 +582,16 @@ namespace Firedump.Properties {
         internal static System.Drawing.Bitmap show_hide_icon {
             get {
                 object obj = ResourceManager.GetObject("show_hide_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap skip_icon {
+            get {
+                object obj = ResourceManager.GetObject("skip_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

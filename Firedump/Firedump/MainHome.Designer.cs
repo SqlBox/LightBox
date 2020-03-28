@@ -59,10 +59,13 @@ namespace Firedump
             this.toolStripButtonExecNext = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonStop = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton11 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton12 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton13 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonEnableAutoCommit = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripComboBoxLimit = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripButtonFetchNext = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton13 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton18 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton22 = new System.Windows.Forms.ToolStripButton();
@@ -82,8 +85,6 @@ namespace Firedump
             this.toolStripButton16 = new System.Windows.Forms.ToolStripButton();
             this.toolStripTextBoxSearch = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripButton19 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripComboBoxLimit = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -167,6 +168,8 @@ namespace Firedump
             // 
             // statusStrip1
             // 
+            this.statusStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            this.statusStrip1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripProgressBar});
             this.statusStrip1.Location = new System.Drawing.Point(0, 631);
@@ -219,6 +222,7 @@ namespace Firedump
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
             this.splitContainer1.Size = new System.Drawing.Size(1169, 557);
             this.splitContainer1.SplitterDistance = 250;
@@ -226,6 +230,7 @@ namespace Firedump
             // 
             // tabView1
             // 
+            this.tabView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
             this.tabView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabView1.Location = new System.Drawing.Point(0, 0);
             this.tabView1.Name = "tabView1";
@@ -234,28 +239,35 @@ namespace Firedump
             // 
             // splitContainer2
             // 
-            this.splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
             this.splitContainer2.Name = "splitContainer2";
             // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            // 
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.tableView1);
-            this.splitContainer2.Size = new System.Drawing.Size(915, 557);
-            this.splitContainer2.SplitterDistance = 726;
+            this.splitContainer2.Size = new System.Drawing.Size(913, 555);
+            this.splitContainer2.SplitterDistance = 724;
             this.splitContainer2.TabIndex = 0;
             // 
             // tableView1
             // 
+            this.tableView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
             this.tableView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableView1.Location = new System.Drawing.Point(0, 0);
             this.tableView1.Name = "tableView1";
-            this.tableView1.Size = new System.Drawing.Size(183, 555);
+            this.tableView1.Size = new System.Drawing.Size(185, 555);
             this.tableView1.TabIndex = 0;
             // 
             // toolStrip1
             // 
+            this.toolStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            this.toolStrip1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.toolStrip1.GripMargin = new System.Windows.Forms.Padding(2, 0, 2, 2);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonShowSysDb,
             this.toolStripSeparator15,
@@ -276,12 +288,16 @@ namespace Firedump
             this.toolStripButtonExecNext,
             this.toolStripSeparator21,
             this.toolStripButtonStop,
+            this.toolStripSeparator23,
             this.toolStripButton11,
-            this.toolStripButton12,
-            this.toolStripButton13,
-            this.toolStripSeparator17});
+            this.toolStripButtonEnableAutoCommit,
+            this.toolStripSeparator17,
+            this.toolStripComboBoxLimit,
+            this.toolStripButtonFetchNext,
+            this.toolStripButton13});
             this.toolStrip1.Location = new System.Drawing.Point(0, 49);
             this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip1.Size = new System.Drawing.Size(1169, 25);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
@@ -452,40 +468,73 @@ namespace Firedump
             this.toolStripButtonStop.ToolTipText = "Stop executing query";
             this.toolStripButtonStop.Click += new System.EventHandler(this.StopRunningQuery);
             // 
+            // toolStripSeparator23
+            // 
+            this.toolStripSeparator23.Name = "toolStripSeparator23";
+            this.toolStripSeparator23.Size = new System.Drawing.Size(6, 25);
+            // 
             // toolStripButton11
             // 
             this.toolStripButton11.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton11.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton11.Image")));
+            this.toolStripButton11.Image = global::Firedump.Properties.Resources.skip_icon;
             this.toolStripButton11.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton11.Name = "toolStripButton11";
             this.toolStripButton11.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton11.Text = "toolStripButton11";
+            this.toolStripButton11.ToolTipText = "Enable if Execution of SQL should continue after fail";
+            this.toolStripButton11.Click += new System.EventHandler(this.ContOnErrorClick);
             // 
-            // toolStripButton12
+            // toolStripButtonEnableAutoCommit
             // 
-            this.toolStripButton12.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton12.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton12.Image")));
-            this.toolStripButton12.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton12.Name = "toolStripButton12";
-            this.toolStripButton12.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton12.Text = "toolStripButton12";
-            // 
-            // toolStripButton13
-            // 
-            this.toolStripButton13.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton13.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton13.Image")));
-            this.toolStripButton13.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton13.Name = "toolStripButton13";
-            this.toolStripButton13.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton13.Text = "toolStripButton13";
+            this.toolStripButtonEnableAutoCommit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonEnableAutoCommit.Image = global::Firedump.Properties.Resources.commit_icon;
+            this.toolStripButtonEnableAutoCommit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonEnableAutoCommit.Name = "toolStripButtonEnableAutoCommit";
+            this.toolStripButtonEnableAutoCommit.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonEnableAutoCommit.Text = "toolStripButton12";
+            this.toolStripButtonEnableAutoCommit.ToolTipText = "Enable for auto commit every statement";
+            this.toolStripButtonEnableAutoCommit.Click += new System.EventHandler(this.OnAutoCommitEnabledClick);
             // 
             // toolStripSeparator17
             // 
             this.toolStripSeparator17.Name = "toolStripSeparator17";
             this.toolStripSeparator17.Size = new System.Drawing.Size(6, 25);
             // 
+            // toolStripComboBoxLimit
+            // 
+            this.toolStripComboBoxLimit.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripComboBoxLimit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.toolStripComboBoxLimit.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.toolStripComboBoxLimit.Name = "toolStripComboBoxLimit";
+            this.toolStripComboBoxLimit.Size = new System.Drawing.Size(121, 25);
+            // 
+            // toolStripButtonFetchNext
+            // 
+            this.toolStripButtonFetchNext.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripButtonFetchNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonFetchNext.Image = global::Firedump.Properties.Resources.query_results_icon;
+            this.toolStripButtonFetchNext.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonFetchNext.Name = "toolStripButtonFetchNext";
+            this.toolStripButtonFetchNext.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonFetchNext.Text = "toolStripButton1";
+            this.toolStripButtonFetchNext.ToolTipText = "Fetch Next Data";
+            // 
+            // toolStripButton13
+            // 
+            this.toolStripButton13.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton13.Image = global::Firedump.Properties.Resources.favorite_icon;
+            this.toolStripButton13.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton13.Name = "toolStripButton13";
+            this.toolStripButton13.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.toolStripButton13.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton13.Text = "toolStripButton13";
+            this.toolStripButton13.ToolTipText = "Save selected query to  snippet";
+            // 
             // toolStrip2
             // 
+            this.toolStrip2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            this.toolStrip2.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.toolStrip2.GripMargin = new System.Windows.Forms.Padding(2, 2, 2, 0);
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton18,
             this.toolStripButton22,
@@ -504,11 +553,10 @@ namespace Firedump
             this.toolStripButton15,
             this.toolStripButton16,
             this.toolStripTextBoxSearch,
-            this.toolStripButton19,
-            this.toolStripComboBoxLimit,
-            this.toolStripButton7});
+            this.toolStripButton19});
             this.toolStrip2.Location = new System.Drawing.Point(0, 24);
             this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip2.Size = new System.Drawing.Size(1169, 25);
             this.toolStrip2.TabIndex = 2;
             this.toolStrip2.Text = "toolStrip2";
@@ -537,7 +585,7 @@ namespace Firedump
             // toolStripButtonSaveAll
             // 
             this.toolStripButtonSaveAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonSaveAll.Image = global::Firedump.Properties.Resources.saveall_icon;
+            this.toolStripButtonSaveAll.Image = global::Firedump.Properties.Resources.save_all_icon;
             this.toolStripButtonSaveAll.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonSaveAll.Name = "toolStripButtonSaveAll";
             this.toolStripButtonSaveAll.Size = new System.Drawing.Size(23, 22);
@@ -665,6 +713,7 @@ namespace Firedump
             // 
             // toolStripTextBoxSearch
             // 
+            this.toolStripTextBoxSearch.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.toolStripTextBoxSearch.Name = "toolStripTextBoxSearch";
             this.toolStripTextBoxSearch.Size = new System.Drawing.Size(100, 25);
             this.toolStripTextBoxSearch.ToolTipText = "Enter text to find";
@@ -681,24 +730,9 @@ namespace Firedump
             this.toolStripButton19.ToolTipText = "Find Next";
             this.toolStripButton19.Click += new System.EventHandler(this.FindNextClick);
             // 
-            // toolStripComboBoxLimit
-            // 
-            this.toolStripComboBoxLimit.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripComboBoxLimit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.toolStripComboBoxLimit.Name = "toolStripComboBoxLimit";
-            this.toolStripComboBoxLimit.Size = new System.Drawing.Size(121, 25);
-            // 
-            // toolStripButton7
-            // 
-            this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton7.Image")));
-            this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton7.Name = "toolStripButton7";
-            this.toolStripButton7.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton7.Text = "toolStripButton7";
-            // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
             this.menuStrip1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
@@ -713,6 +747,7 @@ namespace Firedump
             this.helpToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(0);
             this.menuStrip1.Size = new System.Drawing.Size(1169, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
@@ -730,7 +765,7 @@ namespace Firedump
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // newToolStripMenuItem
@@ -796,7 +831,7 @@ namespace Firedump
             this.toolStripSeparator9,
             this.preferencesToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(40, 24);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // undoToolStripMenuItem
@@ -923,7 +958,7 @@ namespace Firedump
             this.addNewServerToolStripMenuItem,
             this.manageServersToolStripMenuItem});
             this.databaseToolStripMenuItem.Name = "databaseToolStripMenuItem";
-            this.databaseToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
+            this.databaseToolStripMenuItem.Size = new System.Drawing.Size(69, 24);
             this.databaseToolStripMenuItem.Text = "Database";
             // 
             // connectToDatabaseToolStripMenuItem
@@ -950,14 +985,14 @@ namespace Firedump
             // dataToolStripMenuItem
             // 
             this.dataToolStripMenuItem.Name = "dataToolStripMenuItem";
-            this.dataToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.dataToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
             this.dataToolStripMenuItem.Text = "Data";
             this.dataToolStripMenuItem.Click += new System.EventHandler(this.DataToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 24);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // helpToolStripMenuItem
@@ -965,7 +1000,7 @@ namespace Firedump
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(43, 24);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // aboutToolStripMenuItem
@@ -988,7 +1023,7 @@ namespace Firedump
             this.toolStripSeparator11,
             this.exitToolStripMenuItem1});
             this.fileToolStripMenuItem1.Name = "fileToolStripMenuItem1";
-            this.fileToolStripMenuItem1.Size = new System.Drawing.Size(36, 20);
+            this.fileToolStripMenuItem1.Size = new System.Drawing.Size(36, 24);
             this.fileToolStripMenuItem1.Text = "&File";
             // 
             // newToolStripMenuItem1
@@ -1074,7 +1109,7 @@ namespace Firedump
             this.toolStripSeparator13,
             this.selectAllToolStripMenuItem1});
             this.editToolStripMenuItem1.Name = "editToolStripMenuItem1";
-            this.editToolStripMenuItem1.Size = new System.Drawing.Size(40, 20);
+            this.editToolStripMenuItem1.Size = new System.Drawing.Size(40, 24);
             this.editToolStripMenuItem1.Text = "&Edit";
             // 
             // undoToolStripMenuItem1
@@ -1141,7 +1176,7 @@ namespace Firedump
             this.customizeToolStripMenuItem,
             this.optionsToolStripMenuItem});
             this.toolsToolStripMenuItem1.Name = "toolsToolStripMenuItem1";
-            this.toolsToolStripMenuItem1.Size = new System.Drawing.Size(48, 20);
+            this.toolsToolStripMenuItem1.Size = new System.Drawing.Size(48, 24);
             this.toolsToolStripMenuItem1.Text = "&Tools";
             // 
             // customizeToolStripMenuItem
@@ -1165,7 +1200,7 @@ namespace Firedump
             this.toolStripSeparator14,
             this.aboutToolStripMenuItem1});
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(43, 20);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(43, 24);
             this.helpToolStripMenuItem1.Text = "&Help";
             // 
             // contentsToolStripMenuItem
@@ -1201,12 +1236,13 @@ namespace Firedump
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
             this.ClientSize = new System.Drawing.Size(1169, 653);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.Name = "MainHome";
-            this.Text = "NewHome";
+            this.Text = "LightBox";
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -1260,7 +1296,7 @@ namespace Firedump
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator21;
         private System.Windows.Forms.ToolStripButton toolStripButtonStop;
         private System.Windows.Forms.ToolStripButton toolStripButton11;
-        private System.Windows.Forms.ToolStripButton toolStripButton12;
+        private System.Windows.Forms.ToolStripButton toolStripButtonEnableAutoCommit;
         private System.Windows.Forms.ToolStripButton toolStripButton13;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
         private System.Windows.Forms.ToolStrip toolStrip2;
@@ -1282,8 +1318,6 @@ namespace Firedump
         private System.Windows.Forms.ToolStripButton toolStripButton16;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBoxSearch;
         private System.Windows.Forms.ToolStripButton toolStripButton19;
-        private System.Windows.Forms.ToolStripComboBox toolStripComboBoxLimit;
-        private System.Windows.Forms.ToolStripButton toolStripButton7;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
@@ -1351,5 +1385,8 @@ namespace Firedump
         private System.Windows.Forms.ToolStripMenuItem searchToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripComboBox toolStripComboBoxLimit;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator23;
+        private System.Windows.Forms.ToolStripButton toolStripButtonFetchNext;
     }
 }

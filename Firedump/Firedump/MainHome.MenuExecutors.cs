@@ -174,5 +174,15 @@ namespace Firedump
         {
             GetEditor().stopAnyRunningQuery();
         }
+
+        private void ContOnErrorClick(object sender, EventArgs e)
+        {
+            ((ToolStripButton)sender).Checked = !((ToolStripButton)sender).Checked;
+        }
+
+        private void OnAutoCommitEnabledClick(object sender, EventArgs e)
+        {
+            ((ToolStripButton)sender).Checked = !((ToolStripButton)sender).Checked;
+        }
     }
 }

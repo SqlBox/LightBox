@@ -127,7 +127,7 @@ namespace Firedump.core
             DataColumn c1 = new DataColumn("Query");
             DataColumn c2 = new DataColumn("Rows affected");
             DataColumn c3 = new DataColumn("Info");
-            DataColumn c4 = new DataColumn("Millis");
+            DataColumn c4 = new DataColumn("Secs/Millis");
             DataColumn c5 = new DataColumn("Executed At");
             c0.DataType = System.Type.GetType("System.Byte[]");
             data.Columns.Add(c0);
@@ -152,7 +152,7 @@ namespace Firedump.core
             row["Query"] = e.query;
             row["Rows affected"] = e.recordsAffected;
             row["Info"] = e.Ex != null ? e.Ex.Message : "";
-            row["Millis"] = e.duration.TotalMilliseconds;
+            row["Secs/Millis"] = (int)e.duration.TotalSeconds +"/" + (int) e.duration.TotalMilliseconds;
             row["Executed At"] = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
             data.Rows.Add(row);
             return data;

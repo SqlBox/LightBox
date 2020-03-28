@@ -16,6 +16,7 @@ using Firedump.core.models.events;
 using Firedump.core.models.dbinfo;
 using Firedump.core.sql.executor;
 using Firedump.core;
+using System.Windows.Media;
 
 namespace Firedump.usercontrols
 {
@@ -111,6 +112,5 @@ namespace Firedump.usercontrols
                 this.editor.Fetch(new QueryParams() { Limit = this.editor.GetMainHome().GetLimitFromToolStripComboBoxLimit(), Offset = dataGridView1.RowCount, Hash = this.GetHashCode(),Sql = SQL });
             }
         }
-
     }
 }

@@ -32,12 +32,13 @@ namespace Firedump.usercontrols
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TabView));
+            this.imageListTableTree = new System.Windows.Forms.ImageList(this.components);
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageTables = new System.Windows.Forms.TabPage();
             this.treeViewTables = new System.Windows.Forms.TreeView();
-            this.imageListTableTree = new System.Windows.Forms.ImageList(this.components);
             this.textBoxTable = new System.Windows.Forms.TextBox();
             this.tabPagePKs = new System.Windows.Forms.TabPage();
             this.dataGridViewPKs = new System.Windows.Forms.DataGridView();
@@ -63,7 +64,6 @@ namespace Firedump.usercontrols
             this.tabPageViews = new System.Windows.Forms.TabPage();
             this.dataGridViewView = new System.Windows.Forms.DataGridView();
             this.textBoxView = new System.Windows.Forms.TextBox();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.comboBoxServers = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -86,6 +86,26 @@ namespace Firedump.usercontrols
             this.tabPageViews.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewView)).BeginInit();
             this.SuspendLayout();
+            // 
+            // imageListTableTree
+            // 
+            this.imageListTableTree.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListTableTree.ImageStream")));
+            this.imageListTableTree.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListTableTree.Images.SetKeyName(0, "table-icon.png");
+            this.imageListTableTree.Images.SetKeyName(1, "fieldicon.png");
+            this.imageListTableTree.Images.SetKeyName(2, "view-icon.png");
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "index-icon.png");
+            this.imageList1.Images.SetKeyName(1, "trigger-icon.bmp");
+            this.imageList1.Images.SetKeyName(2, "procedure-icon.png");
+            this.imageList1.Images.SetKeyName(3, "function-icon.png");
+            this.imageList1.Images.SetKeyName(4, "view-icon.png");
+            this.imageList1.Images.SetKeyName(5, "table-icon.png");
+            this.imageList1.Images.SetKeyName(6, "key-icon.png");
             // 
             // panel1
             // 
@@ -136,8 +156,8 @@ namespace Firedump.usercontrols
             this.tabPageTables.Controls.Add(this.textBoxTable);
             this.tabPageTables.ImageIndex = 5;
             this.tabPageTables.Location = new System.Drawing.Point(4, 61);
+            this.tabPageTables.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageTables.Name = "tabPageTables";
-            this.tabPageTables.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageTables.Size = new System.Drawing.Size(263, 488);
             this.tabPageTables.TabIndex = 5;
             this.tabPageTables.Text = "Tables";
@@ -145,32 +165,26 @@ namespace Firedump.usercontrols
             // 
             // treeViewTables
             // 
+            this.treeViewTables.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            this.treeViewTables.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.treeViewTables.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewTables.ImageIndex = 0;
             this.treeViewTables.ImageList = this.imageListTableTree;
-            this.treeViewTables.Location = new System.Drawing.Point(3, 24);
+            this.treeViewTables.Location = new System.Drawing.Point(0, 21);
             this.treeViewTables.Name = "treeViewTables";
             this.treeViewTables.SelectedImageIndex = 0;
-            this.treeViewTables.Size = new System.Drawing.Size(257, 461);
+            this.treeViewTables.Size = new System.Drawing.Size(263, 467);
             this.treeViewTables.TabIndex = 3;
             this.treeViewTables.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeViewTables_BeforeExpand);
             this.treeViewTables.DoubleClick += new System.EventHandler(this.TreeViewTable_MenuItem_ShowCreate);
             this.treeViewTables.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeViewTables_MouseUp);
             // 
-            // imageListTableTree
-            // 
-            this.imageListTableTree.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListTableTree.ImageStream")));
-            this.imageListTableTree.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListTableTree.Images.SetKeyName(0, "table-icon.png");
-            this.imageListTableTree.Images.SetKeyName(1, "fieldicon.png");
-            this.imageListTableTree.Images.SetKeyName(2, "view-icon.png");
-            // 
             // textBoxTable
             // 
             this.textBoxTable.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBoxTable.Location = new System.Drawing.Point(3, 3);
+            this.textBoxTable.Location = new System.Drawing.Point(0, 0);
             this.textBoxTable.Name = "textBoxTable";
-            this.textBoxTable.Size = new System.Drawing.Size(257, 21);
+            this.textBoxTable.Size = new System.Drawing.Size(263, 21);
             this.textBoxTable.TabIndex = 0;
             // 
             // tabPagePKs
@@ -178,10 +192,10 @@ namespace Firedump.usercontrols
             this.tabPagePKs.Controls.Add(this.dataGridViewPKs);
             this.tabPagePKs.Controls.Add(this.searchPKbox);
             this.tabPagePKs.ImageIndex = 6;
-            this.tabPagePKs.Location = new System.Drawing.Point(4, 61);
+            this.tabPagePKs.Location = new System.Drawing.Point(4, 23);
+            this.tabPagePKs.Margin = new System.Windows.Forms.Padding(0);
             this.tabPagePKs.Name = "tabPagePKs";
-            this.tabPagePKs.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePKs.Size = new System.Drawing.Size(263, 488);
+            this.tabPagePKs.Size = new System.Drawing.Size(263, 526);
             this.tabPagePKs.TabIndex = 6;
             this.tabPagePKs.Text = "PKs";
             this.tabPagePKs.UseVisualStyleBackColor = true;
@@ -191,22 +205,24 @@ namespace Firedump.usercontrols
             this.dataGridViewPKs.AllowUserToAddRows = false;
             this.dataGridViewPKs.AllowUserToDeleteRows = false;
             this.dataGridViewPKs.AllowUserToOrderColumns = true;
+            this.dataGridViewPKs.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            this.dataGridViewPKs.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewPKs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewPKs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewPKs.Location = new System.Drawing.Point(3, 24);
+            this.dataGridViewPKs.Location = new System.Drawing.Point(0, 21);
             this.dataGridViewPKs.Name = "dataGridViewPKs";
             this.dataGridViewPKs.ReadOnly = true;
             this.dataGridViewPKs.RowHeadersVisible = false;
             this.dataGridViewPKs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewPKs.Size = new System.Drawing.Size(257, 461);
+            this.dataGridViewPKs.Size = new System.Drawing.Size(263, 505);
             this.dataGridViewPKs.TabIndex = 1;
             // 
             // searchPKbox
             // 
             this.searchPKbox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.searchPKbox.Location = new System.Drawing.Point(3, 3);
+            this.searchPKbox.Location = new System.Drawing.Point(0, 0);
             this.searchPKbox.Name = "searchPKbox";
-            this.searchPKbox.Size = new System.Drawing.Size(257, 21);
+            this.searchPKbox.Size = new System.Drawing.Size(263, 21);
             this.searchPKbox.TabIndex = 0;
             // 
             // tabPageUKs
@@ -214,10 +230,10 @@ namespace Firedump.usercontrols
             this.tabPageUKs.Controls.Add(this.dataGridViewUnique);
             this.tabPageUKs.Controls.Add(this.textBoxUK);
             this.tabPageUKs.ImageIndex = 6;
-            this.tabPageUKs.Location = new System.Drawing.Point(4, 61);
+            this.tabPageUKs.Location = new System.Drawing.Point(4, 23);
+            this.tabPageUKs.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageUKs.Name = "tabPageUKs";
-            this.tabPageUKs.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageUKs.Size = new System.Drawing.Size(263, 488);
+            this.tabPageUKs.Size = new System.Drawing.Size(263, 526);
             this.tabPageUKs.TabIndex = 7;
             this.tabPageUKs.Text = "UKs";
             this.tabPageUKs.UseVisualStyleBackColor = true;
@@ -227,21 +243,23 @@ namespace Firedump.usercontrols
             this.dataGridViewUnique.AllowUserToAddRows = false;
             this.dataGridViewUnique.AllowUserToDeleteRows = false;
             this.dataGridViewUnique.AllowUserToOrderColumns = true;
+            this.dataGridViewUnique.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            this.dataGridViewUnique.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewUnique.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewUnique.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewUnique.Location = new System.Drawing.Point(3, 24);
+            this.dataGridViewUnique.Location = new System.Drawing.Point(0, 21);
             this.dataGridViewUnique.Name = "dataGridViewUnique";
             this.dataGridViewUnique.ReadOnly = true;
             this.dataGridViewUnique.RowHeadersVisible = false;
-            this.dataGridViewUnique.Size = new System.Drawing.Size(257, 461);
+            this.dataGridViewUnique.Size = new System.Drawing.Size(263, 505);
             this.dataGridViewUnique.TabIndex = 2;
             // 
             // textBoxUK
             // 
             this.textBoxUK.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBoxUK.Location = new System.Drawing.Point(3, 3);
+            this.textBoxUK.Location = new System.Drawing.Point(0, 0);
             this.textBoxUK.Name = "textBoxUK";
-            this.textBoxUK.Size = new System.Drawing.Size(257, 21);
+            this.textBoxUK.Size = new System.Drawing.Size(263, 21);
             this.textBoxUK.TabIndex = 0;
             // 
             // tabPageFKs
@@ -249,9 +267,10 @@ namespace Firedump.usercontrols
             this.tabPageFKs.Controls.Add(this.dataGridViewFKs);
             this.tabPageFKs.Controls.Add(this.textBoxFK);
             this.tabPageFKs.ImageIndex = 6;
-            this.tabPageFKs.Location = new System.Drawing.Point(4, 61);
+            this.tabPageFKs.Location = new System.Drawing.Point(4, 23);
+            this.tabPageFKs.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageFKs.Name = "tabPageFKs";
-            this.tabPageFKs.Size = new System.Drawing.Size(263, 488);
+            this.tabPageFKs.Size = new System.Drawing.Size(263, 526);
             this.tabPageFKs.TabIndex = 8;
             this.tabPageFKs.Text = "FKs";
             this.tabPageFKs.UseVisualStyleBackColor = true;
@@ -261,13 +280,15 @@ namespace Firedump.usercontrols
             this.dataGridViewFKs.AllowUserToAddRows = false;
             this.dataGridViewFKs.AllowUserToDeleteRows = false;
             this.dataGridViewFKs.AllowUserToOrderColumns = true;
+            this.dataGridViewFKs.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            this.dataGridViewFKs.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewFKs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewFKs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewFKs.Location = new System.Drawing.Point(0, 21);
             this.dataGridViewFKs.Name = "dataGridViewFKs";
             this.dataGridViewFKs.ReadOnly = true;
             this.dataGridViewFKs.RowHeadersVisible = false;
-            this.dataGridViewFKs.Size = new System.Drawing.Size(263, 467);
+            this.dataGridViewFKs.Size = new System.Drawing.Size(263, 505);
             this.dataGridViewFKs.TabIndex = 3;
             // 
             // textBoxFK
@@ -283,10 +304,10 @@ namespace Firedump.usercontrols
             this.tabPageIndexes.Controls.Add(this.dataGridViewIndexes);
             this.tabPageIndexes.Controls.Add(this.textBoxIndex);
             this.tabPageIndexes.ImageIndex = 0;
-            this.tabPageIndexes.Location = new System.Drawing.Point(4, 61);
+            this.tabPageIndexes.Location = new System.Drawing.Point(4, 42);
+            this.tabPageIndexes.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageIndexes.Name = "tabPageIndexes";
-            this.tabPageIndexes.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageIndexes.Size = new System.Drawing.Size(263, 488);
+            this.tabPageIndexes.Size = new System.Drawing.Size(263, 507);
             this.tabPageIndexes.TabIndex = 0;
             this.tabPageIndexes.Text = "Indexes";
             this.tabPageIndexes.UseVisualStyleBackColor = true;
@@ -296,21 +317,23 @@ namespace Firedump.usercontrols
             this.dataGridViewIndexes.AllowUserToAddRows = false;
             this.dataGridViewIndexes.AllowUserToDeleteRows = false;
             this.dataGridViewIndexes.AllowUserToOrderColumns = true;
+            this.dataGridViewIndexes.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            this.dataGridViewIndexes.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewIndexes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewIndexes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewIndexes.Location = new System.Drawing.Point(3, 24);
+            this.dataGridViewIndexes.Location = new System.Drawing.Point(0, 21);
             this.dataGridViewIndexes.Name = "dataGridViewIndexes";
             this.dataGridViewIndexes.ReadOnly = true;
             this.dataGridViewIndexes.RowHeadersVisible = false;
-            this.dataGridViewIndexes.Size = new System.Drawing.Size(257, 461);
+            this.dataGridViewIndexes.Size = new System.Drawing.Size(263, 486);
             this.dataGridViewIndexes.TabIndex = 2;
             // 
             // textBoxIndex
             // 
             this.textBoxIndex.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBoxIndex.Location = new System.Drawing.Point(3, 3);
+            this.textBoxIndex.Location = new System.Drawing.Point(0, 0);
             this.textBoxIndex.Name = "textBoxIndex";
-            this.textBoxIndex.Size = new System.Drawing.Size(257, 21);
+            this.textBoxIndex.Size = new System.Drawing.Size(263, 21);
             this.textBoxIndex.TabIndex = 0;
             // 
             // tabPageTriggers
@@ -318,10 +341,10 @@ namespace Firedump.usercontrols
             this.tabPageTriggers.Controls.Add(this.dataGridViewTrigger);
             this.tabPageTriggers.Controls.Add(this.textBoxTrigger);
             this.tabPageTriggers.ImageIndex = 1;
-            this.tabPageTriggers.Location = new System.Drawing.Point(4, 61);
+            this.tabPageTriggers.Location = new System.Drawing.Point(4, 42);
+            this.tabPageTriggers.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageTriggers.Name = "tabPageTriggers";
-            this.tabPageTriggers.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageTriggers.Size = new System.Drawing.Size(263, 488);
+            this.tabPageTriggers.Size = new System.Drawing.Size(263, 507);
             this.tabPageTriggers.TabIndex = 1;
             this.tabPageTriggers.Text = "Triggers";
             this.tabPageTriggers.UseVisualStyleBackColor = true;
@@ -331,21 +354,23 @@ namespace Firedump.usercontrols
             this.dataGridViewTrigger.AllowUserToAddRows = false;
             this.dataGridViewTrigger.AllowUserToDeleteRows = false;
             this.dataGridViewTrigger.AllowUserToOrderColumns = true;
+            this.dataGridViewTrigger.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            this.dataGridViewTrigger.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewTrigger.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewTrigger.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewTrigger.Location = new System.Drawing.Point(3, 24);
+            this.dataGridViewTrigger.Location = new System.Drawing.Point(0, 21);
             this.dataGridViewTrigger.Name = "dataGridViewTrigger";
             this.dataGridViewTrigger.ReadOnly = true;
             this.dataGridViewTrigger.RowHeadersVisible = false;
-            this.dataGridViewTrigger.Size = new System.Drawing.Size(257, 461);
+            this.dataGridViewTrigger.Size = new System.Drawing.Size(263, 486);
             this.dataGridViewTrigger.TabIndex = 4;
             // 
             // textBoxTrigger
             // 
             this.textBoxTrigger.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBoxTrigger.Location = new System.Drawing.Point(3, 3);
+            this.textBoxTrigger.Location = new System.Drawing.Point(0, 0);
             this.textBoxTrigger.Name = "textBoxTrigger";
-            this.textBoxTrigger.Size = new System.Drawing.Size(257, 21);
+            this.textBoxTrigger.Size = new System.Drawing.Size(263, 21);
             this.textBoxTrigger.TabIndex = 0;
             // 
             // tabPageProcedures
@@ -353,10 +378,10 @@ namespace Firedump.usercontrols
             this.tabPageProcedures.Controls.Add(this.dataGridViewProcedures);
             this.tabPageProcedures.Controls.Add(this.textBoxProcedure);
             this.tabPageProcedures.ImageIndex = 2;
-            this.tabPageProcedures.Location = new System.Drawing.Point(4, 61);
+            this.tabPageProcedures.Location = new System.Drawing.Point(4, 42);
+            this.tabPageProcedures.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageProcedures.Name = "tabPageProcedures";
-            this.tabPageProcedures.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageProcedures.Size = new System.Drawing.Size(263, 488);
+            this.tabPageProcedures.Size = new System.Drawing.Size(263, 507);
             this.tabPageProcedures.TabIndex = 2;
             this.tabPageProcedures.Text = "Procedures";
             this.tabPageProcedures.UseVisualStyleBackColor = true;
@@ -366,21 +391,23 @@ namespace Firedump.usercontrols
             this.dataGridViewProcedures.AllowUserToAddRows = false;
             this.dataGridViewProcedures.AllowUserToDeleteRows = false;
             this.dataGridViewProcedures.AllowUserToOrderColumns = true;
+            this.dataGridViewProcedures.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            this.dataGridViewProcedures.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewProcedures.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewProcedures.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewProcedures.Location = new System.Drawing.Point(3, 24);
+            this.dataGridViewProcedures.Location = new System.Drawing.Point(0, 21);
             this.dataGridViewProcedures.Name = "dataGridViewProcedures";
             this.dataGridViewProcedures.ReadOnly = true;
             this.dataGridViewProcedures.RowHeadersVisible = false;
-            this.dataGridViewProcedures.Size = new System.Drawing.Size(257, 461);
+            this.dataGridViewProcedures.Size = new System.Drawing.Size(263, 486);
             this.dataGridViewProcedures.TabIndex = 4;
             // 
             // textBoxProcedure
             // 
             this.textBoxProcedure.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBoxProcedure.Location = new System.Drawing.Point(3, 3);
+            this.textBoxProcedure.Location = new System.Drawing.Point(0, 0);
             this.textBoxProcedure.Name = "textBoxProcedure";
-            this.textBoxProcedure.Size = new System.Drawing.Size(257, 21);
+            this.textBoxProcedure.Size = new System.Drawing.Size(263, 21);
             this.textBoxProcedure.TabIndex = 0;
             // 
             // tabPageFunctions
@@ -389,8 +416,8 @@ namespace Firedump.usercontrols
             this.tabPageFunctions.Controls.Add(this.textBoxFunction);
             this.tabPageFunctions.ImageIndex = 3;
             this.tabPageFunctions.Location = new System.Drawing.Point(4, 61);
+            this.tabPageFunctions.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageFunctions.Name = "tabPageFunctions";
-            this.tabPageFunctions.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageFunctions.Size = new System.Drawing.Size(263, 488);
             this.tabPageFunctions.TabIndex = 3;
             this.tabPageFunctions.Text = "Functions";
@@ -401,21 +428,23 @@ namespace Firedump.usercontrols
             this.dataGridViewFunctions.AllowUserToAddRows = false;
             this.dataGridViewFunctions.AllowUserToDeleteRows = false;
             this.dataGridViewFunctions.AllowUserToOrderColumns = true;
+            this.dataGridViewFunctions.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            this.dataGridViewFunctions.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewFunctions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewFunctions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewFunctions.Location = new System.Drawing.Point(3, 24);
+            this.dataGridViewFunctions.Location = new System.Drawing.Point(0, 21);
             this.dataGridViewFunctions.Name = "dataGridViewFunctions";
             this.dataGridViewFunctions.ReadOnly = true;
             this.dataGridViewFunctions.RowHeadersVisible = false;
-            this.dataGridViewFunctions.Size = new System.Drawing.Size(257, 461);
+            this.dataGridViewFunctions.Size = new System.Drawing.Size(263, 467);
             this.dataGridViewFunctions.TabIndex = 5;
             // 
             // textBoxFunction
             // 
             this.textBoxFunction.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBoxFunction.Location = new System.Drawing.Point(3, 3);
+            this.textBoxFunction.Location = new System.Drawing.Point(0, 0);
             this.textBoxFunction.Name = "textBoxFunction";
-            this.textBoxFunction.Size = new System.Drawing.Size(257, 21);
+            this.textBoxFunction.Size = new System.Drawing.Size(263, 21);
             this.textBoxFunction.TabIndex = 0;
             // 
             // tabPageViews
@@ -424,8 +453,8 @@ namespace Firedump.usercontrols
             this.tabPageViews.Controls.Add(this.textBoxView);
             this.tabPageViews.ImageIndex = 4;
             this.tabPageViews.Location = new System.Drawing.Point(4, 61);
+            this.tabPageViews.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageViews.Name = "tabPageViews";
-            this.tabPageViews.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageViews.Size = new System.Drawing.Size(263, 488);
             this.tabPageViews.TabIndex = 4;
             this.tabPageViews.Text = "Views";
@@ -436,34 +465,24 @@ namespace Firedump.usercontrols
             this.dataGridViewView.AllowUserToAddRows = false;
             this.dataGridViewView.AllowUserToDeleteRows = false;
             this.dataGridViewView.AllowUserToOrderColumns = true;
+            this.dataGridViewView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            this.dataGridViewView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewView.Location = new System.Drawing.Point(3, 24);
+            this.dataGridViewView.Location = new System.Drawing.Point(0, 21);
             this.dataGridViewView.Name = "dataGridViewView";
             this.dataGridViewView.ReadOnly = true;
             this.dataGridViewView.RowHeadersVisible = false;
-            this.dataGridViewView.Size = new System.Drawing.Size(257, 461);
+            this.dataGridViewView.Size = new System.Drawing.Size(263, 467);
             this.dataGridViewView.TabIndex = 6;
             // 
             // textBoxView
             // 
             this.textBoxView.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBoxView.Location = new System.Drawing.Point(3, 3);
+            this.textBoxView.Location = new System.Drawing.Point(0, 0);
             this.textBoxView.Name = "textBoxView";
-            this.textBoxView.Size = new System.Drawing.Size(257, 21);
+            this.textBoxView.Size = new System.Drawing.Size(263, 21);
             this.textBoxView.TabIndex = 0;
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "index-icon.png");
-            this.imageList1.Images.SetKeyName(1, "trigger-icon.bmp");
-            this.imageList1.Images.SetKeyName(2, "procedure-icon.png");
-            this.imageList1.Images.SetKeyName(3, "function-icon.png");
-            this.imageList1.Images.SetKeyName(4, "view-icon.png");
-            this.imageList1.Images.SetKeyName(5, "table-icon.png");
-            this.imageList1.Images.SetKeyName(6, "key-icon.png");
             // 
             // comboBoxServers
             // 
@@ -482,6 +501,7 @@ namespace Firedump.usercontrols
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
             this.Controls.Add(this.panel1);
             this.Name = "TabView";
             this.Size = new System.Drawing.Size(271, 574);
