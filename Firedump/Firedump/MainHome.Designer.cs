@@ -429,7 +429,7 @@ namespace Firedump
             this.toolStripButtonExecute.Name = "toolStripButtonExecute";
             this.toolStripButtonExecute.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonExecute.Text = "toolStripButtonExecute";
-            this.toolStripButtonExecute.ToolTipText = "Execute script";
+            this.toolStripButtonExecute.ToolTipText = "Execute script (F5)";
             this.toolStripButtonExecute.Click += new System.EventHandler(this.ExecuteScript);
             // 
             // toolStripButtonExecCurrent
@@ -686,7 +686,7 @@ namespace Firedump
             this.toolStripButton14.Name = "toolStripButton14";
             this.toolStripButton14.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton14.Text = "toolStripButton14";
-            this.toolStripButton14.ToolTipText = "Open find dialog";
+            this.toolStripButton14.ToolTipText = "Open find dialog (CTRL + F)";
             this.toolStripButton14.Click += new System.EventHandler(this.OnSearchClick);
             // 
             // toolStripButton15
@@ -697,7 +697,7 @@ namespace Firedump
             this.toolStripButton15.Name = "toolStripButton15";
             this.toolStripButton15.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton15.Text = "toolStripButton15";
-            this.toolStripButton15.ToolTipText = "Go to line.";
+            this.toolStripButton15.ToolTipText = "Go to line (CTRL + G)";
             this.toolStripButton15.Click += new System.EventHandler(this.OnGoToLineClick);
             // 
             // toolStripButton16
@@ -708,7 +708,7 @@ namespace Firedump
             this.toolStripButton16.Name = "toolStripButton16";
             this.toolStripButton16.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton16.Text = "toolStripButton16";
-            this.toolStripButton16.ToolTipText = "Open replace dialog";
+            this.toolStripButton16.ToolTipText = "Open replace dialog (CTRL + H)";
             this.toolStripButton16.Click += new System.EventHandler(this.OnReplaceClick);
             // 
             // toolStripTextBoxSearch

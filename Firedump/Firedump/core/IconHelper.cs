@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Firedump.core.sql;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -18,21 +19,9 @@ namespace Firedump.core
 
         static IconHelper()
         {
-            using (MemoryStream ms = new MemoryStream())
-            {
-                Icon.FromHandle(Properties.Resources.status_ok.GetHicon()).Save(ms);
-                status_ok_arr =  ms.ToArray();
-            }
-            using (MemoryStream ms = new MemoryStream())
-            {
-                Icon.FromHandle(Properties.Resources.status_error.GetHicon()).Save(ms);
-                status_error_arr = ms.ToArray();
-            }
-            using (MemoryStream ms = new MemoryStream())
-            {
-                Icon.FromHandle(Properties.Resources.status_info.GetHicon()).Save(ms);
-                status_info_arr = ms.ToArray();
-            }
+            status_ok_arr = Utils.IconToBytes(Icon.FromHandle(Properties.Resources.status_ok.GetHicon()));
+            status_error_arr = Utils.IconToBytes(Icon.FromHandle(Properties.Resources.status_error.GetHicon()));
+            status_info_arr = Utils.IconToBytes(Icon.FromHandle(Properties.Resources.status_info.GetHicon()));
         }
 
     }

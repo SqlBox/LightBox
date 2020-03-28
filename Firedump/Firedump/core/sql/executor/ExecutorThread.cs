@@ -42,8 +42,6 @@ namespace Firedump.core.sql.executor
                     {
                         using (var reader = Command.ExecuteReader())
                         {
-                            stopWatch.Stop();
-                            int rows_affected = reader.RecordsAffected;
                             bool is_last = statements.Count - 1 == i;
                             bool is_select = Utils.IsShowDataTypeOfCommand(statements[i]);
                             var resultData = new DataTable();
@@ -87,9 +85,10 @@ namespace Firedump.core.sql.executor
                                     }
                                     ds.Tables.Remove(resultData);
                                 }
-                            } 
+                            }
+                            stopWatch.Stop();
                             eventResult = new ExecutionQueryEvent(is_last ? Status.FINISHED : Status.RUNNING) 
-                                { query = statements[i], duration = stopWatch.Elapsed, recordsAffected = rows_affected, data = resultData };
+                                { query = statements[i], duration = stopWatch.Elapsed, recordsAffected = reader.RecordsAffected, data = resultData };
                         }
                     }
                     FireEvent(eventResult);
