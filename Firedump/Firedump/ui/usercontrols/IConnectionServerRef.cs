@@ -10,7 +10,7 @@ namespace Firedump.usercontrols
     //
     // Summary:
     //     The Interface for the base main windows component.
-    public interface IParentRef
+    public interface IConnectionServerRef
     {
         DbConnection GetConnection();
 

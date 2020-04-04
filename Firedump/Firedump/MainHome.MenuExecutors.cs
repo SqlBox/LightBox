@@ -17,11 +17,16 @@ namespace Firedump
     {
         private bool findTextBoxInputChange = false;
 
-        internal Editor GetEditor()
+
+        internal T GetUserControl<T>() where T : UserControlReference
         {
-            foreach (UserControlReference c in ChildControls)
-                if (c is Editor)
-                    return (c as Editor);
+            foreach(UserControlReference c in ChildControls)
+            {
+                if(c is T)
+                {
+                    return (T)c;
+                }
+            }
             return null;
         }
 
@@ -47,17 +52,17 @@ namespace Firedump
 
         private void Undo(object sender, EventArgs e)
         {
-            GetEditor().Undo();
+            GetUserControl<Editor>().Undo();
         }
 
         private void Redo(object sender, EventArgs e)
         {
-            GetEditor().Redo();
+            GetUserControl<Editor>().Redo();
         }
 
         private void PrettifyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            GetEditor().formatSelectedTab();
+            GetUserControl<Editor>().formatSelectedTab();
         }
 
         private void CommitBtnEventClick(object sender, EventArgs e)
@@ -78,7 +83,7 @@ namespace Firedump
 
         private void addNewQueryTab(object sender, EventArgs e)
         {
-            GetEditor().AddQueryTab();
+            GetUserControl<Editor>().AddQueryTab();
         }
 
        
@@ -86,7 +91,7 @@ namespace Firedump
         // Closes selected open tab
         private void closeTabClick(object sender, EventArgs e)
         {
-            GetEditor().CloseSelectedTab();
+            GetUserControl<Editor>().CloseSelectedTab();
         }
 
         private void OnSearchBoxEnterKey(object sender, KeyEventArgs e)
@@ -118,42 +123,42 @@ namespace Firedump
 
         private void OnSearchClick(object sender, EventArgs e)
         {
-            GetEditor().ShowFindDialog();
+            GetUserControl<Editor>().ShowFindDialog();
         }
 
         private void OnGoToLineClick(object sender, EventArgs e)
         {
-            GetEditor().ShowGoToLineDialog();
+            GetUserControl<Editor>().ShowGoToLineDialog();
         }
 
         private void OnReplaceClick(object sender, EventArgs e)
         {
-            GetEditor().ShowReplaceDialog();
+            GetUserControl<Editor>().ShowReplaceDialog();
         }
 
         private void handleFindClickEvent(string text, bool hasChanged, bool isNext)
         {
-            GetEditor().FindText(text, hasChanged, isNext);
+            GetUserControl<Editor>().FindText(text, hasChanged, isNext);
         }
 
         private void ToUpperClick(object sender,EventArgs e)
         {
-            GetEditor().ToUpper();
+            GetUserControl<Editor>().ToUpper();
         }
 
         private void ToLowerClick(object sender, EventArgs e)
         {
-            GetEditor().ToLower();
+            GetUserControl<Editor>().ToLower();
         }
 
         private void ExportHtmlClick(object sender, EventArgs e)
         {
-            GetEditor().ExportHtml();
+            GetUserControl<Editor>().ExportHtml();
         }
 
         private void PrintSelected(object sender, EventArgs e)
         {
-            GetEditor().PrintSelected();
+            GetUserControl<Editor>().PrintSelected();
         }
 
         private void ExecuteScript(object sender,EventArgs e)
@@ -161,7 +166,7 @@ namespace Firedump
             EnableUi(false);
             try
             {
-                GetEditor().ExecuteScript(null);
+                GetUserControl<Editor>().ExecuteScript(null);
             }
             catch (Exception ex) {
                 //LOG
@@ -172,7 +177,7 @@ namespace Firedump
 
         private void StopRunningQuery(object sender, EventArgs e)
         {
-            GetEditor().stopAnyRunningQuery();
+            GetUserControl<Editor>().stopAnyRunningQuery();
         }
 
         private void ContOnErrorClick(object sender, EventArgs e)

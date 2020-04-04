@@ -1,6 +1,7 @@
 ﻿using Firedump.core.models;
 using Firedump.core.models.dbinfo;
 using Firedump.core.models.events;
+using Firedump.usercontrols;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,7 +42,7 @@ namespace Firedump
         {
            this.Invoke((MethodInvoker)delegate {
                this.SuspendLayout();
-               GetTabView().GetDatabasesCombobox().Enabled = enable;
+               GetUserControl<TabView>().GetDatabasesCombobox().Enabled = enable;
                toolStripProgressBar.Visible = !enable;
                toolStripProgressBar.Enabled = !enable;
                this.toolStripButtonExecute.Enabled = enable;

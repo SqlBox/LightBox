@@ -27,7 +27,7 @@ namespace Firedump.usercontrols
             {
                 List<string> tables = new SqlBuilderFactory(base.GetSqlConnection())
                         .Create(null).removeSystemDatabases(DbUtils.getTables(base.GetSqlConnection()), false);
-                GetMainHome().GetEditor().UpdateEditor(tables);
+                GetMainHome().GetUserControl<Editor>().UpdateEditor(tables);
                 this.setRootTablesIntoTreeView(tables);
             }
         }
@@ -65,7 +65,7 @@ namespace Firedump.usercontrols
 
         private void TreeViewTables_BeforeExpand(object sender, TreeViewCancelEventArgs e)
         {
-            if (!GetMainHome().GetEditor().GetQueryExecutor().IsAlive())
+            if (!GetMainHome().GetUserControl<Editor>().GetQueryExecutor().IsAlive())
             {
                 this.setTableFields(DbUtils.getTableFields(GetSqlConnection(), e.Node.Text), e.Node.Index);
             }

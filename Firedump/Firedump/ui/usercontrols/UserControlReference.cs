@@ -12,7 +12,7 @@ namespace Firedump.usercontrols
 {
     public class UserControlReference : UserControl
     {
-        private IParentRef parent;
+        private IConnectionServerRef parent;
 
         // this default constructor exists only for the visual studio incapability 
         // and bugs causing missing and error forms render in editor
@@ -20,12 +20,12 @@ namespace Firedump.usercontrols
         {
         }
 
-        public UserControlReference(IParentRef parentRef) : this()
+        public UserControlReference(IConnectionServerRef parentRef) : this()
         {
             this.parent = parentRef;
         }
 
-        internal void InitComponent(IParentRef parentRef)
+        internal void InitComponent(IConnectionServerRef parentRef)
         {
             this.parent = parentRef;
             this.Init();

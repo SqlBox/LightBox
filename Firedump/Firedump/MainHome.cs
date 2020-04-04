@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace Firedump
 {
-    public sealed partial class MainHome : BaseForm , IParentRef
+    public sealed partial class MainHome : BaseForm , IConnectionServerRef
     {
         private DbConnection con;
         private sqlservers server;

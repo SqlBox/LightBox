@@ -89,6 +89,7 @@ namespace Firedump.core.sql.executor
                             stopWatch.Stop();
                             eventResult = new ExecutionQueryEvent(is_last ? Status.FINISHED : Status.RUNNING) 
                                 { query = statements[i], duration = stopWatch.Elapsed, recordsAffected = reader.RecordsAffected, data = resultData };
+                            Command?.Cancel();
                         }
                     }
                     FireEvent(eventResult);
@@ -108,7 +109,6 @@ namespace Firedump.core.sql.executor
                 }
                 catch(Exception ex)
                 {
-                    // a more generic error
                     Console.WriteLine(ex.Message);
                     FireEvent(new ExecutionQueryEvent(Status.ERROR) { Ex = ex, query = statements[i] });
                 }

@@ -57,7 +57,7 @@
             // 
             // treeViewTables
             // 
-            this.treeViewTables.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            this.treeViewTables.BackColor = System.Drawing.Color.White;
             this.treeViewTables.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.treeViewTables.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewTables.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));

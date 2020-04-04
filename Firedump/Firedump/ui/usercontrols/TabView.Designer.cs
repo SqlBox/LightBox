@@ -165,7 +165,7 @@ namespace Firedump.usercontrols
             // 
             // treeViewTables
             // 
-            this.treeViewTables.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            this.treeViewTables.BackColor = System.Drawing.Color.White;
             this.treeViewTables.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.treeViewTables.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewTables.ImageIndex = 0;
@@ -192,10 +192,10 @@ namespace Firedump.usercontrols
             this.tabPagePKs.Controls.Add(this.dataGridViewPKs);
             this.tabPagePKs.Controls.Add(this.searchPKbox);
             this.tabPagePKs.ImageIndex = 6;
-            this.tabPagePKs.Location = new System.Drawing.Point(4, 23);
+            this.tabPagePKs.Location = new System.Drawing.Point(4, 61);
             this.tabPagePKs.Margin = new System.Windows.Forms.Padding(0);
             this.tabPagePKs.Name = "tabPagePKs";
-            this.tabPagePKs.Size = new System.Drawing.Size(263, 526);
+            this.tabPagePKs.Size = new System.Drawing.Size(263, 488);
             this.tabPagePKs.TabIndex = 6;
             this.tabPagePKs.Text = "PKs";
             this.tabPagePKs.UseVisualStyleBackColor = true;
@@ -205,7 +205,7 @@ namespace Firedump.usercontrols
             this.dataGridViewPKs.AllowUserToAddRows = false;
             this.dataGridViewPKs.AllowUserToDeleteRows = false;
             this.dataGridViewPKs.AllowUserToOrderColumns = true;
-            this.dataGridViewPKs.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            this.dataGridViewPKs.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewPKs.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewPKs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewPKs.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -214,7 +214,7 @@ namespace Firedump.usercontrols
             this.dataGridViewPKs.ReadOnly = true;
             this.dataGridViewPKs.RowHeadersVisible = false;
             this.dataGridViewPKs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewPKs.Size = new System.Drawing.Size(263, 505);
+            this.dataGridViewPKs.Size = new System.Drawing.Size(263, 467);
             this.dataGridViewPKs.TabIndex = 1;
             // 
             // searchPKbox
@@ -230,10 +230,10 @@ namespace Firedump.usercontrols
             this.tabPageUKs.Controls.Add(this.dataGridViewUnique);
             this.tabPageUKs.Controls.Add(this.textBoxUK);
             this.tabPageUKs.ImageIndex = 6;
-            this.tabPageUKs.Location = new System.Drawing.Point(4, 23);
+            this.tabPageUKs.Location = new System.Drawing.Point(4, 61);
             this.tabPageUKs.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageUKs.Name = "tabPageUKs";
-            this.tabPageUKs.Size = new System.Drawing.Size(263, 526);
+            this.tabPageUKs.Size = new System.Drawing.Size(263, 488);
             this.tabPageUKs.TabIndex = 7;
             this.tabPageUKs.Text = "UKs";
             this.tabPageUKs.UseVisualStyleBackColor = true;
@@ -243,7 +243,7 @@ namespace Firedump.usercontrols
             this.dataGridViewUnique.AllowUserToAddRows = false;
             this.dataGridViewUnique.AllowUserToDeleteRows = false;
             this.dataGridViewUnique.AllowUserToOrderColumns = true;
-            this.dataGridViewUnique.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            this.dataGridViewUnique.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewUnique.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewUnique.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewUnique.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -251,7 +251,7 @@ namespace Firedump.usercontrols
             this.dataGridViewUnique.Name = "dataGridViewUnique";
             this.dataGridViewUnique.ReadOnly = true;
             this.dataGridViewUnique.RowHeadersVisible = false;
-            this.dataGridViewUnique.Size = new System.Drawing.Size(263, 505);
+            this.dataGridViewUnique.Size = new System.Drawing.Size(263, 467);
             this.dataGridViewUnique.TabIndex = 2;
             // 
             // textBoxUK
@@ -267,10 +267,10 @@ namespace Firedump.usercontrols
             this.tabPageFKs.Controls.Add(this.dataGridViewFKs);
             this.tabPageFKs.Controls.Add(this.textBoxFK);
             this.tabPageFKs.ImageIndex = 6;
-            this.tabPageFKs.Location = new System.Drawing.Point(4, 23);
+            this.tabPageFKs.Location = new System.Drawing.Point(4, 61);
             this.tabPageFKs.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageFKs.Name = "tabPageFKs";
-            this.tabPageFKs.Size = new System.Drawing.Size(263, 526);
+            this.tabPageFKs.Size = new System.Drawing.Size(263, 488);
             this.tabPageFKs.TabIndex = 8;
             this.tabPageFKs.Text = "FKs";
             this.tabPageFKs.UseVisualStyleBackColor = true;
@@ -280,7 +280,7 @@ namespace Firedump.usercontrols
             this.dataGridViewFKs.AllowUserToAddRows = false;
             this.dataGridViewFKs.AllowUserToDeleteRows = false;
             this.dataGridViewFKs.AllowUserToOrderColumns = true;
-            this.dataGridViewFKs.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            this.dataGridViewFKs.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewFKs.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewFKs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewFKs.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -288,7 +288,7 @@ namespace Firedump.usercontrols
             this.dataGridViewFKs.Name = "dataGridViewFKs";
             this.dataGridViewFKs.ReadOnly = true;
             this.dataGridViewFKs.RowHeadersVisible = false;
-            this.dataGridViewFKs.Size = new System.Drawing.Size(263, 505);
+            this.dataGridViewFKs.Size = new System.Drawing.Size(263, 467);
             this.dataGridViewFKs.TabIndex = 3;
             // 
             // textBoxFK
@@ -304,10 +304,10 @@ namespace Firedump.usercontrols
             this.tabPageIndexes.Controls.Add(this.dataGridViewIndexes);
             this.tabPageIndexes.Controls.Add(this.textBoxIndex);
             this.tabPageIndexes.ImageIndex = 0;
-            this.tabPageIndexes.Location = new System.Drawing.Point(4, 42);
+            this.tabPageIndexes.Location = new System.Drawing.Point(4, 61);
             this.tabPageIndexes.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageIndexes.Name = "tabPageIndexes";
-            this.tabPageIndexes.Size = new System.Drawing.Size(263, 507);
+            this.tabPageIndexes.Size = new System.Drawing.Size(263, 488);
             this.tabPageIndexes.TabIndex = 0;
             this.tabPageIndexes.Text = "Indexes";
             this.tabPageIndexes.UseVisualStyleBackColor = true;
@@ -317,7 +317,7 @@ namespace Firedump.usercontrols
             this.dataGridViewIndexes.AllowUserToAddRows = false;
             this.dataGridViewIndexes.AllowUserToDeleteRows = false;
             this.dataGridViewIndexes.AllowUserToOrderColumns = true;
-            this.dataGridViewIndexes.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            this.dataGridViewIndexes.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewIndexes.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewIndexes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewIndexes.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -325,7 +325,7 @@ namespace Firedump.usercontrols
             this.dataGridViewIndexes.Name = "dataGridViewIndexes";
             this.dataGridViewIndexes.ReadOnly = true;
             this.dataGridViewIndexes.RowHeadersVisible = false;
-            this.dataGridViewIndexes.Size = new System.Drawing.Size(263, 486);
+            this.dataGridViewIndexes.Size = new System.Drawing.Size(263, 467);
             this.dataGridViewIndexes.TabIndex = 2;
             // 
             // textBoxIndex
@@ -341,10 +341,10 @@ namespace Firedump.usercontrols
             this.tabPageTriggers.Controls.Add(this.dataGridViewTrigger);
             this.tabPageTriggers.Controls.Add(this.textBoxTrigger);
             this.tabPageTriggers.ImageIndex = 1;
-            this.tabPageTriggers.Location = new System.Drawing.Point(4, 42);
+            this.tabPageTriggers.Location = new System.Drawing.Point(4, 61);
             this.tabPageTriggers.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageTriggers.Name = "tabPageTriggers";
-            this.tabPageTriggers.Size = new System.Drawing.Size(263, 507);
+            this.tabPageTriggers.Size = new System.Drawing.Size(263, 488);
             this.tabPageTriggers.TabIndex = 1;
             this.tabPageTriggers.Text = "Triggers";
             this.tabPageTriggers.UseVisualStyleBackColor = true;
@@ -354,7 +354,7 @@ namespace Firedump.usercontrols
             this.dataGridViewTrigger.AllowUserToAddRows = false;
             this.dataGridViewTrigger.AllowUserToDeleteRows = false;
             this.dataGridViewTrigger.AllowUserToOrderColumns = true;
-            this.dataGridViewTrigger.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            this.dataGridViewTrigger.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewTrigger.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewTrigger.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewTrigger.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -362,7 +362,7 @@ namespace Firedump.usercontrols
             this.dataGridViewTrigger.Name = "dataGridViewTrigger";
             this.dataGridViewTrigger.ReadOnly = true;
             this.dataGridViewTrigger.RowHeadersVisible = false;
-            this.dataGridViewTrigger.Size = new System.Drawing.Size(263, 486);
+            this.dataGridViewTrigger.Size = new System.Drawing.Size(263, 467);
             this.dataGridViewTrigger.TabIndex = 4;
             // 
             // textBoxTrigger
@@ -378,10 +378,10 @@ namespace Firedump.usercontrols
             this.tabPageProcedures.Controls.Add(this.dataGridViewProcedures);
             this.tabPageProcedures.Controls.Add(this.textBoxProcedure);
             this.tabPageProcedures.ImageIndex = 2;
-            this.tabPageProcedures.Location = new System.Drawing.Point(4, 42);
+            this.tabPageProcedures.Location = new System.Drawing.Point(4, 61);
             this.tabPageProcedures.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageProcedures.Name = "tabPageProcedures";
-            this.tabPageProcedures.Size = new System.Drawing.Size(263, 507);
+            this.tabPageProcedures.Size = new System.Drawing.Size(263, 488);
             this.tabPageProcedures.TabIndex = 2;
             this.tabPageProcedures.Text = "Procedures";
             this.tabPageProcedures.UseVisualStyleBackColor = true;
@@ -391,7 +391,7 @@ namespace Firedump.usercontrols
             this.dataGridViewProcedures.AllowUserToAddRows = false;
             this.dataGridViewProcedures.AllowUserToDeleteRows = false;
             this.dataGridViewProcedures.AllowUserToOrderColumns = true;
-            this.dataGridViewProcedures.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            this.dataGridViewProcedures.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewProcedures.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewProcedures.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewProcedures.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -399,7 +399,7 @@ namespace Firedump.usercontrols
             this.dataGridViewProcedures.Name = "dataGridViewProcedures";
             this.dataGridViewProcedures.ReadOnly = true;
             this.dataGridViewProcedures.RowHeadersVisible = false;
-            this.dataGridViewProcedures.Size = new System.Drawing.Size(263, 486);
+            this.dataGridViewProcedures.Size = new System.Drawing.Size(263, 467);
             this.dataGridViewProcedures.TabIndex = 4;
             // 
             // textBoxProcedure
@@ -428,7 +428,7 @@ namespace Firedump.usercontrols
             this.dataGridViewFunctions.AllowUserToAddRows = false;
             this.dataGridViewFunctions.AllowUserToDeleteRows = false;
             this.dataGridViewFunctions.AllowUserToOrderColumns = true;
-            this.dataGridViewFunctions.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            this.dataGridViewFunctions.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewFunctions.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewFunctions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewFunctions.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -465,7 +465,7 @@ namespace Firedump.usercontrols
             this.dataGridViewView.AllowUserToAddRows = false;
             this.dataGridViewView.AllowUserToDeleteRows = false;
             this.dataGridViewView.AllowUserToOrderColumns = true;
-            this.dataGridViewView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            this.dataGridViewView.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewView.Dock = System.Windows.Forms.DockStyle.Fill;

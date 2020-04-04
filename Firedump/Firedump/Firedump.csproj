@@ -77,10 +77,6 @@
     <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
       <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
     </Reference>
-    <Reference Include="SqlStatementParser, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\protectsoft.SqlStatementParser.1.0.3\lib\netstandard2.0\SqlStatementParser.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -165,7 +161,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="sqlitetables\userinfo.cs" />
-    <Compile Include="ui\usercontrols\IParentRef.cs" />
+    <Compile Include="ui\usercontrols\IConnectionServerRef.cs" />
     <Compile Include="core\ControlBuilder.cs" />
     <Compile Include="core\sql\Words.cs" />
     <Compile Include="firedumpdbDataSet.cs">

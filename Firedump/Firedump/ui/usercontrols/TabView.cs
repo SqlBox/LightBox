@@ -59,7 +59,7 @@ namespace Firedump.usercontrols
 
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(!GetMainHome().GetEditor().GetQueryExecutor().IsAlive())
+            if(!GetMainHome().GetUserControl<Editor>().GetQueryExecutor().IsAlive())
             {
                 this.initTabControl();
             }
@@ -141,7 +141,7 @@ namespace Firedump.usercontrols
 
         private void TreeViewTables_BeforeExpand(object sender, TreeViewCancelEventArgs e)
         {
-            if (!GetMainHome().GetEditor().GetQueryExecutor().IsAlive())
+            if (!GetMainHome().GetUserControl<Editor>().GetQueryExecutor().IsAlive())
             {
                 List<string> fields = DbUtils.getTableFields(GetSqlConnection(), e.Node.Text);
                 List<string> fieldsInfo = DbUtils.getTableInfo(GetSqlConnection(), e.Node.Text);
@@ -230,7 +230,7 @@ namespace Firedump.usercontrols
         {
             if(IsNodeSelected())
             {
-                GetMainHome().GetEditor().Execute("SELECT * FROM " + treeViewTables.SelectedNode.Text, new QueryParams()
+                GetMainHome().GetUserControl<Editor>().Execute("SELECT * FROM " + treeViewTables.SelectedNode.Text, new QueryParams()
                 {
                     Limit = GetMainHome().GetLimitFromToolStripComboBoxLimit(),
                     Offset = 0,
@@ -258,7 +258,7 @@ namespace Firedump.usercontrols
 
         private void sendCreateToEditor(string table)
         {
-            GetMainHome().GetEditor().AddQueryTab(DbUtils.getCreateTable(GetSqlConnection(), table),table);
+            GetMainHome().GetUserControl<Editor>().AddQueryTab(DbUtils.getCreateTable(GetSqlConnection(), table),table);
         }
 
         internal void TreeViewTable_MenuItem_DropTable(object sender, EventArgs e)
