@@ -78,7 +78,7 @@ namespace Firedump.core.db
             {
                 while (reader.Read())
                 {
-                    data.Add(reader.GetString(0).ToUpper() + " " + reader.GetString(1) + ", Nullable:" + reader.GetString(2));
+                    data.Add(reader.GetString(0) + " " + reader.GetString(1) + ", Nullable:" + reader.GetString(2));
                 }
             }
             return data;
@@ -137,7 +137,7 @@ namespace Firedump.core.db
             {
                 while (reader.Read())
                 {
-                    data.Add(reader.GetString(0).ToUpper());
+                    data.Add(reader.GetString(0));
                 }
             }
             return data;

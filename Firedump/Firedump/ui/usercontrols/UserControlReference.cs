@@ -38,8 +38,12 @@ namespace Firedump.usercontrols
         {
             if (DB.IsConnected(parent.GetConnection()))
             {
-                parent.GetConnection().ChangeDatabase(database);
-                this.OnConnectionChanged(this, new ConChangedEventArgs(parent.GetConnection()));
+                try
+                {
+                    parent.GetConnection().ChangeDatabase(database);
+                    this.OnConnectionChanged(this, new ConChangedEventArgs(parent.GetConnection()));
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
             }
         }
 

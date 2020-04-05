@@ -25,7 +25,7 @@ namespace Firedump
             ,new MyToolStripItem(500) { },new MyToolStripItem(1000) { },new MyToolStripItem(5000) { },new MyToolStripItem(10_000) { }
             ,new MyToolStripItem(50_000) { },new MyToolStripItem(100_000) { },new MyToolStripItem(0) { }});
             //Selected index should be fetch from what user last selected or options
-            toolStripComboBoxLimit.SelectedIndex = 1;
+            toolStripComboBoxLimit.SelectedIndex = 0;
         }
 
         private void InitEditorComponent()
