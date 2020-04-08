@@ -60,6 +60,8 @@ namespace Firedump
             this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonStop = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonAbandon = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator24 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton11 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonEnableAutoCommit = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
@@ -289,6 +291,8 @@ namespace Firedump
             this.toolStripSeparator21,
             this.toolStripButtonStop,
             this.toolStripSeparator23,
+            this.toolStripButtonAbandon,
+            this.toolStripSeparator24,
             this.toolStripButton11,
             this.toolStripButtonEnableAutoCommit,
             this.toolStripSeparator17,
@@ -472,6 +476,22 @@ namespace Firedump
             // 
             this.toolStripSeparator23.Name = "toolStripSeparator23";
             this.toolStripSeparator23.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButtonAbandon
+            // 
+            this.toolStripButtonAbandon.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAbandon.Image = global::Firedump.Properties.Resources.status_error;
+            this.toolStripButtonAbandon.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAbandon.Name = "toolStripButtonAbandon";
+            this.toolStripButtonAbandon.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonAbandon.Text = "toolStripButton1";
+            this.toolStripButtonAbandon.ToolTipText = "Abandon running query and reconnect";
+            this.toolStripButtonAbandon.Click += new System.EventHandler(this.AbandonClick);
+            // 
+            // toolStripSeparator24
+            // 
+            this.toolStripSeparator24.Name = "toolStripSeparator24";
+            this.toolStripSeparator24.Size = new System.Drawing.Size(6, 25);
             // 
             // toolStripButton11
             // 
@@ -1388,5 +1408,7 @@ namespace Firedump
         private System.Windows.Forms.ToolStripComboBox toolStripComboBoxLimit;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator23;
         private System.Windows.Forms.ToolStripButton toolStripButtonFetchNext;
+        private System.Windows.Forms.ToolStripButton toolStripButtonAbandon;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator24;
     }
 }

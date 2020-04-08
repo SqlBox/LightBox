@@ -33,7 +33,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageResult = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPageHistory = new System.Windows.Forms.TabPage();
             this.dataGridViewHistory = new System.Windows.Forms.DataGridView();
             this.tabPagePlan = new System.Windows.Forms.TabPage();
@@ -42,14 +41,15 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.firedumpdbDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.firedumpdbDataSet = new Firedump.firedumpdbDataSet();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageResult.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPageHistory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHistory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.firedumpdbDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.firedumpdbDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -95,22 +95,6 @@
             this.tabPageResult.TabIndex = 0;
             this.tabPageResult.Text = "Results";
             this.tabPageResult.ToolTipText = "tab\'s last query data results";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(596, 425);
-            this.dataGridView1.TabIndex = 1;
-            this.dataGridView1.VirtualMode = true;
-            this.dataGridView1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dataGridView1_Scroll);
             // 
             // tabPageHistory
             // 
@@ -196,6 +180,22 @@
             this.firedumpdbDataSet.DataSetName = "firedumpdbDataSet";
             this.firedumpdbDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(0);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(596, 425);
+            this.dataGridView1.TabIndex = 1;
+            this.dataGridView1.VirtualMode = true;
+            this.dataGridView1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dataGridView1_Scroll);
+            // 
             // DataView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -206,11 +206,11 @@
             this.panel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPageResult.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPageHistory.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHistory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.firedumpdbDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.firedumpdbDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -218,7 +218,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.BindingSource firedumpdbDataSetBindingSource;
         private firedumpdbDataSet firedumpdbDataSet;
         private System.Windows.Forms.TabControl tabControl1;
@@ -229,5 +228,6 @@
         private System.Windows.Forms.TabPage tabPagePrint;
         private System.Windows.Forms.TabPage tabPageHtml;
         private System.Windows.Forms.DataGridView dataGridViewHistory;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

@@ -30,8 +30,12 @@ namespace Firedump.usercontrols
             this.dataGridView1.RowPostPaint += DataGridViewRowPostPaint;
             this.dataGridViewHistory.RowPostPaint += DataGridViewRowPostPaint;
             this.dataGridView1.KeyDown += DataGridViewKeyDownEvent;
+            this.dataGridView1.ShowRowErrors = false;
+            this.dataGridView1.ShowCellErrors = false;
+            this.dataGridView1.CausesValidation = false;
             tabPageResult.ImageIndex = 0;
         }
+
 
         public DataView(Editor editor) : this()
         {

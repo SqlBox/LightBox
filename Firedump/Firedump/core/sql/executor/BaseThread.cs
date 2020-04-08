@@ -24,10 +24,10 @@ namespace Firedump.core.sql.executor
         {
         }
 
-        public List<string> Statements() => this.statements;
-        public DbConnection Con() => this._con;
+        internal List<string> Statements() => this.statements;
+        internal DbConnection Con() => this._con;
 
-        public void Start(List<string> statements,DbConnection con,QueryParams parameters)
+        internal void Start(List<string> statements,DbConnection con,QueryParams parameters)
         {
             if(this._thread == null || (this._thread != null && this._thread.ThreadState == ThreadState.Stopped))
             {
@@ -47,8 +47,15 @@ namespace Firedump.core.sql.executor
             return this._thread != null && this._thread.ThreadState == ThreadState.Running;
         }
 
-        public abstract  void Stop();
+        public void Stop()
+        {
+            this._thread = new Thread(new ThreadStart(cancel));
+            this._thread.Start();
+        }
+
         public abstract void run();
+
+        public abstract void cancel();
         
         protected virtual void OnStatementExecuted(object t, ExecutionQueryEvent e)
         {

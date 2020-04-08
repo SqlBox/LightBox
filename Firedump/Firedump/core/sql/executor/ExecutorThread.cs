@@ -16,6 +16,7 @@ namespace Firedump.core.sql.executor
     {
         public bool _Alive = true;
         private DbCommand Command;
+        private DbDataReader reader;
 
         public ExecutorThread() : base()
         {
@@ -40,8 +41,18 @@ namespace Firedump.core.sql.executor
                     stopWatch.Start();
                     using (Command = new DbCommandFactory(Con(), statements[i]).Create())
                     {
-                        using (var reader = Command.ExecuteReader())
+                        if (!_Alive)
                         {
+                            cancel(); 
+                            break;
+                        }
+                        using (reader = Command.ExecuteReader())
+                        {
+                            if (!_Alive)
+                            {
+                                cancel();
+                                break;
+                            }
                             bool is_last = statements.Count - 1 == i;
                             bool is_select = Utils.IsShowDataTypeOfCommand(statements[i]);
                             var resultData = new DataTable();
@@ -127,7 +138,7 @@ namespace Firedump.core.sql.executor
         }
 
 
-        public override void Stop()
+        public override void cancel()
         {
             this._Alive = false;
             try
@@ -135,7 +146,10 @@ namespace Firedump.core.sql.executor
                 Command?.Cancel();
             }
             catch (Exception ex) { /*log*/}
-            OnStatementExecuted(this, new ExecutionQueryEvent(Status.CANCELED) { QueryParams = this.QueryParams});
+            finally 
+            {
+                OnStatementExecuted(this, new ExecutionQueryEvent(Status.CANCELED) { QueryParams = QueryParams });
+            }
         }
 
     }

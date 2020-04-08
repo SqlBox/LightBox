@@ -189,5 +189,10 @@ namespace Firedump
         {
             ((ToolStripButton)sender).Checked = !((ToolStripButton)sender).Checked;
         }
+
+        private void AbandonClick(object sender, EventArgs e)
+        {
+            GetUserControl<Editor>().abandonRunningQuery();
+        }
     }
 }

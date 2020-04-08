@@ -1,4 +1,5 @@
 ﻿using Firedump.core.db;
+using Firedump.core.models.dbinfo;
 using Firedump.core.models.events;
 using Firedump.core.sql.executor;
 using Firedump.usercontrols;
@@ -18,33 +19,60 @@ namespace Firedump.core.sql
     public class QueryExecutor
     {
         private BaseThread queryThread;
+
         public event EventHandler<ExecutionQueryEvent> StatementExecuted;
 
         public QueryExecutor()
         {
-            this.queryThread = new ExecutorThread();
-            this.queryThread.StatementExecuted += OnStatementExecuted;
         }
 
         internal void OnStatementExecuted(object t,ExecutionQueryEvent e)
         {
             StatementExecuted?.Invoke(t, e);
+            if(e.Status != Status.RUNNING && this.queryThread != null)
+            {
+                lock(this.queryThread)
+                {
+                    this.queryThread.StatementExecuted -= OnStatementExecuted;
+                    this.queryThread = null;
+                }
+            }
         }
         
 
         internal void Execute(List<string> statements, DbConnection con,QueryParams qp)
         {
-            this.queryThread.Start(statements, con, qp);
+            if(this.queryThread == null)
+            {
+                this.queryThread = new ExecutorThread();
+                lock(this.queryThread)
+                {
+                    this.queryThread.StatementExecuted += OnStatementExecuted;
+                    this.queryThread.Start(statements, con, qp);
+                }
+            }
         }
 
-
-        internal  void Cancel() { 
-            this.queryThread.Stop();
+        //Abandon thread and let it close
+        internal void Cancel() {
+            if(this.queryThread != null)
+            {
+                lock (this.queryThread)
+                {
+                    this.queryThread.Stop();
+                    
+                    /*this.queryThread.StatementExecuted -= OnStatementExecuted;
+                    var queryParams = this.queryThread.QueryParams;
+                    this.queryThread = null;
+                    OnStatementExecuted(this, new ExecutionQueryEvent(Status.CANCELED) { QueryParams = queryParams });
+                    */    
+                }
+            }
         }
 
         internal bool IsAlive()
         {
-            return this.queryThread.IsAlive();
+            return this.queryThread != null && this.queryThread.IsAlive();
         }
 
     }

@@ -181,6 +181,10 @@ namespace Firedump.usercontrols
             this.queryExecutor?.Cancel();
         }
 
+        internal void abandonRunningQuery()
+        {
+        }
+
 
     }
 }
