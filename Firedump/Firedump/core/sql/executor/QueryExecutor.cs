@@ -60,12 +60,6 @@ namespace Firedump.core.sql
                 lock (this.queryThread)
                 {
                     this.queryThread.Stop();
-                    
-                    /*this.queryThread.StatementExecuted -= OnStatementExecuted;
-                    var queryParams = this.queryThread.QueryParams;
-                    this.queryThread = null;
-                    OnStatementExecuted(this, new ExecutionQueryEvent(Status.CANCELED) { QueryParams = queryParams });
-                    */    
                 }
             }
         }
@@ -75,5 +69,20 @@ namespace Firedump.core.sql
             return this.queryThread != null && this.queryThread.IsAlive();
         }
 
+        internal void Abort()
+        {
+            if (this.queryThread != null)
+            {
+                var queryParams = this.queryThread.QueryParams;
+                string query = this.queryThread.CurrentQuery;
+                lock (this.queryThread)
+                {
+                    this.queryThread.StatementExecuted -= OnStatementExecuted;
+                    this.queryThread.Abort();
+                    this.queryThread = null;
+                }
+                StatementExecuted?.Invoke(this, new ExecutionQueryEvent(Status.ABORTED) { QueryParams = queryParams , TAG = queryParams.Hash ,query = query });
+            }
+        }
     }
 }

@@ -14,6 +14,7 @@ namespace Firedump.core.sql.executor
         private Thread _thread;
         private List<string> statements;
         private DbConnection _con;
+        public string CurrentQuery;
         
         public QueryParams QueryParams;
 
@@ -53,9 +54,17 @@ namespace Firedump.core.sql.executor
             this._thread.Start();
         }
 
-        public abstract void run();
+        public void Abort()
+        {
+            this._thread = new Thread(new ThreadStart(_abort));
+            this._thread.Start();
+        }
 
-        public abstract void cancel();
+        protected abstract void run();
+
+        protected abstract void cancel();
+
+        protected abstract void _abort();
         
         protected virtual void OnStatementExecuted(object t, ExecutionQueryEvent e)
         {

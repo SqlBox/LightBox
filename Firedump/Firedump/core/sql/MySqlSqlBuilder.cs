@@ -92,7 +92,8 @@ namespace Firedump.core.sql
          */
         public List<string> removeSystemDatabases(List<string> databases, bool showSystemDb = false) =>
             !showSystemDb
-                ? databases.Where(i => i != "sys".ToUpper() && i != "performance_schema".ToUpper() && i != "mysql".ToUpper() && i != "information_schema".ToUpper()).ToList()
+                ? databases.Where(i => i.ToLower() != "sys" && i.ToLower() != "performance_schema" && i.ToLower() != "mysql" 
+                    && i.ToLower() != "information_schema").ToList()
                 : databases;
 
         public string showTablesSql() => "show tables from " + Database + ";";

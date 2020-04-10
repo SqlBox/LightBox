@@ -137,6 +137,7 @@ namespace Firedump.core
             data.Columns.Add(c4);
             data.Columns.Add(c5);
             DataRow row = data.NewRow();
+            string info = "";
             if (e.Ex != null)
             {
                 row["Status"] = IconHelper.status_error_arr;
@@ -144,14 +145,21 @@ namespace Firedump.core
             else if (e.Status == Status.CANCELED)
             {
                 row["Status"] = IconHelper.status_info_arr;
+                info = "Canceled";
+
+            } else if(e.Status == Status.ABORTED)
+            {
+                row["Status"] = IconHelper.status_info_arr;
+                info = "Aborted";
             }
             else
             {
                 row["Status"] = IconHelper.status_ok_arr;
             }
-            row["Query"] = e.query;
+            string query = e.query != null ? e.query : e.QueryParams != null ? e.QueryParams.Sql : "";
+            row["Query"] = query;
             row["Rows affected"] = e.recordsAffected;
-            row["Info"] = e.Ex != null ? e.Ex.Message : "";
+            row["Info"] = e.Ex != null ? e.Ex.Message : info;
             row["Secs/Millis"] = (int)e.duration.TotalSeconds +"/" + (int) e.duration.TotalMilliseconds;
             row["Executed At"] = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
             data.Rows.Add(row);

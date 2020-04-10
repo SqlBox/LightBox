@@ -54,21 +54,25 @@ namespace Firedump.usercontrols
 
         public void AppendData(DataTable data)
         {
-            this.SuspendLayout();
-            this.dataGridView1.SuspendLayout();
-            int firstdisplayidx = this.dataGridView1.FirstDisplayedScrollingRowIndex;
-            ((DataTable)this.dataGridView1.DataSource).Merge(data);
-            if(firstdisplayidx > 1)
+            if(this.dataGridView1.DataSource != null && data != null && data.Rows.Count > 0)
             {
-                this.dataGridView1.FirstDisplayedScrollingRowIndex = firstdisplayidx;
+                this.SuspendLayout();
+                this.dataGridView1.SuspendLayout();
+                int firstdisplayidx = this.dataGridView1.FirstDisplayedScrollingRowIndex;
+                ((DataTable)this.dataGridView1.DataSource).Merge(data);
+                if (firstdisplayidx > 1)
+                {
+                    this.dataGridView1.FirstDisplayedScrollingRowIndex = firstdisplayidx;
+                }
+                this.dataGridView1.ResumeLayout();
+                this.ResumeLayout();
             }
-            this.dataGridView1.ResumeLayout();
-            this.ResumeLayout();
         }
 
 
         internal void SetHistory(ExecutionQueryEvent e)
         {
+            this.SuspendLayout();
             this.dataGridViewHistory.SuspendLayout();
             if (this.dataGridViewHistory.DataSource == null)
             {
@@ -82,6 +86,7 @@ namespace Firedump.usercontrols
                 this.dataGridViewHistory.FirstDisplayedScrollingRowIndex = firstdisplayidx;
             }
             this.dataGridViewHistory.ResumeLayout();
+            this.ResumeLayout();
         }
 
         private void DataGridViewKeyDownEvent(object sender,KeyEventArgs e)

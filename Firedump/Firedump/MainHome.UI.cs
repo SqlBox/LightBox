@@ -64,14 +64,8 @@ namespace Firedump
 
         private void OnStatementExecuted(object sender, ExecutionQueryEvent e)
         {
-            switch(e.Status)
-            {
-                case Status.CANCELED:
-                case Status.FINISHED:
-                case Status.HIDDEN:
-                case Status.ERROR:
-                    EnableUi(true);
-                    break;
+            if(e.Status != Status.RUNNING) {
+                EnableUi(true);
             }
         }
     }

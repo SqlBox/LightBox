@@ -22,13 +22,14 @@ namespace Firedump.core.sql.executor
         {
         }
 
-        public override void run()
+        protected override void run()
         {
             _Alive = true;
             List<string> statements = base.Statements();
             ExecutionQueryEvent eventResult = null;
             for (int i = 0; i < statements.Count; i++)
             {
+                CurrentQuery = statements[i];
                 try
                 {
                     if (!_Alive)
@@ -43,14 +44,12 @@ namespace Firedump.core.sql.executor
                     {
                         if (!_Alive)
                         {
-                            cancel(); 
                             break;
                         }
                         using (reader = Command.ExecuteReader())
                         {
                             if (!_Alive)
                             {
-                                cancel();
                                 break;
                             }
                             bool is_last = statements.Count - 1 == i;
@@ -138,7 +137,7 @@ namespace Firedump.core.sql.executor
         }
 
 
-        public override void cancel()
+        protected override void cancel()
         {
             this._Alive = false;
             try
@@ -148,8 +147,19 @@ namespace Firedump.core.sql.executor
             catch (Exception ex) { /*log*/}
             finally 
             {
-                OnStatementExecuted(this, new ExecutionQueryEvent(Status.CANCELED) { QueryParams = QueryParams });
+                OnStatementExecuted(this, new ExecutionQueryEvent(Status.CANCELED) { QueryParams = QueryParams, TAG = this.QueryParams.Hash, query = CurrentQuery });
             }
+        }
+
+
+        protected override void _abort()
+        {
+            this._Alive = false;
+            try
+            {
+                Command?.Cancel();
+            }
+            catch (Exception ex) { }
         }
 
     }

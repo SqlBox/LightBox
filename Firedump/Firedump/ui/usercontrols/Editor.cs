@@ -76,6 +76,12 @@ namespace Firedump.usercontrols
             {
                 return;
             }
+            else if(e.Status == Status.ABORTED)
+            {
+                this.Invoke((MethodInvoker)delegate {
+                    base.GetMainHome().AbandonAndOpenNewConnection();
+                });
+            }
             foreach (TabPageHolder dv in tabControl1.Controls) {
                if(dv.GetDataView().GetHashCode() == e.TAG)
                 {
@@ -87,7 +93,8 @@ namespace Firedump.usercontrols
                         {
                             dv.GetDataView().AppendData(e.data);
                         }
-                        if(e.QueryParams.Sql == null)
+                        
+                        if(e.QueryParams.Sql == null || e.Status == Status.ABORTED || e.Status == Status.CANCELED)
                         {
                             dv.GetDataView().SetHistory(e);
                         }
@@ -183,6 +190,7 @@ namespace Firedump.usercontrols
 
         internal void abandonRunningQuery()
         {
+            this.queryExecutor?.Abort();
         }
 
 

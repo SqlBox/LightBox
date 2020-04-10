@@ -117,6 +117,19 @@ namespace Firedump
             }
         }
 
+        internal void AbandonAndOpenNewConnection()
+        {
+            if(server != null && this.con != null)
+            {
+                string database = this.con.Database;
+                con = null;
+                if (DB.TestConnection(server).wasSuccessful)
+                {
+                    this.SetReconnectionStatus(DB.connect(server, database));
+                }
+            }
+        }
+
         private void DataToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new Home().Show();
