@@ -63,6 +63,16 @@ namespace Firedump.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bookmark {
+            get {
+                object obj = ResourceManager.GetObject("bookmark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap case_sensitive_icon {
             get {
                 object obj = ResourceManager.GetObject("case_sensitive_icon", resourceCulture);
@@ -483,6 +493,16 @@ namespace Firedump.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Refresh {
+            get {
+                object obj = ResourceManager.GetObject("Refresh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap rollback_icon {
             get {
                 object obj = ResourceManager.GetObject("rollback_icon", resourceCulture);
@@ -504,6 +524,10 @@ namespace Firedump.Properties {
         ///   Looks up a localized string similar to SELECT COUNT(price), price FROM orders 
         ///WHERE price &lt; 70 GROUP BY price ORDER BY price
         ///
+        ///select * from images;
+        ///
+        ///select * from movie;
+        ///
         ///select * from (
         ///    select rownum offset, rs.* from (
         ///       SELECT MAX(t.category) as category, 
@@ -515,10 +539,7 @@ namespace Firedump.Properties {
         ///) where rownum &lt;= 10 /* limit */
         ///    and offset &gt;= 0 /* offset */
         ///
-        ////* This query below is commented so it won&apos;t execute*/
-        ////*
-        ///SELECT item FROM Orders 
-        ///WHERE [rest of string was truncated]&quot;;.
+        ////* This query below is commented so it won [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string sample {
             get {

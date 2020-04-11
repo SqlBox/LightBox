@@ -154,6 +154,7 @@ namespace Firedump
             this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripButtonRefresh = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -213,7 +214,6 @@ namespace Firedump
             // 
             // splitContainer1
             // 
-            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 74);
             this.splitContainer1.Name = "splitContainer1";
@@ -236,7 +236,7 @@ namespace Firedump
             this.tabView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabView1.Location = new System.Drawing.Point(0, 0);
             this.tabView1.Name = "tabView1";
-            this.tabView1.Size = new System.Drawing.Size(248, 555);
+            this.tabView1.Size = new System.Drawing.Size(250, 557);
             this.tabView1.TabIndex = 0;
             // 
             // splitContainer2
@@ -252,8 +252,8 @@ namespace Firedump
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.tableView1);
-            this.splitContainer2.Size = new System.Drawing.Size(913, 555);
-            this.splitContainer2.SplitterDistance = 724;
+            this.splitContainer2.Size = new System.Drawing.Size(915, 557);
+            this.splitContainer2.SplitterDistance = 725;
             this.splitContainer2.TabIndex = 0;
             // 
             // tableView1
@@ -262,7 +262,7 @@ namespace Firedump
             this.tableView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableView1.Location = new System.Drawing.Point(0, 0);
             this.tableView1.Name = "tableView1";
-            this.tableView1.Size = new System.Drawing.Size(185, 555);
+            this.tableView1.Size = new System.Drawing.Size(186, 557);
             this.tableView1.TabIndex = 0;
             // 
             // toolStrip1
@@ -276,6 +276,7 @@ namespace Firedump
             this.toolStripButtonConnect,
             this.toolStripButtonDisconnect,
             this.toolStripButtonReconnect,
+            this.toolStripButtonRefresh,
             this.toolStripSeparator1,
             this.toolStripButtonNewTab,
             this.toolStripButtonCloseTab,
@@ -542,7 +543,7 @@ namespace Firedump
             // toolStripButton13
             // 
             this.toolStripButton13.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton13.Image = global::Firedump.Properties.Resources.favorite_icon;
+            this.toolStripButton13.Image = global::Firedump.Properties.Resources.bookmark;
             this.toolStripButton13.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton13.Name = "toolStripButton13";
             this.toolStripButton13.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -1252,6 +1253,16 @@ namespace Firedump
             this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
             this.aboutToolStripMenuItem1.Text = "&About...";
             // 
+            // toolStripButtonRefresh
+            // 
+            this.toolStripButtonRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonRefresh.Image = global::Firedump.Properties.Resources.Refresh;
+            this.toolStripButtonRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonRefresh.Name = "toolStripButtonRefresh";
+            this.toolStripButtonRefresh.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonRefresh.Text = "toolStripButton1";
+            this.toolStripButtonRefresh.ToolTipText = "Refresh database metadata";
+            // 
             // MainHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1410,5 +1421,6 @@ namespace Firedump
         private System.Windows.Forms.ToolStripButton toolStripButtonFetchNext;
         private System.Windows.Forms.ToolStripButton toolStripButtonAbandon;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator24;
+        private System.Windows.Forms.ToolStripButton toolStripButtonRefresh;
     }
 }
