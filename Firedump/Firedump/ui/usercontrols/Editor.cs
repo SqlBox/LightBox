@@ -167,7 +167,7 @@ namespace Firedump.usercontrols
             {
                 if (!string.IsNullOrWhiteSpace(query))
                 {
-                    var parser = new SqlStatementParserWrapper(query, (DbType)(int)_DbUtils.GetDbTypeEnum(base.GetSqlConnection()));
+                    var parser = new SqlStatementParserWrapper(query, (com.protectsoft.SqlStatementParser.DbType)(int)_DbUtils.GetDbTypeEnum(base.GetSqlConnection()));
                     List<string> statementList = SqlStatementParserWrapper.convert(parser.sql, parser.Parse());
                     this.queryExecutor.Execute(statementList, this.GetSqlConnection(), parameters);
                 }

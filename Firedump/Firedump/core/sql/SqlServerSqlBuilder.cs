@@ -6,18 +6,19 @@ using System.Threading.Tasks;
 
 namespace Firedump.core.sql
 {
-    class OracleSqlBuilder : ISqlBuilder
+    class SqlServerSqlBuilder : ISqlBuilder
     {
         private readonly string SCHEMA;
-        public bool IsUpper;
-
-        public OracleSqlBuilder(string schema, bool isUpper = true)
+        public SqlServerSqlBuilder(string s) 
         {
-            SCHEMA = schema;
-            IsUpper = isUpper;
+            this.SCHEMA = s;
+        }
+        public string createDatabaseIndexes()
+        {
+            throw new NotImplementedException();
         }
 
-        public string createDatabaseIndexes()
+        public string describeTableSql(string table)
         {
             throw new NotImplementedException();
         }
@@ -37,7 +38,7 @@ namespace Firedump.core.sql
             throw new NotImplementedException();
         }
 
-        public string getTableInfo(string table)
+        public string getDatabases()
         {
             throw new NotImplementedException();
         }
@@ -47,17 +48,17 @@ namespace Firedump.core.sql
             throw new NotImplementedException();
         }
 
-        public string getDatabases()
-        {
-            return "show databases;";
-        }
-
-        public List<string> getTables()
+        public List<string> getTableFields()
         {
             throw new NotImplementedException();
         }
 
-        public List<string> getTableFields()
+        public string getTableInfo(string table)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<string> getTables()
         {
             throw new NotImplementedException();
         }
@@ -67,17 +68,12 @@ namespace Firedump.core.sql
             throw new NotImplementedException();
         }
 
-        public string showTablesSql()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string describeTableSql(string table)
-        {
-            throw new NotImplementedException();
-        }
-
         public string ShowCreateStatement(string table)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string showTablesSql()
         {
             throw new NotImplementedException();
         }

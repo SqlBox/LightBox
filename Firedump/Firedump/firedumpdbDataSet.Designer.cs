@@ -1432,6 +1432,8 @@ namespace Firedump {
             
             private global::System.Data.DataColumn columndb_type;
             
+            private global::System.Data.DataColumn columnpath;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public sql_serversDataTable() {
@@ -1531,6 +1533,14 @@ namespace Firedump {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn pathColumn {
+                get {
+                    return this.columnpath;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1566,7 +1576,7 @@ namespace Firedump {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public sql_serversRow Addsql_serversRow(string name, long port, string host, string username, string password, string database, int db_type) {
+            public sql_serversRow Addsql_serversRow(string name, long port, string host, string username, string password, string database, int db_type, string path) {
                 sql_serversRow rowsql_serversRow = ((sql_serversRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1576,7 +1586,8 @@ namespace Firedump {
                         username,
                         password,
                         database,
-                        db_type};
+                        db_type,
+                        path};
                 rowsql_serversRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowsql_serversRow);
                 return rowsql_serversRow;
@@ -1614,6 +1625,7 @@ namespace Firedump {
                 this.columnpassword = base.Columns["password"];
                 this.columndatabase = base.Columns["database"];
                 this.columndb_type = base.Columns["db_type"];
+                this.columnpath = base.Columns["path"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1635,6 +1647,8 @@ namespace Firedump {
                 base.Columns.Add(this.columndatabase);
                 this.columndb_type = new global::System.Data.DataColumn("db_type", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndb_type);
+                this.columnpath = new global::System.Data.DataColumn("path", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpath);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid}, true));
                 this.columnid.AutoIncrement = true;
@@ -3693,6 +3707,22 @@ namespace Firedump {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string path {
+                get {
+                    try {
+                        return ((string)(this[this.tablesql_servers.pathColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'path\' in table \'sql_servers\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablesql_servers.pathColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsdatabaseNull() {
                 return this.IsNull(this.tablesql_servers.databaseColumn);
             }
@@ -3713,6 +3743,18 @@ namespace Firedump {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void Setdb_typeNull() {
                 this[this.tablesql_servers.db_typeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IspathNull() {
+                return this.IsNull(this.tablesql_servers.pathColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetpathNull() {
+                this[this.tablesql_servers.pathColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6757,7 +6799,7 @@ WHERE        (id = @Original_id)";
                 this._clearBeforeFill = value;
             }
         }
-        
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {

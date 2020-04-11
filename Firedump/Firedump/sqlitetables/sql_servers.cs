@@ -22,6 +22,16 @@ namespace Firedump
             this.schedules = new HashSet<schedules>();
         }
 
+        public sqlservers(string h, int p, string u, string passwd, int db_type,string path) : this()
+        {
+            this.host = h;
+            this.port = p;
+            this.username = u;
+            this.password = passwd;
+            this.db_type = db_type;
+            this.path = path;
+        }
+
         public sqlservers(string h, int p, string u, string passwd,int db_type) : this()
         {
             this.host = h;
@@ -36,9 +46,6 @@ namespace Firedump
         {
         }
 
-        public sqlservers(CredentialsConfig creds) : this(creds.host, creds.port, creds.username, creds.password)
-        {
-        }
 
         public long id { get; set; }
         public string name { get; set; }
@@ -49,6 +56,8 @@ namespace Firedump
         public string password { get; set; }
 
         public int db_type { get; set; }
+
+        public string path { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<schedules> schedules { get; set; }

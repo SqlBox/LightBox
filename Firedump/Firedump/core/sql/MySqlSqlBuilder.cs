@@ -10,7 +10,7 @@ namespace Firedump.core.sql
     // Remember If order of named sql column results change in this sql's query, remapping is needed for dataSource binding.
     class MySqlSqlBuilder : ISqlBuilder
     {
-        public string Database { get; set; }
+        private readonly string Database;
 
         //PROBLEM WITH CASE SENSITIVE TABLES/DATABASES/NAMES IN LINUX 
         public bool IsUpper { get; set; }

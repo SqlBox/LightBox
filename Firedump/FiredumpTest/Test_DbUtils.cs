@@ -2,10 +2,10 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Firedump.sqlitetables;
 using MySql.Data.MySqlClient;
 using Oracle.ManagedDataAccess.Client;
 using Firedump.core.db;
+using sqlbox.commons;
 
 namespace FiredumpTest
 {
@@ -19,11 +19,11 @@ namespace FiredumpTest
         [TestMethod]
         public void Test_Convert()
         {
-            Assert.AreEqual(DbTypeEnum.MYSQL, _DbUtils._convert(0));
-            Assert.AreEqual(DbTypeEnum.MARIADB, _DbUtils._convert(1));
-            Assert.AreEqual(DbTypeEnum.ORACLE, _DbUtils._convert(2));
-            Assert.AreEqual(DbTypeEnum.POSTGRES, _DbUtils._convert(3));
-            Assert.AreEqual(DbTypeEnum.SQLSERVER, _DbUtils._convert(4));
+            Assert.AreEqual(DbType.MYSQL, _DbUtils._convert(0));
+            Assert.AreEqual(DbType.MARIADB, _DbUtils._convert(1));
+            Assert.AreEqual(DbType.ORACLE, _DbUtils._convert(2));
+            Assert.AreEqual(DbType.POSTGRES, _DbUtils._convert(3));
+            Assert.AreEqual(DbType.SQLSERVER, _DbUtils._convert(4));
         }
     }
 }

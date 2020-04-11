@@ -1,4 +1,7 @@
-﻿namespace Firedump
+﻿using sqlbox.commons;
+using System;
+
+namespace Firedump
 {
 
 
@@ -31,8 +34,9 @@ namespace Firedump.firedumpdbDataSetTableAdapters
     public partial class sql_serversTableAdapter
     {
         // new insert query with db type
-        public virtual int InsertQuery(string name, long port, string host, string username, string password, string database,int db_type)
+        public virtual int InsertQuery(string name, long port, string host, string username, string password, string database,int db_type,string path = null)
         {
+
             if ((name == null))
             {
                 throw new global::System.ArgumentNullException("name");
@@ -75,6 +79,11 @@ namespace Firedump.firedumpdbDataSetTableAdapters
                 this.Adapter.InsertCommand.Parameters[5].Value = ((string)(database));
             }
             this.Adapter.InsertCommand.Parameters[6].Value = db_type;
+            if(path != null && path.Trim().Length < 2)
+            {
+                path = null;
+            }
+            this.Adapter.InsertCommand.Parameters[7].Value = path;
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open)
                         != global::System.Data.ConnectionState.Open))
@@ -95,7 +104,8 @@ namespace Firedump.firedumpdbDataSetTableAdapters
             }
         }
 
-
+        // This Method Moved here from designer class to add new fields when i want. if its on designer class it will be overriden by visual studio
+        // with wrong and less fields, so its better to self micro manage
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitAdapter()
@@ -112,6 +122,7 @@ namespace Firedump.firedumpdbDataSetTableAdapters
             tableMapping.ColumnMappings.Add("password", "password");
             tableMapping.ColumnMappings.Add("database", "database");
             tableMapping.ColumnMappings.Add("db_type", "db_type");
+            tableMapping.ColumnMappings.Add("path", "path");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
@@ -175,8 +186,8 @@ namespace Firedump.firedumpdbDataSetTableAdapters
             this._adapter.InsertCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
             this._adapter.InsertCommand.CommandText = "INSERT INTO [main].[sqlite_default_schema].[mysql_servers] ([name], [port], [host" +
-                "], [username], [password], [database]) VALUES (@name, @port, @host, @username, @" +
-                "password, @database)";
+                "], [username], [password], [database], [db_type], [path]) VALUES (@name, @port, @host, @username, @" +
+                "password, @database, @db_type, @path)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@name";
@@ -216,6 +227,11 @@ namespace Firedump.firedumpdbDataSetTableAdapters
             param.ParameterName = "@db_type";
             param.DbType = global::System.Data.DbType.Int32;
             param.SourceColumn = "db_type";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@path";
+            param.DbType = global::System.Data.DbType.String;
+            param.SourceColumn = "path";
             this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
@@ -311,6 +327,5 @@ namespace Firedump.firedumpdbDataSetTableAdapters
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
         }
-
     }
 }

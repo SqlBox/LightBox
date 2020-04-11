@@ -1,6 +1,5 @@
 ﻿using com.protectsoft.SqlStatementParser;
 using Firedump.core;
-using Firedump.sqlitetables;
 using System;
 using System.Collections.Generic;
 using System.IO;
