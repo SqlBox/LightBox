@@ -206,7 +206,7 @@ namespace Firedump
             if (cmbServers.Items.Count > 0 && cmbServers.SelectedIndex >= 0)
             {
                 firedumpdbDataSet.sql_serversRow server = ((firedumpdbDataSet.sql_serversDataTable)cmbServers.DataSource).ElementAt(cmbServers.SelectedIndex);
-                NewSqlServer newServer = new NewSqlServer(true, server);
+                NewSqlServer newServer = new NewSqlServer(server);
                 newServer.ReloadServerData += reloadserverData;
                 newServer.Show();
                

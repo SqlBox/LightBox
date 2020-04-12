@@ -174,8 +174,10 @@ namespace Firedump.core.db
         
         internal static sqlservers getSqlServerFromTable(DataTable table, ListControl control)
         {
+            string path = table.Rows[control.SelectedIndex]["path"] != System.DBNull.Value ? (string)table.Rows[control.SelectedIndex]["path"] : null;
             return new sqlservers((string)table.Rows[control.SelectedIndex]["host"], unchecked((int)(long)table.Rows[control.SelectedIndex]["port"]),
-                (string)table.Rows[control.SelectedIndex]["username"], EncryptionUtils.sDecrypt((string)table.Rows[control.SelectedIndex]["password"]));
+                (string)table.Rows[control.SelectedIndex]["username"], EncryptionUtils.sDecrypt((string)table.Rows[control.SelectedIndex]["password"]),
+                (int)table.Rows[control.SelectedIndex]["db_type"], path);
         }
 
         

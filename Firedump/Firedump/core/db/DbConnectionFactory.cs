@@ -32,7 +32,7 @@ namespace Firedump.core.db
 
         public override sealed DbConnection Create()
         {
-            DbType dbType = _DbUtils._convert(Server.db_type);
+            DbType dbType = Firedump.core.sql.Utils._convert(Server.db_type);
             if (dbType == DbType.MYSQL || dbType == DbType.MARIADB)
             {
                 return string.IsNullOrEmpty(ConnectionString) ? new MySqlConnection() : new MySqlConnection(ConnectionString);

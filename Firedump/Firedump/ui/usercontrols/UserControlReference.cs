@@ -20,10 +20,6 @@ namespace Firedump.usercontrols
         {
         }
 
-        public UserControlReference(IConnectionServerRef parentRef) : this()
-        {
-            this.parent = parentRef;
-        }
 
         internal void InitComponent(IConnectionServerRef parentRef)
         {
@@ -57,11 +53,6 @@ namespace Firedump.usercontrols
             return parent.GetServer();
         }
 
-        [Obsolete]
-        internal virtual void dataReceived(ITriplet<UserControlReference, UserControlReference, object> triplet)
-        {
-        }
-
         public MainHome GetMainHome()
         {
             return (MainHome)parent;
@@ -92,12 +83,6 @@ namespace Firedump.usercontrols
             ConnectionChanged?.Invoke(t, e);
         }
 
-
-        public event EventHandler<object> Send;
-        internal void OnSend(object sender,object e)
-        {
-            Send?.Invoke(sender, e);
-        }
 
     }
 }

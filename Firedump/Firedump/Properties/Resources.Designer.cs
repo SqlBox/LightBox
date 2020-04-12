@@ -610,6 +610,16 @@ namespace Firedump.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap show_pass {
+            get {
+                object obj = ResourceManager.GetObject("show_pass", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap skip_icon {
             get {
                 object obj = ResourceManager.GetObject("skip_icon", resourceCulture);
@@ -723,6 +733,16 @@ namespace Firedump.Properties {
         internal static System.Drawing.Bitmap table_icon {
             get {
                 object obj = ResourceManager.GetObject("table_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap test_run {
+            get {
+                object obj = ResourceManager.GetObject("test_run", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

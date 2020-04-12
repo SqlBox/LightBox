@@ -22,7 +22,7 @@ namespace Firedump
             this.schedules = new HashSet<schedules>();
         }
 
-        public sqlservers(string h, int p, string u, string passwd, int db_type,string path) : this()
+        public sqlservers(string h, int p, string u, string passwd, int db_type,string path = null) : this()
         {
             this.host = h;
             this.port = p;
@@ -31,21 +31,6 @@ namespace Firedump
             this.db_type = db_type;
             this.path = path;
         }
-
-        public sqlservers(string h, int p, string u, string passwd,int db_type) : this()
-        {
-            this.host = h;
-            this.port = p;
-            this.username = u;
-            this.password = passwd;
-            this.db_type = db_type;
-        }
-
-        // remove constroctur after refactor
-        public sqlservers(string h, int p, string u, string passwd) : this(h,p,u,passwd,0)
-        {
-        }
-
 
         public long id { get; set; }
         public string name { get; set; }

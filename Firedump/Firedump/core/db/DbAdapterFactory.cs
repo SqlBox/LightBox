@@ -1,4 +1,5 @@
 ﻿using FirebirdSql.Data.FirebirdClient;
+using Firedump.core.sql;
 using IBM.Data.DB2.Core;
 using MySql.Data.MySqlClient;
 using Oracle.ManagedDataAccess.Client;
@@ -31,7 +32,7 @@ namespace Firedump.core.db
 
         public override sealed DbDataAdapter Create()
         {
-            DbType dbType = _DbUtils.GetDbTypeEnum(Connection);
+            DbType dbType = Firedump.core.sql.Utils.GetDbTypeEnum(Connection);
             if (dbType == DbType.MYSQL || dbType == DbType.MARIADB)
             {
                 if(command != null)

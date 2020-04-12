@@ -208,6 +208,7 @@
     <Compile Include="core\models\dbinfo\Status.cs" />
     <Compile Include="core\models\events\ExecutionEventArgs.cs" />
     <Compile Include="core\models\MyToolStripItem.cs" />
+    <Compile Include="core\models\ToolStripItemDbType.cs" />
     <Compile Include="core\sql\Db2SqlBuilder.cs" />
     <Compile Include="core\sql\executor\BaseThread.cs" />
     <Compile Include="core\sql\executor\ExecutorThread.cs" />
@@ -219,7 +220,6 @@
     <Compile Include="core\sql\OracleSqlBuilder.cs" />
     <Compile Include="core\sql\PostgreSqlBuilder.cs" />
     <Compile Include="core\sql\SqlBuilderFactory.cs" />
-    <Compile Include="core\db\_DbUtils.cs" />
     <Compile Include="core\exceptions\AppException.cs" />
     <Compile Include="core\exceptions\EntityException.cs" />
     <Compile Include="core\exceptions\EntityNotExistsException.cs" />
@@ -273,10 +273,6 @@
     <Compile Include="core\db\DB.cs" />
     <Compile Include="core\db\DbUtils.cs" />
     <Compile Include="core\models\events\ConnectionEventArgs.cs" />
-    <Compile Include="core\models\events\GenericEventArg.cs" />
-    <Compile Include="core\models\events\IGenericEventArgs.cs" />
-    <Compile Include="core\models\events\ITriplet.cs" />
-    <Compile Include="core\models\events\TripletEventArgs.cs" />
     <Compile Include="core\models\BaseStatus.cs" />
     <Compile Include="core\models\JobDetail.cs" />
     <Compile Include="core\models\dbinfo\ColumnInfo.cs" />
@@ -491,6 +487,8 @@
     <None Include="resources\icons\main\favorite_icon.png" />
     <None Include="resources\icons\main\skip_icon.png" />
     <None Include="resources\icons\main\save-all-icon.png" />
+    <None Include="resources\icons\main\test_run.png" />
+    <None Include="resources\icons\main\show_pass.png" />
     <Content Include="resources\icons\redcircle.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

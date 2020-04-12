@@ -95,10 +95,6 @@ namespace Firedump
                     this.pushConnection();
                     this.setHomeConnectionStatus();
                 });
-                uc.Send += new EventHandler<object>((sender,e) =>
-                    this.DispatchEvent((ITriplet<UserControlReference, UserControlReference, object>)
-                    ((IGenericEventArgs<ITriplet<UserControlReference, UserControlReference, object>>)e).GetObject())
-                );
                 uc.Reconnect += (sender, e) => Reconnect(); 
             }
         }
@@ -286,19 +282,6 @@ namespace Firedump
                 this.con.Close();
                 onDisconnected(null,null);
                 setConstrolEnableStatus(false);
-            }
-        }
-
-
-        private void DispatchEvent(ITriplet<UserControlReference, UserControlReference, object> triplet)
-        {
-            foreach (UserControlReference c in ChildControls)
-            {
-                if (c.GetType() == triplet.TargetType())
-                {                 
-                    c.dataReceived(triplet);
-                    break;
-                }
             }
         }
 

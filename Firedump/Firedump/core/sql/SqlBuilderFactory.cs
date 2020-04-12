@@ -63,9 +63,9 @@ namespace Firedump.core.sql
         {
             if (server != null)
             {
-                return _DbUtils._convert(server.db_type);
+                return Firedump.core.sql.Utils._convert(server.db_type);
             }
-            return _DbUtils.GetDbTypeEnum(con);
+            return Firedump.core.sql.Utils.GetDbTypeEnum(con);
         }
 
     }
