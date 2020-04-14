@@ -14,7 +14,7 @@ namespace Firedump.core.sql
 
         List<string> getTableFields();
 
-        string createDatabaseIndexes();
+        string getDatabaseIndexes();
 
         string getDatabasePrimaryKeys();
 
@@ -34,5 +34,15 @@ namespace Firedump.core.sql
         List<string> removeSystemDatabases(List<string> databases, bool showSystemDb = false);
 
         string ShowCreateStatement(string table);
+
+        string GetAllTriggers();
+
+        string GetTableTriggers(string table);
+
+        string GetAllViews();
+
+        string GetProcedures();
+
+        string GetFunctions();
     }
 }

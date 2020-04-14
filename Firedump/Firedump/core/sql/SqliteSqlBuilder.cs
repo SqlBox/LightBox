@@ -8,19 +8,17 @@ namespace Firedump.core.sql
 {
     class SqliteSqlBuilder : ISqlBuilder
     {
-        private readonly string SCHEMA;
-        public SqliteSqlBuilder(string s) 
+        public SqliteSqlBuilder() 
         {
-            this.SCHEMA = s;
         }
-        public string createDatabaseIndexes()
+        public string getDatabaseIndexes()
         {
-            throw new NotImplementedException();
+            return "SELECT name AS 'INDEX', tbl_name AS 'TABLE' FROM sqlite_master WHERE type = 'index'";
         }
 
         public string describeTableSql(string table)
         {
-            throw new NotImplementedException();
+            return "pragma table_info('"+table+"')";
         }
 
         public string getAllFieldsFromAllTablesInDb()
@@ -40,7 +38,7 @@ namespace Firedump.core.sql
 
         public string getDatabases()
         {
-            throw new NotImplementedException();
+            return "";
         }
 
         public string getDatabaseUniques()
@@ -55,7 +53,7 @@ namespace Firedump.core.sql
 
         public string getTableInfo(string table)
         {
-            throw new NotImplementedException();
+            return describeTableSql(table);
         }
 
         public List<string> getTables()
@@ -65,15 +63,40 @@ namespace Firedump.core.sql
 
         public List<string> removeSystemDatabases(List<string> databases, bool showSystemDb = false)
         {
-            throw new NotImplementedException();
+            return databases;
         }
 
         public string ShowCreateStatement(string table)
         {
-            throw new NotImplementedException();
+            return "SELECT name, sql FROM sqlite_master WHERE tbl_name = '"+table +"' ";
         }
 
         public string showTablesSql()
+        {
+            return "SELECT name FROM sqlite_master WHERE type = 'table'";
+        }
+
+        public string GetAllTriggers()
+        {
+            return "SELECT name as 'Trigger', tbl_name as 'Table', sql FROM sqlite_master WHERE type = 'trigger'";
+        }
+
+        public string GetTableTriggers(string table)
+        {
+            return "SELECT name as 'Trigger', tbl_name as 'Table', sql FROM sqlite_master WHERE type = 'trigger' AND tbl_name = '"+table +"' ";
+        }
+
+        public string GetAllViews()
+        {
+            return "SELECT name as 'View', sql FROM sqlite_master WHERE type = 'view'";
+        }
+
+        public string GetProcedures()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetFunctions()
         {
             throw new NotImplementedException();
         }

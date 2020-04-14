@@ -43,9 +43,9 @@
             this.bSave = new System.Windows.Forms.Button();
             this.tbDatabase = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.labelPath = new System.Windows.Forms.Label();
             this.textBoxPath = new System.Windows.Forms.TextBox();
             this.groupBoxDetails = new System.Windows.Forms.GroupBox();
+            this.buttonChooseDb = new System.Windows.Forms.Button();
             this.buttonShowPass = new System.Windows.Forms.Button();
             this.labelDbType = new System.Windows.Forms.Label();
             this.comboBoxDbTypes = new System.Windows.Forms.ComboBox();
@@ -56,7 +56,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 49);
+            this.label1.Location = new System.Drawing.Point(46, 48);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 13);
             this.label1.TabIndex = 0;
@@ -65,7 +65,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 75);
+            this.label2.Location = new System.Drawing.Point(46, 74);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 13);
             this.label2.TabIndex = 1;
@@ -74,7 +74,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(18, 102);
+            this.label3.Location = new System.Drawing.Point(48, 101);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(57, 13);
             this.label3.TabIndex = 2;
@@ -82,7 +82,7 @@
             // 
             // tbHost
             // 
-            this.tbHost.Location = new System.Drawing.Point(83, 46);
+            this.tbHost.Location = new System.Drawing.Point(113, 45);
             this.tbHost.Name = "tbHost";
             this.tbHost.Size = new System.Drawing.Size(191, 21);
             this.tbHost.TabIndex = 2;
@@ -90,7 +90,7 @@
             // tbUsername
             // 
             this.tbUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.tbUsername.Location = new System.Drawing.Point(83, 72);
+            this.tbUsername.Location = new System.Drawing.Point(113, 71);
             this.tbUsername.Name = "tbUsername";
             this.tbUsername.Size = new System.Drawing.Size(276, 20);
             this.tbUsername.TabIndex = 4;
@@ -98,7 +98,7 @@
             // tbPassword
             // 
             this.tbPassword.Font = new System.Drawing.Font("News706 BT", 8.25F, System.Drawing.FontStyle.Bold);
-            this.tbPassword.Location = new System.Drawing.Point(83, 99);
+            this.tbPassword.Location = new System.Drawing.Point(113, 98);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(244, 21);
@@ -107,7 +107,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(280, 49);
+            this.label4.Location = new System.Drawing.Point(310, 48);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(31, 13);
             this.label4.TabIndex = 6;
@@ -115,7 +115,7 @@
             // 
             // tbPort
             // 
-            this.tbPort.Location = new System.Drawing.Point(312, 46);
+            this.tbPort.Location = new System.Drawing.Point(342, 45);
             this.tbPort.Name = "tbPort";
             this.tbPort.Size = new System.Drawing.Size(47, 21);
             this.tbPort.TabIndex = 3;
@@ -124,7 +124,7 @@
             // 
             this.bTestConnection.Image = global::Firedump.Properties.Resources.test_run;
             this.bTestConnection.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bTestConnection.Location = new System.Drawing.Point(15, 204);
+            this.bTestConnection.Location = new System.Drawing.Point(18, 203);
             this.bTestConnection.Name = "bTestConnection";
             this.bTestConnection.Size = new System.Drawing.Size(125, 23);
             this.bTestConnection.TabIndex = 7;
@@ -136,9 +136,9 @@
             // 
             this.bCancel.Image = global::Firedump.Properties.Resources.status_error;
             this.bCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bCancel.Location = new System.Drawing.Point(255, 234);
+            this.bCancel.Location = new System.Drawing.Point(284, 232);
             this.bCancel.Name = "bCancel";
-            this.bCancel.Size = new System.Drawing.Size(104, 23);
+            this.bCancel.Size = new System.Drawing.Size(104, 24);
             this.bCancel.TabIndex = 9;
             this.bCancel.Text = "Cancel";
             this.bCancel.UseVisualStyleBackColor = true;
@@ -146,7 +146,7 @@
             // 
             // tbName
             // 
-            this.tbName.Location = new System.Drawing.Point(83, 20);
+            this.tbName.Location = new System.Drawing.Point(113, 19);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(191, 21);
             this.tbName.TabIndex = 1;
@@ -154,7 +154,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(36, 23);
+            this.label5.Location = new System.Drawing.Point(66, 22);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(38, 13);
             this.label5.TabIndex = 12;
@@ -165,7 +165,7 @@
             this.bSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.bSave.Image = global::Firedump.Properties.Resources.save_icon;
             this.bSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bSave.Location = new System.Drawing.Point(15, 233);
+            this.bSave.Location = new System.Drawing.Point(18, 232);
             this.bSave.Name = "bSave";
             this.bSave.Size = new System.Drawing.Size(125, 24);
             this.bSave.TabIndex = 8;
@@ -175,7 +175,7 @@
             // 
             // tbDatabase
             // 
-            this.tbDatabase.Location = new System.Drawing.Point(83, 126);
+            this.tbDatabase.Location = new System.Drawing.Point(113, 125);
             this.tbDatabase.Name = "tbDatabase";
             this.tbDatabase.Size = new System.Drawing.Size(276, 21);
             this.tbDatabase.TabIndex = 6;
@@ -183,36 +183,29 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(31, 129);
+            this.label6.Location = new System.Drawing.Point(61, 128);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(43, 13);
             this.label6.TabIndex = 15;
             this.label6.Text = "Shema:";
             // 
-            // labelPath
-            // 
-            this.labelPath.AutoSize = true;
-            this.labelPath.Location = new System.Drawing.Point(41, 156);
-            this.labelPath.Name = "labelPath";
-            this.labelPath.Size = new System.Drawing.Size(33, 13);
-            this.labelPath.TabIndex = 16;
-            this.labelPath.Text = "Path:";
-            // 
             // textBoxPath
             // 
-            this.textBoxPath.Location = new System.Drawing.Point(83, 153);
+            this.textBoxPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxPath.Location = new System.Drawing.Point(113, 152);
             this.textBoxPath.Name = "textBoxPath";
+            this.textBoxPath.ReadOnly = true;
             this.textBoxPath.Size = new System.Drawing.Size(276, 21);
             this.textBoxPath.TabIndex = 17;
             this.textBoxPath.Click += new System.EventHandler(this.textBoxPath_Click);
             // 
             // groupBoxDetails
             // 
+            this.groupBoxDetails.Controls.Add(this.buttonChooseDb);
             this.groupBoxDetails.Controls.Add(this.buttonShowPass);
             this.groupBoxDetails.Controls.Add(this.tbName);
             this.groupBoxDetails.Controls.Add(this.textBoxPath);
             this.groupBoxDetails.Controls.Add(this.label1);
-            this.groupBoxDetails.Controls.Add(this.labelPath);
             this.groupBoxDetails.Controls.Add(this.label2);
             this.groupBoxDetails.Controls.Add(this.label6);
             this.groupBoxDetails.Controls.Add(this.label3);
@@ -228,15 +221,28 @@
             this.groupBoxDetails.Controls.Add(this.bTestConnection);
             this.groupBoxDetails.Location = new System.Drawing.Point(12, 46);
             this.groupBoxDetails.Name = "groupBoxDetails";
-            this.groupBoxDetails.Size = new System.Drawing.Size(380, 275);
+            this.groupBoxDetails.Size = new System.Drawing.Size(414, 275);
             this.groupBoxDetails.TabIndex = 18;
             this.groupBoxDetails.TabStop = false;
             this.groupBoxDetails.Text = "Connection details";
             // 
+            // buttonChooseDb
+            // 
+            this.buttonChooseDb.Image = global::Firedump.Properties.Resources.database_icon;
+            this.buttonChooseDb.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonChooseDb.Location = new System.Drawing.Point(18, 152);
+            this.buttonChooseDb.Name = "buttonChooseDb";
+            this.buttonChooseDb.Size = new System.Drawing.Size(86, 21);
+            this.buttonChooseDb.TabIndex = 19;
+            this.buttonChooseDb.Text = "choose db:";
+            this.buttonChooseDb.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonChooseDb.UseVisualStyleBackColor = true;
+            this.buttonChooseDb.Click += new System.EventHandler(this.textBoxPath_Click);
+            // 
             // buttonShowPass
             // 
             this.buttonShowPass.Image = global::Firedump.Properties.Resources.show_pass;
-            this.buttonShowPass.Location = new System.Drawing.Point(333, 99);
+            this.buttonShowPass.Location = new System.Drawing.Point(363, 98);
             this.buttonShowPass.Name = "buttonShowPass";
             this.buttonShowPass.Size = new System.Drawing.Size(25, 23);
             this.buttonShowPass.TabIndex = 18;
@@ -264,13 +270,14 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialogPath";
+            this.openFileDialog1.ReadOnlyChecked = true;
             // 
             // NewSqlServer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
-            this.ClientSize = new System.Drawing.Size(408, 332);
+            this.ClientSize = new System.Drawing.Size(440, 332);
             this.Controls.Add(this.comboBoxDbTypes);
             this.Controls.Add(this.labelDbType);
             this.Controls.Add(this.groupBoxDetails);
@@ -279,7 +286,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "NewSqlServer";
-            this.Text = "New MySQL Server";
+            this.Text = "Manage SQL Server";
             this.groupBoxDetails.ResumeLayout(false);
             this.groupBoxDetails.PerformLayout();
             this.ResumeLayout(false);
@@ -304,12 +311,12 @@
         private System.Windows.Forms.Button bSave;
         private System.Windows.Forms.TextBox tbDatabase;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label labelPath;
         private System.Windows.Forms.TextBox textBoxPath;
         private System.Windows.Forms.GroupBox groupBoxDetails;
         private System.Windows.Forms.Label labelDbType;
         private System.Windows.Forms.ComboBox comboBoxDbTypes;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button buttonShowPass;
+        private System.Windows.Forms.Button buttonChooseDb;
     }
 }

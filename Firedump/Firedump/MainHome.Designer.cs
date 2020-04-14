@@ -31,8 +31,6 @@ namespace Firedump
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainHome));
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.miniToolStrip = new System.Windows.Forms.MenuStrip();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -45,6 +43,7 @@ namespace Firedump
             this.toolStripButtonConnect = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDisconnect = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonReconnect = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonRefresh = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonNewTab = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonCloseTab = new System.Windows.Forms.ToolStripButton();
@@ -154,8 +153,6 @@ namespace Firedump
             this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripButtonRefresh = new System.Windows.Forms.ToolStripButton();
-            this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -168,26 +165,6 @@ namespace Firedump
             this.toolStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
-            this.statusStrip1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripProgressBar});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 631);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.statusStrip1.Size = new System.Drawing.Size(1169, 22);
-            this.statusStrip1.TabIndex = 3;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripProgressBar
-            // 
-            this.toolStripProgressBar.Name = "toolStripProgressBar";
-            this.toolStripProgressBar.Size = new System.Drawing.Size(200, 16);
-            this.toolStripProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.toolStripProgressBar.Visible = false;
             // 
             // miniToolStrip
             // 
@@ -209,7 +186,7 @@ namespace Firedump
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1169, 631);
+            this.panel1.Size = new System.Drawing.Size(1169, 653);
             this.panel1.TabIndex = 4;
             // 
             // splitContainer1
@@ -226,7 +203,7 @@ namespace Firedump
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1169, 557);
+            this.splitContainer1.Size = new System.Drawing.Size(1169, 579);
             this.splitContainer1.SplitterDistance = 250;
             this.splitContainer1.TabIndex = 4;
             // 
@@ -236,7 +213,7 @@ namespace Firedump
             this.tabView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabView1.Location = new System.Drawing.Point(0, 0);
             this.tabView1.Name = "tabView1";
-            this.tabView1.Size = new System.Drawing.Size(250, 557);
+            this.tabView1.Size = new System.Drawing.Size(250, 579);
             this.tabView1.TabIndex = 0;
             // 
             // splitContainer2
@@ -252,7 +229,7 @@ namespace Firedump
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.tableView1);
-            this.splitContainer2.Size = new System.Drawing.Size(915, 557);
+            this.splitContainer2.Size = new System.Drawing.Size(915, 579);
             this.splitContainer2.SplitterDistance = 725;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -262,7 +239,7 @@ namespace Firedump
             this.tableView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableView1.Location = new System.Drawing.Point(0, 0);
             this.tableView1.Name = "tableView1";
-            this.tableView1.Size = new System.Drawing.Size(186, 557);
+            this.tableView1.Size = new System.Drawing.Size(186, 579);
             this.tableView1.TabIndex = 0;
             // 
             // toolStrip1
@@ -351,6 +328,16 @@ namespace Firedump
             this.toolStripButtonReconnect.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonReconnect.Text = "Reconnect";
             this.toolStripButtonReconnect.Click += new System.EventHandler(this.reconnectEventClick);
+            // 
+            // toolStripButtonRefresh
+            // 
+            this.toolStripButtonRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonRefresh.Image = global::Firedump.Properties.Resources.Refresh;
+            this.toolStripButtonRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonRefresh.Name = "toolStripButtonRefresh";
+            this.toolStripButtonRefresh.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonRefresh.Text = "toolStripButton1";
+            this.toolStripButtonRefresh.ToolTipText = "Refresh database metadata";
             // 
             // toolStripSeparator1
             // 
@@ -1253,16 +1240,6 @@ namespace Firedump
             this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
             this.aboutToolStripMenuItem1.Text = "&About...";
             // 
-            // toolStripButtonRefresh
-            // 
-            this.toolStripButtonRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonRefresh.Image = global::Firedump.Properties.Resources.Refresh;
-            this.toolStripButtonRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonRefresh.Name = "toolStripButtonRefresh";
-            this.toolStripButtonRefresh.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonRefresh.Text = "toolStripButton1";
-            this.toolStripButtonRefresh.ToolTipText = "Refresh database metadata";
-            // 
             // MainHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1270,12 +1247,9 @@ namespace Firedump
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
             this.ClientSize = new System.Drawing.Size(1169, 653);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.statusStrip1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.Name = "MainHome";
             this.Text = "LightBox";
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -1292,14 +1266,11 @@ namespace Firedump
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
         private usercontrols.Editor editor1;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar;
         private System.Windows.Forms.MenuStrip miniToolStrip;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.SplitContainer splitContainer1;

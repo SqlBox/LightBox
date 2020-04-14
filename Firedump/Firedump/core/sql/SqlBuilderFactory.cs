@@ -30,11 +30,11 @@ namespace Firedump.core.sql
             DbType dbType = getDbTypeEnum();
             if (dbType == DbType.MYSQL || dbType == DbType.MARIADB)
             {
-                return new MySqlSqlBuilder(database, isUpper);
+                return new MySqlSqlBuilder(database);
             }
             else if (dbType == DbType.ORACLE)
             {
-                return new OracleSqlBuilder(database, isUpper);
+                return new OracleSqlBuilder(database);
             }
             else if(dbType == DbType.POSTGRES)
             {
@@ -42,7 +42,7 @@ namespace Firedump.core.sql
             }
             else if(dbType == DbType.SQLITE)
             {
-                return new SqliteSqlBuilder(database);
+                return new SqliteSqlBuilder();
             }
             else if(dbType == DbType.SQLSERVER)
             {

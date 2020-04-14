@@ -43,10 +43,6 @@ namespace Firedump.core.sql.executor
             } 
         }
 
-        public bool IsAlive()
-        {
-            return this._thread != null && this._thread.ThreadState == ThreadState.Running;
-        }
 
         public void Stop()
         {

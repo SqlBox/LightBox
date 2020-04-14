@@ -13,7 +13,7 @@ namespace Firedump.core.sql
         {
             this.SCHEMA = schema;
         }
-        public string createDatabaseIndexes()
+        public string getDatabaseIndexes()
         {
             throw new NotImplementedException();
         }
@@ -74,6 +74,31 @@ namespace Firedump.core.sql
         }
 
         public string showTablesSql()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetAllTriggers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetTableTriggers(string table)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetAllViews()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetProcedures()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetFunctions()
         {
             throw new NotImplementedException();
         }

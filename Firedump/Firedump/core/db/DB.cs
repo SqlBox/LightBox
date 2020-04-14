@@ -49,17 +49,29 @@ namespace Firedump.core.db
 
         internal static void Rollback(DbConnection con)
         {
-            using (var command = new DbCommandFactory(con, "rollback").Create())
+            try
             {
-                command.ExecuteNonQuery();
+                using (var command = new DbCommandFactory(con, "rollback").Create())
+                {
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (DbException ex) {
+                Console.WriteLine(ex.Message);
             }
         }
 
         internal static void Commit(DbConnection con)
         {
-            using (var command = new DbCommandFactory(con, "commit").Create())
+            try
             {
-                command.ExecuteNonQuery();
+                using (var command = new DbCommandFactory(con, "commit").Create())
+                {
+                    command.ExecuteNonQuery();
+                }
+            }catch(DbException ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -80,14 +92,16 @@ namespace Firedump.core.db
         {
             if (uc.GetServer() == null)
                 return false;
-            bool is_connected_to_db = IsConnectedToDatabase(uc.GetSqlConnection());
+            bool isEmdedded = Utils.IsDbEmbedded(uc.GetServer().db_type);
+            bool is_connected_to_db = !isEmdedded ? IsConnectedToDatabase(uc.GetSqlConnection()) : IsConnected(uc.GetSqlConnection());
             if (is_connected_to_db)
                 return true;
             uc.OnReconnect(uc, new EventArgs());
-            if(IsConnectedToDatabase(uc.GetSqlConnection()))
+            if(!isEmdedded ? IsConnectedToDatabase(uc.GetSqlConnection()) : IsConnected(uc.GetSqlConnection()))
                 return true;
             uc.OnDisconnected(uc, new EventArgs());
             return false;
         }
+
     }
 }

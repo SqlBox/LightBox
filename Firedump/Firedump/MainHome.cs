@@ -177,8 +177,8 @@ namespace Firedump
         private void SetInitialConnectionStatus(ConnectionEventArgs e)
         {
             this.con = e.con;
-            SetAutoCommit(con);
             this.server = e.server;
+            SetAutoCommit(con);
             this.setConnectionAndServerToUserControls();
             this.setHomeConnectionStatus();
         }
@@ -200,8 +200,15 @@ namespace Firedump
         private void setConnectionAndServerToUserControls()
         {
             this.pushConnection();
-            this.tabView1.setServerDataToComboBox(new SqlBuilderFactory(GetServer())
+            if(Utils.IsDbEmbedded(GetServer().db_type))
+            {
+                this.tabView1.setServerDataToComboBox(new List<string>() {"main"});
+            } else
+            {
+                this.tabView1.setServerDataToComboBox(new SqlBuilderFactory(GetServer())
                 .Create(null).removeSystemDatabases(DbUtils.getDatabases(this.server, this.con), this.showSystemDatabases));
+            }
+            
         }
 
         private void pushConnection()
@@ -228,7 +235,7 @@ namespace Firedump
 
         private void ShowHideSystemDbEventClick(object sender, EventArgs e)
         {
-            if(this.isConnected(this.con))
+            if(this.isConnected(this.con) && !Utils.IsDbEmbedded(GetServer().db_type))
             {
                 this.tabView1.setServerDataToComboBox(new SqlBuilderFactory(GetServer())
                 .Create(null).removeSystemDatabases(DbUtils.getDatabases(this.server, this.con), this.showSystemDatabases = !this.showSystemDatabases));
@@ -264,7 +271,7 @@ namespace Firedump
 
         private void SetAutoCommit(DbConnection con)
         {
-            if(isConnected(con))
+            if(isConnected(con) && !Utils.IsDbEmbedded(server.db_type))
             {
                 DbSessionSettings.SetAutoCommit(con,false);
             }

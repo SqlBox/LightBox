@@ -12,17 +12,13 @@ namespace Firedump.core.sql
     {
         private readonly string Database;
 
-        //PROBLEM WITH CASE SENSITIVE TABLES/DATABASES/NAMES IN LINUX 
-        public bool IsUpper { get; set; }
-
-        public MySqlSqlBuilder(string db, bool isUpper = true)
+        public MySqlSqlBuilder(string db)
         {
             Database = db;
-            IsUpper = isUpper;
         }
 
         // Remember If order of named sql column results change in this sql query, remapping is needed for dataSource binding.
-        public string createDatabaseIndexes() =>
+        public string getDatabaseIndexes() =>
              "SELECT DISTINCT TABLE_NAME AS 'Table', INDEX_NAME AS 'Index' FROM INFORMATION_SCHEMA.STATISTICS WHERE" +
             " TABLE_SCHEMA = '" + Database + "' ";
 
@@ -106,6 +102,31 @@ namespace Firedump.core.sql
         public string ShowCreateStatement(string table)
         {
             return "SHOW CREATE TABLE " + table;
+        }
+
+        public string GetAllTriggers()
+        {
+            return "show triggers;";
+        }
+
+        public string GetTableTriggers(string table)
+        {
+            return "SELECT trigger_name, action_timing, event_manipulation FROM information_schema.triggers WHERE event_object_table = '" +table+ "' order by  trigger_name,action_timing, event_manipulation";
+        }
+
+        public string GetAllViews()
+        {
+            return "SHOW FULL TABLES IN " + Database + " WHERE TABLE_TYPE LIKE 'VIEW';";
+        }
+
+        public string GetProcedures()
+        {
+            return "SHOW PROCEDURE STATUS WHERE Db = '"+Database+"'";
+        }
+
+        public string GetFunctions()
+        {
+            return "SHOW FUNCTION STATUS WHERE Db = '" +Database+ "'";
         }
     }
 

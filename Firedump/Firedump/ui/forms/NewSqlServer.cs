@@ -100,7 +100,7 @@ namespace Firedump.Forms.mysql
 
         private void ShowPathForEmbeddedDb(bool hide)
         {
-            this.labelPath.Visible = hide;
+            this.buttonChooseDb.Visible = hide;
             this.textBoxPath.Visible = hide;
         }
 
@@ -282,6 +282,7 @@ namespace Firedump.Forms.mysql
                 textBoxPath.Text = openFileDialog1.FileName;
             }
         }
+
 
         private void comboBoxDbTypes_SelectedIndexChanged(object sender, EventArgs e)
         {

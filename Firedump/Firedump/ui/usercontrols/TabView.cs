@@ -52,7 +52,10 @@ namespace Firedump.usercontrols
 
         private void ComboBoxServers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            base.changeDatabase(comboBoxServers.SelectedItem.ToString());
+            if(!Utils.IsDbEmbedded(GetServer().db_type))
+            {
+                base.changeDatabase(comboBoxServers.SelectedItem.ToString());
+            }
             this.initTabControl(comboBoxServers.SelectedItem.ToString());
         }
 
@@ -68,7 +71,7 @@ namespace Firedump.usercontrols
         // On tab select set the data.
         private void initTabControl(string database = null)
         {
-            if (database != null && DB.IsConnectedToDatabaseAndAfterReconnect(this))
+            if (!Utils.IsDbEmbedded(GetServer().db_type) && database != null && DB.IsConnectedToDatabaseAndAfterReconnect(this))
             {
                 base.changeDatabase(database);
             }
@@ -171,45 +174,71 @@ namespace Firedump.usercontrols
         private void setDataGridViewIndexes()
         {
             dataGridViewIndexes.DataSource = DbUtils.getDataTableData(GetSqlConnection(),
-                new SqlBuilderFactory(GetServer()).Create(GetSqlConnection().Database).createDatabaseIndexes());
+                    new SqlBuilderFactory(GetServer()).Create(GetSqlConnection().Database).getDatabaseIndexes());
         }
 
         private void setDataGridViewPKs()
         {
-            dataGridViewPKs.DataSource = DbUtils.getDataTableData(GetSqlConnection(),
-               new SqlBuilderFactory(GetServer()).Create(GetSqlConnection().Database).getDatabasePrimaryKeys());
+            if(Utils.IsDbEmbedded(GetServer().db_type))
+            {
+                sqlbox.commons.DbType type = Utils._convert(GetServer().db_type);
+                if(type == sqlbox.commons.DbType.SQLITE)
+                {
+                    dataGridViewPKs.DataSource = SqliteHelpers.GetDatabasePrimaryKeysDataSource(GetServer(),GetSqlConnection());
+                }
+            } else
+            {
+                dataGridViewPKs.DataSource = DbUtils.getDataTableData(GetSqlConnection(),
+                    new SqlBuilderFactory(GetServer()).Create(GetSqlConnection().Database).getDatabasePrimaryKeys());
+            }
         }
 
         private void setDataGridUniques()
         {
-            dataGridViewUnique.DataSource = DbUtils.getDataTableData(GetSqlConnection(),
-               new SqlBuilderFactory(GetServer()).Create(GetSqlConnection().Database).getDatabaseUniques());
+            if(!Utils.IsDbEmbedded(GetServer().db_type))
+            {
+                dataGridViewUnique.DataSource = DbUtils.getDataTableData(GetSqlConnection(),
+                    new SqlBuilderFactory(GetServer()).Create(GetSqlConnection().Database).getDatabaseUniques());
+            }
         }
 
         private void setDataGridFKs()
         {
-            dataGridViewFKs.DataSource = DbUtils.getDataTableData(GetSqlConnection(),
-               new SqlBuilderFactory(GetServer()).Create(GetSqlConnection().Database).getDatabaseForeignKeys());
+            if(!Utils.IsDbEmbedded(GetServer().db_type))
+            {
+                dataGridViewFKs.DataSource = DbUtils.getDataTableData(GetSqlConnection(),
+                    new SqlBuilderFactory(GetServer()).Create(GetSqlConnection().Database).getDatabaseForeignKeys());
+            }
         }
 
         private void setDataGridTriggers()
         {
-            dataGridViewTrigger.DataSource = DbUtils.getDataTableData(GetSqlConnection(), "show triggers");
+            dataGridViewTrigger.DataSource = DbUtils.getDataTableData(GetSqlConnection(),
+                new SqlBuilderFactory(GetServer()).Create(GetSqlConnection().Database).GetAllTriggers());
         }
 
         private void setDataGridProcedures()
         {
-            dataGridViewProcedures.DataSource = DbUtils.getDataTableData(GetSqlConnection(), "SHOW PROCEDURE STATUS WHERE Db = '"+ GetSqlConnection().Database+"'");
+            if(!Utils.IsDbEmbedded(GetServer().db_type))
+            {
+                dataGridViewProcedures.DataSource = DbUtils.getDataTableData(GetSqlConnection(),
+                new SqlBuilderFactory(GetServer()).Create(GetSqlConnection().Database).GetProcedures());
+            }
         }
 
         private void setDataGridFunctions()
         {
-            dataGridViewFunctions.DataSource = DbUtils.getDataTableData(GetSqlConnection(), "SHOW FUNCTION STATUS WHERE Db = '" + GetSqlConnection().Database + "'");
+            if(!Utils.IsDbEmbedded(GetServer().db_type))
+            {
+                dataGridViewFunctions.DataSource = DbUtils.getDataTableData(GetSqlConnection(),
+                new SqlBuilderFactory(GetServer()).Create(GetSqlConnection().Database).GetFunctions());
+            }   
         }
 
         private void setDatagridViews()
         {
-            dataGridViewView.DataSource = DbUtils.getDataTableData(GetSqlConnection(), "SHOW FULL TABLES IN "+ GetSqlConnection().Database+" WHERE TABLE_TYPE LIKE 'VIEW';");
+            dataGridViewView.DataSource = DbUtils.getDataTableData(GetSqlConnection(),
+                new SqlBuilderFactory(GetServer()).Create(GetSqlConnection().Database).GetAllViews());
         }
 
 

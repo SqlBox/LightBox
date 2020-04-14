@@ -13,6 +13,7 @@ namespace Firedump.models
         public string DataType;
         public string IsNullable;
         public long length;
+        public string DefaultValue;
         public Table() { }
 
         public Table(string t, string c, string d, string n, long l) : this()

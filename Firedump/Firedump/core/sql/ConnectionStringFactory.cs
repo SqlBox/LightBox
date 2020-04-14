@@ -24,6 +24,7 @@ namespace Firedump.core.sql
             }
             else if(server.db_type == (int)DbType.SQLITE)
             {
+                return SqliteConnectionStringFactory.ConnectionStringBuilder(server.path, server.password);
             }
             else if(server.db_type == (int)DbType.SQLSERVER)
             {

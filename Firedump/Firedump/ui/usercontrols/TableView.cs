@@ -23,10 +23,19 @@ namespace Firedump.usercontrols
 
         internal sealed override void onConnected()
         {
-            if(DB.IsConnectedToDatabase(base.GetSqlConnection()))
+            if (!Utils.IsDbEmbedded(GetServer().db_type))
+            {
+                if (DB.IsConnectedToDatabase(base.GetSqlConnection()))
+                {
+                    List<string> tables = new SqlBuilderFactory(base.GetSqlConnection())
+                            .Create(null).removeSystemDatabases(DbUtils.getTables(base.GetSqlConnection()), false);
+                    GetMainHome().GetUserControl<Editor>().UpdateEditor(tables);
+                    this.setRootTablesIntoTreeView(tables);
+                }
+            } else
             {
                 List<string> tables = new SqlBuilderFactory(base.GetSqlConnection())
-                        .Create(null).removeSystemDatabases(DbUtils.getTables(base.GetSqlConnection()), false);
+                            .Create(null).removeSystemDatabases(DbUtils.getTables(base.GetSqlConnection()), false);
                 GetMainHome().GetUserControl<Editor>().UpdateEditor(tables);
                 this.setRootTablesIntoTreeView(tables);
             }

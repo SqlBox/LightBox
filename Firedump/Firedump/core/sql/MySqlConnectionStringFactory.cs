@@ -12,7 +12,7 @@ namespace Firedump.core.sql
             connectionStringBuilder(server.host, server.username, server.password, database, server.port);
 
         // string params order matters!
-        internal static string connectionStringBuilder(string host, string username, string password, string database, long port = 3306, int timeout = 120, string SslMode = "none")
+        private static string connectionStringBuilder(string host, string username, string password, string database, long port = 3306, int timeout = 120, string SslMode = "none")
             =>
             "Server=" + host + ";" + (string.IsNullOrEmpty(database) ? "" : "database=" + database
                 + ";Convert Zero Datetime=true;default command timeout=" + timeout + "") + ";UID=" + username

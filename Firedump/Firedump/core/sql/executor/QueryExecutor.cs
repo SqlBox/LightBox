@@ -66,7 +66,7 @@ namespace Firedump.core.sql
 
         internal bool IsAlive()
         {
-            return this.queryThread != null && this.queryThread.IsAlive();
+            return this.queryThread != null;
         }
 
         internal void Abort()

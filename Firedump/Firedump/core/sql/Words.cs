@@ -35,14 +35,6 @@ namespace Firedump.core.sql
         public const string FULL_OUTER_JOIN = "FULL OUTER JOIN";
         public const string RIGHT_JOIN = "RIGHT JOIN";
 
-        public static readonly List<string> JOINS = new List<string>()
-        {
-            INNER_JOIN,
-            LEFT_JOIN,
-            FULL_OUTER_JOIN,
-            RIGHT_JOIN
-        };
-
         public static readonly List<string> PL_SQL = new List<string>()
         {
            // "BEGIN",

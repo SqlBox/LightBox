@@ -9,15 +9,13 @@ namespace Firedump.core.sql
     class OracleSqlBuilder : ISqlBuilder
     {
         private readonly string SCHEMA;
-        public bool IsUpper;
 
-        public OracleSqlBuilder(string schema, bool isUpper = true)
+        public OracleSqlBuilder(string schema)
         {
             SCHEMA = schema;
-            IsUpper = isUpper;
         }
 
-        public string createDatabaseIndexes()
+        public string getDatabaseIndexes()
         {
             throw new NotImplementedException();
         }
@@ -78,6 +76,31 @@ namespace Firedump.core.sql
         }
 
         public string ShowCreateStatement(string table)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetAllTriggers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetTableTriggers(string table)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetAllViews()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetProcedures()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetFunctions()
         {
             throw new NotImplementedException();
         }

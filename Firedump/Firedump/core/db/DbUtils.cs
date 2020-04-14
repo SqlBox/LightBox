@@ -55,16 +55,36 @@ namespace Firedump.core.db
             return getStringData(con, new SqlBuilderFactory(con).Create(con.Database).showTablesSql());
         }
 
-        [Resolve("db specific Parser Needed for result set")]
+        //returns all fields from all tables
         internal static List<Table> getTablesInfo(sqlservers server, DbConnection con)
         {
             var list = new List<Table>();
-            using (var r = new DbCommandFactory(con, new SqlBuilderFactory(server).Create(con.Database).getAllFieldsFromAllTablesInDb()).Create().ExecuteReader())
+            if(sql.Utils.IsDbEmbedded(server.db_type))
             {
-                while (r.Read())
+                //case of embedded like sqlite the process to get all fields from all tables is very different.
+                //first get all tables
+                List<string> tables = getTables(con);
+                //and then for every each one get table fields
+                foreach(string table in tables)
                 {
-                    list.Add(new Table(r.GetString(0), r.GetString(1), r.GetString(2), r.GetString(3),
-                        r.GetValue(4) != DBNull.Value ? r.GetInt64(4) : default));
+                    string table_info = new SqlBuilderFactory(server).Create(con.Database).describeTableSql(table);
+                    using (var r = new DbCommandFactory(con,table_info).Create().ExecuteReader())
+                    {
+                        while(r.Read())
+                        {
+                            list.Add(new Table(table, r.GetString(1), r.GetString(2), r.GetInt32(3) == 0 ? "YES" : "NO", 0));
+                        }
+                    }
+                }
+            } else
+            {
+                using (var r = new DbCommandFactory(con, new SqlBuilderFactory(server).Create(con.Database).getAllFieldsFromAllTablesInDb()).Create().ExecuteReader())
+                {
+                    while (r.Read())
+                    {
+                        list.Add(new Table(r.GetString(0), r.GetString(1), r.GetString(2), r.GetString(3),
+                            r.GetValue(4) != DBNull.Value ? r.GetInt64(4) : default));
+                    }
                 }
             }
             return list;
@@ -76,9 +96,18 @@ namespace Firedump.core.db
             var data = new List<string>();
             using (var reader = new DbCommandFactory(con, new SqlBuilderFactory(con).Create(con.Database).describeTableSql(table)).Create().ExecuteReader())
             {
-                while (reader.Read())
+                if(!sql.Utils.IsDbEmbedded(sql.Utils.GetDbTypeEnum(con)))
                 {
-                    data.Add(reader.GetString(0) + " " + reader.GetString(1) + ", Nullable:" + reader.GetString(2));
+                    while (reader.Read())
+                    {
+                        data.Add(reader.GetString(0) + " " + reader.GetString(1) + ", Nullable:" + reader.GetString(2));
+                    }
+                } else
+                {
+                    while (reader.Read())
+                    {
+                        data.Add(reader.GetString(1) + " " + reader.GetString(2) + ", Nullable:" + (reader.GetInt32(3) == 1 ? "NO" : "YES"));
+                    }
                 }
             }
             return data;
@@ -89,15 +118,18 @@ namespace Firedump.core.db
             var data = new List<string>();
             using (var reader = new DbCommandFactory(con, new SqlBuilderFactory(con).Create(con.Database).getTableInfo(table)).Create().ExecuteReader())
             {
-                while (reader.Read())
+                if(!sql.Utils.IsDbEmbedded(sql.Utils.GetDbTypeEnum(con)))
                 {
-                    data.Add("~Rows:"+(reader.IsDBNull(5) ? "" : reader.GetString(5)));
-                    data.Add("AvgLen:"+ (reader.IsDBNull(0) ? "" : reader.GetString(0)));
-                    data.Add("Length:" + (reader.IsDBNull(1) ? "" : reader.GetString(1)));
-                    data.Add("Free:" + (reader.IsDBNull(2) ? "" : reader.GetString(2)));
-                    data.Add("AI:" + (reader.IsDBNull(3) ? "" : reader.GetString(3)));
-                    data.Add("Collation:" + (reader.IsDBNull(4) ? "" : reader.GetString(4)));
-                }
+                    while (reader.Read())
+                    {
+                        data.Add("~Rows:" + (reader.IsDBNull(5) ? "" : reader.GetString(5)));
+                        data.Add("AvgLen:" + (reader.IsDBNull(0) ? "" : reader.GetString(0)));
+                        data.Add("Length:" + (reader.IsDBNull(1) ? "" : reader.GetString(1)));
+                        data.Add("Free:" + (reader.IsDBNull(2) ? "" : reader.GetString(2)));
+                        data.Add("AI:" + (reader.IsDBNull(3) ? "" : reader.GetString(3)));
+                        data.Add("Collation:" + (reader.IsDBNull(4) ? "" : reader.GetString(4)));
+                    }
+                } 
             }
             return data;
         }
