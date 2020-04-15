@@ -74,9 +74,7 @@ namespace Firedump.core.sql.executor
                                         {
                                             foreach(DataRow row in schema.Rows)
                                             {
-                                                var column = new DataColumn(System.Convert.ToString(row["ColumnName"]), (Type)(row["DataType"]));
-                                                listCols.Add(column);
-                                                resultData.Columns.Add(column);
+                                                listCols.Add(AddTableColumn(resultData, (Type)(row["DataType"]), System.Convert.ToString(row["ColumnName"])));
                                             }
                                         }
                                         int count = 0;
@@ -107,19 +105,25 @@ namespace Firedump.core.sql.executor
                 catch (DbException ex)
                 {
                     ///log
+#if DEBUG
                     Console.WriteLine(ex.Message);
+#endif
                     //status change in future depending on user selection continue or not after error
                     FireEvent(new ExecutionQueryEvent(Status.ERROR) { Ex = ex, query = statements[i] });
                 }
                 catch (IndexOutOfRangeException ex)
                 {
                     //better format/handle the sql errors/exceptions
+#if DEBUG
                     Console.WriteLine(ex.Message);
+#endif
                     FireEvent(new ExecutionQueryEvent(Status.ERROR) { Ex = ex, query = statements[i] });
                 }
                 catch(Exception ex)
                 {
+#if DEBUG
                     Console.WriteLine(ex.Message);
+#endif
                     FireEvent(new ExecutionQueryEvent(Status.ERROR) { Ex = ex, query = statements[i] });
                 }
             }
@@ -159,7 +163,27 @@ namespace Firedump.core.sql.executor
             {
                 Command?.Cancel();
             }
-            catch (Exception ex) { }
+            catch (Exception ex) 
+            {
+#if DEBUG
+                Console.WriteLine(ex);
+#endif         
+            }
+        }
+
+        private DataColumn AddTableColumn(DataTable table,Type type,String columnName)
+        {
+            try
+            {
+                var col = new DataColumn(columnName, type);
+                table.Columns.Add(col);
+                return col;
+            }
+            catch (System.Data.DuplicateNameException)
+            {
+                return AddTableColumn(table,type,columnName+"1");
+            }
+            return null;
         }
 
     }
