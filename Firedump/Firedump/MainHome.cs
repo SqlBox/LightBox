@@ -193,7 +193,14 @@ namespace Firedump
 
         private void setHomeConnectionStatus()
         {
-            this.connectionStatusStripTextbox.Text = this.server.username+"@"+ this.server.host + ":" + this.server.port+":"+this.con.Database;
+            if(!Utils.IsDbEmbedded(this.server.db_type))
+            {
+                this.connectionStatusStripTextbox.Text = this.server.username + "@" + this.server.host + ":" + this.server.port + ":" + this.con.Database;
+            }
+            else
+            {
+                this.connectionStatusStripTextbox.Text = this.server.path;
+            }
         }
 
 
@@ -271,9 +278,15 @@ namespace Firedump
 
         private void SetAutoCommit(DbConnection con)
         {
-            if(isConnected(con) && !Utils.IsDbEmbedded(server.db_type))
+            if(isConnected(con))
             {
-                DbSessionSettings.SetAutoCommit(con,false);
+                if(!Utils.IsDbEmbedded(server.db_type))
+                {
+                    DbSessionSettings.SetAutoCommit(con, false);
+                } else
+                {
+                    DbSessionSettings.BeginTransaction(con);
+                }
             }
         }
 

@@ -57,7 +57,9 @@ namespace Firedump.core.db
                 }
             }
             catch (DbException ex) {
+#if DEBUG
                 Console.WriteLine(ex.Message);
+#endif
             }
         }
 
@@ -71,7 +73,9 @@ namespace Firedump.core.db
                 }
             }catch(DbException ex)
             {
+#if DEBUG
                 Console.WriteLine(ex.Message);
+#endif
             }
         }
 

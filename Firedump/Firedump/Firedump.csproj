@@ -491,6 +491,13 @@
     <None Include="resources\icons\main\test_run.png" />
     <None Include="resources\icons\main\show_pass.png" />
     <None Include="resources\icons\main\database-icon.png" />
+    <None Include="resources\icons\main\saveas.png" />
+    <None Include="resources\icons\main\settings.png" />
+    <None Include="resources\icons\main\copy.png" />
+    <None Include="resources\icons\main\cut.png" />
+    <None Include="resources\icons\main\paste.png" />
+    <None Include="resources\icons\main\exit.png" />
+    <None Include="resources\icons\main\manage_server.png" />
     <Content Include="resources\icons\redcircle.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

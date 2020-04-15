@@ -100,5 +100,10 @@ namespace Firedump.core.sql
         {
             throw new NotImplementedException();
         }
+
+        public string GetTriggerCreateStatement(string table, string triggerName)
+        {
+            return "SELECT name, sql FROM sqlite_master WHERE type = 'trigger' AND tbl_name = '"+table+"' AND name = '"+triggerName+"' ";
+        }
     }
 }

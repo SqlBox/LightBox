@@ -104,5 +104,10 @@ namespace Firedump.core.sql
         {
             throw new NotImplementedException();
         }
+
+        public string GetTriggerCreateStatement(string table, string triggerName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

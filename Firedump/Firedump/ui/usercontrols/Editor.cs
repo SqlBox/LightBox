@@ -112,9 +112,16 @@ namespace Firedump.usercontrols
                 // forced show (MinFragmentLength will be ignored)
                 ((TabPageHolder)tabControl1.SelectedTab).GetAutocompleteMenu().Show(true);
                 e.Handled = true;
-            } else if(e.KeyData == Keys.F5)
+            }
+            else if (e.KeyData == Keys.F5)
             {
                 ExecuteScript(null);
+            }
+            else if (e.KeyData == Keys.F6)
+            {
+            }
+            else if (e.KeyData == Keys.F7) 
+            { 
             }
         }       
 

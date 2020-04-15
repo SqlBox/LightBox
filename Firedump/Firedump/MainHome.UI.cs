@@ -40,13 +40,11 @@ namespace Firedump
         //Disable ui elements when query is running.
         private void EnableUi(bool enable)
         {
-            Console.WriteLine("EnableUi:"+enable);
            this.Invoke((MethodInvoker)delegate {
                this.SuspendLayout();
-               Console.WriteLine(enable);
                GetUserControl<TabView>().GetDatabasesCombobox().Enabled = enable;
-               //toolStripProgressBar.Visible = !enable;
-               //toolStripProgressBar.Enabled = !enable;
+               this.toolStripProgressBar1.Enabled = !enable;
+               this.toolStripProgressBar1.Visible = !enable;
                this.toolStripButtonExecute.Enabled = enable;
                this.toolStripButtonShowSysDb.Enabled = enable;
                this.toolStripButtonConnect.Enabled = enable;

@@ -118,7 +118,6 @@ namespace Firedump.usercontrols
             if (e.ScrollOrientation == ScrollOrientation.VerticalScroll && dataGridView1.DisplayedRowCount(false) + dataGridView1.FirstDisplayedScrollingRowIndex
                 >= dataGridView1.RowCount-1 && !this.editor.GetQueryExecutor().IsAlive())
             {
-                Console.WriteLine("dataGridView1_Scroll");
                 this.editor.Fetch(new QueryParams() { Limit = this.editor.GetMainHome().GetLimitFromToolStripComboBoxLimit(), Offset = dataGridView1.RowCount, Hash = this.GetHashCode(),Sql = SQL });
             }
         }

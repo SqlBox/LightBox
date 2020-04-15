@@ -44,5 +44,7 @@ namespace Firedump.core.sql
         string GetProcedures();
 
         string GetFunctions();
+
+        string GetTriggerCreateStatement(string table, string triggerName);
     }
 }
