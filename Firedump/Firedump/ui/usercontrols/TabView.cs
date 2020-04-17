@@ -14,28 +14,28 @@ using Firedump.core.sql;
 using Firedump.models;
 using Firedump.models.events;
 using Firedump.core.sql.executor;
+using Firedump.core.models;
+using static Firedump.core.models.MyTreeNode;
 
 namespace Firedump.usercontrols
 {
     public sealed partial class TabView : UserControlReference
     {
-        private readonly ContextMenu treeTableMenu = new ContextMenu();
+        private readonly ContextMenu TableTableMenu = new ContextMenu();
+        private readonly ContextMenu TableTriggersMenu = new ContextMenu();
+
         private class FieldImageIndex
         {
             public string Value;
             public int Index;
         }
 
-        
         public TabView()
         {
             InitializeComponent();
-            this.BuildTreeTableMenu();
-        }
-
-        private void BuildTreeTableMenu()
-        {
-            treeTableMenu.MenuItems.AddRange(ControlBuilder.TreeTableMenuItemsBuilder(this));
+            var menuItemBuilder = new TabViewContextMenuBuilder(this);
+            TableTableMenu.MenuItems.AddRange(menuItemBuilder.BuildeTableTableMenuItems());
+            TableTriggersMenu.MenuItems.AddRange(menuItemBuilder.BuildTableTriggerMenuItems());
         }
 
         public void setServerDataToComboBox(List<string> databases)
@@ -116,27 +116,27 @@ namespace Firedump.usercontrols
             treeViewTables.Nodes.Clear();
             foreach (string t in tables)
             {
-                TreeNode node = new TreeNode(t) { ImageIndex = 0 };
+                MyTreeNode node = new MyTreeNode() { Text = t, ImageIndex = 0 ,Type = NodeType.Table };
                 node.Nodes.Add(getDummy()); 
                 treeViewTables.Nodes.Add(node);
             }
             this.treeViewTables.EndUpdate();
         }
 
-        private void setTableFields(List<FieldImageIndex> fields, int nodeIndex)
+        private void setTableFields(List<MyTreeNode> nodes, MyTreeNode parentNode)
         {
             this.treeViewTables.BeginUpdate();
-            treeViewTables.Nodes[nodeIndex].Nodes.Clear();
-            if (fields != null && fields.Count > 0)
+            parentNode.Nodes.Clear();
+            if (nodes != null && nodes.Count > 0)
             {
-                foreach (FieldImageIndex f in fields)
+                foreach (var n in nodes)
                 {
-                    treeViewTables.Nodes[nodeIndex].Nodes.Add(new TreeNode(f.Value) { ImageIndex = f.Index, SelectedImageIndex = f.Index });
+                    parentNode.Nodes.Add(n);
                 }
             }
             else
             {
-                treeViewTables.Nodes[nodeIndex].Nodes.Add(getDummy());
+                parentNode.Nodes.Add(getDummy());
             }
             this.treeViewTables.EndUpdate();
         }
@@ -146,23 +146,44 @@ namespace Firedump.usercontrols
         {
             if (!GetMainHome().GetUserControl<Editor>().GetQueryExecutor().IsAlive())
             {
-                List<string> fields = DbUtils.getTableFields(GetSqlConnection(), e.Node.Text);
-                List<string> fieldsInfo = DbUtils.getTableInfo(GetSqlConnection(), e.Node.Text);
-                List<FieldImageIndex> finalFieldList = new List<FieldImageIndex>();
-                foreach (string f in fields)
+                switch((e.Node as MyTreeNode).Type)
                 {
-                    finalFieldList.Add(new FieldImageIndex() { Value = f, Index = 1 });
+                    case NodeType.Table:
+                        {
+                            List<string> fields = DbUtils.getTableFields(GetSqlConnection(), e.Node.Text);
+                            List<string> fieldsInfo = DbUtils.getTableInfo(GetSqlConnection(), e.Node.Text);
+                            List<MyTreeNode> nodes = new List<MyTreeNode>();
+                            foreach (string f in fields)
+                            {
+                                nodes.Add(new MyTreeNode() { Text = f, ImageIndex = 1, SelectedImageIndex = 1 });
+                            }
+                            foreach (string f in fieldsInfo)
+                            {
+                                nodes.Add(new MyTreeNode() { Text = f, ImageIndex = 2, SelectedImageIndex = 2 });
+                            }
+                            var triggerParentNode = new MyTreeNode() { Text = "Triggers", ImageIndex = 3, SelectedImageIndex = 3, Type = NodeType.ParentTrigger };
+                            triggerParentNode.Nodes.Add(getDummy());
+                            nodes.Add(triggerParentNode);
+                            this.setTableFields(nodes, e.Node as MyTreeNode);
+                        }
+                        break;
+                    case NodeType.ParentTrigger:
+                        {
+                            List<string> triggers = DbUtils.getTableTriggers(GetSqlConnection(),e.Node.Parent.Text);
+                            List<MyTreeNode> nodes = new List<MyTreeNode>();
+                            foreach (string t in triggers)
+                            {
+                                nodes.Add(new MyTreeNode() { Text = t,Type = NodeType.Trigger, ImageIndex = 3, SelectedImageIndex = 3 });
+                            }
+                            this.setTableFields(nodes, e.Node as MyTreeNode);
+                        }
+                        break;
                 }
-                foreach (string f in fieldsInfo)
-                {
-                    finalFieldList.Add(new FieldImageIndex() { Value = f, Index = 2 });
-                }
-                this.setTableFields(finalFieldList, e.Node.Index);
             }
         }
 
-        private TreeNode getDummy() =>
-            new TreeNode() { ImageIndex = 0 };
+        private MyTreeNode getDummy() =>
+            new MyTreeNode() { ImageIndex = 0 };
 
         private void setDatagridviewTables()
         {
@@ -247,10 +268,22 @@ namespace Firedump.usercontrols
             if(e.Button == MouseButtons.Right)
             {
                 Point p = new Point(e.X,e.Y);
-                TreeNode node = treeViewTables.GetNodeAt(p);
-                if (node == null || node.Parent != null) return;
-                treeViewTables.SelectedNode = node;
-                treeTableMenu.Show(this, this.PointToClient(treeViewTables.PointToScreen(p)));
+                MyTreeNode node = treeViewTables.GetNodeAt(p) as MyTreeNode;
+                switch(node.Type)
+                {
+                    case NodeType.Table:
+                        {
+                            treeViewTables.SelectedNode = node;
+                            TableTableMenu.Show(this, this.PointToClient(treeViewTables.PointToScreen(p)));
+                        }
+                        break;
+                    case NodeType.Trigger:
+                        {
+                            treeViewTables.SelectedNode = node;
+                            TableTriggersMenu.Show(this, this.PointToClient(treeViewTables.PointToScreen(p)));
+                        }
+                        break;
+                }
             }
         }
 
@@ -275,19 +308,32 @@ namespace Firedump.usercontrols
                 {
                     if (((TreeView)sender).SelectedNode != null && ((TreeView)sender).SelectedNode.Parent == null)
                     {
-                        sendCreateToEditor(treeViewTables.SelectedNode.Text);
+                        sendCreateTableToEditor(treeViewTables.SelectedNode.Text);
                     }
                 }
                 else
                 {
-                    sendCreateToEditor(treeViewTables.SelectedNode.Text);
+                    sendCreateTableToEditor(treeViewTables.SelectedNode.Text);
                 }
             }
         }
 
-        private void sendCreateToEditor(string table)
+        private void sendCreateTableToEditor(string table)
         {
             GetMainHome().GetUserControl<Editor>().AddQueryTab(DbUtils.getCreateTable(GetSqlConnection(), table),table);
+        }
+
+        private void sendCreateTriggerToEditor(string table,string triggerName)
+        {
+            GetMainHome().GetUserControl<Editor>().AddQueryTab(DbUtils.GetCreateTrigger(GetSqlConnection(), table, triggerName), triggerName);
+        }
+
+        internal void TreeViewTableTriggers_MenuItem_ShowCreate(object sender, EventArgs e)
+        {
+            if(IsNodeSelected())
+            {
+                sendCreateTriggerToEditor(treeViewTables.SelectedNode.Parent.Parent.Text,treeViewTables.SelectedNode.Text);
+            }
         }
 
         internal void TreeViewTable_MenuItem_DropTable(object sender, EventArgs e)
@@ -305,6 +351,8 @@ namespace Firedump.usercontrols
         internal void TreeViewTable_MenuItem_Inspect(object sender,EventArgs e)
         {
         }
+
+
 
         private bool IsNodeSelected()
         {

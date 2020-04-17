@@ -288,11 +288,6 @@ namespace Firedump.Forms.mysql
         {
             this.groupBoxDetails.Enabled = true;
             this.checkkDbType(((ToolStripItemDbType)this.comboBoxDbTypes.SelectedItem).db_type);
-            this.tbPort.Text = "";
-            this.tbUsername.Text = "";
-            this.tbHost.Text = "";
-            this.tbDatabase.Text = "";
-            this.tbPassword.Text = "";
         }
     }
 }

@@ -94,13 +94,14 @@ namespace Firedump.usercontrols
             this.imageListTableTree.Images.SetKeyName(0, "table-icon.png");
             this.imageListTableTree.Images.SetKeyName(1, "fieldicon.png");
             this.imageListTableTree.Images.SetKeyName(2, "view-icon.png");
+            this.imageListTableTree.Images.SetKeyName(3, "trigger-icon.png");
             // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "index-icon.png");
-            this.imageList1.Images.SetKeyName(1, "trigger-icon.bmp");
+            this.imageList1.Images.SetKeyName(1, "trigger-icon.png");
             this.imageList1.Images.SetKeyName(2, "procedure-icon.png");
             this.imageList1.Images.SetKeyName(3, "function-icon.png");
             this.imageList1.Images.SetKeyName(4, "view-icon.png");

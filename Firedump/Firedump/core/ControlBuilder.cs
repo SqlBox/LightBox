@@ -96,29 +96,6 @@ namespace Firedump.core
             };
         }
 
-        internal static MenuItem[] TreeTableMenuItemsBuilder(TabView _this)
-        {
-            var items = new List<MenuItem>();
-            foreach(MenuItem menuItem in MenuItemGenerator(_this))
-            {
-                items.Add(menuItem);
-            }
-            return items.ToArray();
-        }
-
-        private static IEnumerable<MenuItem> MenuItemGenerator(TabView _this)
-        {
-            yield return new MenuItem("Show Data", _this.TreeViewTable_MenuItem_ShowData);
-            yield return new MenuItem("Send Create Statement", _this.TreeViewTable_MenuItem_ShowCreate);
-            yield return new MenuItem("-");
-            yield return new MenuItem("Inspect Table", _this.TreeViewTable_MenuItem_Inspect);
-            yield return new MenuItem("-");
-            yield return new MenuItem("Drop Table", _this.TreeViewTable_MenuItem_DropTable);
-            yield return new MenuItem("Truncate Table", _this.TreeViewTable_MenuItem_TruncateTable);
-            yield return new MenuItem("-");
-            yield return new MenuItem("Refresh", _this.TreeViewTable_MenuItem_RefreshTable);
-        }
-
 
         internal static DataTable HistoryDataTableBuilder(ExecutionQueryEvent e)
         {

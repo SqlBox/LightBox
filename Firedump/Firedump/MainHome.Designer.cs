@@ -846,14 +846,14 @@ namespace Firedump
             this.manageServersToolStripMenuItem});
             this.databaseToolStripMenuItem.Name = "databaseToolStripMenuItem";
             this.databaseToolStripMenuItem.Size = new System.Drawing.Size(69, 24);
-            this.databaseToolStripMenuItem.Text = "SCHEMA";
+            this.databaseToolStripMenuItem.Text = "Database";
             // 
             // connectToDatabaseToolStripMenuItem
             // 
             this.connectToDatabaseToolStripMenuItem.Image = global::Firedump.Properties.Resources.connect_icon;
             this.connectToDatabaseToolStripMenuItem.Name = "connectToDatabaseToolStripMenuItem";
             this.connectToDatabaseToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-            this.connectToDatabaseToolStripMenuItem.Text = "Connect To SCHEMA";
+            this.connectToDatabaseToolStripMenuItem.Text = "Connect To Database";
             this.connectToDatabaseToolStripMenuItem.Click += new System.EventHandler(this.ConnectToDatabaseToolStripMenuItem_Click);
             // 
             // addNewServerToolStripMenuItem

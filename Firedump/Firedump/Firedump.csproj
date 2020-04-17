@@ -209,6 +209,7 @@
     <Compile Include="core\models\dbinfo\Status.cs" />
     <Compile Include="core\models\events\ExecutionEventArgs.cs" />
     <Compile Include="core\models\MyToolStripItem.cs" />
+    <Compile Include="core\models\MyTreeNode.cs" />
     <Compile Include="core\models\ToolStripItemDbType.cs" />
     <Compile Include="core\sql\Db2SqlBuilder.cs" />
     <Compile Include="core\sql\executor\BaseThread.cs" />
@@ -230,6 +231,7 @@
     <Compile Include="core\sql\SqliteSqlBuilder.cs" />
     <Compile Include="core\sql\SqlServerSqlBuilder.cs" />
     <Compile Include="core\sql\Utils.cs" />
+    <Compile Include="core\TabViewContextMenuBuilder.cs" />
     <Compile Include="MainHome.UI.cs">
       <SubType>Form</SubType>
     </Compile>

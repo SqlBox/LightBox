@@ -55,6 +55,41 @@ namespace Firedump.core.db
             return getStringData(con, new SqlBuilderFactory(con).Create(con.Database).showTablesSql());
         }
 
+        internal static List<string> getTableTriggers(DbConnection con, string table)
+        {
+            var data = new List<string>();
+            using (var reader = new DbCommandFactory(con,new SqlBuilderFactory(con).Create(con.Database).GetTableTriggers(table)).Create().ExecuteReader())
+            {
+                while(reader.Read())
+                {
+                    data.Add(reader.GetString(0));
+                }
+            }
+            return data;
+        }
+
+        internal static string GetCreateTrigger(DbConnection con, string table, string triggerName)
+        {
+            string triggerCreateStatement = "";
+            using (var r = new DbCommandFactory(con, new SqlBuilderFactory(con).Create(con.Database).GetTriggerCreateStatement(table, triggerName)).Create().ExecuteReader())
+            {
+                while(r.Read())
+                {
+                    if (sql.Utils.IsDbEmbedded(sql.Utils.GetDbTypeEnum(con)))
+                    {
+                        triggerCreateStatement = r.GetString(1);
+                        break;
+                    }
+                    else
+                    {
+                        triggerCreateStatement = r.GetString(2);
+                        break;
+                    }
+                }
+            }
+            return triggerCreateStatement;
+        }
+
         //returns all fields from all tables
         internal static List<Table> getTablesInfo(sqlservers server, DbConnection con)
         {
@@ -161,7 +196,6 @@ namespace Firedump.core.db
             return getIntSingleResult(con, "SELECT COUNT(*) FROM " + database + "." + tablename);
         }
 
-
         internal static List<string> getStringData(DbConnection con, string sql)
         {
             var data = new List<string>();
@@ -212,6 +246,5 @@ namespace Firedump.core.db
                 (int)table.Rows[control.SelectedIndex]["db_type"], path);
         }
 
-        
     }
 }

@@ -251,7 +251,7 @@
             // labelDbType
             // 
             this.labelDbType.AutoSize = true;
-            this.labelDbType.Location = new System.Drawing.Point(35, 22);
+            this.labelDbType.Location = new System.Drawing.Point(65, 22);
             this.labelDbType.Name = "labelDbType";
             this.labelDbType.Size = new System.Drawing.Size(51, 13);
             this.labelDbType.TabIndex = 19;
@@ -261,7 +261,7 @@
             // 
             this.comboBoxDbTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxDbTypes.FormattingEnabled = true;
-            this.comboBoxDbTypes.Location = new System.Drawing.Point(96, 19);
+            this.comboBoxDbTypes.Location = new System.Drawing.Point(125, 19);
             this.comboBoxDbTypes.Name = "comboBoxDbTypes";
             this.comboBoxDbTypes.Size = new System.Drawing.Size(190, 21);
             this.comboBoxDbTypes.TabIndex = 20;
