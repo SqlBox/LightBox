@@ -73,18 +73,11 @@ namespace Firedump.core.db
             string triggerCreateStatement = "";
             using (var r = new DbCommandFactory(con, new SqlBuilderFactory(con).Create(con.Database).GetTriggerCreateStatement(table, triggerName)).Create().ExecuteReader())
             {
-                while(r.Read())
+                bool isEmb = sql.Utils.IsDbEmbedded(sql.Utils.GetDbTypeEnum(con));
+                while (r.Read())
                 {
-                    if (sql.Utils.IsDbEmbedded(sql.Utils.GetDbTypeEnum(con)))
-                    {
-                        triggerCreateStatement = r.GetString(1);
-                        break;
-                    }
-                    else
-                    {
-                        triggerCreateStatement = r.GetString(2);
-                        break;
-                    }
+                    triggerCreateStatement = "DELIMITER $ " + "\r\n" + r.GetString(isEmb ? 1 : 2) + " $ " + "\r\n" + " DELIMITER ;\0";
+                    break;
                 }
             }
             return triggerCreateStatement;

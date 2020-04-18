@@ -302,18 +302,16 @@ namespace Firedump.usercontrols
 
         internal void TreeViewTable_MenuItem_ShowCreate(object sender, EventArgs e)
         {
-            if(IsNodeSelected())
+            if (IsNodeSelected())
             {
-                if (sender is TreeView)
-                {
-                    if (((TreeView)sender).SelectedNode != null && ((TreeView)sender).SelectedNode.Parent == null)
-                    {
-                        sendCreateTableToEditor(treeViewTables.SelectedNode.Text);
-                    }
-                }
-                else
+                var node = treeViewTables.SelectedNode as MyTreeNode;
+                if (node.Type == NodeType.Table)
                 {
                     sendCreateTableToEditor(treeViewTables.SelectedNode.Text);
+                }
+                else if(node.Type == NodeType.Trigger)
+                {
+                    sendCreateTriggerToEditor(node.Parent.Parent.Text, node.Text);
                 }
             }
         }

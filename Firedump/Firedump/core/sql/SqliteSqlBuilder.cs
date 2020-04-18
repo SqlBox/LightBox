@@ -68,7 +68,7 @@ namespace Firedump.core.sql
 
         public string ShowCreateStatement(string table)
         {
-            return "SELECT name, sql FROM sqlite_master WHERE tbl_name = '"+table +"' ";
+            return "SELECT name, sql FROM sqlite_master WHERE tbl_name = '"+table +"' AND type = 'table'";
         }
 
         public string showTablesSql()
