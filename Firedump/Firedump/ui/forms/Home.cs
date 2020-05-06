@@ -55,20 +55,20 @@ namespace Firedump
             sqlservers server = null;
             this.Invoke((MethodInvoker)delegate ()
             {
-                server = DbUtils.getSqlServerFromTable(serverData,cmbServers);
+                server = sqlservers.CreateSqlServerFromDataTable(serverData,cmbServers);
             });
             ConnectionResultSet result = DB.TestConnection(server);
             if (result.wasSuccessful)
             {
                 MySqlConnection con = (MySqlConnection)DB.connect(server);
                 List<string> databases = new SqlBuilderFactory(server)
-                        .Create(null).removeSystemDatabases(DbUtils.getDatabases(server, con), !hideSystemDatabases);
+                        .Create(null).removeSystemDatabases(DbDataHelper.getDatabases(server, con), !hideSystemDatabases);
                 foreach (string database in databases)
                 {
                     this.Invoke((MethodInvoker)delegate () {
                         TreeNode node = new TreeNode(database);
                         node.ImageIndex = 0;
-                        List<string> tables = DbUtils.getTables(server, database,con);
+                        List<string> tables = DbDataHelper.getTables(server, database,con);
                         foreach (string table in tables)
                         {
                             TreeNode tablenode = new TreeNode(table);

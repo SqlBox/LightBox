@@ -30,13 +30,22 @@ namespace Firedump
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainHome));
             this.miniToolStrip = new System.Windows.Forms.MenuStrip();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainerMainParent = new System.Windows.Forms.SplitContainer();
+            this.splitContainerMiddle = new System.Windows.Forms.SplitContainer();
             this.tabView1 = new Firedump.usercontrols.TabView();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.splitContainerMiddleChild = new System.Windows.Forms.SplitContainer();
             this.tableView1 = new Firedump.usercontrols.TableView();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPageShowHide = new System.Windows.Forms.TabPage();
+            this.tabPageAppHistory = new System.Windows.Forms.TabPage();
+            this.richTextBoxAppHistory = new System.Windows.Forms.RichTextBox();
+            this.tabPageTerminal = new System.Windows.Forms.TabPage();
+            this.terminal1 = new Firedump.ui.usercontrols.Terminal();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonShowSysDb = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
@@ -86,6 +95,7 @@ namespace Firedump
             this.toolStripButton16 = new System.Windows.Forms.ToolStripButton();
             this.toolStripTextBoxSearch = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripButton19 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonTerminal = new System.Windows.Forms.ToolStripButton();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -133,13 +143,20 @@ namespace Firedump
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerMainParent)).BeginInit();
+            this.splitContainerMainParent.Panel1.SuspendLayout();
+            this.splitContainerMainParent.Panel2.SuspendLayout();
+            this.splitContainerMainParent.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerMiddle)).BeginInit();
+            this.splitContainerMiddle.Panel1.SuspendLayout();
+            this.splitContainerMiddle.Panel2.SuspendLayout();
+            this.splitContainerMiddle.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerMiddleChild)).BeginInit();
+            this.splitContainerMiddleChild.Panel2.SuspendLayout();
+            this.splitContainerMiddleChild.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPageAppHistory.SuspendLayout();
+            this.tabPageTerminal.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -158,7 +175,7 @@ namespace Firedump
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.splitContainer1);
+            this.panel1.Controls.Add(this.splitContainerMainParent);
             this.panel1.Controls.Add(this.toolStrip1);
             this.panel1.Controls.Add(this.toolStrip2);
             this.panel1.Controls.Add(this.menuStrip1);
@@ -168,23 +185,41 @@ namespace Firedump
             this.panel1.Size = new System.Drawing.Size(1169, 653);
             this.panel1.TabIndex = 4;
             // 
-            // splitContainer1
+            // splitContainerMainParent
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 74);
-            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainerMainParent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerMainParent.Location = new System.Drawing.Point(0, 74);
+            this.splitContainerMainParent.Name = "splitContainerMainParent";
+            this.splitContainerMainParent.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // splitContainer1.Panel1
+            // splitContainerMainParent.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.tabView1);
+            this.splitContainerMainParent.Panel1.Controls.Add(this.splitContainerMiddle);
             // 
-            // splitContainer1.Panel2
+            // splitContainerMainParent.Panel2
             // 
-            this.splitContainer1.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
-            this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1169, 579);
-            this.splitContainer1.SplitterDistance = 250;
-            this.splitContainer1.TabIndex = 4;
+            this.splitContainerMainParent.Panel2.Controls.Add(this.tabControl1);
+            this.splitContainerMainParent.Size = new System.Drawing.Size(1169, 579);
+            this.splitContainerMainParent.SplitterDistance = 451;
+            this.splitContainerMainParent.TabIndex = 5;
+            // 
+            // splitContainerMiddle
+            // 
+            this.splitContainerMiddle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerMiddle.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerMiddle.Name = "splitContainerMiddle";
+            // 
+            // splitContainerMiddle.Panel1
+            // 
+            this.splitContainerMiddle.Panel1.Controls.Add(this.tabView1);
+            // 
+            // splitContainerMiddle.Panel2
+            // 
+            this.splitContainerMiddle.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            this.splitContainerMiddle.Panel2.Controls.Add(this.splitContainerMiddleChild);
+            this.splitContainerMiddle.Size = new System.Drawing.Size(1169, 451);
+            this.splitContainerMiddle.SplitterDistance = 250;
+            this.splitContainerMiddle.TabIndex = 4;
             // 
             // tabView1
             // 
@@ -192,25 +227,25 @@ namespace Firedump
             this.tabView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabView1.Location = new System.Drawing.Point(0, 0);
             this.tabView1.Name = "tabView1";
-            this.tabView1.Size = new System.Drawing.Size(250, 579);
+            this.tabView1.Size = new System.Drawing.Size(250, 451);
             this.tabView1.TabIndex = 0;
             // 
-            // splitContainer2
+            // splitContainerMiddleChild
             // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainerMiddleChild.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerMiddleChild.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerMiddleChild.Name = "splitContainerMiddleChild";
             // 
-            // splitContainer2.Panel1
+            // splitContainerMiddleChild.Panel1
             // 
-            this.splitContainer2.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            this.splitContainerMiddleChild.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
             // 
-            // splitContainer2.Panel2
+            // splitContainerMiddleChild.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.tableView1);
-            this.splitContainer2.Size = new System.Drawing.Size(915, 579);
-            this.splitContainer2.SplitterDistance = 725;
-            this.splitContainer2.TabIndex = 0;
+            this.splitContainerMiddleChild.Panel2.Controls.Add(this.tableView1);
+            this.splitContainerMiddleChild.Size = new System.Drawing.Size(915, 451);
+            this.splitContainerMiddleChild.SplitterDistance = 725;
+            this.splitContainerMiddleChild.TabIndex = 0;
             // 
             // tableView1
             // 
@@ -218,8 +253,85 @@ namespace Firedump
             this.tableView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableView1.Location = new System.Drawing.Point(0, 0);
             this.tableView1.Name = "tableView1";
-            this.tableView1.Size = new System.Drawing.Size(186, 579);
+            this.tableView1.Size = new System.Drawing.Size(186, 451);
             this.tableView1.TabIndex = 0;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
+            this.tabControl1.Controls.Add(this.tabPageShowHide);
+            this.tabControl1.Controls.Add(this.tabPageAppHistory);
+            this.tabControl1.Controls.Add(this.tabPageTerminal);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.ImageList = this.imageList1;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1169, 124);
+            this.tabControl1.TabIndex = 0;
+            this.tabControl1.Click += new System.EventHandler(this.tabControl1_Click);
+            // 
+            // tabPageShowHide
+            // 
+            this.tabPageShowHide.ImageIndex = 2;
+            this.tabPageShowHide.Location = new System.Drawing.Point(4, 26);
+            this.tabPageShowHide.Name = "tabPageShowHide";
+            this.tabPageShowHide.Size = new System.Drawing.Size(1161, 37);
+            this.tabPageShowHide.TabIndex = 2;
+            this.tabPageShowHide.UseVisualStyleBackColor = true;
+            // 
+            // tabPageAppHistory
+            // 
+            this.tabPageAppHistory.Controls.Add(this.richTextBoxAppHistory);
+            this.tabPageAppHistory.ImageIndex = 1;
+            this.tabPageAppHistory.Location = new System.Drawing.Point(4, 26);
+            this.tabPageAppHistory.Name = "tabPageAppHistory";
+            this.tabPageAppHistory.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageAppHistory.Size = new System.Drawing.Size(1161, 37);
+            this.tabPageAppHistory.TabIndex = 1;
+            this.tabPageAppHistory.Text = "Application History";
+            this.tabPageAppHistory.UseVisualStyleBackColor = true;
+            // 
+            // richTextBoxAppHistory
+            // 
+            this.richTextBoxAppHistory.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBoxAppHistory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxAppHistory.Location = new System.Drawing.Point(3, 3);
+            this.richTextBoxAppHistory.Name = "richTextBoxAppHistory";
+            this.richTextBoxAppHistory.Size = new System.Drawing.Size(1155, 31);
+            this.richTextBoxAppHistory.TabIndex = 0;
+            this.richTextBoxAppHistory.Text = "";
+            // 
+            // tabPageTerminal
+            // 
+            this.tabPageTerminal.Controls.Add(this.terminal1);
+            this.tabPageTerminal.ImageIndex = 0;
+            this.tabPageTerminal.Location = new System.Drawing.Point(4, 26);
+            this.tabPageTerminal.Name = "tabPageTerminal";
+            this.tabPageTerminal.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageTerminal.Size = new System.Drawing.Size(1161, 94);
+            this.tabPageTerminal.TabIndex = 0;
+            this.tabPageTerminal.Text = "Terminal";
+            this.tabPageTerminal.UseVisualStyleBackColor = true;
+            // 
+            // terminal1
+            // 
+            this.terminal1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.terminal1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.terminal1.Location = new System.Drawing.Point(3, 3);
+            this.terminal1.Margin = new System.Windows.Forms.Padding(0);
+            this.terminal1.Name = "terminal1";
+            this.terminal1.Size = new System.Drawing.Size(1155, 88);
+            this.terminal1.TabIndex = 0;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "terminal.png");
+            this.imageList1.Images.SetKeyName(1, "history-icon.png");
+            this.imageList1.Images.SetKeyName(2, "expand.png");
+            this.imageList1.Images.SetKeyName(3, "collapse.png");
             // 
             // toolStrip1
             // 
@@ -451,7 +563,7 @@ namespace Firedump
             this.toolStripButtonAbandon.Name = "toolStripButtonAbandon";
             this.toolStripButtonAbandon.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonAbandon.Text = "toolStripButton1";
-            this.toolStripButtonAbandon.ToolTipText = "Abandon running query and reconnect";
+            this.toolStripButtonAbandon.ToolTipText = "Abandon running query and reconnect (abandoned query will try to disconnect)";
             this.toolStripButtonAbandon.Click += new System.EventHandler(this.AbandonClick);
             // 
             // toolStripSeparator24
@@ -540,6 +652,7 @@ namespace Firedump
             this.toolStripButton16,
             this.toolStripTextBoxSearch,
             this.toolStripButton19,
+            this.toolStripButtonTerminal,
             this.toolStripProgressBar1});
             this.toolStrip2.Location = new System.Drawing.Point(0, 24);
             this.toolStrip2.Name = "toolStrip2";
@@ -716,6 +829,17 @@ namespace Firedump
             this.toolStripButton19.Text = "toolStripButton19";
             this.toolStripButton19.ToolTipText = "Find Next";
             this.toolStripButton19.Click += new System.EventHandler(this.FindNextClick);
+            // 
+            // toolStripButtonTerminal
+            // 
+            this.toolStripButtonTerminal.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripButtonTerminal.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonTerminal.Image = global::Firedump.Properties.Resources.terminal;
+            this.toolStripButtonTerminal.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonTerminal.Name = "toolStripButtonTerminal";
+            this.toolStripButtonTerminal.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.toolStripButtonTerminal.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonTerminal.ToolTipText = "Open new terminal";
             // 
             // toolStripProgressBar1
             // 
@@ -1081,13 +1205,20 @@ namespace Firedump
             this.Text = "LightBox";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
-            this.splitContainer2.ResumeLayout(false);
+            this.splitContainerMainParent.Panel1.ResumeLayout(false);
+            this.splitContainerMainParent.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerMainParent)).EndInit();
+            this.splitContainerMainParent.ResumeLayout(false);
+            this.splitContainerMiddle.Panel1.ResumeLayout(false);
+            this.splitContainerMiddle.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerMiddle)).EndInit();
+            this.splitContainerMiddle.ResumeLayout(false);
+            this.splitContainerMiddleChild.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerMiddleChild)).EndInit();
+            this.splitContainerMiddleChild.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPageAppHistory.ResumeLayout(false);
+            this.tabPageTerminal.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
@@ -1102,9 +1233,9 @@ namespace Firedump
         private usercontrols.Editor editor1;
         private System.Windows.Forms.MenuStrip miniToolStrip;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.SplitContainer splitContainerMiddle;
         private TabView tabView1;
-        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.SplitContainer splitContainerMiddleChild;
         private TableView tableView1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButtonShowSysDb;
@@ -1201,5 +1332,14 @@ namespace Firedump
         private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exportHTMLToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator25;
+        private System.Windows.Forms.ToolStripButton toolStripButtonTerminal;
+        private System.Windows.Forms.SplitContainer splitContainerMainParent;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPageTerminal;
+        private System.Windows.Forms.TabPage tabPageAppHistory;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.RichTextBox richTextBoxAppHistory;
+        private System.Windows.Forms.TabPage tabPageShowHide;
+        private ui.usercontrols.Terminal terminal1;
     }
 }

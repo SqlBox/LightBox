@@ -17,13 +17,5 @@ namespace Firedump.core.db
                 command.ExecuteNonQuery();
             }
         }
-
-        internal static void BeginTransaction(DbConnection con)
-        {
-            using (var command = new DbCommandFactory(con, "begin transaction").Create())
-            {
-                command.ExecuteNonQuery();
-            }
-        }
     }
 }

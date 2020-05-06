@@ -28,14 +28,14 @@ namespace Firedump.usercontrols
                 if (DB.IsConnectedToDatabase(base.GetSqlConnection()))
                 {
                     List<string> tables = new SqlBuilderFactory(base.GetSqlConnection())
-                            .Create(null).removeSystemDatabases(DbUtils.getTables(base.GetSqlConnection()), false);
+                            .Create(null).removeSystemDatabases(DbDataHelper.getTables(base.GetSqlConnection()), false);
                     GetMainHome().GetUserControl<Editor>().UpdateEditor(tables);
                     this.setRootTablesIntoTreeView(tables);
                 }
             } else
             {
                 List<string> tables = new SqlBuilderFactory(base.GetSqlConnection())
-                            .Create(null).removeSystemDatabases(DbUtils.getTables(base.GetSqlConnection()), false);
+                            .Create(null).removeSystemDatabases(DbDataHelper.getTables(base.GetSqlConnection()), false);
                 GetMainHome().GetUserControl<Editor>().UpdateEditor(tables);
                 this.setRootTablesIntoTreeView(tables);
             }
@@ -76,7 +76,7 @@ namespace Firedump.usercontrols
         {
             if (!GetMainHome().GetUserControl<Editor>().GetQueryExecutor().IsAlive())
             {
-                this.setTableFields(DbUtils.getTableFields(GetSqlConnection(), e.Node.Text), e.Node.Index);
+                this.setTableFields(DbDataHelper.getTableFields(GetSqlConnection(), e.Node.Text), e.Node.Index);
             }
         }
 

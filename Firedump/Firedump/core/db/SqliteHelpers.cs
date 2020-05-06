@@ -11,6 +11,14 @@ namespace Firedump.core.db
 {
     public class SqliteHelpers
     {
+        internal static void BeginTransaction(DbConnection con)
+        {
+            using (var command = new DbCommandFactory(con, "begin transaction").Create())
+            {
+                command.ExecuteNonQuery();
+            }
+        }
+
         internal static DataTable GetDatabasePrimaryKeysDataSource(sqlservers server,DbConnection con)
         {
             DataTable data = new DataTable();
@@ -18,7 +26,7 @@ namespace Firedump.core.db
             DataColumn c1 = new DataColumn("Table");
             data.Columns.Add(c0);
             data.Columns.Add(c1);
-            List<string> tables = DbUtils.getTables(con);
+            List<string> tables = DbDataHelper.getTables(con);
             foreach(string table in tables)
             {
                 string table_info = new SqlBuilderFactory(server).Create(con.Database).describeTableSql(table);

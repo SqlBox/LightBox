@@ -47,7 +47,7 @@ namespace Firedump.usercontrols
 
         internal void UpdateEditor(List<string> tables)
         {
-            this.UpdateEditor(tables, DbUtils.getTablesInfo(this.GetServer(), this.GetSqlConnection()));
+            this.UpdateEditor(tables, DbDataHelper.getTablesInfo(this.GetServer(), this.GetSqlConnection()));
         }
 
         internal sealed override void onConnected()

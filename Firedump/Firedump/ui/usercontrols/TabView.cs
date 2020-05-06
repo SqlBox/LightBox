@@ -150,8 +150,8 @@ namespace Firedump.usercontrols
                 {
                     case NodeType.Table:
                         {
-                            List<string> fields = DbUtils.getTableFields(GetSqlConnection(), e.Node.Text);
-                            List<string> fieldsInfo = DbUtils.getTableInfo(GetSqlConnection(), e.Node.Text);
+                            List<string> fields = DbDataHelper.getTableFields(GetSqlConnection(), e.Node.Text);
+                            List<string> fieldsInfo = DbDataHelper.getTableInfo(GetSqlConnection(), e.Node.Text);
                             List<MyTreeNode> nodes = new List<MyTreeNode>();
                             foreach (string f in fields)
                             {
@@ -169,7 +169,7 @@ namespace Firedump.usercontrols
                         break;
                     case NodeType.ParentTrigger:
                         {
-                            List<string> triggers = DbUtils.getTableTriggers(GetSqlConnection(),e.Node.Parent.Text);
+                            List<string> triggers = DbDataHelper.getTableTriggers(GetSqlConnection(),e.Node.Parent.Text);
                             List<MyTreeNode> nodes = new List<MyTreeNode>();
                             foreach (string t in triggers)
                             {
@@ -188,13 +188,13 @@ namespace Firedump.usercontrols
         private void setDatagridviewTables()
         {
             setRootTablesIntoTreeView(new SqlBuilderFactory(base.GetSqlConnection())
-                        .Create(null).removeSystemDatabases(DbUtils.getTables(base.GetSqlConnection()), false));
+                        .Create(null).removeSystemDatabases(DbDataHelper.getTables(base.GetSqlConnection()), false));
         }
     
 
         private void setDataGridViewIndexes()
         {
-            dataGridViewIndexes.DataSource = DbUtils.getDataTableData(GetSqlConnection(),
+            dataGridViewIndexes.DataSource = DbDataHelper.getDataTableData(GetSqlConnection(),
                     new SqlBuilderFactory(GetServer()).Create(GetSqlConnection().Database).getDatabaseIndexes());
         }
 
@@ -209,7 +209,7 @@ namespace Firedump.usercontrols
                 }
             } else
             {
-                dataGridViewPKs.DataSource = DbUtils.getDataTableData(GetSqlConnection(),
+                dataGridViewPKs.DataSource = DbDataHelper.getDataTableData(GetSqlConnection(),
                     new SqlBuilderFactory(GetServer()).Create(GetSqlConnection().Database).getDatabasePrimaryKeys());
             }
         }
@@ -218,7 +218,7 @@ namespace Firedump.usercontrols
         {
             if(!Utils.IsDbEmbedded(GetServer().db_type))
             {
-                dataGridViewUnique.DataSource = DbUtils.getDataTableData(GetSqlConnection(),
+                dataGridViewUnique.DataSource = DbDataHelper.getDataTableData(GetSqlConnection(),
                     new SqlBuilderFactory(GetServer()).Create(GetSqlConnection().Database).getDatabaseUniques());
             }
         }
@@ -227,14 +227,14 @@ namespace Firedump.usercontrols
         {
             if(!Utils.IsDbEmbedded(GetServer().db_type))
             {
-                dataGridViewFKs.DataSource = DbUtils.getDataTableData(GetSqlConnection(),
+                dataGridViewFKs.DataSource = DbDataHelper.getDataTableData(GetSqlConnection(),
                     new SqlBuilderFactory(GetServer()).Create(GetSqlConnection().Database).getDatabaseForeignKeys());
             }
         }
 
         private void setDataGridTriggers()
         {
-            dataGridViewTrigger.DataSource = DbUtils.getDataTableData(GetSqlConnection(),
+            dataGridViewTrigger.DataSource = DbDataHelper.getDataTableData(GetSqlConnection(),
                 new SqlBuilderFactory(GetServer()).Create(GetSqlConnection().Database).GetAllTriggers());
         }
 
@@ -242,7 +242,7 @@ namespace Firedump.usercontrols
         {
             if(!Utils.IsDbEmbedded(GetServer().db_type))
             {
-                dataGridViewProcedures.DataSource = DbUtils.getDataTableData(GetSqlConnection(),
+                dataGridViewProcedures.DataSource = DbDataHelper.getDataTableData(GetSqlConnection(),
                 new SqlBuilderFactory(GetServer()).Create(GetSqlConnection().Database).GetProcedures());
             }
         }
@@ -251,14 +251,14 @@ namespace Firedump.usercontrols
         {
             if(!Utils.IsDbEmbedded(GetServer().db_type))
             {
-                dataGridViewFunctions.DataSource = DbUtils.getDataTableData(GetSqlConnection(),
+                dataGridViewFunctions.DataSource = DbDataHelper.getDataTableData(GetSqlConnection(),
                 new SqlBuilderFactory(GetServer()).Create(GetSqlConnection().Database).GetFunctions());
             }   
         }
 
         private void setDatagridViews()
         {
-            dataGridViewView.DataSource = DbUtils.getDataTableData(GetSqlConnection(),
+            dataGridViewView.DataSource = DbDataHelper.getDataTableData(GetSqlConnection(),
                 new SqlBuilderFactory(GetServer()).Create(GetSqlConnection().Database).GetAllViews());
         }
 
@@ -318,12 +318,12 @@ namespace Firedump.usercontrols
 
         private void sendCreateTableToEditor(string table)
         {
-            GetMainHome().GetUserControl<Editor>().AddQueryTab(DbUtils.getCreateTable(GetSqlConnection(), table),table);
+            GetMainHome().GetUserControl<Editor>().AddQueryTab(DbDataHelper.getCreateTable(GetSqlConnection(), table),table);
         }
 
         private void sendCreateTriggerToEditor(string table,string triggerName)
         {
-            GetMainHome().GetUserControl<Editor>().AddQueryTab(DbUtils.GetCreateTrigger(GetSqlConnection(), table, triggerName), triggerName);
+            GetMainHome().GetUserControl<Editor>().AddQueryTab(DbDataHelper.GetCreateTrigger(GetSqlConnection(), table, triggerName), triggerName);
         }
 
         internal void TreeViewTableTriggers_MenuItem_ShowCreate(object sender, EventArgs e)

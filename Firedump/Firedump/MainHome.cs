@@ -213,7 +213,7 @@ namespace Firedump
             } else
             {
                 this.tabView1.setServerDataToComboBox(new SqlBuilderFactory(GetServer())
-                .Create(null).removeSystemDatabases(DbUtils.getDatabases(this.server, this.con), this.showSystemDatabases));
+                .Create(null).removeSystemDatabases(DbDataHelper.getDatabases(this.server, this.con), this.showSystemDatabases));
             }
             
         }
@@ -245,7 +245,7 @@ namespace Firedump
             if(this.isConnected(this.con) && !Utils.IsDbEmbedded(GetServer().db_type))
             {
                 this.tabView1.setServerDataToComboBox(new SqlBuilderFactory(GetServer())
-                .Create(null).removeSystemDatabases(DbUtils.getDatabases(this.server, this.con), this.showSystemDatabases = !this.showSystemDatabases));
+                .Create(null).removeSystemDatabases(DbDataHelper.getDatabases(this.server, this.con), this.showSystemDatabases = !this.showSystemDatabases));
             }
         }
 
@@ -280,12 +280,14 @@ namespace Firedump
         {
             if(isConnected(con))
             {
-                if(!Utils.IsDbEmbedded(server.db_type))
+                if(Utils._convert(server.db_type) == sqlbox.commons.DbType.SQLITE)
                 {
-                    DbSessionSettings.SetAutoCommit(con, false);
+                    //sqlite transaction is needed to make db updates/changes
+                    //could be a config option for user, start or not a transaction on connection
+                    SqliteHelpers.BeginTransaction(con);
                 } else
                 {
-                    DbSessionSettings.BeginTransaction(con);
+                    DbSessionSettings.SetAutoCommit(con, false);
                 }
             }
         }
@@ -315,5 +317,9 @@ namespace Firedump
             return this.server;
         }
 
+        private void tabControl1_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

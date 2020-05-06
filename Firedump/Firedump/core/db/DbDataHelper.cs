@@ -11,10 +11,12 @@ using System.Text;
 using System.Diagnostics;
 using System.Threading;
 using sqlbox.commons;
+using MySql.Data.MySqlClient;
+using System.Data.SQLite;
 
 namespace Firedump.core.db
 {
-    public class DbUtils
+    public class DbDataHelper
     {
         /**
          * The user can give his own connection, that case i dont have to close it.
@@ -73,10 +75,16 @@ namespace Firedump.core.db
             string triggerCreateStatement = "";
             using (var r = new DbCommandFactory(con, new SqlBuilderFactory(con).Create(con.Database).GetTriggerCreateStatement(table, triggerName)).Create().ExecuteReader())
             {
-                bool isEmb = sql.Utils.IsDbEmbedded(sql.Utils.GetDbTypeEnum(con));
                 while (r.Read())
                 {
-                    triggerCreateStatement = "DELIMITER $ " + "\r\n" + r.GetString(isEmb ? 1 : 2) + " $ " + "\r\n" + " DELIMITER ;\0";
+                    if (con is MySqlConnection || con is SQLiteConnection)
+                    {
+                        triggerCreateStatement = "DELIMITER $ " + "\r\n" + r.GetString(2) + " $ " + "\r\n" + " DELIMITER ;\0";
+                    }
+                    else
+                    {
+                        triggerCreateStatement = r.GetString(2);
+                    }
                     break;
                 }
             }
@@ -118,7 +126,6 @@ namespace Firedump.core.db
             return list;
         }
 
-        [Deprecated("Indeed the describe exists for most of the databases, But the results are different! A parser is needed per database")]
         internal static List<string> getTableFields(DbConnection con, string table)
         {
             var data = new List<string>();
@@ -175,19 +182,6 @@ namespace Firedump.core.db
             return res;
         }
 
-        internal static int getTableRowCount(sqlservers server, string database, string tablename, DbConnection con = null)
-        {
-            if (con == null)
-            {
-                int res = 0;
-                using (con = DB.connect(server, database))
-                {
-                    res = getIntSingleResult(con, "SELECT COUNT(*) FROM " + database + "." + tablename);
-                }
-                return res;
-            }
-            return getIntSingleResult(con, "SELECT COUNT(*) FROM " + database + "." + tablename);
-        }
 
         internal static List<string> getStringData(DbConnection con, string sql)
         {
@@ -200,19 +194,6 @@ namespace Firedump.core.db
                 }
             }
             return data;
-        }
-
-        internal static int getIntSingleResult(DbConnection con, string sql)
-        {
-            int result = 0;
-            using (var reader = new DbCommandFactory(con, sql).Create().ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    result = reader.GetInt32(0);
-                }
-            }
-            return result;
         }
 
         internal static DataTable getDataTableData(DbConnection con, string sql)
@@ -228,15 +209,6 @@ namespace Firedump.core.db
 
             }
             return data;
-        }
-
-        
-        internal static sqlservers getSqlServerFromTable(DataTable table, ListControl control)
-        {
-            string path = table.Rows[control.SelectedIndex]["path"] != System.DBNull.Value ? (string)table.Rows[control.SelectedIndex]["path"] : null;
-            return new sqlservers((string)table.Rows[control.SelectedIndex]["host"], unchecked((int)(long)table.Rows[control.SelectedIndex]["port"]),
-                (string)table.Rows[control.SelectedIndex]["username"], EncryptionUtils.sDecrypt((string)table.Rows[control.SelectedIndex]["password"]),
-                (int)table.Rows[control.SelectedIndex]["db_type"], path);
         }
 
     }

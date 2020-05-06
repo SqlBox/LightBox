@@ -120,8 +120,8 @@
     <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
       <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
     </Reference>
-    <Reference Include="SqlStatementParser, Version=1.0.4.0, Culture=neutral, PublicKeyToken=cc6f1792fc89ba5f, processorArchitecture=MSIL">
-      <HintPath>..\packages\protectsoft.SqlStatementParser.1.0.4\lib\netstandard2.0\SqlStatementParser.dll</HintPath>
+    <Reference Include="SqlStatementParser, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\protectsoft.SqlStatementParser.1.0.5\lib\netstandard2.0\SqlStatementParser.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -208,6 +208,9 @@
     <Compile Include="core\EditorAdapter.cs" />
     <Compile Include="core\models\dbinfo\Status.cs" />
     <Compile Include="core\models\events\ExecutionEventArgs.cs" />
+    <Compile Include="core\models\FullWidthToolStripTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="core\models\MyToolStripItem.cs" />
     <Compile Include="core\models\MyTreeNode.cs" />
     <Compile Include="core\models\ToolStripItemDbType.cs" />
@@ -275,7 +278,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="core\db\DB.cs" />
-    <Compile Include="core\db\DbUtils.cs" />
+    <Compile Include="core\db\DbDataHelper.cs" />
     <Compile Include="core\models\events\ConnectionEventArgs.cs" />
     <Compile Include="core\models\BaseStatus.cs" />
     <Compile Include="core\models\dbinfo\ColumnInfo.cs" />
@@ -327,6 +330,12 @@
     <Compile Include="ui\usercontrols\TabView.Designer.cs">
       <DependentUpon>TabView.cs</DependentUpon>
     </Compile>
+    <Compile Include="ui\usercontrols\Terminal.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ui\usercontrols\Terminal.Designer.cs">
+      <DependentUpon>Terminal.cs</DependentUpon>
+    </Compile>
     <Compile Include="ui\usercontrols\UserControlReference.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -370,6 +379,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ui\usercontrols\TabView.resx">
       <DependentUpon>TabView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\usercontrols\Terminal.resx">
+      <DependentUpon>Terminal.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="firedumpdbDataSet.xsc">
       <DependentUpon>firedumpdbDataSet.xsd</DependentUpon>
@@ -500,6 +512,9 @@
     <None Include="resources\icons\main\paste.png" />
     <None Include="resources\icons\main\exit.png" />
     <None Include="resources\icons\main\manage_server.png" />
+    <None Include="resources\icons\main\terminal.png" />
+    <None Include="resources\icons\main\expand.png" />
+    <None Include="resources\icons\main\collapse.png" />
     <Content Include="resources\icons\redcircle.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -26,12 +26,13 @@ namespace Firedump
             ,new MyToolStripItem(50_000) { },new MyToolStripItem(100_000) { },new MyToolStripItem(0) { }});
             //Selected index should be fetch from what user last selected or options
             toolStripComboBoxLimit.SelectedIndex = 0;
+            this.terminal1.SetMainHome(this);
         }
 
         private void InitEditorComponent()
         {
             this.editor1 = new Firedump.usercontrols.Editor();
-            this.splitContainer2.Panel1.Controls.Add(this.editor1);
+            this.splitContainerMiddleChild.Panel1.Controls.Add(this.editor1);
             this.editor1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.editor1.Name = "Editor1";
             this.editor1.TabIndex = 0;

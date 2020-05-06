@@ -47,7 +47,7 @@ namespace Firedump.Forms.mysql.connect
         {
             if(serverData.Count > 0)
             {
-                var server = DbUtils.getSqlServerFromTable(serverData, comboBox1);
+                var server = sqlservers.CreateSqlServerFromDataTable(serverData, comboBox1);
                 if (server != null)
                 {
                     ConnectionResultSet result = DB.TestConnection(server);
@@ -73,7 +73,7 @@ namespace Firedump.Forms.mysql.connect
         {
             if (serverData.Count > 0)
             {
-                var server = DbUtils.getSqlServerFromTable(serverData, comboBox1);
+                var server = sqlservers.CreateSqlServerFromDataTable(serverData, comboBox1);
                 if (server != null)
                 {
                     //test connection
