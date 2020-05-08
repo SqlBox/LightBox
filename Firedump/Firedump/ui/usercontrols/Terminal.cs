@@ -13,19 +13,17 @@ namespace Firedump.ui.usercontrols
 {
     public partial class Terminal : UserControl
     {
-        private ToolStripTextBox textBoxCommand;
         private MainHome home;
         public Terminal()
         {
             InitializeComponent();
-            textBoxCommand = new FullWidthToolStripTextBox();
-            textBoxCommand.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            textBoxCommand.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            textBoxCommand.Font = new System.Drawing.Font("Courier New", 8.25F);
-            textBoxCommand.ForeColor = System.Drawing.SystemColors.HighlightText;
-            textBoxCommand.Name = "toolStripTextBox1";
-            textBoxCommand.KeyDown += textBox1_KeyDown;
-            toolStrip1.Items.Add(textBoxCommand);
+            Task.Delay(500).ContinueWith(_ =>
+            {
+                this.Invoke((MethodInvoker)delegate
+                {
+                    textBox1.Focus();
+                });
+            });
         }
 
         public void SetMainHome(MainHome mh)
@@ -38,14 +36,9 @@ namespace Firedump.ui.usercontrols
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if(textBoxCommand.Text.Trim().ToLower() == "clear" || textBoxCommand.Text.Trim().ToLower() == "cls")
-                {
-                    richTextBox.Text = "";
-                    textBoxCommand.Text = "";
-                }
-                richTextBox.AppendText(textBoxCommand.Text + "\n");
+                richTextBox.AppendText(textBox1.Text + "\n");
                 richTextBox.ScrollToCaret();
-                textBoxCommand.Text = "";
+                textBox1.Text = "";
                 e.SuppressKeyPress = true;
             }
         }

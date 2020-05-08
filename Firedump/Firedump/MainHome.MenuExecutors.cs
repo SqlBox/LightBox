@@ -1,5 +1,6 @@
 ﻿using Firedump.core.db;
 using Firedump.core.models;
+using Firedump.ui.forms;
 using Firedump.usercontrols;
 using System;
 using System.Collections;
@@ -193,6 +194,11 @@ namespace Firedump
         private void AbandonClick(object sender, EventArgs e)
         {
             GetUserControl<Editor>().abandonRunningQuery();
+        }
+
+        private void ShowTerminalForm(object sender, EventArgs e)
+        {
+            new TerminalForm(this).Show();
         }
     }
 }

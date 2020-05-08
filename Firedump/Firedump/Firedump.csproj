@@ -251,6 +251,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="core\IconHelper.cs" />
+    <Compile Include="ui\forms\TerminalForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ui\forms\TerminalForm.Designer.cs">
+      <DependentUpon>TerminalForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ui\usercontrols\Editor.Common.Actions.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -368,6 +374,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ui\forms\TerminalForm.resx">
+      <DependentUpon>TerminalForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ui\usercontrols\DataView.resx">
       <DependentUpon>DataView.cs</DependentUpon>
     </EmbeddedResource>
@@ -515,6 +524,7 @@
     <None Include="resources\icons\main\terminal.png" />
     <None Include="resources\icons\main\expand.png" />
     <None Include="resources\icons\main\collapse.png" />
+    <None Include="resources\icons\main\eraser.png" />
     <Content Include="resources\icons\redcircle.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
