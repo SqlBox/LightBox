@@ -1,5 +1,5 @@
 ## WIP
-###### Public Task tracker on trello 
+###### Public Task tracker/progress on trello 
 <a target="_blank" href="https://trello.com/b/hoXLWMX2/lightbox">https://trello.com/b/hoXLWMX2/lightbox</a> <br>
 <b>Early pic.</b>
 <br>
