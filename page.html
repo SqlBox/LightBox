@@ -1,0 +1,132 @@
+<div class="lightbox-wrapper">
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <a class="navbar-brand mb-0"  href="#">
+            <figure class="d-inline-block align-center" >
+                <img width="60" alt="lightbox logo" src="{{logoImgUrl}}" loading="lazy" />
+                <span class="text-white-bold">LightBox</span>
+            </figure>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            {% for item in navItems %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="#"><span class="text-white">{{item.title}}</span></a>
+                </li>
+            {% endfor %}    
+          </ul>
+        </div>
+        <ul class="navbar-nav d-none d-md-block">
+            <li class="nav-item">
+                <div class="github-logo-container">
+                    <a target="_blank" href="{{repo}}"><img src="{{githubLogo}}" alt="github logo"/></a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+  
+    <div class="container-fluid pr-0 pl-0">
+        <section class="grey-white container-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h1>{{titleHeadline}}</h1>
+                        <div class="h6">
+                            <p>{{titleDescription}}</p>
+                            <span class="badge badge-pill badge-danger">{{wip}}</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="first-section-img-wrapper">
+                            <figure>
+                                <img alt="{{appScreenShotAlt}}" src="{{appScreenShot}}"/>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container-fluid pr-0 pl-0">
+            <div class="container feautures">
+                <h3 class="h3 text-center">{{feautures.title}}</h3>
+                <div class="row">
+                    {% for item in feautures.items %}
+                        <div class="col-sm-4">
+                                <div class="card feauture-card">
+                                    <img src="{{item.img}}" class="card-img-top" alt="{{item.imgAlt}}">
+                                    <div class="card-body">
+                                    <h5 class="card-title">{{item.title}}</h5>
+                                    </div>
+                                </div>
+                        </div>
+                    {% endfor %}    
+                </div>
+            </div>
+        </section>
+        
+        <section class="grey-white container-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <h3 class="h3">{{downloads.title}}</h3>
+                        <div>
+                            <p>{{downloads.description}}</p>
+                        </div>
+                        <div>
+                            <p>{{downloads.requirements}}</p>
+                        </div>
+                        <div>
+                            <div class="btn-group btn-outline-primary" role="group">
+                                <button id="btnGroupDrop1" type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{downloads.title}}
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                  {% for item in downloads.links %}  
+                                    <a class="dropdown-item" href="{{item.link}}">{{item.title}}</a>
+                                  {% endfor %}    
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="gif-wrapper">
+                            <figure>
+                                <img alt="{{appScreenShotAlt}}" src="{{vid1}}"/>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="container-fluid light-blue ">
+            <section>
+                <div class="text-center text-md-left">
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="container">
+                                <div class="github-logo-container">
+                                    <a target="_blank" href="{{repo}}"><img src="{{githubLogo}}" alt="{{githubLogoAlt}}"/></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <h5 class="text-white">{{footer.content}}</h5>
+                            <ul class="text-white">
+                                {% for item in footer.items %}  
+                                    <li><a target="_blank" class="text-white" href="{{item.link}}">{{item.title}}</a></li>
+                                {% endfor %}    
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="text-center py-3 text-white">{{footer.copyright.caption}}
+                <a href="{{repo}}" class="text-white">{{title}}</a>
+            </div>
+        </footer>
+    </div>
+</div> 

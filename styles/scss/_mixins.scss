@@ -1,0 +1,43 @@
+//Grid breakpoints mixins
+@mixin desktopSmall() {
+    @media only screen and (max-width: $small - 1){
+        @content
+    }
+};
+
+@mixin desktopMedium() {
+    @media only screen and (max-width: $medium - 1){
+        @content
+    }
+};
+
+@mixin desktopLarge() {
+    @media only screen and (max-width: $large - 1){
+        @content
+    }
+};
+
+@mixin desktopXlarge() {
+    @media only screen and (max-width: $xlarge - 1){
+        @content
+    }
+};
+
+@mixin desktopXXlarge() {
+    @media only screen and (min-width: $xxlarge){
+        @content
+    }
+};
+
+@mixin desktopCustom($width) {
+    @media only screen and (max-width: $width - 1){
+        @content
+    }
+};
+
+@mixin rotate($degree) {
+    transform: rotate($degree);
+    -o-transform: rotate($degree);
+    -moz-transform: rotate($degree);
+    -webkit-transform: rotate($degree);
+};

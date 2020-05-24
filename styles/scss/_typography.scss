@@ -1,0 +1,59 @@
+p, body {
+    font-family: $Noto;
+    font-weight: 400;
+    font-size: 16px;
+    color:$copy-black;
+    line-height: 20px;
+    &.text-white-bg {
+        color: $white;
+    }
+}
+
+.text-white {
+    color: $white;
+    &-bold {
+        @extend .text-white;
+        font-weight: bold;
+    }
+}
+
+h1, .h1 {
+    @include desktopMedium() {
+        font-size: 36px;
+    }
+    @include desktopSmall() {
+        font-size: 30px;
+    }
+}
+
+h2, .h2 {
+    @include desktopMedium() {
+        font-size: 30px;
+    }
+}
+
+h3, .h3 {
+    @include desktopMedium() {
+        font-size: 26px;
+    }
+}
+
+h4, .h4 {
+    @include desktopMedium() {
+        font-size: 22px;
+    }
+}
+
+h5, .h5 {
+    @include desktopMedium() {
+        font-size: 18px;
+    }
+}
+
+h6, .h6 {
+    @include desktopMedium() {
+        font-size: 15px;
+    }
+}
+
+

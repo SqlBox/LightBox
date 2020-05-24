@@ -1,0 +1,111 @@
+@import 'style';
+
+.lightbox-wrapper {
+    .grey-white {
+        background-color: $light-grey;
+    }
+    .light-blue {
+        background-color: $blue-light;
+    }
+    .bg-light {
+        background-color: $blue-light !important;
+    }
+    nav {
+        a > figure {
+            margin-bottom: 0;
+            span {
+                padding-left: 10px;
+            }
+        }
+        .navbar-collapse {
+            justify-content: flex-start;
+            a:hover {
+                span {
+                    color: $grey-white !important;
+                }
+            }
+        }
+    }
+    .github-logo-container {
+        padding-left: 15px;
+        img {
+            width: 40px;
+            height: auto;
+        }
+    }
+    .first-section-img-wrapper {
+        figure {
+            > img {
+                width: 760px;
+                height: auto;
+                @include desktopXXlarge {
+                    width: 900px;
+                }
+                @include desktopXlarge {
+                    width: 620px;
+                }
+                @include desktopLarge {
+                    width: 400px;
+                }
+                @include desktopMedium {
+                    width: 350px;
+                }
+            }
+            @include desktopMedium {
+                text-align: center;
+            }
+        }
+    }
+    .gif-wrapper {
+        padding-top: 15px;
+        figure {
+            > img {
+                width: 400px;
+                height: auto;
+                @include desktopXXlarge {
+                    width: 400px;
+                }
+                @include desktopXlarge {
+                    width: 350px;
+                }
+                @include desktopLarge {
+                    width: 250px;
+                }
+                @include desktopMedium {
+                    width: 180px;
+                }
+                @include desktopSmall {
+                    width: 220px;
+                }
+            }
+            @include desktopMedium {
+                text-align: center;
+            }
+        }
+    }
+    section {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        @include desktopXXlarge {
+            padding-top: 60px;
+            padding-bottom: 60px;
+        }
+    }
+    .feauture-card {
+        img {
+            max-height: 200px;
+            @include desktopSmall {
+                max-width: 300px;
+            }
+        }
+        @include desktopSmall {
+            margin: 20px 0 20px 0;
+            align-items: center;
+        }
+    }
+    .feautures {
+        h3 {
+            padding-bottom: 10px;
+        }
+    }
+}

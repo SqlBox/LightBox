@@ -1,0 +1,11 @@
+{
+  "name": "lightbox-site",
+  "version": "1.0.0",
+  "description": "Homepage for lightbox",
+  "keywords": [],
+  "scripts":{
+    "sass":"sass --watch styles/scss:styles/css"
+  },
+  "author": "Avraam Piperidis",
+  "license": "MIT"
+}
