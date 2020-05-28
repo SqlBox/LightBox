@@ -102,7 +102,7 @@
             </div>
         </section>
 
-        <footer class="container-fluid light-blue ">
+        <footer class="container-fluid light-blue footer">
             <section>
                 <div class="text-center text-md-left">
                     <div class="row">
@@ -114,12 +114,14 @@
                             </div>
                         </div>
                         <div class="col-9">
-                            <h5 class="text-white">{{footer.content}}</h5>
-                            <ul class="text-white">
-                                {% for item in footer.items %}  
-                                    <li><a target="_blank" class="text-white" href="{{item.link}}">{{item.title}}</a></li>
-                                {% endfor %}    
-                            </ul>
+                            <div class="link-container">
+                                <h5 class="text-white">{{footer.content}}</h5>
+                                <ul class="text-white">
+                                    {% for item in footer.items %}  
+                                        <li><a target="_blank" class="text-white" href="{{item.link}}">{{item.title}}</a></li>
+                                    {% endfor %}    
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
