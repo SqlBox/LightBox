@@ -3,123 +3,187 @@ p, body {
   font-weight: 400;
   font-size: 16px;
   color: #363942;
-  line-height: 20px; }
-  p.text-white-bg, body.text-white-bg {
-    color: #FFFFFF; }
+  line-height: 20px;
+}
+p.text-white-bg, body.text-white-bg {
+  color: #FFFFFF;
+}
 
 .text-white, .text-white-bold {
-  color: #FFFFFF; }
-  .text-white-bold {
-    font-weight: bold; }
+  color: #FFFFFF;
+}
+.text-white-bold {
+  font-weight: bold;
+}
 
 @media only screen and (max-width: 767px) {
   h1, .h1 {
-    font-size: 36px; } }
+    font-size: 36px;
+  }
+}
 @media only screen and (max-width: 575px) {
   h1, .h1 {
-    font-size: 30px; } }
+    font-size: 30px;
+  }
+}
 
 @media only screen and (max-width: 767px) {
   h2, .h2 {
-    font-size: 30px; } }
+    font-size: 30px;
+  }
+}
 
 @media only screen and (max-width: 767px) {
   h3, .h3 {
-    font-size: 26px; } }
+    font-size: 26px;
+  }
+}
 
 @media only screen and (max-width: 767px) {
   h4, .h4 {
-    font-size: 22px; } }
+    font-size: 22px;
+  }
+}
 
 @media only screen and (max-width: 767px) {
   h5, .h5 {
-    font-size: 18px; } }
+    font-size: 18px;
+  }
+}
 
 @media only screen and (max-width: 767px) {
   h6, .h6 {
-    font-size: 15px; } }
+    font-size: 15px;
+  }
+}
 
 .lightbox-wrapper .grey-white {
-  background-color: #e2e6f0; }
+  background-color: #e2e6f0;
+}
 .lightbox-wrapper .light-blue {
-  background-color: #4a6896; }
+  background-color: #4a6896;
+}
 .lightbox-wrapper .bg-light {
-  background-color: #4a6896 !important; }
+  background-color: #4a6896 !important;
+}
 .lightbox-wrapper nav a > figure {
-  margin-bottom: 0; }
-  .lightbox-wrapper nav a > figure span {
-    padding-left: 10px; }
+  margin-bottom: 0;
+}
+.lightbox-wrapper nav a > figure span {
+  padding-left: 10px;
+}
 .lightbox-wrapper nav .navbar-collapse {
-  justify-content: flex-start; }
-  .lightbox-wrapper nav .navbar-collapse a:hover span {
-    color: #ccc8c8 !important; }
+  justify-content: flex-start;
+}
+.lightbox-wrapper nav .navbar-collapse a:hover span {
+  color: #ccc8c8 !important;
+}
 .lightbox-wrapper .github-logo-container {
-  padding-left: 15px; }
-  .lightbox-wrapper .github-logo-container img {
-    width: 40px;
-    height: auto; }
+  padding-left: 15px;
+}
+.lightbox-wrapper .github-logo-container img {
+  width: 40px;
+  height: auto;
+}
 .lightbox-wrapper .first-section-img-wrapper figure > img {
   width: 760px;
-  height: auto; }
-  @media only screen and (min-width: 1600px) {
-    .lightbox-wrapper .first-section-img-wrapper figure > img {
-      width: 900px; } }
-  @media only screen and (max-width: 1199px) {
-    .lightbox-wrapper .first-section-img-wrapper figure > img {
-      width: 620px; } }
-  @media only screen and (max-width: 991px) {
-    .lightbox-wrapper .first-section-img-wrapper figure > img {
-      width: 400px; } }
-  @media only screen and (max-width: 767px) {
-    .lightbox-wrapper .first-section-img-wrapper figure > img {
-      width: 350px; } }
+  height: auto;
+}
+@media only screen and (min-width: 1600px) {
+  .lightbox-wrapper .first-section-img-wrapper figure > img {
+    width: 900px;
+  }
+}
+@media only screen and (max-width: 1199px) {
+  .lightbox-wrapper .first-section-img-wrapper figure > img {
+    width: 620px;
+  }
+}
+@media only screen and (max-width: 991px) {
+  .lightbox-wrapper .first-section-img-wrapper figure > img {
+    width: 400px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .lightbox-wrapper .first-section-img-wrapper figure > img {
+    width: 350px;
+  }
+}
 @media only screen and (max-width: 767px) {
   .lightbox-wrapper .first-section-img-wrapper figure {
-    text-align: center; } }
+    text-align: center;
+  }
+}
 .lightbox-wrapper .gif-wrapper {
-  padding-top: 15px; }
+  padding-top: 15px;
+}
+.lightbox-wrapper .gif-wrapper figure > img {
+  width: 400px;
+  height: auto;
+}
+@media only screen and (min-width: 1600px) {
   .lightbox-wrapper .gif-wrapper figure > img {
     width: 400px;
-    height: auto; }
-    @media only screen and (min-width: 1600px) {
-      .lightbox-wrapper .gif-wrapper figure > img {
-        width: 400px; } }
-    @media only screen and (max-width: 1199px) {
-      .lightbox-wrapper .gif-wrapper figure > img {
-        width: 350px; } }
-    @media only screen and (max-width: 991px) {
-      .lightbox-wrapper .gif-wrapper figure > img {
-        width: 250px; } }
-    @media only screen and (max-width: 767px) {
-      .lightbox-wrapper .gif-wrapper figure > img {
-        width: 180px; } }
-    @media only screen and (max-width: 575px) {
-      .lightbox-wrapper .gif-wrapper figure > img {
-        width: 220px; } }
-  @media only screen and (max-width: 767px) {
-    .lightbox-wrapper .gif-wrapper figure {
-      text-align: center; } }
+  }
+}
+@media only screen and (max-width: 1199px) {
+  .lightbox-wrapper .gif-wrapper figure > img {
+    width: 350px;
+  }
+}
+@media only screen and (max-width: 991px) {
+  .lightbox-wrapper .gif-wrapper figure > img {
+    width: 250px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .lightbox-wrapper .gif-wrapper figure > img {
+    width: 180px;
+  }
+}
+@media only screen and (max-width: 575px) {
+  .lightbox-wrapper .gif-wrapper figure > img {
+    width: 220px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .lightbox-wrapper .gif-wrapper figure {
+    text-align: center;
+  }
+}
 .lightbox-wrapper section {
   padding-top: 40px;
-  padding-bottom: 40px; }
-  @media only screen and (min-width: 1600px) {
-    .lightbox-wrapper section {
-      padding-top: 60px;
-      padding-bottom: 60px; } }
-.lightbox-wrapper .feauture-card img {
-  max-height: 200px; }
-  @media only screen and (max-width: 575px) {
-    .lightbox-wrapper .feauture-card img {
-      max-width: 300px; } }
+  padding-bottom: 40px;
+}
+@media only screen and (min-width: 1600px) {
+  .lightbox-wrapper section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+}
+@media only screen and (max-width: 575px) {
+  .lightbox-wrapper .feauture-card img {
+    max-width: 300px;
+  }
+}
 @media only screen and (max-width: 575px) {
   .lightbox-wrapper .feauture-card {
-    margin: 20px 0 20px 0;
-    align-items: center; } }
+    margin: 20px auto 20px auto;
+    align-items: center;
+    width: 300px;
+  }
+}
 .lightbox-wrapper .feautures h3 {
-  padding-bottom: 10px; }
+  padding-bottom: 10px;
+}
 .lightbox-wrapper .footer .link-container {
-  text-align: left; }
-  .lightbox-wrapper .footer .link-container ul {
-    padding-left: 0px; }
+  text-align: left;
+}
+.lightbox-wrapper .footer .link-container ul {
+  padding-left: 0px;
+}
+.lightbox-wrapper .badge-wip {
+  margin: 10px 0 10px 0;
+}
 
 /*# sourceMappingURL=page.css.map */

@@ -93,14 +93,14 @@
     }
     .feauture-card {
         img {
-            max-height: 200px;
             @include desktopSmall {
                 max-width: 300px;
             }
         }
         @include desktopSmall {
-            margin: 20px 0 20px 0;
+            margin: 20px auto 20px auto;
             align-items: center;
+            width: 300px;
         }
     }
     .feautures {
@@ -114,6 +114,11 @@
             ul {
                 padding-left: 0px;
             }
+        }
+    }
+    .badge {
+        &-wip {
+            margin: 10px 0 10px 0;
         }
     }
 }

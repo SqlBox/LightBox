@@ -33,9 +33,14 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <h1>{{titleHeadline}}</h1>
+                        {% if isWip %}
+                        <span class="badge badge-wip badge-pill badge-danger">{{wip}}</span>
+                        {% endif %}
+                        <div>
+                            <p class="h5">{{titleDescription}}</p>
+                        </div>
                         <div class="h6">
-                            <p>{{titleDescription}}</p>
-                            <span class="badge badge-pill badge-danger">{{wip}}</span>
+                            {{secondDescription}}
                         </div>
                     </div>
                     <div class="col-sm-8">
@@ -55,12 +60,16 @@
                 <div class="row">
                     {% for item in feautures.items %}
                         <div class="col-sm-4">
+                            <div>
                                 <div class="card feauture-card">
-                                    <img src="{{item.img}}" class="card-img-top" alt="{{item.imgAlt}}">
+                                    <figure>
+                                        <img src="{{item.img}}" class="card-img-top" alt="{{item.imgAlt}}">
+                                    </figure>
                                     <div class="card-body">
-                                    <h5 class="card-title">{{item.title}}</h5>
+                                        <h5 class="card-title">{{item.title}}</h5>
                                     </div>
                                 </div>
+                            </div>
                         </div>
                     {% endfor %}    
                 </div>
