@@ -143,7 +143,7 @@ p.text-white-bg, body.text-white-bg {
 }
 @media only screen and (max-width: 575px) {
   .lightbox-wrapper .gif-wrapper figure > img {
-    width: 220px;
+    width: 200px;
   }
 }
 @media only screen and (max-width: 767px) {

@@ -70,12 +70,12 @@
                 }
                 @include desktopLarge {
                     width: 250px;
-                }
+                } 
                 @include desktopMedium {
                     width: 180px;
                 }
                 @include desktopSmall {
-                    width: 220px;
+                    width: 200px;
                 }
             }
             @include desktopMedium {
