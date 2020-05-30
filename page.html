@@ -13,7 +13,7 @@
           <ul class="navbar-nav">
             {% for item in navItems %}
                 <li class="nav-item active">
-                    <a class="nav-link" href="#"><span class="text-white">{{item.title}}</span></a>
+                    <a class="nav-link" href="{{item.href}}"><span class="text-white">{{item.title}}</span></a>
                 </li>
             {% endfor %}    
           </ul>
@@ -54,29 +54,50 @@
             </div>
         </section>
 
-        <section class="container-fluid pr-0 pl-0">
-            <div class="container feautures">
-                <h3 class="h3 text-center">{{feautures.title}}</h3>
+        <section class="container-fluid pr-0 pl-0" id="features">
+            <div class="container features">
+                <h3 class="h3 text-center">{{features.title}}</h3>
                 <div class="row">
-                    {% for item in feautures.items %}
+                    {% for item in features.items %}
                         <div class="col-sm-4">
                             <div>
-                                <div class="card feauture-card">
+                                <div class="card features-card">
                                     <figure>
                                         <img src="{{item.img}}" class="card-img-top" alt="{{item.imgAlt}}">
                                     </figure>
                                     <div class="card-body">
                                         <h5 class="card-title">{{item.title}}</h5>
+                                        <p>{{item.description}}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     {% endfor %}    
                 </div>
+                <div class="extra-features text-center">
+                    <h5>{{features.extraFeatures.title}}</h5>
+                    {% for item in features.extraFeatures.featureProgress %}
+                    <div>
+                        {% if item.completed %}
+                        <input checked type="checkbox" disabled class="form-check-input">
+                        {% endif %}
+                        {% if item.completed == false %}
+                        <input type="checkbox" disabled class="form-check-input">
+                        {% endif %}
+                        <label class="form-check-label">{{item.title}}</label>
+                    </div>
+                    {% endfor %}
+                    <div class="trello">
+                        <a href="{{features.extraFeatures.trello.url}}" target="_blank"><h5>{{features.extraFeatures.trello.title}}</h5></a>
+                        <figure>
+                            <a href="{{features.extraFeatures.trello.url}}" target="_blank"><img alt="{{features.extraFeatures.trello.alt}}" src="{{features.extraFeatures.trello.icon}}" /></a>
+                        </figure>
+                    </div>
+                </div>
             </div>
         </section>
         
-        <section class="grey-white container-fluid">
+        <section class="grey-white container-fluid" id="downloads">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-7">
@@ -111,25 +132,58 @@
             </div>
         </section>
 
-        <footer class="container-fluid light-blue footer">
+        <section class="container-fluid" id="apps">
+            <div class="container features">
+                <h3 class="h3 text-center">{{apps.title}}</h3>
+                <div class="row">
+                    {% for tool in apps.tools %}
+                        <div class="col-sm-4">
+                            <div>
+                                <div class="card features-card features-card-apps">
+                                    {% if tool.img %}
+                                    <figure>
+                                        <img src="{{tool.img}}" class="card-img-top" alt="{{tool.imgAlt}}">
+                                    </figure>
+                                    {% endif %}
+                                    <div class="card-body">
+                                        <h5 class="h5">{{tool.title}}</h5>
+                                        <p>{{tool.description}}</p>
+                                        <a href="{{tool.url}}" target="_blank" class="btn btn-outline-primary">Github</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}    
+                </div>
+            </div>
+        </section>
+
+        <footer class="container-fluid light-blue footer" id="footer">
             <section>
                 <div class="text-center text-md-left">
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-12 col-sm-2">
+                            <figure class="d-inline-block align-center" >
+                                <img width="60" alt="lightbox logo" src="{{logoImgUrl}}" loading="lazy" />
+                            </figure>
+                        </div>
+                        <div class="col-12 col-sm-8">
+                            <div class="link-container">
+                                <div class="link-content">
+                                    <h5 class="text-white">{{footer.content}}</h5>
+                                    <ul class="text-white">
+                                        {% for item in footer.items %}  
+                                            <li><a target="_blank" class="text-white" href="{{item.link}}">{{item.title}}</a></li>
+                                        {% endfor %}    
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-2">
                             <div class="container">
                                 <div class="github-logo-container">
                                     <a target="_blank" href="{{repo}}"><img src="{{githubLogo}}" alt="{{githubLogoAlt}}"/></a>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-9">
-                            <div class="link-container">
-                                <h5 class="text-white">{{footer.content}}</h5>
-                                <ul class="text-white">
-                                    {% for item in footer.items %}  
-                                        <li><a target="_blank" class="text-white" href="{{item.link}}">{{item.title}}</a></li>
-                                    {% endfor %}    
-                                </ul>
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,7 @@
 @import 'style';
-
+html {
+    scroll-behavior: smooth;
+}
 .lightbox-wrapper {
     .grey-white {
         background-color: $light-grey;
@@ -48,11 +50,12 @@
                     width: 400px;
                 }
                 @include desktopMedium {
-                    width: 350px;
+                    width: 320px;
                 }
             }
             @include desktopMedium {
                 text-align: center;
+                padding-top: 10px;
             }
         }
     }
@@ -70,12 +73,12 @@
                 }
                 @include desktopLarge {
                     width: 250px;
-                } 
+                }
                 @include desktopMedium {
                     width: 180px;
                 }
                 @include desktopSmall {
-                    width: 200px;
+                    width: 220px;
                 }
             }
             @include desktopMedium {
@@ -91,7 +94,7 @@
             padding-bottom: 60px;
         }
     }
-    .feauture-card {
+    .features-card {
         img {
             @include desktopSmall {
                 max-width: 300px;
@@ -102,10 +105,34 @@
             align-items: center;
             width: 300px;
         }
+        &-apps {
+            width: 300px;
+            @include desktopLarge {
+                width: 220px;
+            }
+            @include desktopMedium {
+                width: 150px;
+            }
+            @include desktopSmall {
+                width: 300px;
+            }
+        }
     }
-    .feautures {
+    .features {
         h3 {
             padding-bottom: 10px;
+        }
+    }
+    .extra-features {
+        padding: 40px 0 0 20px;
+        .trello {
+            padding-top: 30px;
+            figure {
+                img {
+                    width: 150px;
+                    height: auto;
+                }
+            }
         }
     }
     .footer {
@@ -113,6 +140,14 @@
             text-align: left;
             ul {
                 padding-left: 0px;
+                list-style-position: inside;
+            }
+            @include desktopSmall {
+                text-align: left;
+                .link-content {
+                    width: 200px;
+                    margin: 0px auto 0 auto;
+                }
             }
         }
     }
@@ -121,4 +156,5 @@
             margin: 10px 0 10px 0;
         }
     }
+    
 }

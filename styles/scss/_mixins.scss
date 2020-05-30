@@ -30,7 +30,7 @@
 };
 
 @mixin desktopCustom($width) {
-    @media only screen and (max-width: $width - 1){
+    @media only screen and (max-width: $width){
         @content
     }
 };
