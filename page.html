@@ -115,7 +115,12 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                   {% for item in downloads.links %}  
+                                    {% if item.active == true %}
                                     <a class="dropdown-item" href="{{item.link}}">{{item.title}}</a>
+                                    {% endif %}
+                                    {% if item.active == false %}
+                                    <a disabled style="text-decoration: line-through;" class="dropdown-item">{{item.title}}</a>
+                                    {% endif %}
                                   {% endfor %}    
                                 </div>
                               </div>
