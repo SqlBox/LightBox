@@ -13,7 +13,9 @@ namespace Firedump.ui.usercontrols
 {
     public partial class Terminal : UserControl
     {
+        public static Terminal MainTerminal { get; set; }
         private MainHome home;
+        public int QueueLimit = 100;
         public Terminal()
         {
             InitializeComponent();
@@ -36,11 +38,24 @@ namespace Firedump.ui.usercontrols
         {
             if (e.KeyCode == Keys.Enter)
             {
-                richTextBox.AppendText(textBox1.Text + "\n");
-                richTextBox.ScrollToCaret();
-                textBox1.Text = "";
+                AppendText(textBox1.Text);
                 e.SuppressKeyPress = true;
             }
+        }
+
+        public void AppendText(string command)
+        {
+            this.Invoke((MethodInvoker)delegate {
+                if(richTextBox.Lines.Length >= QueueLimit)
+                {
+                    List<string> lines = richTextBox.Lines.ToList();
+                    lines.RemoveAt(0);
+                    richTextBox.Lines = lines.ToArray();
+                }
+                richTextBox.AppendText(command + "\n");
+                richTextBox.ScrollToCaret();
+                textBox1.Text = "";
+            });
         }
     }
 }

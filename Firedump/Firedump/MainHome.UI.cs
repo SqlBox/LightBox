@@ -1,6 +1,8 @@
 ﻿using Firedump.core.models;
 using Firedump.core.models.dbinfo;
 using Firedump.core.models.events;
+using Firedump.ui.forms;
+using Firedump.ui.usercontrols;
 using Firedump.usercontrols;
 using System;
 using System.Collections.Generic;
@@ -27,6 +29,7 @@ namespace Firedump
             //Selected index should be fetch from what user last selected or options
             toolStripComboBoxLimit.SelectedIndex = 0;
             this.terminal1.SetMainHome(this);
+            Terminal.MainTerminal = this.terminal1;
         }
 
         private void InitEditorComponent()

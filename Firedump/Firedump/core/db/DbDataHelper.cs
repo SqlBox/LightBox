@@ -13,6 +13,7 @@ using System.Threading;
 using sqlbox.commons;
 using MySql.Data.MySqlClient;
 using System.Data.SQLite;
+using Firedump.ui.usercontrols;
 
 namespace Firedump.core.db
 {
@@ -25,55 +26,73 @@ namespace Firedump.core.db
          */
         public static List<string> getDatabases(sqlservers server, DbConnection con = null)
         {
+            String sql = "";
+            List<string> data = null;
             if (con == null)
             {
-                List<string> data = null;
                 using (con = DB.connect(server))
                 {
-                    data = getStringData(con, new SqlBuilderFactory(con).Create(null).getDatabases());
+                    sql = new SqlBuilderFactory(con).Create(null).getDatabases();
+                    data = getStringData(con, sql);
+                    Terminal.MainTerminal.AppendText(sql);
                 }
                 return data;
             }
-            return getStringData(con, new SqlBuilderFactory(con).Create(null).getDatabases());
+            sql = new SqlBuilderFactory(con).Create(null).getDatabases();
+            data = getStringData(con,sql);
+            Terminal.MainTerminal.AppendText(sql);
+            return data;
         }
 
         public static List<string> getTables(sqlservers server, string database, DbConnection con = null)
         {
+            List<string> data = null;
+            string sql = "";
             if (con == null)
             {
-                List<string> data = null;
                 using (con = DB.connect(server, database))
                 {
-                    data = getStringData(con, new SqlBuilderFactory(con).Create(database).showTablesSql());
+                    sql = new SqlBuilderFactory(con).Create(database).showTablesSql();
+                    data = getStringData(con,sql);
+                    Terminal.MainTerminal.AppendText(sql);
                 }
                 return data;
             }
-            return getStringData(con, new SqlBuilderFactory(con).Create(database).showTablesSql());
+            sql = new SqlBuilderFactory(con).Create(database).showTablesSql();
+            data = getStringData(con, sql);
+            Terminal.MainTerminal.AppendText(sql);
+            return data;
         }
 
 
         public static List<string> getTables(DbConnection con)
         {
-            return getStringData(con, new SqlBuilderFactory(con).Create(con.Database).showTablesSql());
+            string sql = new SqlBuilderFactory(con).Create(con.Database).showTablesSql();
+            var data = getStringData(con, sql);
+            Terminal.MainTerminal.AppendText(sql);
+            return data;
         }
 
         internal static List<string> getTableTriggers(DbConnection con, string table)
         {
             var data = new List<string>();
-            using (var reader = new DbCommandFactory(con,new SqlBuilderFactory(con).Create(con.Database).GetTableTriggers(table)).Create().ExecuteReader())
+            string sql = new SqlBuilderFactory(con).Create(con.Database).GetTableTriggers(table);
+            using (var reader = new DbCommandFactory(con,sql).Create().ExecuteReader())
             {
                 while(reader.Read())
                 {
                     data.Add(reader.GetString(0));
                 }
             }
+            Terminal.MainTerminal.AppendText(sql);
             return data;
         }
 
         internal static string GetCreateTrigger(DbConnection con, string table, string triggerName)
         {
             string triggerCreateStatement = "";
-            using (var r = new DbCommandFactory(con, new SqlBuilderFactory(con).Create(con.Database).GetTriggerCreateStatement(table, triggerName)).Create().ExecuteReader())
+            string sql = new SqlBuilderFactory(con).Create(con.Database).GetTriggerCreateStatement(table, triggerName);
+            using (var r = new DbCommandFactory(con, sql).Create().ExecuteReader())
             {
                 while (r.Read())
                 {
@@ -88,6 +107,7 @@ namespace Firedump.core.db
                     break;
                 }
             }
+            Terminal.MainTerminal.AppendText(sql);
             return triggerCreateStatement;
         }
 
@@ -111,10 +131,12 @@ namespace Firedump.core.db
                             list.Add(new Table(table, r.GetString(1), r.GetString(2), r.GetInt32(3) == 0 ? "YES" : "NO", 0));
                         }
                     }
+                    Terminal.MainTerminal.AppendText(table_info);
                 }
             } else
             {
-                using (var r = new DbCommandFactory(con, new SqlBuilderFactory(server).Create(con.Database).getAllFieldsFromAllTablesInDb()).Create().ExecuteReader())
+                string sql = new SqlBuilderFactory(server).Create(con.Database).getAllFieldsFromAllTablesInDb();
+                using (var r = new DbCommandFactory(con, sql).Create().ExecuteReader())
                 {
                     while (r.Read())
                     {
@@ -122,6 +144,7 @@ namespace Firedump.core.db
                             r.GetValue(4) != DBNull.Value ? r.GetInt64(4) : default));
                     }
                 }
+                Terminal.MainTerminal.AppendText(sql);
             }
             return list;
         }
@@ -129,7 +152,8 @@ namespace Firedump.core.db
         internal static List<string> getTableFields(DbConnection con, string table)
         {
             var data = new List<string>();
-            using (var reader = new DbCommandFactory(con, new SqlBuilderFactory(con).Create(con.Database).describeTableSql(table)).Create().ExecuteReader())
+            string command = new SqlBuilderFactory(con).Create(con.Database).describeTableSql(table);
+            using (var reader = new DbCommandFactory(con, command).Create().ExecuteReader())
             {
                 if(!sql.Utils.IsDbEmbedded(sql.Utils.GetDbTypeEnum(con)))
                 {
@@ -145,13 +169,15 @@ namespace Firedump.core.db
                     }
                 }
             }
+            Terminal.MainTerminal.AppendText(command);
             return data;
         }
 
         internal static List<string> getTableInfo(DbConnection con,string table)
         {
             var data = new List<string>();
-            using (var reader = new DbCommandFactory(con, new SqlBuilderFactory(con).Create(con.Database).getTableInfo(table)).Create().ExecuteReader())
+            string command = new SqlBuilderFactory(con).Create(con.Database).getTableInfo(table);
+            using (var reader = new DbCommandFactory(con, command).Create().ExecuteReader())
             {
                 if(!sql.Utils.IsDbEmbedded(sql.Utils.GetDbTypeEnum(con)))
                 {
@@ -166,19 +192,22 @@ namespace Firedump.core.db
                     }
                 } 
             }
+            Terminal.MainTerminal.AppendText(command);
             return data;
         }
 
         internal static string getCreateTable(DbConnection con,string table)
         {
             string res = "";
-            using (var reader = new DbCommandFactory(con,new SqlBuilderFactory(con).Create(con.Database).ShowCreateStatement(table)).Create().ExecuteReader())
+            string sql = new SqlBuilderFactory(con).Create(con.Database).ShowCreateStatement(table);
+            using (var reader = new DbCommandFactory(con,sql).Create().ExecuteReader())
             {
                 while(reader.Read())
                 {
                     res = reader.GetString(1);
                 }
             }
+            Terminal.MainTerminal.AppendText(sql);
             return res;
         }
 
@@ -193,6 +222,7 @@ namespace Firedump.core.db
                     data.Add(reader.GetString(0));
                 }
             }
+            Terminal.MainTerminal.AppendText(sql);
             return data;
         }
 
@@ -204,6 +234,7 @@ namespace Firedump.core.db
                 try
                 {
                     adapter.Fill(data);
+                    Terminal.MainTerminal.AppendText(sql);
                 }
                 catch (Exception ex) { Console.WriteLine(ex.ToString()); }
 

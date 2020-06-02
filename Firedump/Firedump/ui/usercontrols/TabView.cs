@@ -16,6 +16,7 @@ using Firedump.models.events;
 using Firedump.core.sql.executor;
 using Firedump.core.models;
 using static Firedump.core.models.MyTreeNode;
+using Firedump.ui.usercontrols;
 
 namespace Firedump.usercontrols
 {
@@ -292,11 +293,13 @@ namespace Firedump.usercontrols
         {
             if(IsNodeSelected())
             {
-                GetMainHome().GetUserControl<Editor>().Execute("SELECT * FROM " + treeViewTables.SelectedNode.Text, new QueryParams()
+                string sql = "SELECT * FROM " + treeViewTables.SelectedNode.Text;
+                GetMainHome().GetUserControl<Editor>().Execute(sql, new QueryParams()
                 {
                     Limit = GetMainHome().GetLimitFromToolStripComboBoxLimit(),
                     Offset = 0,
                 });
+                Terminal.MainTerminal.AppendText(sql);
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using Firedump.core.sql;
 using Firedump.models;
+using Firedump.ui.usercontrols;
 using Firedump.usercontrols;
 using MySql.Data.MySqlClient;
 using System;
@@ -54,6 +55,7 @@ namespace Firedump.core.db
                 using (var command = new DbCommandFactory(con, "rollback").Create())
                 {
                     command.ExecuteNonQuery();
+                    Terminal.MainTerminal.AppendText("rollback;");
                 }
             }
             catch (DbException ex) {
@@ -70,6 +72,7 @@ namespace Firedump.core.db
                 using (var command = new DbCommandFactory(con, "commit").Create())
                 {
                     command.ExecuteNonQuery();
+                    Terminal.MainTerminal.AppendText("commit;");
                 }
             }catch(DbException ex)
             {
