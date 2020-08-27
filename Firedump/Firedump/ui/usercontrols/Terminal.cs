@@ -18,29 +18,12 @@ namespace Firedump.ui.usercontrols
         public int QueueLimit = 100;
         public Terminal()
         {
-            InitializeComponent();
-            Task.Delay(500).ContinueWith(_ =>
-            {
-                this.Invoke((MethodInvoker)delegate
-                {
-                    textBox1.Focus();
-                });
-            });
+            InitializeComponent();        
         }
 
         public void SetMainHome(MainHome mh)
         {
             this.home = mh;
-        }
-
-
-        private void textBox1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                AppendText(textBox1.Text);
-                e.SuppressKeyPress = true;
-            }
         }
 
         public void AppendText(string command)
@@ -54,7 +37,6 @@ namespace Firedump.ui.usercontrols
                 }
                 richTextBox.AppendText(command + "\n");
                 richTextBox.ScrollToCaret();
-                textBox1.Text = "";
             });
         }
     }

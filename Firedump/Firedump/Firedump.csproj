@@ -247,10 +247,8 @@
     <Compile Include="sqlitetables\sql_servers.cs" />
     <Compile Include="sqlitetables\schedules.cs" />
     <Compile Include="sqlitetables\schedule_save_locations.cs" />
-    <Compile Include="ui\forms\BaseForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="core\IconHelper.cs" />
+    <Compile Include="ui\forms\FormUtils.cs" />
     <Compile Include="ui\forms\TerminalForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -349,9 +347,6 @@
     <Compile Include="core\EditorConfig.cs" />
     <Compile Include="core\exceptions\MyFormatterException.cs" />
     <Compile Include="core\sql\MySqlSqlBuilder.cs" />
-    <EmbeddedResource Include="ui\forms\BaseForm.resx">
-      <DependentUpon>BaseForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ui\forms\connect\DatabaseConnect.resx">
       <DependentUpon>DatabaseConnect.cs</DependentUpon>
     </EmbeddedResource>

@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace Firedump
 {
-    public sealed partial class MainHome : BaseForm , IConnectionServerRef
+    public sealed partial class MainHome : Form, IConnectionServerRef
     {
         private DbConnection con;
         private sqlservers server;
@@ -25,6 +25,7 @@ namespace Firedump
         public MainHome()
         {
             InitializeComponent();
+            FormUtils.setFormIcon(this);
             this.SuspendLayout();
             this.InitMainMenuComponents();
             this.InitChildControls();

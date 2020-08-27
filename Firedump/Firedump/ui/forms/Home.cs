@@ -13,7 +13,7 @@ using Firedump.ui.forms;
 
 namespace Firedump
 {
-    public partial class Home : BaseForm
+    public partial class Home : Form
     {
 
 
@@ -24,7 +24,8 @@ namespace Firedump
         
         public Home()
         {
-            InitializeComponent();       
+            InitializeComponent();
+            FormUtils.setFormIcon(this);
             sql_server_adapter = new firedumpdbDataSetTableAdapters.sql_serversTableAdapter();
         }
 

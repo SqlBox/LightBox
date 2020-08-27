@@ -8,12 +8,11 @@ using System.Windows.Forms;
 
 namespace Firedump.ui.forms
 {
-    //Base parent form with some common properties for all other forms
-    public class BaseForm : Form
+    class FormUtils
     {
-        public BaseForm():base()
+        public static void setFormIcon(Form f)
         {
-            this.Icon = Icon.FromHandle(Properties.Resources.lighthouse_logo1.GetHicon());
+            f.Icon = Icon.FromHandle(Properties.Resources.lighthouse_logo1.GetHicon());
         }
     }
 }

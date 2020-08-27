@@ -15,6 +15,7 @@ namespace Firedump.ui.forms
         public TerminalForm()
         {
             InitializeComponent();
+            FormUtils.setFormIcon(this);
         }
 
         public TerminalForm(MainHome mh):this()

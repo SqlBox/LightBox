@@ -67,10 +67,7 @@ namespace Firedump.core.db
 
         public static List<string> getTables(DbConnection con)
         {
-            string sql = new SqlBuilderFactory(con).Create(con.Database).showTablesSql();
-            var data = getStringData(con, sql);
-            Terminal.MainTerminal.AppendText(sql);
-            return data;
+            return getStringData(con, new SqlBuilderFactory(con).Create(con.Database).showTablesSql());
         }
 
         internal static List<string> getTableTriggers(DbConnection con, string table)
@@ -176,10 +173,10 @@ namespace Firedump.core.db
         internal static List<string> getTableInfo(DbConnection con,string table)
         {
             var data = new List<string>();
-            string command = new SqlBuilderFactory(con).Create(con.Database).getTableInfo(table);
-            using (var reader = new DbCommandFactory(con, command).Create().ExecuteReader())
+            if(!sql.Utils.IsDbEmbedded(sql.Utils.GetDbTypeEnum(con)))
             {
-                if(!sql.Utils.IsDbEmbedded(sql.Utils.GetDbTypeEnum(con)))
+                string command = new SqlBuilderFactory(con).Create(con.Database).getTableInfo(table);
+                using (var reader = new DbCommandFactory(con, command).Create().ExecuteReader())
                 {
                     while (reader.Read())
                     {
@@ -190,9 +187,9 @@ namespace Firedump.core.db
                         data.Add("AI:" + (reader.IsDBNull(3) ? "" : reader.GetString(3)));
                         data.Add("Collation:" + (reader.IsDBNull(4) ? "" : reader.GetString(4)));
                     }
-                } 
+                }
+                Terminal.MainTerminal.AppendText(command);
             }
-            Terminal.MainTerminal.AppendText(command);
             return data;
         }
 

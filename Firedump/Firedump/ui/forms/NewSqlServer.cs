@@ -13,7 +13,7 @@ using sqlbox.commons;
 
 namespace Firedump.Forms.mysql
 {
-    public partial class NewSqlServer : BaseForm
+    public partial class NewSqlServer : Form
     {
         public delegate void reloadserverdata(int id);
         public event reloadserverdata ReloadServerData;
@@ -28,6 +28,7 @@ namespace Firedump.Forms.mysql
         public NewSqlServer()
         {
             InitializeComponent();
+            FormUtils.setFormIcon(this);
             initDbTypeCombobox();
             ShowPathForEmbeddedDb(false);
             this.groupBoxDetails.Enabled = false;
