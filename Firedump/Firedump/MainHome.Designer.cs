@@ -36,10 +36,7 @@ namespace Firedump
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitContainerMainParent = new System.Windows.Forms.SplitContainer();
             this.splitContainerMiddle = new System.Windows.Forms.SplitContainer();
-            this.tabView1 = new Firedump.usercontrols.TabView();
             this.splitContainerMiddleChild = new System.Windows.Forms.SplitContainer();
-            this.tableView1 = new Firedump.usercontrols.TableView();
-            this.terminal1 = new Firedump.ui.usercontrols.Terminal();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonShowSysDb = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
@@ -138,17 +135,15 @@ namespace Firedump
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.mySqlDumpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMainParent)).BeginInit();
             this.splitContainerMainParent.Panel1.SuspendLayout();
-            this.splitContainerMainParent.Panel2.SuspendLayout();
             this.splitContainerMainParent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMiddle)).BeginInit();
-            this.splitContainerMiddle.Panel1.SuspendLayout();
             this.splitContainerMiddle.Panel2.SuspendLayout();
             this.splitContainerMiddle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMiddleChild)).BeginInit();
-            this.splitContainerMiddleChild.Panel2.SuspendLayout();
             this.splitContainerMiddleChild.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
@@ -190,10 +185,6 @@ namespace Firedump
             // splitContainerMainParent.Panel1
             // 
             this.splitContainerMainParent.Panel1.Controls.Add(this.splitContainerMiddle);
-            // 
-            // splitContainerMainParent.Panel2
-            // 
-            this.splitContainerMainParent.Panel2.Controls.Add(this.terminal1);
             this.splitContainerMainParent.Size = new System.Drawing.Size(1169, 579);
             this.splitContainerMainParent.SplitterDistance = 485;
             this.splitContainerMainParent.TabIndex = 5;
@@ -204,10 +195,6 @@ namespace Firedump
             this.splitContainerMiddle.Location = new System.Drawing.Point(0, 0);
             this.splitContainerMiddle.Name = "splitContainerMiddle";
             // 
-            // splitContainerMiddle.Panel1
-            // 
-            this.splitContainerMiddle.Panel1.Controls.Add(this.tabView1);
-            // 
             // splitContainerMiddle.Panel2
             // 
             this.splitContainerMiddle.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
@@ -215,15 +202,6 @@ namespace Firedump
             this.splitContainerMiddle.Size = new System.Drawing.Size(1169, 485);
             this.splitContainerMiddle.SplitterDistance = 250;
             this.splitContainerMiddle.TabIndex = 4;
-            // 
-            // tabView1
-            // 
-            this.tabView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
-            this.tabView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabView1.Location = new System.Drawing.Point(0, 0);
-            this.tabView1.Name = "tabView1";
-            this.tabView1.Size = new System.Drawing.Size(250, 485);
-            this.tabView1.TabIndex = 0;
             // 
             // splitContainerMiddleChild
             // 
@@ -234,33 +212,9 @@ namespace Firedump
             // splitContainerMiddleChild.Panel1
             // 
             this.splitContainerMiddleChild.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
-            // 
-            // splitContainerMiddleChild.Panel2
-            // 
-            this.splitContainerMiddleChild.Panel2.Controls.Add(this.tableView1);
             this.splitContainerMiddleChild.Size = new System.Drawing.Size(915, 485);
             this.splitContainerMiddleChild.SplitterDistance = 725;
             this.splitContainerMiddleChild.TabIndex = 0;
-            // 
-            // tableView1
-            // 
-            this.tableView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
-            this.tableView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableView1.Location = new System.Drawing.Point(0, 0);
-            this.tableView1.Name = "tableView1";
-            this.tableView1.Size = new System.Drawing.Size(186, 485);
-            this.tableView1.TabIndex = 0;
-            // 
-            // terminal1
-            // 
-            this.terminal1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
-            this.terminal1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.terminal1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.terminal1.Location = new System.Drawing.Point(0, 0);
-            this.terminal1.Margin = new System.Windows.Forms.Padding(0);
-            this.terminal1.Name = "terminal1";
-            this.terminal1.Size = new System.Drawing.Size(1169, 90);
-            this.terminal1.TabIndex = 0;
             // 
             // toolStrip1
             // 
@@ -1089,10 +1043,11 @@ namespace Firedump
             // 
             // dataToolStripMenuItem
             // 
+            this.dataToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mySqlDumpToolStripMenuItem});
             this.dataToolStripMenuItem.Name = "dataToolStripMenuItem";
-            this.dataToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
-            this.dataToolStripMenuItem.Text = "Data";
-            this.dataToolStripMenuItem.Click += new System.EventHandler(this.DataToolStripMenuItem_Click);
+            this.dataToolStripMenuItem.Size = new System.Drawing.Size(48, 24);
+            this.dataToolStripMenuItem.Text = "Tools";
             // 
             // helpToolStripMenuItem1
             // 
@@ -1144,6 +1099,13 @@ namespace Firedump
             this.imageList1.Images.SetKeyName(2, "expand.png");
             this.imageList1.Images.SetKeyName(3, "collapse.png");
             // 
+            // mySqlDumpToolStripMenuItem
+            // 
+            this.mySqlDumpToolStripMenuItem.Name = "mySqlDumpToolStripMenuItem";
+            this.mySqlDumpToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.mySqlDumpToolStripMenuItem.Text = "MySql Dump";
+            this.mySqlDumpToolStripMenuItem.Click += new System.EventHandler(this.startfiredumpprocess);
+            // 
             // MainHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1157,14 +1119,11 @@ namespace Firedump
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.splitContainerMainParent.Panel1.ResumeLayout(false);
-            this.splitContainerMainParent.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMainParent)).EndInit();
             this.splitContainerMainParent.ResumeLayout(false);
-            this.splitContainerMiddle.Panel1.ResumeLayout(false);
             this.splitContainerMiddle.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMiddle)).EndInit();
             this.splitContainerMiddle.ResumeLayout(false);
-            this.splitContainerMiddleChild.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMiddleChild)).EndInit();
             this.splitContainerMiddleChild.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
@@ -1285,5 +1244,6 @@ namespace Firedump
         private System.Windows.Forms.ImageList imageList1;
         private ui.usercontrols.Terminal terminal1;
         private System.Windows.Forms.ToolStripButton toolStripButtonHistoryEraser;
+        private System.Windows.Forms.ToolStripMenuItem mySqlDumpToolStripMenuItem;
     }
 }

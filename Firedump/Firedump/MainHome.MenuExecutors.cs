@@ -1,10 +1,12 @@
-﻿using Firedump.core.db;
+﻿using Firedump.core;
+using Firedump.core.db;
 using Firedump.core.models;
 using Firedump.ui.forms;
 using Firedump.usercontrols;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -199,6 +201,19 @@ namespace Firedump
         private void ShowTerminalForm(object sender, EventArgs e)
         {
             new TerminalForm(this).Show();
+        }
+
+
+        private void startfiredumpprocess(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start(RegistryUtils.getFiredumpPath());
+            }
+            catch (Exception) 
+            {
+                MessageBox.Show("Firedump not installed");
+            }
         }
     }
 }
