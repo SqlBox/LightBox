@@ -119,7 +119,7 @@ namespace Firedump
             if(server != null && this.con != null)
             {
                 string database = this.con.Database;
-                con = null;
+                this.con = null;
                 if (DB.TestConnection(server).wasSuccessful)
                 {
                     this.SetReconnectionStatus(DB.connect(server, database));

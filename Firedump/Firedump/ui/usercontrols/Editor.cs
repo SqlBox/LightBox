@@ -174,8 +174,19 @@ namespace Firedump.usercontrols
             {
                 if (!string.IsNullOrWhiteSpace(query))
                 {
-                    var parser = new SqlStatementParserWrapper(query, (com.protectsoft.SqlStatementParser.DbType)(int)Firedump.core.sql.Utils.GetDbTypeEnum(base.GetSqlConnection()));
-                    List<string> statementList = SqlStatementParserWrapper.convert(parser.sql, parser.Parse());
+                    //At the moment parser only supports mysql,mariadb,postgresql
+                    //any other db i just execute all in one statement
+                    sqlbox.commons.DbType dbtype = Firedump.core.sql.Utils.GetDbTypeEnum(base.GetSqlConnection());
+                    List<string> statementList = null;
+                    if (dbtype == sqlbox.commons.DbType.MYSQL || dbtype == sqlbox.commons.DbType.MARIADB || dbtype == sqlbox.commons.DbType.POSTGRES)
+                    {
+                        var parser = new SqlStatementParserWrapper(query, (com.protectsoft.SqlStatementParser.DbType)(int)dbtype);
+                        statementList = SqlStatementParserWrapper.convert(parser.sql, parser.Parse());
+                    } else
+                    {
+                        statementList = new List<string>();
+                        statementList.Add(query);
+                    }
                     this.queryExecutor.Execute(statementList, this.GetSqlConnection(), parameters);
                 }
                 else

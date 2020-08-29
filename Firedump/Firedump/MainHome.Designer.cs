@@ -128,6 +128,7 @@ namespace Firedump
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mySqlDumpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.contentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.indexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -135,7 +136,6 @@ namespace Firedump
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.mySqlDumpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMainParent)).BeginInit();
             this.splitContainerMainParent.Panel1.SuspendLayout();
@@ -186,7 +186,7 @@ namespace Firedump
             // 
             this.splitContainerMainParent.Panel1.Controls.Add(this.splitContainerMiddle);
             this.splitContainerMainParent.Size = new System.Drawing.Size(1169, 579);
-            this.splitContainerMainParent.SplitterDistance = 485;
+            this.splitContainerMainParent.SplitterDistance = 545;
             this.splitContainerMainParent.TabIndex = 5;
             // 
             // splitContainerMiddle
@@ -199,7 +199,7 @@ namespace Firedump
             // 
             this.splitContainerMiddle.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
             this.splitContainerMiddle.Panel2.Controls.Add(this.splitContainerMiddleChild);
-            this.splitContainerMiddle.Size = new System.Drawing.Size(1169, 485);
+            this.splitContainerMiddle.Size = new System.Drawing.Size(1169, 545);
             this.splitContainerMiddle.SplitterDistance = 250;
             this.splitContainerMiddle.TabIndex = 4;
             // 
@@ -212,7 +212,7 @@ namespace Firedump
             // splitContainerMiddleChild.Panel1
             // 
             this.splitContainerMiddleChild.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
-            this.splitContainerMiddleChild.Size = new System.Drawing.Size(915, 485);
+            this.splitContainerMiddleChild.Size = new System.Drawing.Size(915, 545);
             this.splitContainerMiddleChild.SplitterDistance = 725;
             this.splitContainerMiddleChild.TabIndex = 0;
             // 
@@ -1049,6 +1049,13 @@ namespace Firedump
             this.dataToolStripMenuItem.Size = new System.Drawing.Size(48, 24);
             this.dataToolStripMenuItem.Text = "Tools";
             // 
+            // mySqlDumpToolStripMenuItem
+            // 
+            this.mySqlDumpToolStripMenuItem.Name = "mySqlDumpToolStripMenuItem";
+            this.mySqlDumpToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.mySqlDumpToolStripMenuItem.Text = "MySql Dump";
+            this.mySqlDumpToolStripMenuItem.Click += new System.EventHandler(this.startfiredumpprocess);
+            // 
             // helpToolStripMenuItem1
             // 
             this.helpToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1098,13 +1105,6 @@ namespace Firedump
             this.imageList1.Images.SetKeyName(1, "history-icon.png");
             this.imageList1.Images.SetKeyName(2, "expand.png");
             this.imageList1.Images.SetKeyName(3, "collapse.png");
-            // 
-            // mySqlDumpToolStripMenuItem
-            // 
-            this.mySqlDumpToolStripMenuItem.Name = "mySqlDumpToolStripMenuItem";
-            this.mySqlDumpToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.mySqlDumpToolStripMenuItem.Text = "MySql Dump";
-            this.mySqlDumpToolStripMenuItem.Click += new System.EventHandler(this.startfiredumpprocess);
             // 
             // MainHome
             // 

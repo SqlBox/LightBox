@@ -18,6 +18,14 @@ namespace Firedump.core
 
         internal static FastColoredTextBox CreateFastColoredTextBox(Control Control)
         {
+            var tb = CreateFastColoredTextBox();
+            tb.Name = "fastColoredTextBox" + (Control.Controls.Count + 1);
+            tb.TabIndex = Control.Controls.Count;
+            return tb;
+        }
+
+        internal static FastColoredTextBox CreateFastColoredTextBox()
+        {
             return new FastColoredTextBox()
             {
                 BackBrush = null,
@@ -26,12 +34,10 @@ namespace Firedump.core
                 Cursor = Cursors.IBeam,
                 Dock = DockStyle.Fill,
                 IsReplaceMode = false,
-                Name = "fastColoredTextBox" + (Control.Controls.Count + 1),
                 Location = new System.Drawing.Point(30, 30),
                 Text = " ",
                 Zoom = 100,
                 AutoScrollMinSize = new System.Drawing.Size(179, 14),
-                TabIndex = Control.Controls.Count,
                 DisabledColor = System.Drawing.Color.FromArgb(100, 180, 180, 180),
                 SelectionColor = System.Drawing.Color.FromArgb(60, 0, 0, 255),
                 Size = new System.Drawing.Size(726, 120),
