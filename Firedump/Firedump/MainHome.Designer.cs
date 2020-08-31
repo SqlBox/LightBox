@@ -87,7 +87,6 @@ namespace Firedump
             this.toolStripTextBoxSearch = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripButton19 = new System.Windows.Forms.ToolStripButton();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
-            this.toolStripButtonTerminal = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonHistoryEraser = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -536,7 +535,6 @@ namespace Firedump
             this.toolStripTextBoxSearch,
             this.toolStripButton19,
             this.toolStripProgressBar1,
-            this.toolStripButtonTerminal,
             this.toolStripButtonHistoryEraser});
             this.toolStrip2.Location = new System.Drawing.Point(0, 24);
             this.toolStrip2.Name = "toolStrip2";
@@ -721,18 +719,6 @@ namespace Firedump
             this.toolStripProgressBar1.Size = new System.Drawing.Size(121, 22);
             this.toolStripProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.toolStripProgressBar1.Visible = false;
-            // 
-            // toolStripButtonTerminal
-            // 
-            this.toolStripButtonTerminal.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButtonTerminal.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonTerminal.Image = global::Firedump.Properties.Resources.terminal;
-            this.toolStripButtonTerminal.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonTerminal.Name = "toolStripButtonTerminal";
-            this.toolStripButtonTerminal.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripButtonTerminal.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonTerminal.ToolTipText = "Open new terminal";
-            this.toolStripButtonTerminal.Click += new System.EventHandler(this.ShowTerminalForm);
             // 
             // toolStripButtonHistoryEraser
             // 
@@ -1239,7 +1225,6 @@ namespace Firedump
         private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exportHTMLToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator25;
-        private System.Windows.Forms.ToolStripButton toolStripButtonTerminal;
         private System.Windows.Forms.SplitContainer splitContainerMainParent;
         private System.Windows.Forms.ImageList imageList1;
         private ui.usercontrols.Terminal terminal1;

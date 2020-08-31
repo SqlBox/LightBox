@@ -42,6 +42,7 @@ namespace Firedump.core
             {
                 yield return new MenuItem("Show Data", _this.TreeViewTable_MenuItem_ShowData);
                 yield return new MenuItem("Send Create Statement", _this.TreeViewTable_MenuItem_ShowCreate);
+                yield return new MenuItem("Send Create Statement + Triggers", _this.TreeViewTable_Menuitem_ShowCreateWithTrigger);
                 yield return new MenuItem("-");
                 yield return new MenuItem("Inspect Table", _this.TreeViewTable_MenuItem_Inspect);
                 yield return new MenuItem("-");

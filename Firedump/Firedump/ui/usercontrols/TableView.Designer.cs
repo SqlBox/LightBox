@@ -1,6 +1,6 @@
 ﻿namespace Firedump.usercontrols
 {
-    partial class TableView
+    public partial class TableView
     {
         /// <summary> 
         /// Required designer variable.
@@ -32,9 +32,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TableView));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
-            this.treeViewTables = new System.Windows.Forms.TreeView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabObjectInfo = new System.Windows.Forms.TabPage();
+            this.tabSnippet = new System.Windows.Forms.TabPage();
+            this.tabSession = new System.Windows.Forms.TabPage();
             this.panel1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList1
@@ -46,8 +49,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.treeViewTables);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.tabControl1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -55,29 +57,47 @@
             this.panel1.Size = new System.Drawing.Size(298, 497);
             this.panel1.TabIndex = 0;
             // 
-            // treeViewTables
+            // tabControl1
             // 
-            this.treeViewTables.BackColor = System.Drawing.Color.White;
-            this.treeViewTables.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.treeViewTables.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeViewTables.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.treeViewTables.ImageIndex = 0;
-            this.treeViewTables.ImageList = this.imageList1;
-            this.treeViewTables.Location = new System.Drawing.Point(0, 21);
-            this.treeViewTables.Name = "treeViewTables";
-            this.treeViewTables.SelectedImageIndex = 0;
-            this.treeViewTables.Size = new System.Drawing.Size(298, 476);
-            this.treeViewTables.TabIndex = 2;
-            this.treeViewTables.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeViewTables_BeforeExpand);
+            this.tabControl1.Controls.Add(this.tabObjectInfo);
+            this.tabControl1.Controls.Add(this.tabSnippet);
+            this.tabControl1.Controls.Add(this.tabSession);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Multiline = true;
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(298, 497);
+            this.tabControl1.TabIndex = 0;
             // 
-            // textBox1
+            // tabObjectInfo
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBox1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.textBox1.Location = new System.Drawing.Point(0, 0);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(298, 21);
-            this.textBox1.TabIndex = 1;
+            this.tabObjectInfo.Location = new System.Drawing.Point(4, 22);
+            this.tabObjectInfo.Name = "tabObjectInfo";
+            this.tabObjectInfo.Padding = new System.Windows.Forms.Padding(3);
+            this.tabObjectInfo.Size = new System.Drawing.Size(290, 471);
+            this.tabObjectInfo.TabIndex = 0;
+            this.tabObjectInfo.Text = "Object Info";
+            this.tabObjectInfo.UseVisualStyleBackColor = true;
+            // 
+            // tabSnippet
+            // 
+            this.tabSnippet.Location = new System.Drawing.Point(4, 22);
+            this.tabSnippet.Name = "tabSnippet";
+            this.tabSnippet.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSnippet.Size = new System.Drawing.Size(290, 471);
+            this.tabSnippet.TabIndex = 1;
+            this.tabSnippet.Text = "Snippets";
+            this.tabSnippet.UseVisualStyleBackColor = true;
+            // 
+            // tabSession
+            // 
+            this.tabSession.Location = new System.Drawing.Point(4, 22);
+            this.tabSession.Name = "tabSession";
+            this.tabSession.Size = new System.Drawing.Size(290, 471);
+            this.tabSession.TabIndex = 2;
+            this.tabSession.Text = "Session";
+            this.tabSession.UseVisualStyleBackColor = true;
             // 
             // TableView
             // 
@@ -88,7 +108,7 @@
             this.Name = "TableView";
             this.Size = new System.Drawing.Size(298, 497);
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -96,7 +116,9 @@
         #endregion
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TreeView treeViewTables;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabObjectInfo;
+        private System.Windows.Forms.TabPage tabSnippet;
+        private System.Windows.Forms.TabPage tabSession;
     }
 }

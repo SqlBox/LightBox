@@ -198,11 +198,6 @@ namespace Firedump
             GetUserControl<Editor>().abandonRunningQuery();
         }
 
-        private void ShowTerminalForm(object sender, EventArgs e)
-        {
-            new TerminalForm(this).Show();
-        }
-
 
         private void startfiredumpprocess(object sender, EventArgs e)
         {

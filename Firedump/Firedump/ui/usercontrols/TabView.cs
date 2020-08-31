@@ -319,9 +319,33 @@ namespace Firedump.usercontrols
             }
         }
 
+        internal void TreeViewTable_Menuitem_ShowCreateWithTrigger(object sender,EventArgs e)
+        {
+            if(IsNodeSelected())
+            {
+                var node = treeViewTables.SelectedNode as MyTreeNode;
+                if (node.Type == NodeType.Table)
+                {
+                    sendCreateTableWithTriggersToEditor(treeViewTables.SelectedNode.Text);
+                }
+            }
+        }
+
         private void sendCreateTableToEditor(string table)
         {
             GetMainHome().GetUserControl<Editor>().AddQueryTab(DbDataHelper.getCreateTable(GetSqlConnection(), table),table);
+        }
+
+        private void sendCreateTableWithTriggersToEditor(string table)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(DbDataHelper.getCreateTable(GetSqlConnection(), table) + ";\0\r\n");
+            List<string> triggers = DbDataHelper.getTableTriggers(GetSqlConnection(), table);
+            foreach(string t in triggers)
+            {
+                sb.Append(DbDataHelper.GetCreateTrigger(GetSqlConnection(), table, t));
+            }
+            GetMainHome().GetUserControl<Editor>().AddQueryTab(sb.ToString(),table);
         }
 
         private void sendCreateTriggerToEditor(string table,string triggerName)
