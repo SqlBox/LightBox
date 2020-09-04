@@ -59,6 +59,8 @@ namespace Firedump.usercontrols
                 base.changeDatabase(comboBoxServers.SelectedItem.ToString());
             }
             this.initTabControl(comboBoxServers.SelectedItem.ToString());
+            GetMainHome().GetUserControl<Editor>().UpdateEditor(
+                new SqlBuilderFactory(base.GetSqlConnection()).Create(null).removeSystemDatabases(DbDataHelper.getTables(base.GetSqlConnection()), false));
         }
 
 

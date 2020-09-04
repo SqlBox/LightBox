@@ -43,7 +43,12 @@ namespace Firedump.ui.usercontrols
                 {
                     tb.Lines.RemoveAt(0);
                 }
-                tb.AppendText(command + "\n");
+                tb.AppendText(command);
+                if (!command.Trim().EndsWith(";"))
+                {
+                    tb.AppendText(";");
+                }
+                tb.AppendText("\n");
                 tb.GoEnd();
                 tb.ResumeLayout();
             });
