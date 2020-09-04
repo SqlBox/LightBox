@@ -22,12 +22,16 @@ namespace Firedump.core
             where C : Control
         {
             var fastColoredTextBox1 = ControlBuilder.CreateFastColoredTextBox(Control);
+            
+            //problem with formater
+            /*
             if (EditorConfig.isAutoFormatConfigOn())
             {
                 sql = new Formatter().Format(sql);
             }
-            fastColoredTextBox1.Text = sql;
+            */
 
+            fastColoredTextBox1.Text = sql;
             var tabPage = new TabPageHolder(fastColoredTextBox1, ControlBuilder.CreateAutoCompleteMenu(fastColoredTextBox1, imageList1, menuItems), 
                 ControlBuilder.CreateDataView(editor))
             {

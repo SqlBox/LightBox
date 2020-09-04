@@ -40,11 +40,11 @@ namespace Firedump.core.sql
         }
         
 
-        internal void Execute(List<string> statements, DbConnection con,QueryParams qp)
+        internal void Execute(List<string> statements, DbConnection con,QueryParams qp,bool contExecutingOnFail)
         {
             if(this.queryThread == null)
             {
-                this.queryThread = new ExecutorThread();
+                this.queryThread = new ExecutorThread() { ContinueExecutingNextOnFail = contExecutingOnFail };
                 lock(this.queryThread)
                 {
                     this.queryThread.StatementExecuted += OnStatementExecuted;

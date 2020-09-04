@@ -61,7 +61,7 @@ namespace Firedump
             this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonAbandon = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator24 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton11 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonContExec = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonEnableAutoCommit = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripComboBoxLimit = new System.Windows.Forms.ToolStripComboBox();
@@ -244,7 +244,7 @@ namespace Firedump
             this.toolStripSeparator23,
             this.toolStripButtonAbandon,
             this.toolStripSeparator24,
-            this.toolStripButton11,
+            this.toolStripButtonContExec,
             this.toolStripButtonEnableAutoCommit,
             this.toolStripSeparator17,
             this.toolStripComboBoxLimit,
@@ -453,16 +453,16 @@ namespace Firedump
             this.toolStripSeparator24.Name = "toolStripSeparator24";
             this.toolStripSeparator24.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripButton11
+            // toolStripButtonContExec
             // 
-            this.toolStripButton11.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton11.Image = global::Firedump.Properties.Resources.skip_icon;
-            this.toolStripButton11.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton11.Name = "toolStripButton11";
-            this.toolStripButton11.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton11.Text = "toolStripButton11";
-            this.toolStripButton11.ToolTipText = "Enable if Execution of SQL should continue after fail";
-            this.toolStripButton11.Click += new System.EventHandler(this.ContOnErrorClick);
+            this.toolStripButtonContExec.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonContExec.Image = global::Firedump.Properties.Resources.skip_icon;
+            this.toolStripButtonContExec.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonContExec.Name = "toolStripButtonContExec";
+            this.toolStripButtonContExec.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonContExec.Text = "toolStripButton11";
+            this.toolStripButtonContExec.ToolTipText = "Execution of SQL should continue after fail";
+            this.toolStripButtonContExec.Click += new System.EventHandler(this.ContOnErrorClick);
             // 
             // toolStripButtonEnableAutoCommit
             // 
@@ -1150,7 +1150,7 @@ namespace Firedump
         private System.Windows.Forms.ToolStripButton toolStripButtonExecNext;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator21;
         private System.Windows.Forms.ToolStripButton toolStripButtonStop;
-        private System.Windows.Forms.ToolStripButton toolStripButton11;
+        private System.Windows.Forms.ToolStripButton toolStripButtonContExec;
         private System.Windows.Forms.ToolStripButton toolStripButtonEnableAutoCommit;
         private System.Windows.Forms.ToolStripButton toolStripButton13;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;

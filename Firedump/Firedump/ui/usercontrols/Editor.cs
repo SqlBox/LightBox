@@ -93,7 +93,7 @@ namespace Firedump.usercontrols
                         {
                             dv.GetDataView().AppendData(e.data);
                         }
-                        
+
                         if(e.QueryParams.Sql == null || e.Status == Status.ABORTED || e.Status == Status.CANCELED)
                         {
                             dv.GetDataView().SetHistory(e);
@@ -187,7 +187,7 @@ namespace Firedump.usercontrols
                         statementList = new List<string>();
                         statementList.Add(query);
                     }
-                    this.queryExecutor.Execute(statementList, this.GetSqlConnection(), parameters);
+                    this.queryExecutor.Execute(statementList, this.GetSqlConnection(), parameters,this.GetMainHome().IsContinueExecutingOnFail());
                 }
                 else
                 {
@@ -197,7 +197,7 @@ namespace Firedump.usercontrols
             else
             {
                 //case of lazy fetch
-                this.queryExecutor.Execute(new List<string>() { parameters.Sql }, this.GetSqlConnection(), parameters);
+                this.queryExecutor.Execute(new List<string>() { parameters.Sql }, this.GetSqlConnection(), parameters, this.GetMainHome().IsContinueExecutingOnFail());
             }
         }
 

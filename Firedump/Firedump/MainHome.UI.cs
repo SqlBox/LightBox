@@ -21,6 +21,11 @@ namespace Firedump
             return ((MyToolStripItem)toolStripComboBoxLimit.SelectedItem).Limit;
         }
 
+        public bool IsContinueExecutingOnFail()
+        {
+            return this.toolStripButtonContExec.Checked;
+        }
+
         private void InitMainMenuComponents()
         {
             this.tabView1 = new Firedump.usercontrols.TabView();

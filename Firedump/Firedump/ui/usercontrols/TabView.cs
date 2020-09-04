@@ -17,6 +17,7 @@ using Firedump.core.sql.executor;
 using Firedump.core.models;
 using static Firedump.core.models.MyTreeNode;
 using Firedump.ui.usercontrols;
+using com.protectsoft.SqlStatementParser.formatter;
 
 namespace Firedump.usercontrols
 {
@@ -339,11 +340,11 @@ namespace Firedump.usercontrols
         private void sendCreateTableWithTriggersToEditor(string table)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(DbDataHelper.getCreateTable(GetSqlConnection(), table) + ";\0\r\n");
+            sb.Append(DbDataHelper.getCreateTable(GetSqlConnection(), table) + ";\r\n");
             List<string> triggers = DbDataHelper.getTableTriggers(GetSqlConnection(), table);
             foreach(string t in triggers)
             {
-                sb.Append(DbDataHelper.GetCreateTrigger(GetSqlConnection(), table, t));
+                sb.Append("\r\n" +DbDataHelper.GetCreateTrigger(GetSqlConnection(), table, t) + "\r\n");
             }
             GetMainHome().GetUserControl<Editor>().AddQueryTab(sb.ToString(),table);
         }

@@ -17,6 +17,7 @@ namespace Firedump.core.sql.executor
         public bool _Alive = true;
         private DbCommand Command;
         private DbDataReader reader;
+        public bool ContinueExecutingNextOnFail;
 
         public ExecutorThread() : base()
         {
@@ -29,6 +30,7 @@ namespace Firedump.core.sql.executor
             ExecutionQueryEvent eventResult = null;
             for (int i = 0; i < statements.Count; i++)
             {
+                bool is_last = false;
                 CurrentQuery = statements[i];
                 try
                 {
@@ -52,7 +54,7 @@ namespace Firedump.core.sql.executor
                             {
                                 break;
                             }
-                            bool is_last = statements.Count - 1 == i;
+                            is_last = statements.Count - 1 == i;
                             bool is_select = Utils.IsShowDataTypeOfCommand(statements[i]);
                             var resultData = new DataTable();
                             if (is_last)
@@ -104,27 +106,46 @@ namespace Firedump.core.sql.executor
                 }
                 catch (DbException ex)
                 {
-                    ///log
+                    if(this.ContinueExecutingNextOnFail)
+                    {
+                        ///log
 #if DEBUG
-                    Console.WriteLine(ex.Message);
+                        Console.WriteLine(ex.Message);
 #endif
-                    //status change in future depending on user selection continue or not after error
-                    FireEvent(new ExecutionQueryEvent(Status.ERROR) { Ex = ex, query = statements[i] });
+                        //status change in future depending on user selection continue or not after error
+                        FireEvent(new ExecutionQueryEvent(is_last ? Status.FINISHED : Status.RUNNING) { Ex = ex, query = statements[i] });
+                    } else
+                    {
+                        FireEvent(new ExecutionQueryEvent(Status.ERROR) { Ex = ex, query = statements[i] });
+                    }
                 }
                 catch (IndexOutOfRangeException ex)
                 {
-                    //better format/handle the sql errors/exceptions
+                    if(this.ContinueExecutingNextOnFail)
+                    {
+                        //better format/handle the sql errors/exceptions
 #if DEBUG
-                    Console.WriteLine(ex.Message);
+                        Console.WriteLine(ex.Message);
 #endif
-                    FireEvent(new ExecutionQueryEvent(Status.ERROR) { Ex = ex, query = statements[i] });
+                        FireEvent(new ExecutionQueryEvent(is_last ? Status.FINISHED : Status.RUNNING) { Ex = ex, query = statements[i] });
+                    } else
+                    {
+                        FireEvent(new ExecutionQueryEvent(Status.ERROR) { Ex = ex, query = statements[i] });
+                    }
                 }
                 catch(Exception ex)
                 {
+                    if(this.ContinueExecutingNextOnFail)
+                    {
+
 #if DEBUG
-                    Console.WriteLine(ex.Message);
+                        Console.WriteLine(ex.Message);
 #endif
-                    FireEvent(new ExecutionQueryEvent(Status.ERROR) { Ex = ex, query = statements[i] });
+                        FireEvent(new ExecutionQueryEvent(is_last ? Status.FINISHED : Status.RUNNING) { Ex = ex, query = statements[i] });
+                    } else
+                    {
+                        FireEvent(new ExecutionQueryEvent(Status.ERROR) { Ex = ex, query = statements[i] });
+                    }
                 }
             }
         }
