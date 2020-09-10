@@ -19,7 +19,6 @@ namespace Firedump.usercontrols
 {
     public partial class Editor : UserControlReference
     {
-        private readonly ContextMenu tabMenuContext = new ContextMenu();
         // One readonly list, all tabs have reference to this list!
         private readonly List<AutocompleteItem> menuItems = new List<AutocompleteItem>();
         private readonly QueryExecutor queryExecutor = new QueryExecutor();
@@ -173,21 +172,9 @@ namespace Firedump.usercontrols
             if (parameters.Sql == null)
             {
                 if (!string.IsNullOrWhiteSpace(query))
-                {
-                    //At the moment parser only supports mysql,mariadb,postgresql
-                    //any other db i just execute all in one statement
-                    sqlbox.commons.DbType dbtype = Firedump.core.sql.Utils.GetDbTypeEnum(base.GetSqlConnection());
-                    List<string> statementList = null;
-                    if (dbtype == sqlbox.commons.DbType.MYSQL || dbtype == sqlbox.commons.DbType.MARIADB || dbtype == sqlbox.commons.DbType.POSTGRES)
-                    {
-                        var parser = new SqlStatementParserWrapper(query, (com.protectsoft.SqlStatementParser.DbType)(int)dbtype);
-                        statementList = SqlStatementParserWrapper.convert(parser.sql, parser.Parse());
-                    } else
-                    {
-                        statementList = new List<string>();
-                        statementList.Add(query);
-                    }
-                    this.queryExecutor.Execute(statementList, this.GetSqlConnection(), parameters,this.GetMainHome().IsContinueExecutingOnFail());
+                {                    
+                    this.queryExecutor.Execute(core.sql.Utils.convert(Firedump.core.sql.Utils.GetDbTypeEnum(base.GetSqlConnection()), query), 
+                        this.GetSqlConnection(), parameters,this.GetMainHome().IsContinueExecutingOnFail());
                 }
                 else
                 {
@@ -200,6 +187,20 @@ namespace Firedump.usercontrols
                 this.queryExecutor.Execute(new List<string>() { parameters.Sql }, this.GetSqlConnection(), parameters, this.GetMainHome().IsContinueExecutingOnFail());
             }
         }
+
+        internal void ExecuteCurrent(bool moveToNext = false)
+        {
+            var tb = GetSelectedTabEditor();
+            core.sql.Utils.selectCurrent(tb, moveToNext);
+            if (tb != null && !string.IsNullOrEmpty(tb.SelectedText))
+            {
+                ExecuteScript(null);
+            } else
+            {
+                StatementExecuted?.Invoke(this, new ExecutionQueryEvent(Status.FINISHED));
+            }
+        }
+
 
         internal void stopAnyRunningQuery()
         {

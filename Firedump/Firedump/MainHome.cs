@@ -318,10 +318,6 @@ namespace Firedump
             return this.server;
         }
 
-        private void tabControl1_Click(object sender, EventArgs e)
-        {
-            
-        }
-
+        
     }
 }

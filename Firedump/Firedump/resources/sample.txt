@@ -1,5 +1,5 @@
 SELECT COUNT(price), price FROM orders 
-WHERE price < 70 GROUP BY price ORDER BY price
+WHERE price < 70 GROUP BY price ORDER BY price;
 
 select * from images;
 

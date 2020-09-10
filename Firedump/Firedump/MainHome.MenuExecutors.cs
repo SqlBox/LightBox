@@ -210,5 +210,40 @@ namespace Firedump
                 MessageBox.Show("Firedump not installed");
             }
         }
+
+        private void refreshdbdata(object sender, EventArgs e)
+        {
+            this.setConnectionAndServerToUserControls();
+        }
+
+        private void ExecuteCurrent(object sender, EventArgs e)
+        {
+            EnableUi(false);
+            try
+            {
+                GetUserControl<Editor>().ExecuteCurrent();
+            }
+            catch (Exception ex)
+            {
+                //LOG
+                //If something out of control goes wrong at least re-enable the ui
+                EnableUi(false);
+            }
+        }
+
+        private void ExecuteNext(object sender, EventArgs e)
+        {
+            EnableUi(false);
+            try
+            {
+                GetUserControl<Editor>().ExecuteCurrent(true);
+            }
+            catch (Exception ex)
+            {
+                //LOG
+                //If something out of control goes wrong at least re-enable the ui
+                EnableUi(false);
+            }
+        }
     }
 }
