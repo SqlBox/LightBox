@@ -26,6 +26,11 @@ namespace Firedump
             return this.toolStripButtonContExec.Checked;
         }
 
+        public bool IsAutoCommitEnabled()
+        {
+            return this.toolStripButtonEnableAutoCommit.Checked;
+        }
+
         private void InitMainMenuComponents()
         {
             this.tabView1 = new Firedump.usercontrols.TabView();

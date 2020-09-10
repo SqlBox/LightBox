@@ -464,7 +464,7 @@ namespace Firedump
             this.toolStripButtonEnableAutoCommit.Name = "toolStripButtonEnableAutoCommit";
             this.toolStripButtonEnableAutoCommit.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonEnableAutoCommit.Text = "toolStripButton12";
-            this.toolStripButtonEnableAutoCommit.ToolTipText = "Enable for auto commit every statement";
+            this.toolStripButtonEnableAutoCommit.ToolTipText = "Enable for auto commit every query execution";
             this.toolStripButtonEnableAutoCommit.Click += new System.EventHandler(this.OnAutoCommitEnabledClick);
             // 
             // toolStripSeparator17
@@ -511,7 +511,8 @@ namespace Firedump
             this.toolStripButtonAbandon.Name = "toolStripButtonAbandon";
             this.toolStripButtonAbandon.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonAbandon.Text = "toolStripButton1";
-            this.toolStripButtonAbandon.ToolTipText = "Abandon running query and reconnect (abandoned query will try to disconnect)";
+            this.toolStripButtonAbandon.ToolTipText = "Abandon running query and reconnect (abandoned query will try to disconnect but w" +
+    "ithout guarantee.Abandon connection may remain open!).";
             this.toolStripButtonAbandon.Click += new System.EventHandler(this.AbandonClick);
             // 
             // toolStrip2

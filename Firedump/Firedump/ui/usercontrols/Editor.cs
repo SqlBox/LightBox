@@ -88,6 +88,10 @@ namespace Firedump.usercontrols
                         if (e.Status == Status.FINISHED && e.QueryParams.Sql == null)
                         {
                             dv.GetDataView().SetData(e.data,e.query);
+                            if(GetMainHome().IsAutoCommitEnabled())
+                            {
+                                DB.Commit(base.GetSqlConnection());
+                            }
                         } else if(e.Status == Status.FINISHED && e.QueryParams.Sql != null)
                         {
                             dv.GetDataView().AppendData(e.data);
