@@ -36,8 +36,10 @@
             this.tabObjectInfo = new System.Windows.Forms.TabPage();
             this.tabSnippet = new System.Windows.Forms.TabPage();
             this.tabSession = new System.Windows.Forms.TabPage();
+            this.richTextBoxObjectInfo = new System.Windows.Forms.RichTextBox();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.tabObjectInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList1
@@ -72,6 +74,7 @@
             // 
             // tabObjectInfo
             // 
+            this.tabObjectInfo.Controls.Add(this.richTextBoxObjectInfo);
             this.tabObjectInfo.Location = new System.Drawing.Point(4, 22);
             this.tabObjectInfo.Name = "tabObjectInfo";
             this.tabObjectInfo.Padding = new System.Windows.Forms.Padding(3);
@@ -99,6 +102,18 @@
             this.tabSession.Text = "Session";
             this.tabSession.UseVisualStyleBackColor = true;
             // 
+            // richTextBoxObjectInfo
+            // 
+            this.richTextBoxObjectInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
+            this.richTextBoxObjectInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBoxObjectInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxObjectInfo.Font = new System.Drawing.Font("Tahoma", 8.5F);
+            this.richTextBoxObjectInfo.Location = new System.Drawing.Point(3, 3);
+            this.richTextBoxObjectInfo.Name = "richTextBoxObjectInfo";
+            this.richTextBoxObjectInfo.ReadOnly = true;
+            this.richTextBoxObjectInfo.Size = new System.Drawing.Size(284, 465);
+            this.richTextBoxObjectInfo.TabIndex = 0;
+            // 
             // TableView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -109,6 +124,7 @@
             this.Size = new System.Drawing.Size(298, 497);
             this.panel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
+            this.tabObjectInfo.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -120,5 +136,6 @@
         private System.Windows.Forms.TabPage tabObjectInfo;
         private System.Windows.Forms.TabPage tabSnippet;
         private System.Windows.Forms.TabPage tabSession;
+        private System.Windows.Forms.RichTextBox richTextBoxObjectInfo;
     }
 }

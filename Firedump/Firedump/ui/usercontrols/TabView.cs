@@ -45,7 +45,7 @@ namespace Firedump.usercontrols
             this.comboBoxServers.BeginUpdate();
             this.comboBoxServers.Items.Clear();
             this.comboBoxServers.Items.AddRange(databases.ToArray());
-            if(this.comboBoxServers.Items.Count > 0)
+            if (this.comboBoxServers.Items.Count > 0)
             {
                 this.comboBoxServers.SelectedItem = this.comboBoxServers.Items[0];
             }
@@ -54,12 +54,12 @@ namespace Firedump.usercontrols
 
         private void ComboBoxServers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(!Utils.IsDbEmbedded(GetServer().db_type))
+            if (!Utils.IsDbEmbedded(GetServer().db_type))
             {
                 base.changeDatabase(comboBoxServers.SelectedItem.ToString());
             }
             var tables = DbDataHelper.getTables(base.GetSqlConnection());
-            this.initTabControl(comboBoxServers.SelectedItem.ToString(),tables);
+            this.initTabControl(comboBoxServers.SelectedItem.ToString(), tables);
             GetMainHome().GetUserControl<Editor>().UpdateEditor(
                 new SqlBuilderFactory(base.GetSqlConnection()).Create(null).removeSystemDatabases(tables, false));
         }
@@ -67,7 +67,7 @@ namespace Firedump.usercontrols
 
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(!GetMainHome().GetUserControl<Editor>().GetQueryExecutor().IsAlive())
+            if (!GetMainHome().GetUserControl<Editor>().GetQueryExecutor().IsAlive())
             {
                 this.initTabControl();
             }
@@ -82,7 +82,7 @@ namespace Firedump.usercontrols
             }
             if (DB.IsConnectedToDatabaseAndAfterReconnect(this))
             {
-                switch(tabControl1.SelectedTab.Text)
+                switch (tabControl1.SelectedTab.Text)
                 {
                     case "Tables":
                         this.setDatagridviewTables(tables);
@@ -121,8 +121,8 @@ namespace Firedump.usercontrols
             treeViewTables.Nodes.Clear();
             foreach (string t in tables)
             {
-                MyTreeNode node = new MyTreeNode() { Text = t, ImageIndex = 0 ,Type = NodeType.Table };
-                node.Nodes.Add(getDummy()); 
+                MyTreeNode node = new MyTreeNode() { Text = t, ImageIndex = 0, Type = NodeType.Table };
+                node.Nodes.Add(getDummy());
                 treeViewTables.Nodes.Add(node);
             }
             this.treeViewTables.EndUpdate();
@@ -151,7 +151,7 @@ namespace Firedump.usercontrols
         {
             if (!GetMainHome().GetUserControl<Editor>().GetQueryExecutor().IsAlive())
             {
-                switch((e.Node as MyTreeNode).Type)
+                switch ((e.Node as MyTreeNode).Type)
                 {
                     case NodeType.Table:
                         {
@@ -174,11 +174,11 @@ namespace Firedump.usercontrols
                         break;
                     case NodeType.ParentTrigger:
                         {
-                            List<string> triggers = DbDataHelper.getTableTriggers(GetSqlConnection(),e.Node.Parent.Text);
+                            List<string> triggers = DbDataHelper.getTableTriggers(GetSqlConnection(), e.Node.Parent.Text);
                             List<MyTreeNode> nodes = new List<MyTreeNode>();
                             foreach (string t in triggers)
                             {
-                                nodes.Add(new MyTreeNode() { Text = t,Type = NodeType.Trigger, ImageIndex = 3, SelectedImageIndex = 3 });
+                                nodes.Add(new MyTreeNode() { Text = t, Type = NodeType.Trigger, ImageIndex = 3, SelectedImageIndex = 3 });
                             }
                             this.setTableFields(nodes, e.Node as MyTreeNode);
                         }
@@ -195,7 +195,7 @@ namespace Firedump.usercontrols
             setRootTablesIntoTreeView(new SqlBuilderFactory(base.GetSqlConnection())
                         .Create(null).removeSystemDatabases(tables == null ? DbDataHelper.getTables(base.GetSqlConnection()) : tables, false));
         }
-    
+
 
         private void setDataGridViewIndexes()
         {
@@ -205,14 +205,15 @@ namespace Firedump.usercontrols
 
         private void setDataGridViewPKs()
         {
-            if(Utils.IsDbEmbedded(GetServer().db_type))
+            if (Utils.IsDbEmbedded(GetServer().db_type))
             {
                 sqlbox.commons.DbType type = Utils._convert(GetServer().db_type);
-                if(type == sqlbox.commons.DbType.SQLITE)
+                if (type == sqlbox.commons.DbType.SQLITE)
                 {
-                    dataGridViewPKs.DataSource = SqliteHelpers.GetDatabasePrimaryKeysDataSource(GetServer(),GetSqlConnection());
+                    dataGridViewPKs.DataSource = SqliteHelpers.GetDatabasePrimaryKeysDataSource(GetServer(), GetSqlConnection());
                 }
-            } else
+            }
+            else
             {
                 dataGridViewPKs.DataSource = DbDataHelper.getDataTableData(GetSqlConnection(),
                     new SqlBuilderFactory(GetServer()).Create(GetSqlConnection().Database).getDatabasePrimaryKeys());
@@ -221,7 +222,7 @@ namespace Firedump.usercontrols
 
         private void setDataGridUniques()
         {
-            if(!Utils.IsDbEmbedded(GetServer().db_type))
+            if (!Utils.IsDbEmbedded(GetServer().db_type))
             {
                 dataGridViewUnique.DataSource = DbDataHelper.getDataTableData(GetSqlConnection(),
                     new SqlBuilderFactory(GetServer()).Create(GetSqlConnection().Database).getDatabaseUniques());
@@ -230,7 +231,7 @@ namespace Firedump.usercontrols
 
         private void setDataGridFKs()
         {
-            if(!Utils.IsDbEmbedded(GetServer().db_type))
+            if (!Utils.IsDbEmbedded(GetServer().db_type))
             {
                 dataGridViewFKs.DataSource = DbDataHelper.getDataTableData(GetSqlConnection(),
                     new SqlBuilderFactory(GetServer()).Create(GetSqlConnection().Database).getDatabaseForeignKeys());
@@ -245,7 +246,7 @@ namespace Firedump.usercontrols
 
         private void setDataGridProcedures()
         {
-            if(!Utils.IsDbEmbedded(GetServer().db_type))
+            if (!Utils.IsDbEmbedded(GetServer().db_type))
             {
                 dataGridViewProcedures.DataSource = DbDataHelper.getDataTableData(GetSqlConnection(),
                 new SqlBuilderFactory(GetServer()).Create(GetSqlConnection().Database).GetProcedures());
@@ -254,11 +255,11 @@ namespace Firedump.usercontrols
 
         private void setDataGridFunctions()
         {
-            if(!Utils.IsDbEmbedded(GetServer().db_type))
+            if (!Utils.IsDbEmbedded(GetServer().db_type))
             {
                 dataGridViewFunctions.DataSource = DbDataHelper.getDataTableData(GetSqlConnection(),
                 new SqlBuilderFactory(GetServer()).Create(GetSqlConnection().Database).GetFunctions());
-            }   
+            }
         }
 
         private void setDatagridViews()
@@ -270,32 +271,43 @@ namespace Firedump.usercontrols
 
         private void treeViewTables_MouseUp(object sender, MouseEventArgs e)
         {
-            if(e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)
             {
-                Point p = new Point(e.X,e.Y);
+                Point p = new Point(e.X, e.Y);
                 MyTreeNode node = treeViewTables.GetNodeAt(p) as MyTreeNode;
-                switch(node.Type)
+                if(node != null)
                 {
-                    case NodeType.Table:
-                        {
-                            treeViewTables.SelectedNode = node;
-                            TableTableMenu.Show(this, this.PointToClient(treeViewTables.PointToScreen(p)));
-                        }
-                        break;
-                    case NodeType.Trigger:
-                        {
-                            treeViewTables.SelectedNode = node;
-                            TableTriggersMenu.Show(this, this.PointToClient(treeViewTables.PointToScreen(p)));
-                        }
-                        break;
+                    switch (node.Type)
+                    {
+                        case NodeType.Table:
+                            {
+                                treeViewTables.SelectedNode = node;
+                                TableTableMenu.Show(this, this.PointToClient(treeViewTables.PointToScreen(p)));
+                            }
+                            break;
+                        case NodeType.Trigger:
+                            {
+                                treeViewTables.SelectedNode = node;
+                                TableTriggersMenu.Show(this, this.PointToClient(treeViewTables.PointToScreen(p)));
+                            }
+                            break;
+                    }
+                }
+            } else if(e.Button == MouseButtons.Left && !GetMainHome().GetUserControl<Editor>().GetQueryExecutor().IsAlive())
+            {
+                MyTreeNode node = treeViewTables.GetNodeAt(new Point(e.X, e.Y)) as MyTreeNode;
+                if(node != null && node.Type == NodeType.Table && e.X > node.Bounds.Left - 15)
+                {
+                    GetMainHome().GetUserControl<TableView>().setTableInfo(node.Text,DbDataHelper.getTableFields(GetSqlConnection(), node.Text)
+                        , DbDataHelper.getTableInfo(GetSqlConnection(), node.Text));
                 }
             }
         }
 
 
-        internal void TreeViewTable_MenuItem_ShowData(object sender,EventArgs e)
+        internal void TreeViewTable_MenuItem_ShowData(object sender, EventArgs e)
         {
-            if(IsNodeSelected())
+            if (IsNodeSelected())
             {
                 string sql = "SELECT * FROM " + treeViewTables.SelectedNode.Text;
                 GetMainHome().GetUserControl<Editor>().Execute(sql, new QueryParams()
@@ -316,16 +328,16 @@ namespace Firedump.usercontrols
                 {
                     sendCreateTableToEditor(treeViewTables.SelectedNode.Text);
                 }
-                else if(node.Type == NodeType.Trigger)
+                else if (node.Type == NodeType.Trigger)
                 {
                     sendCreateTriggerToEditor(node.Parent.Parent.Text, node.Text);
                 }
             }
         }
 
-        internal void TreeViewTable_Menuitem_ShowCreateWithTrigger(object sender,EventArgs e)
+        internal void TreeViewTable_Menuitem_ShowCreateWithTrigger(object sender, EventArgs e)
         {
-            if(IsNodeSelected())
+            if (IsNodeSelected())
             {
                 var node = treeViewTables.SelectedNode as MyTreeNode;
                 if (node.Type == NodeType.Table)
@@ -337,7 +349,7 @@ namespace Firedump.usercontrols
 
         private void sendCreateTableToEditor(string table)
         {
-            GetMainHome().GetUserControl<Editor>().AddQueryTab(DbDataHelper.getCreateTable(GetSqlConnection(), table),table);
+            GetMainHome().GetUserControl<Editor>().AddQueryTab(DbDataHelper.getCreateTable(GetSqlConnection(), table), table);
         }
 
         private void sendCreateTableWithTriggersToEditor(string table)
@@ -345,23 +357,23 @@ namespace Firedump.usercontrols
             StringBuilder sb = new StringBuilder();
             sb.Append(DbDataHelper.getCreateTable(GetSqlConnection(), table) + ";\r\n");
             List<string> triggers = DbDataHelper.getTableTriggers(GetSqlConnection(), table);
-            foreach(string t in triggers)
+            foreach (string t in triggers)
             {
-                sb.Append("\r\n" +DbDataHelper.GetCreateTrigger(GetSqlConnection(), table, t) + "\r\n");
+                sb.Append("\r\n" + DbDataHelper.GetCreateTrigger(GetSqlConnection(), table, t) + "\r\n");
             }
-            GetMainHome().GetUserControl<Editor>().AddQueryTab(sb.ToString(),table);
+            GetMainHome().GetUserControl<Editor>().AddQueryTab(sb.ToString(), table);
         }
 
-        private void sendCreateTriggerToEditor(string table,string triggerName)
+        private void sendCreateTriggerToEditor(string table, string triggerName)
         {
             GetMainHome().GetUserControl<Editor>().AddQueryTab(DbDataHelper.GetCreateTrigger(GetSqlConnection(), table, triggerName), triggerName);
         }
 
         internal void TreeViewTableTriggers_MenuItem_ShowCreate(object sender, EventArgs e)
         {
-            if(IsNodeSelected())
+            if (IsNodeSelected())
             {
-                sendCreateTriggerToEditor(treeViewTables.SelectedNode.Parent.Parent.Text,treeViewTables.SelectedNode.Text);
+                sendCreateTriggerToEditor(treeViewTables.SelectedNode.Parent.Parent.Text, treeViewTables.SelectedNode.Text);
             }
         }
 
@@ -369,15 +381,15 @@ namespace Firedump.usercontrols
         {
         }
 
-        internal void TreeViewTable_MenuItem_TruncateTable(object sender,EventArgs e)
+        internal void TreeViewTable_MenuItem_TruncateTable(object sender, EventArgs e)
         {
         }
 
-        internal void TreeViewTable_MenuItem_RefreshTable(object sender,EventArgs e)
+        internal void TreeViewTable_MenuItem_RefreshTable(object sender, EventArgs e)
         {
         }
 
-        internal void TreeViewTable_MenuItem_Inspect(object sender,EventArgs e)
+        internal void TreeViewTable_MenuItem_Inspect(object sender, EventArgs e)
         {
         }
 

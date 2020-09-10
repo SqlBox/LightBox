@@ -42,7 +42,7 @@ namespace Firedump.core
                 SelectionColor = System.Drawing.Color.FromArgb(60, 0, 0, 255),
                 Size = new System.Drawing.Size(726, 120),
                 Language = Language.SQL,
-                AutoIndent = true
+                AutoIndent = true,
             };
         }
 

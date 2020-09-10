@@ -1,4 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
+using System;
+using System.Windows.Forms;
 
 namespace Firedump.usercontrols
 {
@@ -539,7 +541,12 @@ namespace Firedump.usercontrols
 
         }
 
-    
+        private void TreeViewTable_MouseClick(object sender, MouseEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+
 
         #endregion
 

@@ -389,6 +389,9 @@
     <EmbeddedResource Include="ui\usercontrols\Terminal.resx">
       <DependentUpon>Terminal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ui\usercontrols\UserControlReference.resx">
+      <DependentUpon>UserControlReference.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="firedumpdbDataSet.xsc">
       <DependentUpon>firedumpdbDataSet.xsd</DependentUpon>
     </None>

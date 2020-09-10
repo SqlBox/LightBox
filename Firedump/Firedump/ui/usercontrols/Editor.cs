@@ -118,9 +118,11 @@ namespace Firedump.usercontrols
             }
             else if (e.KeyData == Keys.F6)
             {
+                ExecuteCurrent();
             }
             else if (e.KeyData == Keys.F7) 
-            { 
+            {
+                ExecuteCurrent(true);
             }
         }       
 
