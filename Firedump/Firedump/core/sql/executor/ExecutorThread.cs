@@ -30,7 +30,7 @@ namespace Firedump.core.sql.executor
             ExecutionQueryEvent eventResult = null;
             for (int i = 0; i < statements.Count; i++)
             {
-                bool is_last = false;
+                bool is_last = statements.Count - 1 == i;
                 CurrentQuery = statements[i];
                 try
                 {
@@ -54,7 +54,6 @@ namespace Firedump.core.sql.executor
                             {
                                 break;
                             }
-                            is_last = statements.Count - 1 == i;
                             bool is_select = Utils.IsShowDataTypeOfCommand(statements[i]);
                             var resultData = new DataTable();
                             if (is_last)

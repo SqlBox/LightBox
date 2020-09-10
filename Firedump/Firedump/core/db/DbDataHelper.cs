@@ -28,18 +28,28 @@ namespace Firedump.core.db
         {
             String sql = "";
             List<string> data = null;
-            if (con == null)
+            try
             {
-                using (con = DB.connect(server))
+                if (con == null)
                 {
-                    sql = new SqlBuilderFactory(con).Create(null).getDatabases();
-                    data = getStringData(con, sql);
-                    Terminal.MainTerminal.AppendText(sql);
+                    using (con = DB.connect(server))
+                    {
+                        sql = new SqlBuilderFactory(con).Create(null).getDatabases();
+                        data = getStringData(con, sql);
+                        Terminal.MainTerminal.AppendText(sql);
+                    }
+                    return data;
                 }
-                return data;
+                sql = new SqlBuilderFactory(con).Create(null).getDatabases();
+                data = getStringData(con, sql);
             }
-            sql = new SqlBuilderFactory(con).Create(null).getDatabases();
-            data = getStringData(con,sql);
+            catch(DbException ex)
+            {
+                sql = ex.Message;
+#if DEBUG
+                Console.WriteLine(ex.Message);
+#endif
+            }
             Terminal.MainTerminal.AppendText(sql);
             return data;
         }
@@ -48,18 +58,28 @@ namespace Firedump.core.db
         {
             List<string> data = null;
             string sql = "";
-            if (con == null)
+            try
             {
-                using (con = DB.connect(server, database))
+                if (con == null)
                 {
-                    sql = new SqlBuilderFactory(con).Create(database).showTablesSql();
-                    data = getStringData(con,sql);
-                    Terminal.MainTerminal.AppendText(sql);
+                    using (con = DB.connect(server, database))
+                    {
+                        sql = new SqlBuilderFactory(con).Create(database).showTablesSql();
+                        data = getStringData(con, sql);
+                        Terminal.MainTerminal.AppendText(sql);
+                    }
+                    return data;
                 }
-                return data;
+                sql = new SqlBuilderFactory(con).Create(database).showTablesSql();
+                data = getStringData(con, sql);
             }
-            sql = new SqlBuilderFactory(con).Create(database).showTablesSql();
-            data = getStringData(con, sql);
+            catch (DbException ex)
+            {
+                sql = ex.Message;
+#if DEBUG
+                Console.WriteLine(ex.Message);
+#endif
+            }
             Terminal.MainTerminal.AppendText(sql);
             return data;
         }
@@ -73,13 +93,24 @@ namespace Firedump.core.db
         internal static List<string> getTableTriggers(DbConnection con, string table)
         {
             var data = new List<string>();
-            string sql = new SqlBuilderFactory(con).Create(con.Database).GetTableTriggers(table);
-            using (var reader = new DbCommandFactory(con,sql).Create().ExecuteReader())
+            string sql = "";
+            try
             {
-                while(reader.Read())
+                sql = new SqlBuilderFactory(con).Create(con.Database).GetTableTriggers(table);
+                using (var reader = new DbCommandFactory(con, sql).Create().ExecuteReader())
                 {
-                    data.Add(reader.GetString(0));
+                    while (reader.Read())
+                    {
+                        data.Add(reader.GetString(0));
+                    }
                 }
+            }
+            catch (DbException ex)
+            {
+                sql = ex.Message;
+#if DEBUG
+                Console.WriteLine(ex.Message);
+#endif
             }
             Terminal.MainTerminal.AppendText(sql);
             return data;
@@ -88,21 +119,32 @@ namespace Firedump.core.db
         internal static string GetCreateTrigger(DbConnection con, string table, string triggerName)
         {
             string triggerCreateStatement = "";
-            string sql = new SqlBuilderFactory(con).Create(con.Database).GetTriggerCreateStatement(table, triggerName);
-            using (var r = new DbCommandFactory(con, sql).Create().ExecuteReader())
+            string sql = "";
+            try
             {
-                while (r.Read())
+                sql = new SqlBuilderFactory(con).Create(con.Database).GetTriggerCreateStatement(table, triggerName);
+                using (var r = new DbCommandFactory(con, sql).Create().ExecuteReader())
                 {
-                    if (con is MySqlConnection || con is SQLiteConnection)
+                    while (r.Read())
                     {
-                        triggerCreateStatement = "DELIMITER $ " + "\r\n" + r.GetString(2) + " $ " + "\r\n" + " DELIMITER ;\0";
+                        if (con is MySqlConnection || con is SQLiteConnection)
+                        {
+                            triggerCreateStatement = "DELIMITER $ " + "\r\n" + r.GetString(2) + " $ " + "\r\n" + " DELIMITER ;\0";
+                        }
+                        else
+                        {
+                            triggerCreateStatement = r.GetString(2);
+                        }
+                        break;
                     }
-                    else
-                    {
-                        triggerCreateStatement = r.GetString(2);
-                    }
-                    break;
                 }
+            }
+            catch (DbException ex)
+            {
+                sql = ex.Message;
+#if DEBUG
+                Console.WriteLine(ex.Message);
+#endif
             }
             Terminal.MainTerminal.AppendText(sql);
             return triggerCreateStatement;
@@ -112,36 +154,47 @@ namespace Firedump.core.db
         internal static List<Table> getTablesInfo(sqlservers server, DbConnection con)
         {
             var list = new List<Table>();
-            if(sql.Utils.IsDbEmbedded(server.db_type))
+            try
             {
-                //case of embedded like sqlite the process to get all fields from all tables is very different.
-                //first get all tables
-                List<string> tables = getTables(con);
-                //and then for every each one get table fields
-                foreach(string table in tables)
+                if (sql.Utils.IsDbEmbedded(server.db_type))
                 {
-                    string table_info = new SqlBuilderFactory(server).Create(con.Database).describeTableSql(table);
-                    using (var r = new DbCommandFactory(con,table_info).Create().ExecuteReader())
+                    //case of embedded like sqlite the process to get all fields from all tables is very different.
+                    //first get all tables
+                    List<string> tables = getTables(con);
+                    //and then for every each one get table fields
+                    foreach (string table in tables)
                     {
-                        while(r.Read())
+                        string table_info = new SqlBuilderFactory(server).Create(con.Database).describeTableSql(table);
+                        using (var r = new DbCommandFactory(con, table_info).Create().ExecuteReader())
                         {
-                            list.Add(new Table(table, r.GetString(1), r.GetString(2), r.GetInt32(3) == 0 ? "YES" : "NO", 0));
+                            while (r.Read())
+                            {
+                                list.Add(new Table(table, r.GetString(1), r.GetString(2), r.GetInt32(3) == 0 ? "YES" : "NO", 0));
+                            }
+                        }
+                        Terminal.MainTerminal.AppendText(table_info);
+                    }
+                }
+                else
+                {
+                    string sql = new SqlBuilderFactory(server).Create(con.Database).getAllFieldsFromAllTablesInDb();
+                    using (var r = new DbCommandFactory(con, sql).Create().ExecuteReader())
+                    {
+                        while (r.Read())
+                        {
+                            list.Add(new Table(r.GetString(0), r.GetString(1), r.GetString(2), r.GetString(3),
+                                r.GetValue(4) != DBNull.Value ? r.GetInt64(4) : default));
                         }
                     }
-                    Terminal.MainTerminal.AppendText(table_info);
+                    Terminal.MainTerminal.AppendText(sql);
                 }
-            } else
+            }
+            catch (DbException ex)
             {
-                string sql = new SqlBuilderFactory(server).Create(con.Database).getAllFieldsFromAllTablesInDb();
-                using (var r = new DbCommandFactory(con, sql).Create().ExecuteReader())
-                {
-                    while (r.Read())
-                    {
-                        list.Add(new Table(r.GetString(0), r.GetString(1), r.GetString(2), r.GetString(3),
-                            r.GetValue(4) != DBNull.Value ? r.GetInt64(4) : default));
-                    }
-                }
-                Terminal.MainTerminal.AppendText(sql);
+                Terminal.MainTerminal.AppendText(ex.Message);
+#if DEBUG
+                Console.WriteLine(ex.Message);
+#endif
             }
             return list;
         }
@@ -149,22 +202,34 @@ namespace Firedump.core.db
         internal static List<string> getTableFields(DbConnection con, string table)
         {
             var data = new List<string>();
-            string command = new SqlBuilderFactory(con).Create(con.Database).describeTableSql(table);
-            using (var reader = new DbCommandFactory(con, command).Create().ExecuteReader())
+            string command = "";
+            try
             {
-                if(!sql.Utils.IsDbEmbedded(sql.Utils.GetDbTypeEnum(con)))
+                command = new SqlBuilderFactory(con).Create(con.Database).describeTableSql(table);
+                using (var reader = new DbCommandFactory(con, command).Create().ExecuteReader())
                 {
-                    while (reader.Read())
+                    if (!sql.Utils.IsDbEmbedded(sql.Utils.GetDbTypeEnum(con)))
                     {
-                        data.Add(reader.GetString(0) + " " + reader.GetString(1) + ", Nullable:" + reader.GetString(2));
+                        while (reader.Read())
+                        {
+                            data.Add(reader.GetString(0) + " " + reader.GetString(1) + ", Nullable:" + reader.GetString(2));
+                        }
                     }
-                } else
-                {
-                    while (reader.Read())
+                    else
                     {
-                        data.Add(reader.GetString(1) + " " + reader.GetString(2) + ", Nullable:" + (reader.GetInt32(3) == 1 ? "NO" : "YES"));
+                        while (reader.Read())
+                        {
+                            data.Add(reader.GetString(1) + " " + reader.GetString(2) + ", Nullable:" + (reader.GetInt32(3) == 1 ? "NO" : "YES"));
+                        }
                     }
                 }
+            }
+            catch (DbException ex)
+            {
+                command = ex.Message;
+#if DEBUG
+                Console.WriteLine(ex.Message);
+#endif
             }
             Terminal.MainTerminal.AppendText(command);
             return data;
@@ -175,18 +240,29 @@ namespace Firedump.core.db
             var data = new List<string>();
             if(!sql.Utils.IsDbEmbedded(sql.Utils.GetDbTypeEnum(con)))
             {
-                string command = new SqlBuilderFactory(con).Create(con.Database).getTableInfo(table);
-                using (var reader = new DbCommandFactory(con, command).Create().ExecuteReader())
+                string command = "";
+                try
                 {
-                    while (reader.Read())
+                    command = new SqlBuilderFactory(con).Create(con.Database).getTableInfo(table);
+                    using (var reader = new DbCommandFactory(con, command).Create().ExecuteReader())
                     {
-                        data.Add("~Rows:" + (reader.IsDBNull(5) ? "" : reader.GetString(5)));
-                        data.Add("AvgLen:" + (reader.IsDBNull(0) ? "" : reader.GetString(0)));
-                        data.Add("Length:" + (reader.IsDBNull(1) ? "" : reader.GetString(1)));
-                        data.Add("Free:" + (reader.IsDBNull(2) ? "" : reader.GetString(2)));
-                        data.Add("AI:" + (reader.IsDBNull(3) ? "" : reader.GetString(3)));
-                        data.Add("Collation:" + (reader.IsDBNull(4) ? "" : reader.GetString(4)));
+                        while (reader.Read())
+                        {
+                            data.Add("~Rows:" + (reader.IsDBNull(5) ? "" : reader.GetString(5)));
+                            data.Add("AvgLen:" + (reader.IsDBNull(0) ? "" : reader.GetString(0)));
+                            data.Add("Length:" + (reader.IsDBNull(1) ? "" : reader.GetString(1)));
+                            data.Add("Free:" + (reader.IsDBNull(2) ? "" : reader.GetString(2)));
+                            data.Add("AI:" + (reader.IsDBNull(3) ? "" : reader.GetString(3)));
+                            data.Add("Collation:" + (reader.IsDBNull(4) ? "" : reader.GetString(4)));
+                        }
                     }
+                }
+                catch (DbException ex)
+                {
+                    command = ex.Message;
+#if DEBUG
+                    Console.WriteLine(ex.Message);
+#endif
                 }
                 Terminal.MainTerminal.AppendText(command);
             }
@@ -196,13 +272,24 @@ namespace Firedump.core.db
         internal static string getCreateTable(DbConnection con,string table)
         {
             string res = "";
-            string sql = new SqlBuilderFactory(con).Create(con.Database).ShowCreateStatement(table);
-            using (var reader = new DbCommandFactory(con,sql).Create().ExecuteReader())
+            string sql = "";
+            try
             {
-                while(reader.Read())
+                sql = new SqlBuilderFactory(con).Create(con.Database).ShowCreateStatement(table);
+                using (var reader = new DbCommandFactory(con, sql).Create().ExecuteReader())
                 {
-                    res = reader.GetString(1);
+                    while (reader.Read())
+                    {
+                        res = reader.GetString(1);
+                    }
                 }
+            }
+            catch (DbException ex)
+            {
+                sql = ex.Message;
+#if DEBUG
+                Console.WriteLine(ex.Message);
+#endif
             }
             Terminal.MainTerminal.AppendText(sql);
             return res;
@@ -212,12 +299,22 @@ namespace Firedump.core.db
         internal static List<string> getStringData(DbConnection con, string sql)
         {
             var data = new List<string>();
-            using (var reader = new DbCommandFactory(con, sql).Create().ExecuteReader())
+            try
             {
-                while (reader.Read())
+                using (var reader = new DbCommandFactory(con, sql).Create().ExecuteReader())
                 {
-                    data.Add(reader.GetString(0));
+                    while (reader.Read())
+                    {
+                        data.Add(reader.GetString(0));
+                    }
                 }
+            }
+            catch (DbException ex)
+            {
+                sql = ex.Message;
+#if DEBUG
+                Console.WriteLine(ex.Message);
+#endif
             }
             Terminal.MainTerminal.AppendText(sql);
             return data;
@@ -226,15 +323,25 @@ namespace Firedump.core.db
         internal static DataTable getDataTableData(DbConnection con, string sql)
         {
             var data = new DataTable();
-            using (var adapter = new DbAdapterFactory(con, sql).Create())
+            try
             {
-                try
+                using (var adapter = new DbAdapterFactory(con, sql).Create())
                 {
-                    adapter.Fill(data);
-                    Terminal.MainTerminal.AppendText(sql);
-                }
-                catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+                    try
+                    {
+                        adapter.Fill(data);
+                        Terminal.MainTerminal.AppendText(sql);
+                    }
+                    catch (Exception ex) { Console.WriteLine(ex.ToString()); }
 
+                }
+            }
+            catch (DbException ex)
+            {
+                Terminal.MainTerminal.AppendText(ex.Message);
+#if DEBUG
+                Console.WriteLine(ex.Message);
+#endif
             }
             return data;
         }

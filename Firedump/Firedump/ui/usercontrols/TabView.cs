@@ -58,9 +58,10 @@ namespace Firedump.usercontrols
             {
                 base.changeDatabase(comboBoxServers.SelectedItem.ToString());
             }
-            this.initTabControl(comboBoxServers.SelectedItem.ToString());
+            var tables = DbDataHelper.getTables(base.GetSqlConnection());
+            this.initTabControl(comboBoxServers.SelectedItem.ToString(),tables);
             GetMainHome().GetUserControl<Editor>().UpdateEditor(
-                new SqlBuilderFactory(base.GetSqlConnection()).Create(null).removeSystemDatabases(DbDataHelper.getTables(base.GetSqlConnection()), false));
+                new SqlBuilderFactory(base.GetSqlConnection()).Create(null).removeSystemDatabases(tables, false));
         }
 
 
@@ -73,7 +74,7 @@ namespace Firedump.usercontrols
         }
 
         // On tab select set the data.
-        private void initTabControl(string database = null)
+        private void initTabControl(string database = null, List<string> tables = null)
         {
             if (!Utils.IsDbEmbedded(GetServer().db_type) && database != null && DB.IsConnectedToDatabaseAndAfterReconnect(this))
             {
@@ -84,7 +85,7 @@ namespace Firedump.usercontrols
                 switch(tabControl1.SelectedTab.Text)
                 {
                     case "Tables":
-                        this.setDatagridviewTables();
+                        this.setDatagridviewTables(tables);
                         break;
                     case "Indexes":
                         this.setDataGridViewIndexes();
@@ -189,10 +190,10 @@ namespace Firedump.usercontrols
         private MyTreeNode getDummy() =>
             new MyTreeNode() { ImageIndex = 0 };
 
-        private void setDatagridviewTables()
+        private void setDatagridviewTables(List<string> tables)
         {
             setRootTablesIntoTreeView(new SqlBuilderFactory(base.GetSqlConnection())
-                        .Create(null).removeSystemDatabases(DbDataHelper.getTables(base.GetSqlConnection()), false));
+                        .Create(null).removeSystemDatabases(tables == null ? DbDataHelper.getTables(base.GetSqlConnection()) : tables, false));
         }
     
 

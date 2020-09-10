@@ -59,6 +59,7 @@ namespace Firedump.core.db
                 }
             }
             catch (DbException ex) {
+                Terminal.MainTerminal.AppendText(ex.Message);
 #if DEBUG
                 Console.WriteLine(ex.Message);
 #endif
@@ -76,6 +77,7 @@ namespace Firedump.core.db
                 }
             }catch(DbException ex)
             {
+                Terminal.MainTerminal.AppendText(ex.Message);
 #if DEBUG
                 Console.WriteLine(ex.Message);
 #endif
