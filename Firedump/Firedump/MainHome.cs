@@ -270,7 +270,13 @@ namespace Firedump
         // Called/Event fired from child/composit components/userControls when mysqlconnection is disconnected and after failed reconnect try.
         private void onDisconnected(object sender, EventArgs e)
         {
-
+            this.con = null;
+            foreach (UserControlReference f in ChildControls)
+            {
+                //also inform all the other child components to update the ui accordingly for offline/disconnected mode
+                f.onDisconnect();
+            }
+            // change mainhome/parent ui according to offline/disconnected status here
         }
 
 
