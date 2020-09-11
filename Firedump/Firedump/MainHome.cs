@@ -3,8 +3,10 @@ using Firedump.core.sql;
 using Firedump.Forms.mysql;
 using Firedump.Forms.mysql.connect;
 using Firedump.models.events;
+using Firedump.Properties;
 using Firedump.ui.forms;
 using Firedump.usercontrols;
+using Microsoft.WindowsAPICodePack.Shell.Interop;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -50,6 +52,20 @@ namespace Firedump
             }
         }
 
+        private void MainHomeLoad(object sender, EventArgs e)
+        {
+            // Set window location
+            if (Settings.Default.WindowLocation != null)
+            {
+                this.Location = Settings.Default.WindowLocation;
+            }
+            // Set window size
+            if (Settings.Default.WindowSize != null)
+            {
+                this.Size = Settings.Default.WindowSize;
+            }
+        }
+
 
         private void InitHomeEvents()
         {
@@ -79,6 +95,29 @@ namespace Firedump
                                        Application.ProductName,
                                        MessageBoxButtons.YesNo) == DialogResult.No;
                 };
+                //save window size and location
+                // Copy window location to app settings
+                Settings.Default.WindowLocation = this.Location;
+                if(Settings.Default.WindowLocation.X < 20 || Settings.Default.WindowLocation.Y < 20)
+                {
+                    Settings.Default.WindowLocation = new Point(25,25);
+                }
+                
+                // Copy window size to app settings
+                if (this.WindowState == FormWindowState.Normal)
+                {
+                    Settings.Default.WindowSize = this.Size;
+                    if(Settings.Default.WindowSize.Width < 250 || Settings.Default.WindowSize.Height < 250)
+                    {
+                        Settings.Default.WindowSize = new Size(1100,800);
+                    }
+                }
+                else
+                {
+                    Settings.Default.WindowSize = this.RestoreBounds.Size;
+                }
+                // Save settings
+                Settings.Default.Save();
             };
             this.ResizeBegin += (sender, e) => this.SuspendLayout();
             this.ResizeEnd += (sender, e) => this.ResumeLayout();
@@ -231,13 +270,7 @@ namespace Firedump
         // Called/Event fired from child/composit components/userControls when mysqlconnection is disconnected and after failed reconnect try.
         private void onDisconnected(object sender, EventArgs e)
         {
-            this.con = null;
-            foreach (UserControlReference f in ChildControls)
-            {
-                //also inform all the other child components to update the ui accordingly for offline/disconnected mode
-                f.onDisconnect();
-            }
-            // change mainhome/parent ui according to offline/disconnected status here
+
         }
 
 
@@ -318,6 +351,6 @@ namespace Firedump
             return this.server;
         }
 
-        
+       
     }
 }

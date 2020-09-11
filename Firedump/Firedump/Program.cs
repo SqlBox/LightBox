@@ -24,6 +24,8 @@ namespace Firedump
         {
             Application.EnableVisualStyles();
             Application.Run(new MainHome());
+            //Properties.Settings.Default.test = GetSelectedTabEditor().Text;
+            //Properties.Settings.Default.Save();
         }
 
     }

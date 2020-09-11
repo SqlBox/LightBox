@@ -208,9 +208,6 @@
     <Compile Include="core\EditorAdapter.cs" />
     <Compile Include="core\models\dbinfo\Status.cs" />
     <Compile Include="core\models\events\ExecutionEventArgs.cs" />
-    <Compile Include="core\models\FullWidthToolStripTextBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="core\models\MyToolStripItem.cs" />
     <Compile Include="core\models\MyTreeNode.cs" />
     <Compile Include="core\models\ToolStripItemDbType.cs" />
