@@ -67,6 +67,8 @@ namespace Firedump.core
             private static IEnumerable<MenuItem> TableTriggerGenerator(TabView _this)
             {
                 yield return new MenuItem("Send Create Statement", _this.TreeViewTableTriggers_MenuItem_ShowCreate);
+                yield return new MenuItem("-");
+                yield return new MenuItem("Drop Trigger", _this.TreeViewTableTriggers_MenuItem_DropTrigger);
             }
         }
     }

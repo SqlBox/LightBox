@@ -135,6 +135,7 @@ namespace Firedump
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMainParent)).BeginInit();
             this.splitContainerMainParent.Panel1.SuspendLayout();
@@ -744,6 +745,7 @@ namespace Firedump
             this.fileToolStripMenuItem,
             this.databaseToolStripMenuItem,
             this.editToolStripMenuItem,
+            this.optionsToolStripMenuItem,
             this.dataToolStripMenuItem,
             this.helpToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -1097,6 +1099,13 @@ namespace Firedump
             this.imageList1.Images.SetKeyName(2, "expand.png");
             this.imageList1.Images.SetKeyName(3, "collapse.png");
             // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 24);
+            this.optionsToolStripMenuItem.Text = "Options";
+            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.MenuOptionsClick);
+            // 
             // MainHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1236,5 +1245,6 @@ namespace Firedump
         private ui.usercontrols.Terminal terminal1;
         private System.Windows.Forms.ToolStripButton toolStripButtonHistoryEraser;
         private System.Windows.Forms.ToolStripMenuItem mySqlDumpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
     }
 }

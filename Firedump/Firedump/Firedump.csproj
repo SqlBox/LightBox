@@ -247,6 +247,12 @@
     <Compile Include="sqlitetables\schedule_save_locations.cs" />
     <Compile Include="core\IconHelper.cs" />
     <Compile Include="ui\forms\FormUtils.cs" />
+    <Compile Include="ui\forms\OptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ui\forms\OptionsForm.Designer.cs">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ui\forms\TerminalForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -368,6 +374,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ui\forms\OptionsForm.resx">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ui\forms\TerminalForm.resx">
       <DependentUpon>TerminalForm.cs</DependentUpon>
     </EmbeddedResource>

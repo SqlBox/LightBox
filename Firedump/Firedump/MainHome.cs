@@ -97,12 +97,7 @@ namespace Firedump
                 };
                 //save window size and location
                 // Copy window location to app settings
-                Settings.Default.WindowLocation = this.Location;
-                if(Settings.Default.WindowLocation.X < 20 || Settings.Default.WindowLocation.Y < 20)
-                {
-                    Settings.Default.WindowLocation = new Point(25,25);
-                }
-                
+                Settings.Default.WindowLocation = this.Location; 
                 // Copy window size to app settings
                 if (this.WindowState == FormWindowState.Normal)
                 {
@@ -357,6 +352,5 @@ namespace Firedump
             return this.server;
         }
 
-       
     }
 }

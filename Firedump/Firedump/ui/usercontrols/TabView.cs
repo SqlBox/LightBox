@@ -115,6 +115,7 @@ namespace Firedump.usercontrols
             }
         }
 
+
         private void setRootTablesIntoTreeView(List<string> tables)
         {
             this.treeViewTables.BeginUpdate();
@@ -390,6 +391,10 @@ namespace Firedump.usercontrols
         }
 
         internal void TreeViewTable_MenuItem_Inspect(object sender, EventArgs e)
+        {
+        }
+
+        internal void TreeViewTableTriggers_MenuItem_DropTrigger(object sender, EventArgs e)
         {
         }
 

@@ -245,5 +245,10 @@ namespace Firedump
                 EnableUi(false);
             }
         }
+
+        private void MenuOptionsClick(object sender, EventArgs e)
+        {
+            new OptionsForm(this.con).ShowDialog();
+        }
     }
 }
