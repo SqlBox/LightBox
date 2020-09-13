@@ -77,5 +77,41 @@ namespace Firedump.Properties {
                 this["WindowSize"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool option_sqlite_begintranscommit {
+            get {
+                return ((bool)(this["option_sqlite_begintranscommit"]));
+            }
+            set {
+                this["option_sqlite_begintranscommit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool option_sqlite_begintransdbopen {
+            get {
+                return ((bool)(this["option_sqlite_begintransdbopen"]));
+            }
+            set {
+                this["option_sqlite_begintransdbopen"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string option_sqlite_sqlafteropen {
+            get {
+                return ((string)(this["option_sqlite_sqlafteropen"]));
+            }
+            set {
+                this["option_sqlite_sqlafteropen"] = value;
+            }
+        }
     }
 }
