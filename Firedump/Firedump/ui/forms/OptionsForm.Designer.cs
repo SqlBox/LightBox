@@ -94,9 +94,24 @@
             this.labelUserVersion = new System.Windows.Forms.Label();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.buttonSavePragma = new System.Windows.Forms.Button();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.numericFontSize = new System.Windows.Forms.NumericUpDown();
+            this.labelFontSize = new System.Windows.Forms.Label();
+            this.labelFont = new System.Windows.Forms.Label();
+            this.comboBoxFonts = new System.Windows.Forms.ComboBox();
+            this.labelCodeCompletion = new System.Windows.Forms.Label();
+            this.checkBoxCodeCompletion = new System.Windows.Forms.CheckBox();
+            this.ap = new System.Windows.Forms.Label();
+            this.numericUpDownAppearInterval = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPageGeneric.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            this.groupBoxSqlEditor.SuspendLayout();
+            this.groupBoxFont.SuspendLayout();
             this.tabPageMySqlMaria.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.tabPageSqlite.SuspendLayout();
@@ -116,6 +131,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxMaxPageCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboboxPageSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericFontSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAppearInterval)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -162,16 +180,28 @@
             // 
             // groupBoxSqlEditor
             // 
+            this.groupBoxSqlEditor.Controls.Add(this.comboBox2);
+            this.groupBoxSqlEditor.Controls.Add(this.label6);
+            this.groupBoxSqlEditor.Controls.Add(this.numericUpDown3);
+            this.groupBoxSqlEditor.Controls.Add(this.label5);
+            this.groupBoxSqlEditor.Controls.Add(this.numericUpDownAppearInterval);
+            this.groupBoxSqlEditor.Controls.Add(this.ap);
+            this.groupBoxSqlEditor.Controls.Add(this.checkBoxCodeCompletion);
+            this.groupBoxSqlEditor.Controls.Add(this.labelCodeCompletion);
             this.groupBoxSqlEditor.Location = new System.Drawing.Point(3, 3);
             this.groupBoxSqlEditor.Name = "groupBoxSqlEditor";
-            this.groupBoxSqlEditor.Size = new System.Drawing.Size(669, 203);
+            this.groupBoxSqlEditor.Size = new System.Drawing.Size(669, 182);
             this.groupBoxSqlEditor.TabIndex = 0;
             this.groupBoxSqlEditor.TabStop = false;
             this.groupBoxSqlEditor.Text = "Sql Editor";
             // 
             // groupBoxFont
             // 
-            this.groupBoxFont.Location = new System.Drawing.Point(3, 212);
+            this.groupBoxFont.Controls.Add(this.numericFontSize);
+            this.groupBoxFont.Controls.Add(this.labelFontSize);
+            this.groupBoxFont.Controls.Add(this.labelFont);
+            this.groupBoxFont.Controls.Add(this.comboBoxFonts);
+            this.groupBoxFont.Location = new System.Drawing.Point(3, 191);
             this.groupBoxFont.Name = "groupBoxFont";
             this.groupBoxFont.Size = new System.Drawing.Size(669, 123);
             this.groupBoxFont.TabIndex = 1;
@@ -180,7 +210,7 @@
             // 
             // groupBoxTabHistory
             // 
-            this.groupBoxTabHistory.Location = new System.Drawing.Point(3, 341);
+            this.groupBoxTabHistory.Location = new System.Drawing.Point(3, 320);
             this.groupBoxTabHistory.Name = "groupBoxTabHistory";
             this.groupBoxTabHistory.Size = new System.Drawing.Size(669, 108);
             this.groupBoxTabHistory.TabIndex = 2;
@@ -189,7 +219,7 @@
             // 
             // groupBoxAppHistory
             // 
-            this.groupBoxAppHistory.Location = new System.Drawing.Point(3, 455);
+            this.groupBoxAppHistory.Location = new System.Drawing.Point(3, 434);
             this.groupBoxAppHistory.Name = "groupBoxAppHistory";
             this.groupBoxAppHistory.Size = new System.Drawing.Size(669, 108);
             this.groupBoxAppHistory.TabIndex = 3;
@@ -815,7 +845,7 @@
             // labelUserVersion
             // 
             this.labelUserVersion.AutoSize = true;
-            this.labelUserVersion.Location = new System.Drawing.Point(396, 199);
+            this.labelUserVersion.Location = new System.Drawing.Point(393, 199);
             this.labelUserVersion.Name = "labelUserVersion";
             this.labelUserVersion.Size = new System.Drawing.Size(67, 13);
             this.labelUserVersion.TabIndex = 30;
@@ -843,6 +873,157 @@
             this.buttonSavePragma.UseVisualStyleBackColor = true;
             this.buttonSavePragma.Click += new System.EventHandler(this.buttonSavePragma_Click);
             // 
+            // numericFontSize
+            // 
+            this.numericFontSize.Location = new System.Drawing.Point(80, 70);
+            this.numericFontSize.Maximum = new decimal(new int[] {
+            72,
+            0,
+            0,
+            0});
+            this.numericFontSize.Minimum = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
+            this.numericFontSize.Name = "numericFontSize";
+            this.numericFontSize.Size = new System.Drawing.Size(575, 21);
+            this.numericFontSize.TabIndex = 28;
+            this.numericFontSize.Value = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            // 
+            // labelFontSize
+            // 
+            this.labelFontSize.AutoSize = true;
+            this.labelFontSize.Location = new System.Drawing.Point(13, 72);
+            this.labelFontSize.Name = "labelFontSize";
+            this.labelFontSize.Size = new System.Drawing.Size(55, 13);
+            this.labelFontSize.TabIndex = 27;
+            this.labelFontSize.Text = "Font Size:";
+            // 
+            // labelFont
+            // 
+            this.labelFont.AutoSize = true;
+            this.labelFont.Location = new System.Drawing.Point(13, 34);
+            this.labelFont.Name = "labelFont";
+            this.labelFont.Size = new System.Drawing.Size(33, 13);
+            this.labelFont.TabIndex = 26;
+            this.labelFont.Text = "Font:";
+            // 
+            // comboBoxFonts
+            // 
+            this.comboBoxFonts.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.comboBoxFonts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxFonts.FormattingEnabled = true;
+            this.comboBoxFonts.Location = new System.Drawing.Point(80, 31);
+            this.comboBoxFonts.Name = "comboBoxFonts";
+            this.comboBoxFonts.Size = new System.Drawing.Size(575, 22);
+            this.comboBoxFonts.TabIndex = 25;
+            this.comboBoxFonts.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ComboBoxFonts_DrawItem);
+            // 
+            // labelCodeCompletion
+            // 
+            this.labelCodeCompletion.AutoSize = true;
+            this.labelCodeCompletion.Location = new System.Drawing.Point(13, 31);
+            this.labelCodeCompletion.Name = "labelCodeCompletion";
+            this.labelCodeCompletion.Size = new System.Drawing.Size(142, 13);
+            this.labelCodeCompletion.TabIndex = 0;
+            this.labelCodeCompletion.Text = "Code completion/intellisense";
+            // 
+            // checkBoxCodeCompletion
+            // 
+            this.checkBoxCodeCompletion.AutoSize = true;
+            this.checkBoxCodeCompletion.Checked = true;
+            this.checkBoxCodeCompletion.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxCodeCompletion.Location = new System.Drawing.Point(171, 31);
+            this.checkBoxCodeCompletion.Name = "checkBoxCodeCompletion";
+            this.checkBoxCodeCompletion.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxCodeCompletion.TabIndex = 1;
+            this.checkBoxCodeCompletion.UseVisualStyleBackColor = true;
+            // 
+            // ap
+            // 
+            this.ap.AutoSize = true;
+            this.ap.Location = new System.Drawing.Point(13, 56);
+            this.ap.Name = "ap";
+            this.ap.Size = new System.Drawing.Size(102, 13);
+            this.ap.TabIndex = 2;
+            this.ap.Text = "Appear interval(ms)";
+            // 
+            // numericUpDownAppearInterval
+            // 
+            this.numericUpDownAppearInterval.Location = new System.Drawing.Point(171, 54);
+            this.numericUpDownAppearInterval.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDownAppearInterval.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownAppearInterval.Name = "numericUpDownAppearInterval";
+            this.numericUpDownAppearInterval.Size = new System.Drawing.Size(82, 21);
+            this.numericUpDownAppearInterval.TabIndex = 3;
+            this.numericUpDownAppearInterval.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(13, 84);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(103, 13);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Min fragment length";
+            // 
+            // numericUpDown3
+            // 
+            this.numericUpDown3.Location = new System.Drawing.Point(171, 82);
+            this.numericUpDown3.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown3.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown3.Name = "numericUpDown3";
+            this.numericUpDown3.Size = new System.Drawing.Size(82, 21);
+            this.numericUpDown3.TabIndex = 5;
+            this.numericUpDown3.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(13, 115);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(122, 13);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Autocomplete text color";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(171, 112);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 21);
+            this.comboBox2.TabIndex = 7;
+            // 
             // OptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -860,6 +1041,10 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPageGeneric.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.groupBoxSqlEditor.ResumeLayout(false);
+            this.groupBoxSqlEditor.PerformLayout();
+            this.groupBoxFont.ResumeLayout(false);
+            this.groupBoxFont.PerformLayout();
             this.tabPageMySqlMaria.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.tabPageSqlite.ResumeLayout(false);
@@ -881,6 +1066,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxMaxPageCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboboxPageSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericFontSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAppearInterval)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -951,5 +1139,18 @@
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.Label labelUserVersion;
         private System.Windows.Forms.Button buttonSavePragma;
+        private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.NumericUpDown numericFontSize;
+        private System.Windows.Forms.Label labelFontSize;
+        private System.Windows.Forms.Label labelFont;
+        private System.Windows.Forms.ComboBox comboBoxFonts;
+        private System.Windows.Forms.CheckBox checkBoxCodeCompletion;
+        private System.Windows.Forms.Label labelCodeCompletion;
+        private System.Windows.Forms.Label ap;
+        private System.Windows.Forms.NumericUpDown numericUpDownAppearInterval;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown numericUpDown3;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Label label6;
     }
 }

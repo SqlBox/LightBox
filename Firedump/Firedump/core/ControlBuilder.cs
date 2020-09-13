@@ -68,7 +68,7 @@ namespace Firedump.core
             {
                 ImageList = imageList,
                 SearchPattern = searchPattern,
-                AppearInterval = 10,
+                AppearInterval = 20,
                 MinFragmentLength = 3,
                 ForeColor = Color.Blue,
             };

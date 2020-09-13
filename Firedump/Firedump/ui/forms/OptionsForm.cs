@@ -19,6 +19,17 @@ namespace Firedump.ui.forms
             InitializeComponent();
             FormUtils.setFormIcon(this);
             this.con = con;
+            comboBoxFonts.DataSource = System.Drawing.FontFamily.Families.ToList();
+        }
+
+        private void ComboBoxFonts_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            var comboBox = (ComboBox)sender;
+            var fontFamily = (FontFamily)comboBox.Items[e.Index];
+            var font = new Font(fontFamily, comboBox.Font.SizeInPoints);
+
+            e.DrawBackground();
+            e.Graphics.DrawString(font.Name, font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
         }
 
         private void OptionsForm_Load(object sender, EventArgs e)
@@ -51,5 +62,6 @@ namespace Firedump.ui.forms
         {
 
         }
+
     }
 }
