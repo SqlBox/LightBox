@@ -1,4 +1,5 @@
-﻿using Firedump.core.db;
+﻿using com.protectsoft.SqlStatementParser;
+using Firedump.core.db;
 using Firedump.core.sql;
 using Firedump.Forms.mysql;
 using Firedump.Forms.mysql.connect;
@@ -7,6 +8,7 @@ using Firedump.Properties;
 using Firedump.ui.forms;
 using Firedump.usercontrols;
 using Microsoft.WindowsAPICodePack.Shell.Interop;
+using sqlbox.commons;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -76,7 +78,7 @@ namespace Firedump
                 {
                     if(this.con != null)
                     {
-                        if (isConnected(con))
+                        if (DB.IsConnected(con))
                         {
                             DB.Rollback(con);
                         }
@@ -89,7 +91,7 @@ namespace Firedump
             {
                 // Inform user for lost un committed data if app closes
                 // To improve this we can ask "Would you like to commit and close?" and we do the work(commit) and close
-                if (this.isConnected(this.con) && e.CloseReason == CloseReason.UserClosing)
+                if (DB.IsConnected(this.con) && e.CloseReason == CloseReason.UserClosing)
                 {
                     e.Cancel = MessageBox.Show(@"Close App? Any UnCommitted changes will be lost!",
                                        Application.ProductName,
@@ -126,7 +128,7 @@ namespace Firedump
                 uc.Disconnected += new EventHandler(onDisconnected);
                 uc.ConnectionChanged += new EventHandler<ConChangedEventArgs>((sender,e) => {
                     this.con = e.con;
-                    SetAutoCommit(con);
+                    //SetAutoCommit(con);
                     this.pushConnection();
                     this.setHomeConnectionStatus();
                 });
@@ -228,7 +230,7 @@ namespace Firedump
 
         private void setHomeConnectionStatus()
         {
-            if(!Utils.IsDbEmbedded(this.server.db_type))
+            if(!core.sql.Utils.IsDbEmbedded(this.server.db_type))
             {
                 this.connectionStatusStripTextbox.Text = this.server.username + "@" + this.server.host + ":" + this.server.port + ":" + this.con.Database;
             }
@@ -242,7 +244,7 @@ namespace Firedump
         private void setConnectionAndServerToUserControls()
         {
             this.pushConnection();
-            if(Utils.IsDbEmbedded(GetServer().db_type))
+            if(core.sql.Utils._convert(GetServer().db_type) == sqlbox.commons.DbType.SQLITE)
             {
                 this.tabView1.setServerDataToComboBox(new List<string>() {"main"});
             } else
@@ -277,7 +279,7 @@ namespace Firedump
 
         private void ShowHideSystemDbEventClick(object sender, EventArgs e)
         {
-            if(this.isConnected(this.con) && !Utils.IsDbEmbedded(GetServer().db_type))
+            if(DB.IsConnected(this.con) && !core.sql.Utils.IsDbEmbedded(GetServer().db_type))
             {
                 this.tabView1.setServerDataToComboBox(new SqlBuilderFactory(GetServer())
                 .Create(null).removeSystemDatabases(DbDataHelper.getDatabases(this.server, this.con), this.showSystemDatabases = !this.showSystemDatabases));
@@ -287,7 +289,7 @@ namespace Firedump
 
         private void EnableDisable(bool enable)
         {
-            if(enable && (isConnected(con)))
+            if(enable && (DB.IsConnected(con)))
             {
                 setConstrolEnableStatus(enable);
             } else if(!enable)
@@ -313,24 +315,31 @@ namespace Firedump
 
         private void SetAutoCommit(DbConnection con)
         {
-            if(isConnected(con))
+            if(DB.IsConnected(con))
             {
-                if(Utils._convert(server.db_type) == sqlbox.commons.DbType.SQLITE)
-                {
-                    //sqlite transaction is needed to make db updates/changes
-                    //could be a config option for user, start or not a transaction on connection
-                    SqliteHelpers.BeginTransaction(con);
-                } else
-                {
-                    DbSessionSettings.SetAutoCommit(con, false);
-                }
+                applySettingsAfterOpen();
             }
         }
 
-        private bool isConnected(DbConnection c)
+        internal void applySettingsAfterOpen()
         {
-            return  c != null && c.State == ConnectionState.Open;
+            if (core.sql.Utils._convert(server.db_type) == sqlbox.commons.DbType.SQLITE)
+            {
+                if (Properties.Settings.Default.option_sqlite_begintransdbopen)
+                {
+                    //sqlite transaction is needed to make db updates/changes
+                    DbDataHelper.executeNonQuery(con, "begin transaction");
+                }
+                if (!string.IsNullOrWhiteSpace(Properties.Settings.Default.option_sqlite_sqlafteropen))
+                {
+                    DbDataHelper.executeNonQuery(con, Properties.Settings.Default.option_sqlite_sqlafteropen);
+                }
+            } else
+            {
+                DbDataHelper.executeNonQuery(con, "set autocommit=" + (Properties.Settings.Default.option_general_autocommit == true ? "1" : "0"));
+            }
         }
+
 
         private void disconnectEventClick(object sender, EventArgs e)
         {

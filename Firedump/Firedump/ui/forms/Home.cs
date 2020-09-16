@@ -10,6 +10,8 @@ using MySql.Data.MySqlClient;
 using Firedump.core.db;
 using Firedump.core.sql;
 using Firedump.ui.forms;
+using System.Data.SqlClient;
+using System.Data.Common;
 
 namespace Firedump
 {
@@ -61,7 +63,7 @@ namespace Firedump
             ConnectionResultSet result = DB.TestConnection(server);
             if (result.wasSuccessful)
             {
-                MySqlConnection con = (MySqlConnection)DB.connect(server);
+                DbConnection con = DB.connect(server);
                 List<string> databases = new SqlBuilderFactory(server)
                         .Create(null).removeSystemDatabases(DbDataHelper.getDatabases(server, con), !hideSystemDatabases);
                 foreach (string database in databases)

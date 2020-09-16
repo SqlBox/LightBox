@@ -26,10 +26,6 @@ namespace Firedump
             return this.toolStripButtonContExec.Checked;
         }
 
-        public bool IsAutoCommitEnabled()
-        {
-            return this.toolStripButtonEnableAutoCommit.Checked;
-        }
 
         private void InitMainMenuComponents()
         {
@@ -112,7 +108,6 @@ namespace Firedump
                toolStripButtonExecNext.Enabled = enable;
                toolStripButtonNewTab.Enabled = enable;
                toolStripButtonCloseTab.Enabled = enable;
-               toolStripButtonEnableAutoCommit.Enabled = enable;
                this.ResumeLayout();
            });   
         }

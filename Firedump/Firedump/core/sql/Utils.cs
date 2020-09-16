@@ -27,7 +27,7 @@ namespace Firedump.core.sql
                 return false;
             }
             string q = sql.Trim().ToLower();
-            return q.Contains("select ") || q.Contains("show ") || q.Contains("describe ") || q.Contains("explain ");
+            return q.Contains("select ") || q.Contains("show ") || q.Contains("describe ") || q.Contains("explain ") || q.Contains("pragma ");
         }
 
         public static sqlbox.commons.DbType _convert(int db_type)

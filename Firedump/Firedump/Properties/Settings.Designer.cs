@@ -113,5 +113,29 @@ namespace Firedump.Properties {
                 this["option_sqlite_sqlafteropen"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool option_general_autocommit {
+            get {
+                return ((bool)(this["option_general_autocommit"]));
+            }
+            set {
+                this["option_general_autocommit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool option_sqlite_foreign_keys {
+            get {
+                return ((bool)(this["option_sqlite_foreign_keys"]));
+            }
+            set {
+                this["option_sqlite_foreign_keys"] = value;
+            }
+        }
     }
 }

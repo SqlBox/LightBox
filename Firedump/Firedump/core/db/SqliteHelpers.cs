@@ -11,14 +11,7 @@ namespace Firedump.core.db
 {
     public class SqliteHelpers
     {
-        internal static void BeginTransaction(DbConnection con)
-        {
-            using (var command = new DbCommandFactory(con, "begin transaction").Create())
-            {
-                command.ExecuteNonQuery();
-            }
-        }
-
+        
         internal static DataTable GetDatabasePrimaryKeysDataSource(sqlservers server,DbConnection con)
         {
             DataTable data = new DataTable();

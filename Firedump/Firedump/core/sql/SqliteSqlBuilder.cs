@@ -38,7 +38,7 @@ namespace Firedump.core.sql
 
         public string getDatabases()
         {
-            return "";
+            return "main";
         }
 
         public string getDatabaseUniques()

@@ -61,7 +61,6 @@ namespace Firedump
             this.toolStripButtonStop = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator24 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonContExec = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonEnableAutoCommit = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripComboBoxLimit = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripButtonFetchNext = new System.Windows.Forms.ToolStripButton();
@@ -126,6 +125,7 @@ namespace Firedump
             this.lOWERCASEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mySqlDumpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -135,7 +135,6 @@ namespace Firedump
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMainParent)).BeginInit();
             this.splitContainerMainParent.Panel1.SuspendLayout();
@@ -245,7 +244,6 @@ namespace Firedump
             this.toolStripButtonStop,
             this.toolStripSeparator24,
             this.toolStripButtonContExec,
-            this.toolStripButtonEnableAutoCommit,
             this.toolStripSeparator17,
             this.toolStripComboBoxLimit,
             this.toolStripButtonFetchNext,
@@ -456,17 +454,6 @@ namespace Firedump
             this.toolStripButtonContExec.Text = "toolStripButton11";
             this.toolStripButtonContExec.ToolTipText = "Execution of SQL should continue after fail";
             this.toolStripButtonContExec.Click += new System.EventHandler(this.ContOnErrorClick);
-            // 
-            // toolStripButtonEnableAutoCommit
-            // 
-            this.toolStripButtonEnableAutoCommit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonEnableAutoCommit.Image = global::Firedump.Properties.Resources.commit_icon;
-            this.toolStripButtonEnableAutoCommit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonEnableAutoCommit.Name = "toolStripButtonEnableAutoCommit";
-            this.toolStripButtonEnableAutoCommit.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonEnableAutoCommit.Text = "toolStripButton12";
-            this.toolStripButtonEnableAutoCommit.ToolTipText = "Enable for auto commit every query execution";
-            this.toolStripButtonEnableAutoCommit.Click += new System.EventHandler(this.OnAutoCommitEnabledClick);
             // 
             // toolStripSeparator17
             // 
@@ -1034,6 +1021,13 @@ namespace Firedump
             this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.preferencesToolStripMenuItem.Text = "Options";
             // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 24);
+            this.optionsToolStripMenuItem.Text = "Options";
+            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.MenuOptionsClick);
+            // 
             // dataToolStripMenuItem
             // 
             this.dataToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1099,13 +1093,6 @@ namespace Firedump
             this.imageList1.Images.SetKeyName(2, "expand.png");
             this.imageList1.Images.SetKeyName(3, "collapse.png");
             // 
-            // optionsToolStripMenuItem
-            // 
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 24);
-            this.optionsToolStripMenuItem.Text = "Options";
-            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.MenuOptionsClick);
-            // 
             // MainHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1166,7 +1153,6 @@ namespace Firedump
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator21;
         private System.Windows.Forms.ToolStripButton toolStripButtonStop;
         private System.Windows.Forms.ToolStripButton toolStripButtonContExec;
-        private System.Windows.Forms.ToolStripButton toolStripButtonEnableAutoCommit;
         private System.Windows.Forms.ToolStripButton toolStripButton13;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
         private System.Windows.Forms.ToolStrip toolStrip2;

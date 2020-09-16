@@ -320,6 +320,30 @@ namespace Firedump.core.db
             return data;
         }
 
+        internal static List<int> getIntData(DbConnection con, string sql)
+        {
+            var data = new List<int>();
+            try
+            {
+                using (var reader = new DbCommandFactory(con, sql).Create().ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        data.Add(reader.GetInt32(0));
+                    }
+                }
+            }
+            catch (DbException ex)
+            {
+                sql = ex.Message;
+#if DEBUG
+                Console.WriteLine(ex.Message);
+#endif
+            }
+            Terminal.MainTerminal.AppendText(sql);
+            return data;
+        }
+
         internal static DataTable getDataTableData(DbConnection con, string sql)
         {
             var data = new DataTable();
@@ -344,6 +368,24 @@ namespace Firedump.core.db
 #endif
             }
             return data;
+        }
+
+        internal static void executeNonQuery(DbConnection con, string sql)
+        {
+            try
+            {
+                using (var command = new DbCommandFactory(con, sql).Create())
+                {
+                    command.ExecuteNonQuery();
+                    Terminal.MainTerminal.AppendText(sql);
+                }
+            }catch(DbException ex)
+            {
+                Terminal.MainTerminal.AppendText(ex.Message);
+#if DEBUG
+                Console.WriteLine(ex.Message);
+#endif
+            }
         }
 
     }

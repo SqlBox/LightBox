@@ -1,6 +1,7 @@
 ﻿using Firedump.core;
 using Firedump.core.db;
 using Firedump.core.models;
+using Firedump.core.sql;
 using Firedump.ui.forms;
 using Firedump.usercontrols;
 using System;
@@ -70,15 +71,19 @@ namespace Firedump
 
         private void CommitBtnEventClick(object sender, EventArgs e)
         {
-            if (this.isConnected(this.con))
+            if (DB.IsConnected(this.con))
             {
                 DB.Commit(this.con);
+                if (Utils._convert(server.db_type) == sqlbox.commons.DbType.SQLITE && Properties.Settings.Default.option_sqlite_begintranscommit)
+                {
+                    DbDataHelper.executeNonQuery(con, "begin transaction");
+                }
             }
         }
 
         private void RollbackBtnEventClick(object sender, EventArgs e)
         {
-            if (isConnected(this.con))
+            if (DB.IsConnected(this.con))
             {
                 DB.Rollback(this.con);
             }
@@ -188,10 +193,6 @@ namespace Firedump
             ((ToolStripButton)sender).Checked = !((ToolStripButton)sender).Checked;
         }
 
-        private void OnAutoCommitEnabledClick(object sender, EventArgs e)
-        {
-            ((ToolStripButton)sender).Checked = !((ToolStripButton)sender).Checked;
-        }
 
         private void AbandonClick(object sender, EventArgs e)
         {
@@ -248,7 +249,7 @@ namespace Firedump
 
         private void MenuOptionsClick(object sender, EventArgs e)
         {
-            new OptionsForm(this.con).ShowDialog();
+            new OptionsForm(this.con,this.server).ShowDialog();
         }
     }
 }

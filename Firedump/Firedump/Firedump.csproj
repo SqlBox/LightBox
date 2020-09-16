@@ -33,7 +33,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -203,7 +203,6 @@
     <Compile Include="core\db\DbAdapterFactory.cs" />
     <Compile Include="core\db\DbCommandFactory.cs" />
     <Compile Include="core\db\DbConnectionFactory.cs" />
-    <Compile Include="core\db\DbSessionSettings.cs" />
     <Compile Include="core\db\SqliteHelpers.cs" />
     <Compile Include="core\EditorAdapter.cs" />
     <Compile Include="core\models\dbinfo\Status.cs" />
@@ -246,6 +245,12 @@
     <Compile Include="sqlitetables\schedules.cs" />
     <Compile Include="sqlitetables\schedule_save_locations.cs" />
     <Compile Include="core\IconHelper.cs" />
+    <Compile Include="ui\forms\CommitRollbackForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ui\forms\CommitRollbackForm.Designer.cs">
+      <DependentUpon>CommitRollbackForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ui\forms\FormUtils.cs" />
     <Compile Include="ui\forms\OptionsForm.cs">
       <SubType>Form</SubType>
@@ -263,6 +268,12 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="sqlitetables\userinfo.cs" />
+    <Compile Include="ui\usercontrols\FontSize.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ui\usercontrols\FontSize.Designer.cs">
+      <DependentUpon>FontSize.cs</DependentUpon>
+    </Compile>
     <Compile Include="ui\usercontrols\IConnectionServerRef.cs" />
     <Compile Include="core\ControlBuilder.cs" />
     <Compile Include="core\sql\Words.cs" />
@@ -351,6 +362,9 @@
     <Compile Include="core\EditorConfig.cs" />
     <Compile Include="core\exceptions\MyFormatterException.cs" />
     <Compile Include="core\sql\MySqlSqlBuilder.cs" />
+    <EmbeddedResource Include="ui\forms\CommitRollbackForm.resx">
+      <DependentUpon>CommitRollbackForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ui\forms\connect\DatabaseConnect.resx">
       <DependentUpon>DatabaseConnect.cs</DependentUpon>
     </EmbeddedResource>
@@ -385,6 +399,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ui\usercontrols\Editor.resx">
       <DependentUpon>Editor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\usercontrols\FontSize.resx">
+      <DependentUpon>FontSize.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ui\usercontrols\TableView.resx">
       <DependentUpon>TableView.cs</DependentUpon>

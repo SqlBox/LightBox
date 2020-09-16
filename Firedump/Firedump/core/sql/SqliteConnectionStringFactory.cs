@@ -10,7 +10,8 @@ namespace Firedump.core.sql
     {
         internal static string ConnectionStringBuilder(string path,string password)
         {
-            return "Data Source="+path+"; Version=3;"+(!string.IsNullOrEmpty(password) ? " Password="+password : "");
+            string foreignkeys = "foreignkeys=" + Properties.Settings.Default.option_sqlite_foreign_keys.ToString().ToLower() + ";";
+            return "Data Source="+path+"; Version=3; "+ foreignkeys + (!string.IsNullOrEmpty(password) ? " Password="+password : "");
         }
     }
 }

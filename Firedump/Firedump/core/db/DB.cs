@@ -38,8 +38,6 @@ namespace Firedump.core.db
             return con;
         }
 
-
-
         internal static void close(DbConnection con)
         {
             if (con.State == ConnectionState.Open)
