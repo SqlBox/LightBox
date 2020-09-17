@@ -45,10 +45,13 @@ namespace Firedump.usercontrols
         public void SetData(DataTable data,string sql)
         {
             this.SuspendLayout();
-            this.dataGridView1.SuspendLayout();
             this.SQL = sql;
-            this.dataGridView1.DataSource = data;
-            this.dataGridView1.ResumeLayout();
+            if(data != null && data.Rows.Count > 0)
+            {
+                this.dataGridView1.SuspendLayout();
+                this.dataGridView1.DataSource = data;
+                this.dataGridView1.ResumeLayout();
+            }
             this.ResumeLayout();
         }
 

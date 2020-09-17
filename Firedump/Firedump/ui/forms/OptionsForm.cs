@@ -29,6 +29,7 @@ namespace Firedump.ui.forms
         private void OptionsForm_Load(object sender, EventArgs e)
         {
             loadGenericSettings();
+            loadMySqlSettings();
             loadSqliteSettings();
             if(!DB.IsConnected(con) || !(Utils._convert(server.db_type) == sqlbox.commons.DbType.SQLITE))
             {
@@ -39,6 +40,7 @@ namespace Firedump.ui.forms
         private void OptionsForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             saveGenericSettings();
+            saveMySqlSettings();
             saveSqliteSettings();
         }
 
@@ -50,6 +52,21 @@ namespace Firedump.ui.forms
         private void saveGenericSettings()
         {
             Properties.Settings.Default.option_general_autocommit = checkBoxAutoCommit.Checked;
+            Properties.Settings.Default.Save();
+        }
+
+        private void loadMySqlSettings()
+        {
+            numericUpDownMySqlReadTimeout.Value = Properties.Settings.Default.option_mysql_conreadtimeout;
+            numericUpDownMySqlTimeout.Value = Properties.Settings.Default.option_mysql_contimeout;
+            numericUpDownMySqlKeepAlive.Value = Properties.Settings.Default.option_mysql_keepalive;
+        }
+
+        private void saveMySqlSettings()
+        {
+            Properties.Settings.Default.option_mysql_conreadtimeout = Decimal.ToInt32(numericUpDownMySqlReadTimeout.Value);
+            Properties.Settings.Default.option_mysql_contimeout = Decimal.ToInt32(numericUpDownMySqlTimeout.Value);
+            Properties.Settings.Default.option_mysql_keepalive = Decimal.ToInt32(numericUpDownMySqlKeepAlive.Value);
             Properties.Settings.Default.Save();
         }
 

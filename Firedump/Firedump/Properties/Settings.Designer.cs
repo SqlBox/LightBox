@@ -137,5 +137,41 @@ namespace Firedump.Properties {
                 this["option_sqlite_foreign_keys"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int option_mysql_conreadtimeout {
+            get {
+                return ((int)(this["option_mysql_conreadtimeout"]));
+            }
+            set {
+                this["option_mysql_conreadtimeout"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("60")]
+        public int option_mysql_contimeout {
+            get {
+                return ((int)(this["option_mysql_contimeout"]));
+            }
+            set {
+                this["option_mysql_contimeout"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("600")]
+        public int option_mysql_keepalive {
+            get {
+                return ((int)(this["option_mysql_keepalive"]));
+            }
+            set {
+                this["option_mysql_keepalive"] = value;
+            }
+        }
     }
 }

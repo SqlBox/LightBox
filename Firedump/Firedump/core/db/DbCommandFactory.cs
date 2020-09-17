@@ -29,7 +29,9 @@ namespace Firedump.core.db
             DbType dbType = Firedump.core.sql.Utils.GetDbTypeEnum(Connection);
             if (dbType == DbType.MYSQL || dbType == DbType.MARIADB)
             {
-                return new MySqlCommand(Sql, (MySqlConnection)Connection);
+                var com =  new MySqlCommand(Sql, (MySqlConnection)Connection);
+                com.CommandTimeout = Properties.Settings.Default.option_mysql_conreadtimeout;
+                return com;
             }
             else if (dbType == DbType.ORACLE)
             {

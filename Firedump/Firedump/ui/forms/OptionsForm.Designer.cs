@@ -33,6 +33,9 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageGeneric = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.groupBoxSql = new System.Windows.Forms.GroupBox();
+            this.checkBoxAutoCommit = new System.Windows.Forms.CheckBox();
+            this.labelAutoCommit = new System.Windows.Forms.Label();
             this.groupBoxSqlEditor = new System.Windows.Forms.GroupBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -47,8 +50,8 @@
             this.tabPageMySqlMaria = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBoxConnection = new System.Windows.Forms.GroupBox();
-            this.numericUpDownTimeout = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownReadTimeout = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownMySqlTimeout = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownMySqlReadTimeout = new System.Windows.Forms.NumericUpDown();
             this.labelTimeout = new System.Windows.Forms.Label();
             this.labelConTimeout = new System.Windows.Forms.Label();
             this.tabPageSqlite = new System.Windows.Forms.TabPage();
@@ -59,6 +62,10 @@
             this.checkBoxBeginTransAfterDbOpens = new System.Windows.Forms.CheckBox();
             this.checkBoxBeginTransAfterCommit = new System.Windows.Forms.CheckBox();
             this.groupBoxPragmaEditor = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBoxRunVacuum = new System.Windows.Forms.CheckBox();
+            this.labelAutoVacuum = new System.Windows.Forms.Label();
+            this.comboBoxAutoVacuum = new System.Windows.Forms.ComboBox();
             this.buttonSavePragma = new System.Windows.Forms.Button();
             this.numericUpDownUserVersion = new System.Windows.Forms.NumericUpDown();
             this.labelUserVersion = new System.Windows.Forms.Label();
@@ -90,8 +97,6 @@
             this.labelCellSizeCheck = new System.Windows.Forms.Label();
             this.checkBoxAutoIndex = new System.Windows.Forms.CheckBox();
             this.labelAutoIndex = new System.Windows.Forms.Label();
-            this.comboBoxAutoVacuum = new System.Windows.Forms.ComboBox();
-            this.labelAutoVacuum = new System.Windows.Forms.Label();
             this.tabPageOracle = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -106,17 +111,15 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.groupBoxSql = new System.Windows.Forms.GroupBox();
-            this.labelAutoCommit = new System.Windows.Forms.Label();
-            this.checkBoxAutoCommit = new System.Windows.Forms.CheckBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBoxRunVacuum = new System.Windows.Forms.CheckBox();
             this.fontSizeControlEditor = new Firedump.ui.usercontrols.FontSize();
             this.fontSizeControlUserTabHistory = new Firedump.ui.usercontrols.FontSize();
             this.fontSizeControlAppHistory = new Firedump.ui.usercontrols.FontSize();
+            this.label7 = new System.Windows.Forms.Label();
+            this.numericUpDownMySqlKeepAlive = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tabPageGeneric.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            this.groupBoxSql.SuspendLayout();
             this.groupBoxSqlEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAppearInterval)).BeginInit();
@@ -125,13 +128,14 @@
             this.tabPageMySqlMaria.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.groupBoxConnection.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTimeout)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownReadTimeout)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMySqlTimeout)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMySqlReadTimeout)).BeginInit();
             this.tabPageSqlite.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fastColoredTextBoxSqlAfterDbOpens)).BeginInit();
             this.groupBoxPragmaEditor.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownUserVersion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericPageSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMaxPageCount)).BeginInit();
@@ -144,8 +148,7 @@
             this.flowLayoutPanel6.SuspendLayout();
             this.tabPageMSSQL.SuspendLayout();
             this.flowLayoutPanel7.SuspendLayout();
-            this.groupBoxSql.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMySqlKeepAlive)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -189,6 +192,35 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(708, 571);
             this.flowLayoutPanel1.TabIndex = 0;
             this.flowLayoutPanel1.WrapContents = false;
+            // 
+            // groupBoxSql
+            // 
+            this.groupBoxSql.Controls.Add(this.checkBoxAutoCommit);
+            this.groupBoxSql.Controls.Add(this.labelAutoCommit);
+            this.groupBoxSql.Location = new System.Drawing.Point(3, 3);
+            this.groupBoxSql.Name = "groupBoxSql";
+            this.groupBoxSql.Size = new System.Drawing.Size(669, 79);
+            this.groupBoxSql.TabIndex = 9;
+            this.groupBoxSql.TabStop = false;
+            this.groupBoxSql.Text = "SQL";
+            // 
+            // checkBoxAutoCommit
+            // 
+            this.checkBoxAutoCommit.AutoSize = true;
+            this.checkBoxAutoCommit.Location = new System.Drawing.Point(171, 33);
+            this.checkBoxAutoCommit.Name = "checkBoxAutoCommit";
+            this.checkBoxAutoCommit.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxAutoCommit.TabIndex = 1;
+            this.checkBoxAutoCommit.UseVisualStyleBackColor = true;
+            // 
+            // labelAutoCommit
+            // 
+            this.labelAutoCommit.AutoSize = true;
+            this.labelAutoCommit.Location = new System.Drawing.Point(16, 33);
+            this.labelAutoCommit.Name = "labelAutoCommit";
+            this.labelAutoCommit.Size = new System.Drawing.Size(100, 13);
+            this.labelAutoCommit.TabIndex = 0;
+            this.labelAutoCommit.Text = "Enable auto commit";
             // 
             // groupBoxSqlEditor
             // 
@@ -353,46 +385,48 @@
             // 
             // groupBoxConnection
             // 
-            this.groupBoxConnection.Controls.Add(this.numericUpDownTimeout);
-            this.groupBoxConnection.Controls.Add(this.numericUpDownReadTimeout);
+            this.groupBoxConnection.Controls.Add(this.numericUpDownMySqlKeepAlive);
+            this.groupBoxConnection.Controls.Add(this.label7);
+            this.groupBoxConnection.Controls.Add(this.numericUpDownMySqlTimeout);
+            this.groupBoxConnection.Controls.Add(this.numericUpDownMySqlReadTimeout);
             this.groupBoxConnection.Controls.Add(this.labelTimeout);
             this.groupBoxConnection.Controls.Add(this.labelConTimeout);
             this.groupBoxConnection.Location = new System.Drawing.Point(3, 3);
             this.groupBoxConnection.Name = "groupBoxConnection";
-            this.groupBoxConnection.Size = new System.Drawing.Size(699, 128);
+            this.groupBoxConnection.Size = new System.Drawing.Size(699, 155);
             this.groupBoxConnection.TabIndex = 0;
             this.groupBoxConnection.TabStop = false;
             this.groupBoxConnection.Text = "MySql Connection";
             // 
-            // numericUpDownTimeout
+            // numericUpDownMySqlTimeout
             // 
-            this.numericUpDownTimeout.Location = new System.Drawing.Point(241, 75);
-            this.numericUpDownTimeout.Maximum = new decimal(new int[] {
+            this.numericUpDownMySqlTimeout.Location = new System.Drawing.Point(241, 75);
+            this.numericUpDownMySqlTimeout.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-            this.numericUpDownTimeout.Name = "numericUpDownTimeout";
-            this.numericUpDownTimeout.Size = new System.Drawing.Size(120, 21);
-            this.numericUpDownTimeout.TabIndex = 3;
-            this.numericUpDownTimeout.Value = new decimal(new int[] {
+            this.numericUpDownMySqlTimeout.Name = "numericUpDownMySqlTimeout";
+            this.numericUpDownMySqlTimeout.Size = new System.Drawing.Size(120, 21);
+            this.numericUpDownMySqlTimeout.TabIndex = 3;
+            this.numericUpDownMySqlTimeout.Value = new decimal(new int[] {
             60,
             0,
             0,
             0});
             // 
-            // numericUpDownReadTimeout
+            // numericUpDownMySqlReadTimeout
             // 
-            this.numericUpDownReadTimeout.Location = new System.Drawing.Point(241, 35);
-            this.numericUpDownReadTimeout.Maximum = new decimal(new int[] {
+            this.numericUpDownMySqlReadTimeout.Location = new System.Drawing.Point(241, 35);
+            this.numericUpDownMySqlReadTimeout.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-            this.numericUpDownReadTimeout.Name = "numericUpDownReadTimeout";
-            this.numericUpDownReadTimeout.Size = new System.Drawing.Size(120, 21);
-            this.numericUpDownReadTimeout.TabIndex = 2;
-            this.numericUpDownReadTimeout.Value = new decimal(new int[] {
+            this.numericUpDownMySqlReadTimeout.Name = "numericUpDownMySqlReadTimeout";
+            this.numericUpDownMySqlReadTimeout.Size = new System.Drawing.Size(120, 21);
+            this.numericUpDownMySqlReadTimeout.TabIndex = 2;
+            this.numericUpDownMySqlReadTimeout.Value = new decimal(new int[] {
             30,
             0,
             0,
@@ -559,6 +593,53 @@
             this.groupBoxPragmaEditor.TabIndex = 1;
             this.groupBoxPragmaEditor.TabStop = false;
             this.groupBoxPragmaEditor.Text = "Pragma Editor";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.checkBoxRunVacuum);
+            this.groupBox1.Controls.Add(this.labelAutoVacuum);
+            this.groupBox1.Controls.Add(this.comboBoxAutoVacuum);
+            this.groupBox1.Location = new System.Drawing.Point(6, 20);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(312, 70);
+            this.groupBox1.TabIndex = 33;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Vacuum";
+            // 
+            // checkBoxRunVacuum
+            // 
+            this.checkBoxRunVacuum.AutoSize = true;
+            this.checkBoxRunVacuum.Checked = true;
+            this.checkBoxRunVacuum.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxRunVacuum.Location = new System.Drawing.Point(11, 44);
+            this.checkBoxRunVacuum.Name = "checkBoxRunVacuum";
+            this.checkBoxRunVacuum.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.checkBoxRunVacuum.Size = new System.Drawing.Size(227, 17);
+            this.checkBoxRunVacuum.TabIndex = 2;
+            this.checkBoxRunVacuum.Text = "Run VACUUM when auto vacuum changes";
+            this.checkBoxRunVacuum.UseVisualStyleBackColor = true;
+            // 
+            // labelAutoVacuum
+            // 
+            this.labelAutoVacuum.AutoSize = true;
+            this.labelAutoVacuum.Location = new System.Drawing.Point(9, 21);
+            this.labelAutoVacuum.Name = "labelAutoVacuum";
+            this.labelAutoVacuum.Size = new System.Drawing.Size(70, 13);
+            this.labelAutoVacuum.TabIndex = 0;
+            this.labelAutoVacuum.Text = "Auto Vacuum";
+            // 
+            // comboBoxAutoVacuum
+            // 
+            this.comboBoxAutoVacuum.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxAutoVacuum.FormattingEnabled = true;
+            this.comboBoxAutoVacuum.Items.AddRange(new object[] {
+            "NONE",
+            "FULL",
+            "INCREMENTAL"});
+            this.comboBoxAutoVacuum.Location = new System.Drawing.Point(152, 17);
+            this.comboBoxAutoVacuum.Name = "comboBoxAutoVacuum";
+            this.comboBoxAutoVacuum.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxAutoVacuum.TabIndex = 1;
             // 
             // buttonSavePragma
             // 
@@ -888,28 +969,6 @@
             this.labelAutoIndex.TabIndex = 2;
             this.labelAutoIndex.Text = "Automatic Index";
             // 
-            // comboBoxAutoVacuum
-            // 
-            this.comboBoxAutoVacuum.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxAutoVacuum.FormattingEnabled = true;
-            this.comboBoxAutoVacuum.Items.AddRange(new object[] {
-            "NONE",
-            "FULL",
-            "INCREMENTAL"});
-            this.comboBoxAutoVacuum.Location = new System.Drawing.Point(152, 17);
-            this.comboBoxAutoVacuum.Name = "comboBoxAutoVacuum";
-            this.comboBoxAutoVacuum.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxAutoVacuum.TabIndex = 1;
-            // 
-            // labelAutoVacuum
-            // 
-            this.labelAutoVacuum.AutoSize = true;
-            this.labelAutoVacuum.Location = new System.Drawing.Point(9, 21);
-            this.labelAutoVacuum.Name = "labelAutoVacuum";
-            this.labelAutoVacuum.Size = new System.Drawing.Size(70, 13);
-            this.labelAutoVacuum.TabIndex = 0;
-            this.labelAutoVacuum.Text = "Auto Vacuum";
-            // 
             // tabPageOracle
             // 
             this.tabPageOracle.Controls.Add(this.flowLayoutPanel4);
@@ -1034,60 +1093,6 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Sql Editor";
             // 
-            // groupBoxSql
-            // 
-            this.groupBoxSql.Controls.Add(this.checkBoxAutoCommit);
-            this.groupBoxSql.Controls.Add(this.labelAutoCommit);
-            this.groupBoxSql.Location = new System.Drawing.Point(3, 3);
-            this.groupBoxSql.Name = "groupBoxSql";
-            this.groupBoxSql.Size = new System.Drawing.Size(669, 79);
-            this.groupBoxSql.TabIndex = 9;
-            this.groupBoxSql.TabStop = false;
-            this.groupBoxSql.Text = "SQL";
-            // 
-            // labelAutoCommit
-            // 
-            this.labelAutoCommit.AutoSize = true;
-            this.labelAutoCommit.Location = new System.Drawing.Point(16, 33);
-            this.labelAutoCommit.Name = "labelAutoCommit";
-            this.labelAutoCommit.Size = new System.Drawing.Size(100, 13);
-            this.labelAutoCommit.TabIndex = 0;
-            this.labelAutoCommit.Text = "Enable auto commit";
-            // 
-            // checkBoxAutoCommit
-            // 
-            this.checkBoxAutoCommit.AutoSize = true;
-            this.checkBoxAutoCommit.Location = new System.Drawing.Point(171, 33);
-            this.checkBoxAutoCommit.Name = "checkBoxAutoCommit";
-            this.checkBoxAutoCommit.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxAutoCommit.TabIndex = 1;
-            this.checkBoxAutoCommit.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.checkBoxRunVacuum);
-            this.groupBox1.Controls.Add(this.labelAutoVacuum);
-            this.groupBox1.Controls.Add(this.comboBoxAutoVacuum);
-            this.groupBox1.Location = new System.Drawing.Point(6, 20);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(312, 70);
-            this.groupBox1.TabIndex = 33;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Vacuum";
-            // 
-            // checkBoxRunVacuum
-            // 
-            this.checkBoxRunVacuum.AutoSize = true;
-            this.checkBoxRunVacuum.Checked = true;
-            this.checkBoxRunVacuum.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxRunVacuum.Location = new System.Drawing.Point(11, 44);
-            this.checkBoxRunVacuum.Name = "checkBoxRunVacuum";
-            this.checkBoxRunVacuum.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.checkBoxRunVacuum.Size = new System.Drawing.Size(227, 17);
-            this.checkBoxRunVacuum.TabIndex = 2;
-            this.checkBoxRunVacuum.Text = "Run VACUUM when auto vacuum changes";
-            this.checkBoxRunVacuum.UseVisualStyleBackColor = true;
-            // 
             // fontSizeControlEditor
             // 
             this.fontSizeControlEditor.BackColor = System.Drawing.Color.Transparent;
@@ -1115,6 +1120,32 @@
             this.fontSizeControlAppHistory.Size = new System.Drawing.Size(387, 65);
             this.fontSizeControlAppHistory.TabIndex = 9;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(17, 120);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(107, 13);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "Keep alive(seconds):";
+            // 
+            // numericUpDownMySqlKeepAlive
+            // 
+            this.numericUpDownMySqlKeepAlive.Location = new System.Drawing.Point(241, 118);
+            this.numericUpDownMySqlKeepAlive.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numericUpDownMySqlKeepAlive.Name = "numericUpDownMySqlKeepAlive";
+            this.numericUpDownMySqlKeepAlive.Size = new System.Drawing.Size(120, 21);
+            this.numericUpDownMySqlKeepAlive.TabIndex = 5;
+            this.numericUpDownMySqlKeepAlive.Value = new decimal(new int[] {
+            600,
+            0,
+            0,
+            0});
+            // 
             // OptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1132,6 +1163,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPageGeneric.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.groupBoxSql.ResumeLayout(false);
+            this.groupBoxSql.PerformLayout();
             this.groupBoxSqlEditor.ResumeLayout(false);
             this.groupBoxSqlEditor.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
@@ -1142,8 +1175,8 @@
             this.flowLayoutPanel2.ResumeLayout(false);
             this.groupBoxConnection.ResumeLayout(false);
             this.groupBoxConnection.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTimeout)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownReadTimeout)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMySqlTimeout)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMySqlReadTimeout)).EndInit();
             this.tabPageSqlite.ResumeLayout(false);
             this.flowLayoutPanel3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -1151,6 +1184,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.fastColoredTextBoxSqlAfterDbOpens)).EndInit();
             this.groupBoxPragmaEditor.ResumeLayout(false);
             this.groupBoxPragmaEditor.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownUserVersion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericPageSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMaxPageCount)).EndInit();
@@ -1163,10 +1198,7 @@
             this.flowLayoutPanel6.ResumeLayout(false);
             this.tabPageMSSQL.ResumeLayout(false);
             this.flowLayoutPanel7.ResumeLayout(false);
-            this.groupBoxSql.ResumeLayout(false);
-            this.groupBoxSql.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMySqlKeepAlive)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1245,8 +1277,8 @@
         private System.Windows.Forms.NumericUpDown numericUpDown3;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.NumericUpDown numericUpDownTimeout;
-        private System.Windows.Forms.NumericUpDown numericUpDownReadTimeout;
+        private System.Windows.Forms.NumericUpDown numericUpDownMySqlTimeout;
+        private System.Windows.Forms.NumericUpDown numericUpDownMySqlReadTimeout;
         private System.Windows.Forms.Label labelTimeout;
         private System.Windows.Forms.Label labelConTimeout;
         private usercontrols.FontSize fontSizeControlEditor;
@@ -1257,5 +1289,7 @@
         private System.Windows.Forms.Label labelAutoCommit;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox checkBoxRunVacuum;
+        private System.Windows.Forms.NumericUpDown numericUpDownMySqlKeepAlive;
+        private System.Windows.Forms.Label label7;
     }
 }
