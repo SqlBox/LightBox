@@ -40,14 +40,14 @@ namespace Firedump.usercontrols
             TableTriggersMenu.MenuItems.AddRange(menuItemBuilder.BuildTableTriggerMenuItems());
         }
 
-        public void setServerDataToComboBox(List<string> databases)
+        public void setServerDataToComboBox(List<string> databases,int selectedIndex = 0)
         {
             this.comboBoxServers.BeginUpdate();
             this.comboBoxServers.Items.Clear();
             this.comboBoxServers.Items.AddRange(databases.ToArray());
             if (this.comboBoxServers.Items.Count > 0)
             {
-                this.comboBoxServers.SelectedItem = this.comboBoxServers.Items[0];
+                this.comboBoxServers.SelectedItem = this.comboBoxServers.Items[selectedIndex];
             }
             this.comboBoxServers.EndUpdate();
         }
@@ -380,14 +380,22 @@ namespace Firedump.usercontrols
 
         internal void TreeViewTable_MenuItem_DropTable(object sender, EventArgs e)
         {
+            if (IsNodeSelected())
+            {
+                DbDataHelper.executeNonQuery(GetSqlConnection(), "drop table " + treeViewTables.SelectedNode.Text);
+                refreshTables();
+            }
         }
 
         internal void TreeViewTable_MenuItem_TruncateTable(object sender, EventArgs e)
         {
+            DbDataHelper.executeNonQuery(GetSqlConnection(), "truncate table " + treeViewTables.SelectedNode.Text);
+            refreshTables();
         }
 
         internal void TreeViewTable_MenuItem_RefreshTable(object sender, EventArgs e)
         {
+            refreshTables();
         }
 
         internal void TreeViewTable_MenuItem_Inspect(object sender, EventArgs e)
@@ -396,9 +404,17 @@ namespace Firedump.usercontrols
 
         internal void TreeViewTableTriggers_MenuItem_DropTrigger(object sender, EventArgs e)
         {
+            if(IsNodeSelected())
+            {
+                DbDataHelper.executeNonQuery(GetSqlConnection(), "drop trigger "+treeViewTables.SelectedNode.Text);
+                treeViewTables.SelectedNode.Parent.Collapse();
+            }
         }
 
-
+        private void refreshTables()
+        {
+            setServerDataToComboBox(comboBoxServers.Items.Cast<string>().ToList(), comboBoxServers.SelectedIndex);
+        }
 
         private bool IsNodeSelected()
         {

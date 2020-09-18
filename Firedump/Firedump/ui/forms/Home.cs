@@ -64,8 +64,15 @@ namespace Firedump
             if (result.wasSuccessful)
             {
                 DbConnection con = DB.connect(server);
-                List<string> databases = new SqlBuilderFactory(server)
+                List<string> databases = null;
+                if (Utils._convert(server.db_type) == sqlbox.commons.DbType.SQLITE)
+                {
+                    databases = new List<string>() {"main"};
+                } else
+                {
+                    databases = new SqlBuilderFactory(server)
                         .Create(null).removeSystemDatabases(DbDataHelper.getDatabases(server, con), !hideSystemDatabases);
+                }
                 foreach (string database in databases)
                 {
                     this.Invoke((MethodInvoker)delegate () {

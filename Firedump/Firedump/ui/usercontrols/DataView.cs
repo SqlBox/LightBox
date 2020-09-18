@@ -46,7 +46,7 @@ namespace Firedump.usercontrols
         {
             this.SuspendLayout();
             this.SQL = sql;
-            if(data != null && data.Rows.Count > 0)
+            if ((data != null && data.Rows.Count > 0) || Utils.IsShowDataTypeOfCommand(sql))
             {
                 this.dataGridView1.SuspendLayout();
                 this.dataGridView1.DataSource = data;
