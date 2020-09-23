@@ -51,6 +51,7 @@ namespace Firedump.Forms.mysql.connect
                 var server = sqlservers.CreateSqlServerFromDataTable(serverData, comboBox1);
                 if (server != null)
                 {
+                    server.password = textBoxPassword.Text;
                     ConnectionResultSet result = DB.TestConnection(server);
                     if (result.wasSuccessful)
                     {
@@ -77,6 +78,7 @@ namespace Firedump.Forms.mysql.connect
                 var server = sqlservers.CreateSqlServerFromDataTable(serverData, comboBox1);
                 if (server != null)
                 {
+                    server.password = textBoxPassword.Text;
                     //test connection
                     ConnectionResultSet result = DB.TestConnection(server);
                     if (result.wasSuccessful)
@@ -102,5 +104,19 @@ namespace Firedump.Forms.mysql.connect
             MessageBox.Show("No saved servers. Go to Database->Add New Server","", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(serverData.Count > 0)
+            {
+                if(comboBox1.SelectedItem != null)
+                {
+                    var server = sqlservers.CreateSqlServerFromDataTable(serverData, comboBox1);
+                    if (server != null) 
+                    {
+                        textBoxPassword.Text = server.password;
+                    }
+                }
+            }
+        }
     }
 }

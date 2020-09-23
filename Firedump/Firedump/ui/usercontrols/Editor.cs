@@ -14,6 +14,8 @@ using Firedump.core.models;
 using Firedump.core.models.events;
 using Firedump.core.models.dbinfo;
 using sqlbox.commons;
+using System.IO;
+using Firedump.ui.forms;
 
 namespace Firedump.usercontrols
 {
@@ -58,10 +60,10 @@ namespace Firedump.usercontrols
         }
 
 
-        internal void AddQueryTab(string sql = "  ",string tabname = null)
+        internal void AddQueryTab(string sql = "  ",string tabname = null,bool isFile = false)
         {
             this.SuspendLayout();
-            TabPageHolder myQueryTab = EditorAdapter.CreateQueryTab(this.tabControl1, imageList1, menuItems,this,sql, tabname);
+            TabPageHolder myQueryTab = EditorAdapter.CreateQueryTab(this.tabControl1, imageList1, menuItems,this,sql, tabname, isFile);
             tabControl1.Controls.Add(myQueryTab);
             myQueryTab.GetFastColoredTextBox().KeyDown += fctb_KeyDown;
             tabControl1.SelectedTab = myQueryTab;
@@ -203,6 +205,52 @@ namespace Firedump.usercontrols
             }
         }
 
+        internal void OpenFile()
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if(ofd.ShowDialog() == DialogResult.OK)
+            {
+                long bytes = new FileInfo(ofd.FileName).Length;
+                if (bytes > 10_000_000)
+                {
+                    var form = new LargeFileForm(bytes, ofd.FileName);
+                    form.ShowDialog();
+                    if(form.openExecute == OpenExecute.OPEN)
+                    {
+                        AddQueryTab(" ", ofd.FileName, true);
+                        GetSelectedTabEditor().OpenBindingFile(ofd.FileName, System.Text.Encoding.UTF8);
+                    }
+                    else if(form.openExecute == OpenExecute.EXECUTE)
+                    {
+                        if(DB.IsConnectedToDatabaseAndAfterReconnect(this))
+                        {
+                            AddQueryTab(" ", ofd.FileName, true);
+                            EnableUi(false);
+                            try
+                            {
+                                this.queryExecutor.Execute(new List<string>() { File.ReadAllText(ofd.FileName) }, this.GetSqlConnection(), new QueryParams()
+                                {
+                                    Limit = GetMainHome().GetLimitFromToolStripComboBoxLimit(),
+                                    Offset = 0,
+                                    Hash = ((TabPageHolder)tabControl1.SelectedTab).GetDataView().GetHashCode()
+                                }, this.GetMainHome().IsContinueExecutingOnFail());
+                            }
+                            catch (Exception ex)
+                            {
+                                EnableUi(false);
+                            }
+                        } else
+                        {
+                            StatementExecuted?.Invoke(this, new ExecutionQueryEvent(Status.FINISHED));
+                        }
+                    }
+                }
+                else
+                {
+                    AddQueryTab(File.ReadAllText(ofd.FileName), ofd.FileName,true);
+                }
+            }
+        }
 
         internal void stopAnyRunningQuery()
         {

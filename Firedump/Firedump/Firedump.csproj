@@ -245,6 +245,12 @@
     <Compile Include="sqlitetables\schedules.cs" />
     <Compile Include="sqlitetables\schedule_save_locations.cs" />
     <Compile Include="core\IconHelper.cs" />
+    <Compile Include="ui\forms\AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ui\forms\AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ui\forms\CommitRollbackForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -252,6 +258,12 @@
       <DependentUpon>CommitRollbackForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ui\forms\FormUtils.cs" />
+    <Compile Include="ui\forms\LargeFileForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ui\forms\LargeFileForm.Designer.cs">
+      <DependentUpon>LargeFileForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ui\forms\OptionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -367,6 +379,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ui\forms\connect\DatabaseConnect.resx">
       <DependentUpon>DatabaseConnect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\forms\LargeFileForm.resx">
+      <DependentUpon>LargeFileForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ui\forms\NewSqlServer.resx">
       <DependentUpon>NewSqlServer.cs</DependentUpon>

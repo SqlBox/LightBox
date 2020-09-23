@@ -106,6 +106,7 @@
             this.dataGridView1.Size = new System.Drawing.Size(596, 425);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.VirtualMode = true;
+            this.dataGridView1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView1_DataError);
             this.dataGridView1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dataGridView1_Scroll);
             // 
             // tabPageHistory

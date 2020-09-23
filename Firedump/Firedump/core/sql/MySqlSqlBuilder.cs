@@ -19,7 +19,7 @@ namespace Firedump.core.sql
 
         // Remember If order of named sql column results change in this sql query, remapping is needed for dataSource binding.
         public string getDatabaseIndexes() =>
-             "SELECT DISTINCT TABLE_NAME AS 'Table', INDEX_NAME AS 'Index' FROM INFORMATION_SCHEMA.STATISTICS WHERE" +
+             "SELECT DISTINCT TABLE_NAME AS 'Table', INDEX_NAME AS 'Index', COLUMN_NAME AS 'Column' FROM INFORMATION_SCHEMA.STATISTICS WHERE" +
             " TABLE_SCHEMA = '" + SCHEMA + "' ";
 
         // Remember If order of named sql column results change in this sql query, remapping is needed for dataSource binding.

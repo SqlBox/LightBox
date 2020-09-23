@@ -290,5 +290,16 @@ namespace Firedump.Forms.mysql
             this.groupBoxDetails.Enabled = true;
             this.checkkDbType(((ToolStripItemDbType)this.comboBoxDbTypes.SelectedItem).db_type);
         }
+
+        private void buttonShowPass_Click(object sender, EventArgs e)
+        {
+            if(tbPassword.PasswordChar == '*')
+            {
+                tbPassword.PasswordChar = '\0';
+            } else
+            {
+                tbPassword.PasswordChar = '*';
+            }
+        }
     }
 }

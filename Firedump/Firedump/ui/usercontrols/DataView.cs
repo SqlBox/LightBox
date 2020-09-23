@@ -124,5 +124,10 @@ namespace Firedump.usercontrols
                 this.editor.Fetch(new QueryParams() { Limit = this.editor.GetMainHome().GetLimitFromToolStripComboBoxLimit(), Offset = dataGridView1.RowCount, Hash = this.GetHashCode(),Sql = SQL });
             }
         }
+
+        private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.Cancel = true;
+        }
     }
 }

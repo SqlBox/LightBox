@@ -1665,9 +1665,8 @@ namespace Firedump {
                 this.columnhost.MaxLength = 2147483647;
                 this.columnusername.AllowDBNull = false;
                 this.columnusername.MaxLength = 45;
-                this.columnpassword.AllowDBNull = false;
                 this.columnpassword.DefaultValue = ((string)(""));
-                this.columnpassword.MaxLength = 45;
+                this.columnpassword.MaxLength = 1000;
                 this.columndatabase.DefaultValue = ((string)(""));
             }
             
@@ -3666,7 +3665,12 @@ namespace Firedump {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public string password {
                 get {
-                    return ((string)(this[this.tablesql_servers.passwordColumn]));
+                    if (this.IspasswordNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tablesql_servers.passwordColumn]));
+                    }
                 }
                 set {
                     this[this.tablesql_servers.passwordColumn] = value;
@@ -3719,6 +3723,18 @@ namespace Firedump {
                 set {
                     this[this.tablesql_servers.pathColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IspasswordNull() {
+                return this.IsNull(this.tablesql_servers.passwordColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetpasswordNull() {
+                this[this.tablesql_servers.passwordColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6799,7 +6815,8 @@ WHERE        (id = @Original_id)";
                 this._clearBeforeFill = value;
             }
         }
-
+        
+        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
@@ -7028,7 +7045,7 @@ WHERE        (id = @Original_id)";
                 this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_username));
             }
             if ((Original_password == null)) {
-                throw new global::System.ArgumentNullException("Original_password");
+                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[5].Value = ((string)(Original_password));
@@ -7082,7 +7099,7 @@ WHERE        (id = @Original_id)";
                 this.Adapter.InsertCommand.Parameters[3].Value = ((string)(username));
             }
             if ((password == null)) {
-                throw new global::System.ArgumentNullException("password");
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.InsertCommand.Parameters[4].Value = ((string)(password));
@@ -7134,7 +7151,7 @@ WHERE        (id = @Original_id)";
                 this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(username));
             }
             if ((password == null)) {
-                throw new global::System.ArgumentNullException("password");
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(password));
@@ -7166,7 +7183,7 @@ WHERE        (id = @Original_id)";
                 this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_username));
             }
             if ((Original_password == null)) {
-                throw new global::System.ArgumentNullException("Original_password");
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_password));
@@ -7342,7 +7359,7 @@ WHERE        (id = @Original_id)";
                 command.Parameters[3].Value = ((string)(username));
             }
             if ((password == null)) {
-                throw new global::System.ArgumentNullException("password");
+                command.Parameters[4].Value = global::System.DBNull.Value;
             }
             else {
                 command.Parameters[4].Value = ((string)(password));

@@ -247,6 +247,7 @@
             this.buttonShowPass.Size = new System.Drawing.Size(25, 23);
             this.buttonShowPass.TabIndex = 18;
             this.buttonShowPass.UseVisualStyleBackColor = true;
+            this.buttonShowPass.Click += new System.EventHandler(this.buttonShowPass_Click);
             // 
             // labelDbType
             // 

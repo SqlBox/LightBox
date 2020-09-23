@@ -251,5 +251,20 @@ namespace Firedump
         {
             new OptionsForm(this.con,this.server).ShowDialog();
         }
+
+        private void toolStripButtonOpenFile_Click(object sender, EventArgs e)
+        {
+            GetUserControl<Editor>().OpenFile();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            new AboutForm().Show();
+        }
     }
 }
