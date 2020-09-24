@@ -257,6 +257,12 @@
     <Compile Include="ui\forms\CommitRollbackForm.Designer.cs">
       <DependentUpon>CommitRollbackForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ui\forms\ExecuteScriptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ui\forms\ExecuteScriptForm.Designer.cs">
+      <DependentUpon>ExecuteScriptForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ui\forms\FormUtils.cs" />
     <Compile Include="ui\forms\LargeFileForm.cs">
       <SubType>Form</SubType>
@@ -374,11 +380,17 @@
     <Compile Include="core\EditorConfig.cs" />
     <Compile Include="core\exceptions\MyFormatterException.cs" />
     <Compile Include="core\sql\MySqlSqlBuilder.cs" />
+    <EmbeddedResource Include="ui\forms\AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ui\forms\CommitRollbackForm.resx">
       <DependentUpon>CommitRollbackForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ui\forms\connect\DatabaseConnect.resx">
       <DependentUpon>DatabaseConnect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\forms\ExecuteScriptForm.resx">
+      <DependentUpon>ExecuteScriptForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ui\forms\LargeFileForm.resx">
       <DependentUpon>LargeFileForm.cs</DependentUpon>
@@ -563,6 +575,7 @@
     <None Include="resources\icons\main\expand.png" />
     <None Include="resources\icons\main\collapse.png" />
     <None Include="resources\icons\main\eraser.png" />
+    <None Include="resources\icons\main\Script_16x.png" />
     <Content Include="resources\icons\redcircle.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

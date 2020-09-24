@@ -249,7 +249,7 @@ namespace Firedump
 
         private void MenuOptionsClick(object sender, EventArgs e)
         {
-            new OptionsForm(this.con,this.server).ShowDialog();
+            new OptionsForm(this.con).ShowDialog();
         }
 
         private void toolStripButtonOpenFile_Click(object sender, EventArgs e)
@@ -265,6 +265,19 @@ namespace Firedump
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             new AboutForm().Show();
+        }
+
+        private void toolStripButtonOpenExecuteFileForm_Click(object sender, EventArgs e)
+        {
+            if(DB.IsConnectedToDatabase(this.con))
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
+                var res = ofd.ShowDialog();
+                if(res == DialogResult.OK)
+                {
+                    new ExecuteScriptForm(this.con,ofd.FileName).Show();
+                }
+            }
         }
     }
 }

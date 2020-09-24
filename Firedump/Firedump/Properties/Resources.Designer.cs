@@ -612,7 +612,7 @@ namespace Firedump.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to SELECT COUNT(price), price FROM orders 
-        ///WHERE price &lt; 70 GROUP BY price ORDER BY price
+        ///WHERE price &lt; 70 GROUP BY price ORDER BY price;
         ///
         ///select * from images;
         ///
@@ -629,7 +629,7 @@ namespace Firedump.Properties {
         ///) where rownum &lt;= 10 /* limit */
         ///    and offset &gt;= 0 /* offset */
         ///
-        ////* This query below is commented so it won [rest of string was truncated]&quot;;.
+        ////* This query below is commented so it wo [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string sample {
             get {
@@ -683,6 +683,16 @@ namespace Firedump.Properties {
         internal static System.Drawing.Bitmap saveas {
             get {
                 object obj = ResourceManager.GetObject("saveas", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Script_16x {
+            get {
+                object obj = ResourceManager.GetObject("Script_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

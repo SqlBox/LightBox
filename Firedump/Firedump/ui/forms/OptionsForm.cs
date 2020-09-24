@@ -16,13 +16,11 @@ namespace Firedump.ui.forms
     public partial class OptionsForm : Form
     {
         private DbConnection con;
-        private sqlservers server;
-        public OptionsForm(System.Data.Common.DbConnection con, sqlservers s)
+        public OptionsForm(System.Data.Common.DbConnection con)
         {
             InitializeComponent();
             FormUtils.setFormIcon(this);
             this.con = con;
-            this.server = s;
         }
 
 
@@ -31,7 +29,7 @@ namespace Firedump.ui.forms
             loadGenericSettings();
             loadMySqlSettings();
             loadSqliteSettings();
-            if(!DB.IsConnected(con) || !(Utils._convert(server.db_type) == sqlbox.commons.DbType.SQLITE))
+            if(!DB.IsConnected(con) || !(Utils.GetDbTypeEnum(con) == sqlbox.commons.DbType.SQLITE))
             {
                 groupBoxPragmaEditor.Enabled = false;
             }
@@ -77,7 +75,7 @@ namespace Firedump.ui.forms
             fastColoredTextBoxSqlAfterDbOpens.Text = Properties.Settings.Default.option_sqlite_sqlafteropen;
             checkBoxForeignKeys.Checked = Properties.Settings.Default.option_sqlite_foreign_keys;
             //load pragma
-            if (DB.IsConnected(con) && Utils._convert(server.db_type) == sqlbox.commons.DbType.SQLITE)
+            if (DB.IsConnected(con) && Utils.GetDbTypeEnum(con) == sqlbox.commons.DbType.SQLITE)
             {
                 var intList = DbDataHelper.getIntData(con, "PRAGMA auto_vacuum");
                 if(intList.Count > 0)
@@ -197,7 +195,7 @@ namespace Firedump.ui.forms
 
         private void buttonSavePragma_Click(object sender, EventArgs e)
         {
-            if (DB.IsConnected(con) && Utils._convert(server.db_type) == sqlbox.commons.DbType.SQLITE)
+            if (DB.IsConnected(con) && Utils.GetDbTypeEnum(con) == sqlbox.commons.DbType.SQLITE)
             {
                 var dialog = new CommitRollbackForm();
                 dialog.ShowDialog();

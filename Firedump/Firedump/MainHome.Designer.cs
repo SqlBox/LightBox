@@ -135,6 +135,8 @@ namespace Firedump
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.toolStripButtonOpenExecuteFileForm = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMainParent)).BeginInit();
             this.splitContainerMainParent.Panel1.SuspendLayout();
@@ -185,7 +187,7 @@ namespace Firedump
             // 
             this.splitContainerMainParent.Panel1.Controls.Add(this.splitContainerMiddle);
             this.splitContainerMainParent.Size = new System.Drawing.Size(1169, 579);
-            this.splitContainerMainParent.SplitterDistance = 545;
+            this.splitContainerMainParent.SplitterDistance = 550;
             this.splitContainerMainParent.TabIndex = 5;
             // 
             // splitContainerMiddle
@@ -198,7 +200,7 @@ namespace Firedump
             // 
             this.splitContainerMiddle.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
             this.splitContainerMiddle.Panel2.Controls.Add(this.splitContainerMiddleChild);
-            this.splitContainerMiddle.Size = new System.Drawing.Size(1169, 545);
+            this.splitContainerMiddle.Size = new System.Drawing.Size(1169, 550);
             this.splitContainerMiddle.SplitterDistance = 250;
             this.splitContainerMiddle.TabIndex = 4;
             // 
@@ -211,7 +213,7 @@ namespace Firedump
             // splitContainerMiddleChild.Panel1
             // 
             this.splitContainerMiddleChild.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
-            this.splitContainerMiddleChild.Size = new System.Drawing.Size(915, 545);
+            this.splitContainerMiddleChild.Size = new System.Drawing.Size(915, 550);
             this.splitContainerMiddleChild.SplitterDistance = 725;
             this.splitContainerMiddleChild.TabIndex = 0;
             // 
@@ -527,6 +529,8 @@ namespace Firedump
             this.toolStripButton16,
             this.toolStripTextBoxSearch,
             this.toolStripButton19,
+            this.toolStripSeparator10,
+            this.toolStripButtonOpenExecuteFileForm,
             this.toolStripProgressBar1,
             this.toolStripButtonHistoryEraser});
             this.toolStrip2.Location = new System.Drawing.Point(0, 24);
@@ -903,7 +907,7 @@ namespace Firedump
             // 
             this.undoToolStripMenuItem.Image = global::Firedump.Properties.Resources.undo_icon;
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.undoToolStripMenuItem.Text = "Undo";
             this.undoToolStripMenuItem.Click += new System.EventHandler(this.Undo);
             // 
@@ -911,58 +915,58 @@ namespace Firedump
             // 
             this.redoToolStripMenuItem.Image = global::Firedump.Properties.Resources.redo_icon;
             this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.redoToolStripMenuItem.Text = "Redo";
             this.redoToolStripMenuItem.Click += new System.EventHandler(this.Redo);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(121, 6);
             // 
             // cutToolStripMenuItem
             // 
             this.cutToolStripMenuItem.Image = global::Firedump.Properties.Resources.cut;
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.cutToolStripMenuItem.Text = "Cut";
             // 
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Image = global::Firedump.Properties.Resources.copy;
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             // 
             // pasteToolStripMenuItem
             // 
             this.pasteToolStripMenuItem.Image = global::Firedump.Properties.Resources.paste;
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Image = global::Firedump.Properties.Resources.delete_icon;
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(121, 6);
             // 
             // selectAllToolStripMenuItem
             // 
             this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
-            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.selectAllToolStripMenuItem.Text = "Select All";
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(121, 6);
             // 
             // findToolStripMenuItem
             // 
@@ -970,7 +974,7 @@ namespace Firedump
             this.findToolStripMenuItem1,
             this.findAndReplaceToolStripMenuItem});
             this.findToolStripMenuItem.Name = "findToolStripMenuItem";
-            this.findToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.findToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.findToolStripMenuItem.Text = "Find";
             // 
             // findToolStripMenuItem1
@@ -996,7 +1000,7 @@ namespace Firedump
             this.uPCASEToolStripMenuItem,
             this.lOWERCASEToolStripMenuItem});
             this.formatToolStripMenuItem.Name = "formatToolStripMenuItem";
-            this.formatToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.formatToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.formatToolStripMenuItem.Text = "Format";
             // 
             // prettifyToolStripMenuItem
@@ -1026,13 +1030,13 @@ namespace Firedump
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator9.Size = new System.Drawing.Size(121, 6);
             // 
             // preferencesToolStripMenuItem
             // 
             this.preferencesToolStripMenuItem.Image = global::Firedump.Properties.Resources.settings;
             this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
-            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.preferencesToolStripMenuItem.Text = "Options";
             this.preferencesToolStripMenuItem.Click += new System.EventHandler(this.MenuOptionsClick);
             // 
@@ -1054,7 +1058,7 @@ namespace Firedump
             // mySqlDumpToolStripMenuItem
             // 
             this.mySqlDumpToolStripMenuItem.Name = "mySqlDumpToolStripMenuItem";
-            this.mySqlDumpToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.mySqlDumpToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.mySqlDumpToolStripMenuItem.Text = "MySql Dump";
             this.mySqlDumpToolStripMenuItem.Click += new System.EventHandler(this.startfiredumpprocess);
             // 
@@ -1073,30 +1077,30 @@ namespace Firedump
             // contentsToolStripMenuItem
             // 
             this.contentsToolStripMenuItem.Name = "contentsToolStripMenuItem";
-            this.contentsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.contentsToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.contentsToolStripMenuItem.Text = "&Contents";
             // 
             // indexToolStripMenuItem
             // 
             this.indexToolStripMenuItem.Name = "indexToolStripMenuItem";
-            this.indexToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.indexToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.indexToolStripMenuItem.Text = "&Index";
             // 
             // searchToolStripMenuItem
             // 
             this.searchToolStripMenuItem.Name = "searchToolStripMenuItem";
-            this.searchToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.searchToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.searchToolStripMenuItem.Text = "&Search";
             // 
             // toolStripSeparator14
             // 
             this.toolStripSeparator14.Name = "toolStripSeparator14";
-            this.toolStripSeparator14.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator14.Size = new System.Drawing.Size(121, 6);
             // 
             // aboutToolStripMenuItem1
             // 
             this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
             this.aboutToolStripMenuItem1.Text = "&About...";
             this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
             // 
@@ -1108,6 +1112,22 @@ namespace Firedump
             this.imageList1.Images.SetKeyName(1, "history-icon.png");
             this.imageList1.Images.SetKeyName(2, "expand.png");
             this.imageList1.Images.SetKeyName(3, "collapse.png");
+            // 
+            // toolStripButtonOpenExecuteFileForm
+            // 
+            this.toolStripButtonOpenExecuteFileForm.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonOpenExecuteFileForm.Image = global::Firedump.Properties.Resources.Script_16x;
+            this.toolStripButtonOpenExecuteFileForm.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonOpenExecuteFileForm.Name = "toolStripButtonOpenExecuteFileForm";
+            this.toolStripButtonOpenExecuteFileForm.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonOpenExecuteFileForm.Text = "toolStripButton1";
+            this.toolStripButtonOpenExecuteFileForm.ToolTipText = "Open execute script form";
+            this.toolStripButtonOpenExecuteFileForm.Click += new System.EventHandler(this.toolStripButtonOpenExecuteFileForm_Click);
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 25);
             // 
             // MainHome
             // 
@@ -1248,5 +1268,7 @@ namespace Firedump
         private System.Windows.Forms.ToolStripButton toolStripButtonHistoryEraser;
         private System.Windows.Forms.ToolStripMenuItem mySqlDumpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+        private System.Windows.Forms.ToolStripButton toolStripButtonOpenExecuteFileForm;
     }
 }

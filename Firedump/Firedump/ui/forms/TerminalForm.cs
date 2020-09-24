@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace Firedump.ui.forms
 {
+    //NOT USED
     public partial class TerminalForm : Form
     {
         public TerminalForm()

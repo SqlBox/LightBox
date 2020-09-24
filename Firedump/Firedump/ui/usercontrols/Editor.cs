@@ -224,21 +224,7 @@ namespace Firedump.usercontrols
                     {
                         if(DB.IsConnectedToDatabaseAndAfterReconnect(this))
                         {
-                            AddQueryTab(" ", ofd.FileName, true);
-                            EnableUi(false);
-                            try
-                            {
-                                this.queryExecutor.Execute(new List<string>() { File.ReadAllText(ofd.FileName) }, this.GetSqlConnection(), new QueryParams()
-                                {
-                                    Limit = GetMainHome().GetLimitFromToolStripComboBoxLimit(),
-                                    Offset = 0,
-                                    Hash = ((TabPageHolder)tabControl1.SelectedTab).GetDataView().GetHashCode()
-                                }, this.GetMainHome().IsContinueExecutingOnFail());
-                            }
-                            catch (Exception ex)
-                            {
-                                EnableUi(false);
-                            }
+                            new ExecuteScriptForm(GetSqlConnection(), ofd.FileName).Show();
                         } else
                         {
                             StatementExecuted?.Invoke(this, new ExecutionQueryEvent(Status.FINISHED));

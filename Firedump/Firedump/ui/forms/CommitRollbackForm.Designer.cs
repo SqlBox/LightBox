@@ -71,6 +71,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonRollback);
             this.Controls.Add(this.buttonCommit);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "CommitRollbackForm";
             this.Text = "Warning";
             this.ResumeLayout(false);
