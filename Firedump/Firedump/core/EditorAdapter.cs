@@ -1,15 +1,15 @@
-﻿using System;
+﻿using com.protectsoft.SqlStatementParser.formatter;
+using FastColoredTextBoxNS;
+using Firedump.core.sql;
+using Firedump.models;
+using Firedump.usercontrols;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using com.protectsoft.SqlStatementParser.formatter;
-using FastColoredTextBoxNS;
-using Firedump.core.sql;
-using Firedump.models;
-using Firedump.usercontrols;
 
 namespace Firedump.core
 {
@@ -18,11 +18,11 @@ namespace Firedump.core
     {
 
         // The order of declarations and 'Add's' Matters
-        internal static TabPageHolder  CreateQueryTab<C>(C Control, ImageList imageList1, List<AutocompleteItem> menuItems,Editor editor, string sql,string tabname,bool isFile)
+        internal static TabPageHolder CreateQueryTab<C>(C Control, ImageList imageList1, List<AutocompleteItem> menuItems, Editor editor, string sql, string tabname, bool isFile)
             where C : Control
         {
             var fastColoredTextBox1 = ControlBuilder.CreateFastColoredTextBox(Control);
-            
+
             //problem with formater
             /*
             if (EditorConfig.isAutoFormatConfigOn())
@@ -32,8 +32,8 @@ namespace Firedump.core
             */
 
             fastColoredTextBox1.Text = sql;
-            var tabPage = new TabPageHolder(fastColoredTextBox1, ControlBuilder.CreateAutoCompleteMenu(fastColoredTextBox1, imageList1, menuItems), 
-                ControlBuilder.CreateDataView(editor),isFile)
+            var tabPage = new TabPageHolder(fastColoredTextBox1, ControlBuilder.CreateAutoCompleteMenu(fastColoredTextBox1, imageList1, menuItems),
+                ControlBuilder.CreateDataView(editor), isFile)
             {
                 Name = "tabPageQuery" + (Control.Controls.Count + 1),
                 Text = tabname == null ? ("Tab" + (Control.Controls.Count + 1)) : tabname,

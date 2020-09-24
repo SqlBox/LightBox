@@ -9,7 +9,7 @@ namespace Firedump.core.sql
     class Db2SqlBuilder : ISqlBuilder
     {
         private readonly string SCHEMA;
-        public Db2SqlBuilder(string schema) 
+        public Db2SqlBuilder(string schema)
         {
             this.SCHEMA = schema;
         }

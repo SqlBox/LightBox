@@ -23,7 +23,7 @@ namespace Firedump
         static void Main(string[] args)
         {
             Application.EnableVisualStyles();
-            Application.Run(new MainHome());       
+            Application.Run(new MainHome());
         }
 
     }

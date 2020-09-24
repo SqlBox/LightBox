@@ -11,7 +11,7 @@ namespace Firedump.core
     public class TabViewContextMenuBuilder
     {
         private TabView tabview;
-        public TabViewContextMenuBuilder(TabView tv) 
+        public TabViewContextMenuBuilder(TabView tv)
         {
             this.tabview = tv;
         }

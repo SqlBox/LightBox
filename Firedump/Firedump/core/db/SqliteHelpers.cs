@@ -11,8 +11,8 @@ namespace Firedump.core.db
 {
     public class SqliteHelpers
     {
-        
-        internal static DataTable GetDatabasePrimaryKeysDataSource(sqlservers server,DbConnection con)
+
+        internal static DataTable GetDatabasePrimaryKeysDataSource(sqlservers server, DbConnection con)
         {
             DataTable data = new DataTable();
             DataColumn c0 = new DataColumn("Column");
@@ -20,14 +20,14 @@ namespace Firedump.core.db
             data.Columns.Add(c0);
             data.Columns.Add(c1);
             List<string> tables = DbDataHelper.getTables(con);
-            foreach(string table in tables)
+            foreach (string table in tables)
             {
                 string table_info = new SqlBuilderFactory(server).Create(con.Database).describeTableSql(table);
                 using (var r = new DbCommandFactory(con, table_info).Create().ExecuteReader())
                 {
                     while (r.Read())
                     {
-                        if(r.GetInt32(5) >= 1)
+                        if (r.GetInt32(5) >= 1)
                         {
                             DataRow row = data.NewRow();
                             row["Column"] = r.GetString(1);

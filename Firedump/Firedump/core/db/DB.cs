@@ -56,7 +56,8 @@ namespace Firedump.core.db
                     Terminal.MainTerminal.AppendText("rollback;");
                 }
             }
-            catch (DbException ex) {
+            catch (DbException ex)
+            {
                 Terminal.MainTerminal.AppendText(ex.Message);
 #if DEBUG
                 Console.WriteLine(ex.Message);
@@ -73,7 +74,8 @@ namespace Firedump.core.db
                     command.ExecuteNonQuery();
                     Terminal.MainTerminal.AppendText("commit;");
                 }
-            }catch(DbException ex)
+            }
+            catch (DbException ex)
             {
                 Terminal.MainTerminal.AppendText(ex.Message);
 #if DEBUG
@@ -104,7 +106,7 @@ namespace Firedump.core.db
             if (is_connected_to_db)
                 return true;
             uc.OnReconnect(uc, new EventArgs());
-            if(!isEmdedded ? IsConnectedToDatabase(uc.GetSqlConnection()) : IsConnected(uc.GetSqlConnection()))
+            if (!isEmdedded ? IsConnectedToDatabase(uc.GetSqlConnection()) : IsConnected(uc.GetSqlConnection()))
                 return true;
             uc.OnDisconnected(uc, new EventArgs());
             return false;

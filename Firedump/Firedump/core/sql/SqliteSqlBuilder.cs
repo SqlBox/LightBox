@@ -8,7 +8,7 @@ namespace Firedump.core.sql
 {
     class SqliteSqlBuilder : ISqlBuilder
     {
-        public SqliteSqlBuilder() 
+        public SqliteSqlBuilder()
         {
         }
         public string getDatabaseIndexes()
@@ -18,7 +18,7 @@ namespace Firedump.core.sql
 
         public string describeTableSql(string table)
         {
-            return "pragma table_info('"+table+"')";
+            return "pragma table_info('" + table + "')";
         }
 
         public string getAllFieldsFromAllTablesInDb()
@@ -68,7 +68,7 @@ namespace Firedump.core.sql
 
         public string ShowCreateStatement(string table)
         {
-            return "SELECT name, sql FROM sqlite_master WHERE tbl_name = '"+table +"' AND type = 'table'";
+            return "SELECT name, sql FROM sqlite_master WHERE tbl_name = '" + table + "' AND type = 'table'";
         }
 
         public string showTablesSql()
@@ -83,7 +83,7 @@ namespace Firedump.core.sql
 
         public string GetTableTriggers(string table)
         {
-            return "SELECT name as 'Trigger', tbl_name as 'Table', sql FROM sqlite_master WHERE type = 'trigger' AND tbl_name = '"+table +"' ";
+            return "SELECT name as 'Trigger', tbl_name as 'Table', sql FROM sqlite_master WHERE type = 'trigger' AND tbl_name = '" + table + "' ";
         }
 
         public string GetAllViews()
@@ -103,7 +103,7 @@ namespace Firedump.core.sql
 
         public string GetTriggerCreateStatement(string table, string triggerName)
         {
-            return "SELECT type, name, sql FROM sqlite_master WHERE type = 'trigger' AND tbl_name = '"+table+"' AND name = '"+triggerName+"' ";
+            return "SELECT type, name, sql FROM sqlite_master WHERE type = 'trigger' AND tbl_name = '" + table + "' AND name = '" + triggerName + "' ";
         }
     }
 }

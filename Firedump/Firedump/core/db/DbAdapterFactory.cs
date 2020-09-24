@@ -35,47 +35,47 @@ namespace Firedump.core.db
             DbType dbType = Firedump.core.sql.Utils.GetDbTypeEnum(Connection);
             if (dbType == DbType.MYSQL || dbType == DbType.MARIADB)
             {
-                if(command != null)
+                if (command != null)
                     return new MySqlDataAdapter((MySqlCommand)command);
                 else
                     return new MySqlDataAdapter(Sql, (MySqlConnection)Connection);
             }
             else if (dbType == DbType.ORACLE)
             {
-                if(command != null)
+                if (command != null)
                     return new OracleDataAdapter((OracleCommand)command);
                 else
                     return new OracleDataAdapter(Sql, (OracleConnection)Connection);
             }
-            else if(dbType == DbType.POSTGRES)
+            else if (dbType == DbType.POSTGRES)
             {
                 if (command != null)
                     return new Npgsql.NpgsqlDataAdapter((Npgsql.NpgsqlCommand)command);
                 else
                     return new Npgsql.NpgsqlDataAdapter(Sql, (Npgsql.NpgsqlConnection)Connection);
             }
-            else if(dbType == DbType.SQLITE)
+            else if (dbType == DbType.SQLITE)
             {
                 if (command != null)
                     return new SQLiteDataAdapter((SQLiteCommand)command);
                 else
                     return new SQLiteDataAdapter(Sql, (SQLiteConnection)Connection);
             }
-            else if(dbType == DbType.SQLSERVER)
+            else if (dbType == DbType.SQLSERVER)
             {
                 if (command != null)
                     return new SqlDataAdapter((SqlCommand)command);
                 else
-                    return new SqlDataAdapter(Sql,(SqlConnection)Connection);
+                    return new SqlDataAdapter(Sql, (SqlConnection)Connection);
             }
-            else if(dbType == DbType.DB2)
+            else if (dbType == DbType.DB2)
             {
                 if (command != null)
                     return new DB2DataAdapter((DB2Command)command);
                 else
                     return new DB2DataAdapter(Sql, (DB2Connection)Connection);
             }
-            else if(dbType == DbType.FIREBIRD)
+            else if (dbType == DbType.FIREBIRD)
             {
                 if (command != null)
                     return new FbDataAdapter((FbCommand)command);

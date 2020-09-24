@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Firedump.core.db;
+using Firedump.core.models;
+using Firedump.ui.forms;
+using sqlbox.commons;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -6,10 +10,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Firedump.core.db;
-using Firedump.core.models;
-using Firedump.ui.forms;
-using sqlbox.commons;
 
 namespace Firedump.Forms.mysql
 {
@@ -23,7 +23,7 @@ namespace Firedump.Forms.mysql
         }
 
         private bool isUpdate = false;
-        private firedumpdbDataSet.sql_serversRow mysqlserver; 
+        private firedumpdbDataSet.sql_serversRow mysqlserver;
 
         public NewSqlServer()
         {
@@ -37,7 +37,7 @@ namespace Firedump.Forms.mysql
         private void initDbTypeCombobox()
         {
             this.comboBoxDbTypes.SuspendLayout();
-            for(int i =0; i < 9; i++)
+            for (int i = 0; i < 9; i++)
             {
                 this.comboBoxDbTypes.Items.Add(new ToolStripItemDbType(i));
             }
@@ -59,7 +59,7 @@ namespace Firedump.Forms.mysql
             checkkDbType(server.db_type);
             setSelectedItem(server.db_type);
             DbType type = Firedump.core.sql.Utils._convert(server.db_type);
-            if(Firedump.core.sql.Utils.IsDbEmbedded(type) && string.IsNullOrEmpty(textBoxPath.Text))
+            if (Firedump.core.sql.Utils.IsDbEmbedded(type) && string.IsNullOrEmpty(textBoxPath.Text))
             {
                 this.textBoxPath.Text = server.path;
             }
@@ -122,7 +122,7 @@ namespace Firedump.Forms.mysql
             else
             {
                 this.UseWaitCursor = false;
-                MessageBox.Show("Connection failed: \n"+result.errorMessage, "Test Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Connection failed: \n" + result.errorMessage, "Test Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -177,7 +177,8 @@ namespace Firedump.Forms.mysql
                     MessageBox.Show(tbPort.Text + " is not a valid port number", "Test Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
-            } else
+            }
+            else
             {
                 if (!Firedump.core.sql.Utils.IsDbEmbedded(type))
                 {
@@ -192,11 +193,11 @@ namespace Firedump.Forms.mysql
             }
             else
             {
-                if(!Firedump.core.sql.Utils.IsDbEmbedded(type))
+                if (!Firedump.core.sql.Utils.IsDbEmbedded(type))
                 {
                     MessageBox.Show("Hostname is empty.", "Test Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
-                } 
+                }
             }
             //username
             if (!string.IsNullOrEmpty(tbUsername.Text))
@@ -229,7 +230,7 @@ namespace Firedump.Forms.mysql
             }
             return true;
         }
-        
+
 
         private void bSave_Click(object sender, EventArgs e)
         {
@@ -241,7 +242,7 @@ namespace Firedump.Forms.mysql
             }
             if ((Int64)adapter.numberOfOccurances(tbName.Text) == 0 || isUpdate)
             {
-                if(!performChecks())
+                if (!performChecks())
                 {
                     return;
                 }
@@ -256,7 +257,7 @@ namespace Firedump.Forms.mysql
                 if (isUpdate)
                     adapter.UpdateMySqlServerById(tbName.Text, server.port, server.host, server.username, passwd, tbDatabase.Text, mysqlserver.id);
                 else
-                    adapter.InsertQuery(tbName.Text, server.port, server.host, server.username, passwd, tbDatabase.Text,(int)type,path); 
+                    adapter.InsertQuery(tbName.Text, server.port, server.host, server.username, passwd, tbDatabase.Text, (int)type, path);
                 int id = Convert.ToInt32((Int64)adapter.GetIdByName(tbName.Text));
                 onReloadServerData(id);
                 this.Close();
@@ -264,7 +265,7 @@ namespace Firedump.Forms.mysql
             }
 
 
-            MessageBox.Show("Name "+tbName.Text+ " already exists", "Test Connection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show("Name " + tbName.Text + " already exists", "Test Connection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             tbPassword.Text = "";
             tbName.Text = "";
@@ -278,7 +279,7 @@ namespace Firedump.Forms.mysql
 
         private void textBoxPath_Click(object sender, EventArgs e)
         {
-            if(this.openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 textBoxPath.Text = openFileDialog1.FileName;
             }
@@ -293,10 +294,11 @@ namespace Firedump.Forms.mysql
 
         private void buttonShowPass_Click(object sender, EventArgs e)
         {
-            if(tbPassword.PasswordChar == '*')
+            if (tbPassword.PasswordChar == '*')
             {
                 tbPassword.PasswordChar = '\0';
-            } else
+            }
+            else
             {
                 tbPassword.PasswordChar = '*';
             }

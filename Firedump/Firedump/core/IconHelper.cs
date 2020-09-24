@@ -15,7 +15,7 @@ namespace Firedump.core
         public static byte[] status_error_arr;
         public static byte[] status_info_arr;
 
-        internal static void Init() {}
+        internal static void Init() { }
 
         static IconHelper()
         {

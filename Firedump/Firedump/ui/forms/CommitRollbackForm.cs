@@ -18,7 +18,7 @@ namespace Firedump.ui.forms
     public partial class CommitRollbackForm : Form
     {
         public DbData action;
-       
+
         public CommitRollbackForm()
         {
             InitializeComponent();

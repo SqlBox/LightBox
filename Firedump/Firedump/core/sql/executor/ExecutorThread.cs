@@ -64,31 +64,32 @@ namespace Firedump.core.sql.executor
                                     {
                                         //skip, apply offset
                                         int count = 0;
-                                        while (count++ != this.QueryParams.Offset && reader.Read());
+                                        while (count++ != this.QueryParams.Offset && reader.Read()) ;
                                     }
                                     ds.Tables.Add(resultData);
-                                    if(is_select && this.QueryParams.Limit > 0)
+                                    if (is_select && this.QueryParams.Limit > 0)
                                     {
                                         var schema = reader.GetSchemaTable();
                                         var listCols = new List<DataColumn>();
-                                        if(schema != null)
+                                        if (schema != null)
                                         {
-                                            foreach(DataRow row in schema.Rows)
+                                            foreach (DataRow row in schema.Rows)
                                             {
                                                 listCols.Add(AddTableColumn(resultData, (Type)(row["DataType"]), System.Convert.ToString(row["ColumnName"])));
                                             }
                                         }
                                         int count = 0;
-                                        while(count++ != this.QueryParams.Limit && reader.Read())
+                                        while (count++ != this.QueryParams.Limit && reader.Read())
                                         {
                                             var row = resultData.NewRow();
-                                            for(int x = 0; x < listCols.Count; x++)
+                                            for (int x = 0; x < listCols.Count; x++)
                                             {
                                                 row[((DataColumn)listCols[x])] = reader[x];
                                             }
                                             resultData.Rows.Add(row);
                                         }
-                                    } else
+                                    }
+                                    else
                                     {
                                         resultData.Load(reader, LoadOption.OverwriteChanges);
                                     }
@@ -96,8 +97,8 @@ namespace Firedump.core.sql.executor
                                 }
                             }
                             stopWatch.Stop();
-                            eventResult = new ExecutionQueryEvent(is_last ? Status.FINISHED : Status.RUNNING) 
-                                { query = statements[i], duration = stopWatch.Elapsed, recordsAffected = reader.RecordsAffected, data = resultData };
+                            eventResult = new ExecutionQueryEvent(is_last ? Status.FINISHED : Status.RUNNING)
+                            { query = statements[i], duration = stopWatch.Elapsed, recordsAffected = reader.RecordsAffected, data = resultData };
                             Command?.Cancel();
                         }
                     }
@@ -105,7 +106,7 @@ namespace Firedump.core.sql.executor
                 }
                 catch (DbException ex)
                 {
-                    if(this.ContinueExecutingNextOnFail)
+                    if (this.ContinueExecutingNextOnFail)
                     {
                         ///log
 #if DEBUG
@@ -113,35 +114,38 @@ namespace Firedump.core.sql.executor
 #endif
                         //status change in future depending on user selection continue or not after error
                         FireEvent(new ExecutionQueryEvent(is_last ? Status.FINISHED : Status.RUNNING) { Ex = ex, query = statements[i] });
-                    } else
+                    }
+                    else
                     {
                         FireEvent(new ExecutionQueryEvent(Status.ERROR) { Ex = ex, query = statements[i] });
                     }
                 }
                 catch (IndexOutOfRangeException ex)
                 {
-                    if(this.ContinueExecutingNextOnFail)
+                    if (this.ContinueExecutingNextOnFail)
                     {
                         //better format/handle the sql errors/exceptions
 #if DEBUG
                         Console.WriteLine(ex.Message);
 #endif
                         FireEvent(new ExecutionQueryEvent(is_last ? Status.FINISHED : Status.RUNNING) { Ex = ex, query = statements[i] });
-                    } else
+                    }
+                    else
                     {
                         FireEvent(new ExecutionQueryEvent(Status.ERROR) { Ex = ex, query = statements[i] });
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    if(this.ContinueExecutingNextOnFail)
+                    if (this.ContinueExecutingNextOnFail)
                     {
 
 #if DEBUG
                         Console.WriteLine(ex.Message);
 #endif
                         FireEvent(new ExecutionQueryEvent(is_last ? Status.FINISHED : Status.RUNNING) { Ex = ex, query = statements[i] });
-                    } else
+                    }
+                    else
                     {
                         FireEvent(new ExecutionQueryEvent(Status.ERROR) { Ex = ex, query = statements[i] });
                     }
@@ -169,7 +173,7 @@ namespace Firedump.core.sql.executor
                 Command?.Cancel();
             }
             catch (Exception ex) { /*log*/}
-            finally 
+            finally
             {
                 OnStatementExecuted(this, new ExecutionQueryEvent(Status.CANCELED) { QueryParams = QueryParams, TAG = this.QueryParams.Hash, query = CurrentQuery });
             }
@@ -183,7 +187,7 @@ namespace Firedump.core.sql.executor
             {
                 Command?.Cancel();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
 #if DEBUG
                 Console.WriteLine(ex);
@@ -191,7 +195,7 @@ namespace Firedump.core.sql.executor
             }
         }
 
-        private DataColumn AddTableColumn(DataTable table,Type type,String columnName)
+        private DataColumn AddTableColumn(DataTable table, Type type, String columnName)
         {
             try
             {
@@ -201,7 +205,7 @@ namespace Firedump.core.sql.executor
             }
             catch (System.Data.DuplicateNameException)
             {
-                return AddTableColumn(table,type,columnName+"1");
+                return AddTableColumn(table, type, columnName + "1");
             }
             return null;
         }

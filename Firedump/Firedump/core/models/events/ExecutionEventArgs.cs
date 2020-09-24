@@ -24,7 +24,7 @@ namespace Firedump.core.models.events
         public TimeSpan duration;
         public TimeSpan secondaryDuration;
         public int recordsAffected;
-        public ExecutionQueryEvent(Status s):base()
+        public ExecutionQueryEvent(Status s) : base()
         {
             this.Status = s;
         }

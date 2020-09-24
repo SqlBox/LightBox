@@ -1,17 +1,17 @@
-﻿using System;
+﻿using Firedump.core.db;
+using Firedump.core.sql;
+using Firedump.Forms.mysql;
+using Firedump.ui.forms;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using Firedump.Forms.mysql;
-using MySql.Data.MySqlClient;
-using Firedump.core.db;
-using Firedump.core.sql;
-using Firedump.ui.forms;
-using System.Data.SqlClient;
-using System.Data.Common;
 
 namespace Firedump
 {
@@ -23,7 +23,7 @@ namespace Firedump
         private firedumpdbDataSetTableAdapters.sql_serversTableAdapter sql_server_adapter;
         private List<firedumpdbDataSet.backup_locationsRow> backuplocations;
         private bool hideSystemDatabases = true;
-        
+
         public Home()
         {
             InitializeComponent();
@@ -43,22 +43,22 @@ namespace Firedump
         {
             serverData = new firedumpdbDataSet.sql_serversDataTable();
             sql_server_adapter.Fill(serverData);
-            cmbServers.DataSource = serverData;           
+            cmbServers.DataSource = serverData;
             cmbServers.DisplayMember = "name";
             cmbServers.ValueMember = "id";
-            if(cmbServers.Items.Count > 0)
+            if (cmbServers.Items.Count > 0)
             {
                 cmbServers.SelectedIndex = 0;
             }
         }
 
         private void fillTreeView()
-        {  
+        {
             if (cmbServers.Items.Count == 0) { return; } //ama den iparxei kanenas server den to kanei
             sqlservers server = null;
             this.Invoke((MethodInvoker)delegate ()
             {
-                server = sqlservers.CreateSqlServerFromDataTable(serverData,cmbServers);
+                server = sqlservers.CreateSqlServerFromDataTable(serverData, cmbServers);
             });
             ConnectionResultSet result = DB.TestConnection(server);
             if (result.wasSuccessful)
@@ -67,18 +67,20 @@ namespace Firedump
                 List<string> databases = null;
                 if (Utils._convert(server.db_type) == sqlbox.commons.DbType.SQLITE)
                 {
-                    databases = new List<string>() {"main"};
-                } else
+                    databases = new List<string>() { "main" };
+                }
+                else
                 {
                     databases = new SqlBuilderFactory(server)
                         .Create(null).removeSystemDatabases(DbDataHelper.getDatabases(server, con), !hideSystemDatabases);
                 }
                 foreach (string database in databases)
                 {
-                    this.Invoke((MethodInvoker)delegate () {
+                    this.Invoke((MethodInvoker)delegate ()
+                    {
                         TreeNode node = new TreeNode(database);
                         node.ImageIndex = 0;
-                        List<string> tables = DbDataHelper.getTables(server, database,con);
+                        List<string> tables = DbDataHelper.getTables(server, database, con);
                         foreach (string table in tables)
                         {
                             TreeNode tablenode = new TreeNode(table);
@@ -86,20 +88,21 @@ namespace Firedump
                             node.Nodes.Add(tablenode);
                         }
                         tvDatabases.Nodes.Add(node);
-                    });                   
+                    });
                 }
                 DB.close(con);
             }
             else
             {
-                this.Invoke((MethodInvoker)delegate () {
+                this.Invoke((MethodInvoker)delegate ()
+                {
                     MessageBox.Show("Connection failed: \n" + result.errorMessage, "Test Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 });
             }
         }
 
 
-       
+
 
         private void Home_Load(object sender, EventArgs e)
         {
@@ -115,26 +118,26 @@ namespace Firedump
             imagelist.Images.Add(Bitmap.FromFile("resources\\icons\\ftpimage.bmp"));
             imagelist.Images.Add(Bitmap.FromFile("resources\\icons\\dropboximage.bmp"));
             imagelist.Images.Add(Bitmap.FromFile("resources\\icons\\googledriveicon.bmp"));
-            
+
             backgroundWorker1 = new BackgroundWorker();
             backgroundWorker1.WorkerSupportsCancellation = true;
             backgroundWorker1.DoWork += treeview_work;
-            backgroundWorker1.RunWorkerAsync();           
+            backgroundWorker1.RunWorkerAsync();
         }
 
         private void bDelete_Click(object sender, EventArgs e)
         {
             if (cmbServers.Items.Count == 0)
             {
-                MessageBox.Show("There are no servers to delete","Server Delete",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("There are no servers to delete", "Server Delete", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             DialogResult result = MessageBox.Show("Are you sure you want to delete server: " + ((DataRowView)cmbServers.Items[cmbServers.SelectedIndex])["name"], "Server Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if(result == DialogResult.Yes)
+            if (result == DialogResult.Yes)
             {
                 serverData.Rows[cmbServers.SelectedIndex].Delete();
                 sql_server_adapter.Update(serverData); //fernei to table sto database stin katastasi tou datatable
-                cmbServers_SelectionChangeCommitted(null,null);
+                cmbServers_SelectionChangeCommitted(null, null);
             }
         }
 
@@ -157,7 +160,7 @@ namespace Firedump
                                 e.Node.Parent.Checked = true;
                                 found = true;
                                 break;
-                            }                           
+                            }
                         }
                         if (!found)
                             e.Node.Parent.Checked = false;
@@ -168,17 +171,18 @@ namespace Firedump
                     }
                 }
                 else
-                {                   
-                    if(e.Node.Checked)
+                {
+                    if (e.Node.Checked)
                     {
                         this.checkAllChildNodes(true, e.Node);
-                    } else
+                    }
+                    else
                     {
                         this.checkAllChildNodes(false, e.Node);
-                    }                   
+                    }
                 }
             }
-               
+
         }
 
         /// <summary>
@@ -198,11 +202,11 @@ namespace Firedump
         {
             //edw prepei na bei elenxos ean trexei eidh to filltreeview thread kai an trexei na ginei interrupt kai destroy
             tvDatabases.Nodes.Clear();
-            if(!backgroundWorker1.IsBusy)
+            if (!backgroundWorker1.IsBusy)
             {
                 backgroundWorker1.RunWorkerAsync();
             }
-            
+
         }
 
         private void treeview_work(object sender, DoWorkEventArgs e)
@@ -219,16 +223,16 @@ namespace Firedump
                 NewSqlServer newServer = new NewSqlServer(server);
                 newServer.ReloadServerData += reloadserverData;
                 newServer.Show();
-               
+
             }
         }
 
         private void reloadserverData(int id)
-        {            
+        {
             sql_server_adapter.Fill(serverData);
-            for(int i=0; i < serverData.Count;i++)
+            for (int i = 0; i < serverData.Count; i++)
             {
-                if(serverData[i].id == id)
+                if (serverData[i].id == id)
                 {
                     cmbServers.SelectedIndex = i;
                     cmbServers_SelectionChangeCommitted(null, null);
@@ -247,7 +251,7 @@ namespace Firedump
         private void onSaveErrorHandler(string message)
         {
             this.UseWaitCursor = false;
-            MessageBox.Show("Save to locations failed:\n"+message,"Locations Save",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            MessageBox.Show("Save to locations failed:\n" + message, "Locations Save", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
     }

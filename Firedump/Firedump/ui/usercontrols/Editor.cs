@@ -1,21 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
+﻿using com.protectsoft.SqlStatementParser;
 using FastColoredTextBoxNS;
-using Firedump.models;
-using Firedump.models.events;
 using Firedump.core;
 using Firedump.core.db;
-using Firedump.core.sql;
-using System.Data.Common;
-using Firedump.core.sql.executor;
-using com.protectsoft.SqlStatementParser;
 using Firedump.core.models;
-using Firedump.core.models.events;
 using Firedump.core.models.dbinfo;
-using sqlbox.commons;
-using System.IO;
+using Firedump.core.models.events;
+using Firedump.core.sql;
+using Firedump.core.sql.executor;
+using Firedump.models;
+using Firedump.models.events;
 using Firedump.ui.forms;
+using sqlbox.commons;
+using System;
+using System.Collections.Generic;
+using System.Data.Common;
+using System.IO;
+using System.Windows.Forms;
 
 namespace Firedump.usercontrols
 {
@@ -60,42 +60,46 @@ namespace Firedump.usercontrols
         }
 
 
-        internal void AddQueryTab(string sql = "  ",string tabname = null,bool isFile = false)
+        internal void AddQueryTab(string sql = "  ", string tabname = null, bool isFile = false)
         {
             this.SuspendLayout();
-            TabPageHolder myQueryTab = EditorAdapter.CreateQueryTab(this.tabControl1, imageList1, menuItems,this,sql, tabname, isFile);
+            TabPageHolder myQueryTab = EditorAdapter.CreateQueryTab(this.tabControl1, imageList1, menuItems, this, sql, tabname, isFile);
             tabControl1.Controls.Add(myQueryTab);
             myQueryTab.GetFastColoredTextBox().KeyDown += fctb_KeyDown;
             tabControl1.SelectedTab = myQueryTab;
             this.ResumeLayout();
         }
 
-        private void OnStatementExecuted(object sender,ExecutionQueryEvent e)
+        private void OnStatementExecuted(object sender, ExecutionQueryEvent e)
         {
             StatementExecuted?.Invoke(sender, e);
-            if(e.Status == Status.HIDDEN)
+            if (e.Status == Status.HIDDEN)
             {
                 return;
             }
-            else if(e.Status == Status.ABORTED)
+            else if (e.Status == Status.ABORTED)
             {
-                this.Invoke((MethodInvoker)delegate {
+                this.Invoke((MethodInvoker)delegate
+                {
                     base.GetMainHome().AbandonAndOpenNewConnection();
                 });
             }
-            foreach (TabPageHolder dv in tabControl1.Controls) {
-               if(dv.GetDataView().GetHashCode() == e.TAG)
+            foreach (TabPageHolder dv in tabControl1.Controls)
+            {
+                if (dv.GetDataView().GetHashCode() == e.TAG)
                 {
-                    this.Invoke((MethodInvoker)delegate {
+                    this.Invoke((MethodInvoker)delegate
+                    {
                         if (e.Status == Status.FINISHED && e.QueryParams.Sql == null)
                         {
-                            dv.GetDataView().SetData(e.data,e.query);
-                        } else if(e.Status == Status.FINISHED && e.QueryParams.Sql != null)
+                            dv.GetDataView().SetData(e.data, e.query);
+                        }
+                        else if (e.Status == Status.FINISHED && e.QueryParams.Sql != null)
                         {
                             dv.GetDataView().AppendData(e.data);
                         }
 
-                        if(e.QueryParams.Sql == null || e.Status == Status.ABORTED || e.Status == Status.CANCELED)
+                        if (e.QueryParams.Sql == null || e.Status == Status.ABORTED || e.Status == Status.CANCELED)
                         {
                             dv.GetDataView().SetHistory(e);
                         }
@@ -122,18 +126,18 @@ namespace Firedump.usercontrols
             {
                 ExecuteCurrent();
             }
-            else if (e.KeyData == Keys.F7) 
+            else if (e.KeyData == Keys.F7)
             {
                 ExecuteCurrent(true);
             }
-        }       
+        }
 
         private FastColoredTextBox GetSelectedTabEditor()
         {
             return (FastColoredTextBox)((TabPageHolder)tabControl1.SelectedTab)?.GetFastColoredTextBox();
         }
 
-        private void UpdateEditor(List<string> tableList,List<Table> fields)
+        private void UpdateEditor(List<string> tableList, List<Table> fields)
         {
             this.SuspendLayout();
             this.menuItems.Clear();
@@ -158,7 +162,8 @@ namespace Firedump.usercontrols
                     };
                 }
                 Execute(StringUtils.SelectedTextOrTabText(tb.SelectedText, tb.Text), parameters);
-            } else
+            }
+            else
             {
                 StatementExecuted?.Invoke(this, new ExecutionQueryEvent(Status.FINISHED));
             }
@@ -176,9 +181,9 @@ namespace Firedump.usercontrols
             if (parameters.Sql == null)
             {
                 if (!string.IsNullOrWhiteSpace(query))
-                {                    
-                    this.queryExecutor.Execute(core.sql.Utils.convert(Firedump.core.sql.Utils.GetDbTypeEnum(base.GetSqlConnection()), query), 
-                        this.GetSqlConnection(), parameters,this.GetMainHome().IsContinueExecutingOnFail());
+                {
+                    this.queryExecutor.Execute(core.sql.Utils.convert(Firedump.core.sql.Utils.GetDbTypeEnum(base.GetSqlConnection()), query),
+                        this.GetSqlConnection(), parameters, this.GetMainHome().IsContinueExecutingOnFail());
                 }
                 else
                 {
@@ -199,7 +204,8 @@ namespace Firedump.usercontrols
             if (tb != null && !string.IsNullOrEmpty(tb.SelectedText))
             {
                 ExecuteScript(null);
-            } else
+            }
+            else
             {
                 StatementExecuted?.Invoke(this, new ExecutionQueryEvent(Status.FINISHED));
             }
@@ -208,24 +214,25 @@ namespace Firedump.usercontrols
         internal void OpenFile()
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            if(ofd.ShowDialog() == DialogResult.OK)
+            if (ofd.ShowDialog() == DialogResult.OK)
             {
                 long bytes = new FileInfo(ofd.FileName).Length;
                 if (bytes > 10_000_000)
                 {
                     var form = new LargeFileForm(bytes, ofd.FileName);
                     form.ShowDialog();
-                    if(form.openExecute == OpenExecute.OPEN)
+                    if (form.openExecute == OpenExecute.OPEN)
                     {
                         AddQueryTab(" ", ofd.FileName, true);
                         GetSelectedTabEditor().OpenBindingFile(ofd.FileName, System.Text.Encoding.UTF8);
                     }
-                    else if(form.openExecute == OpenExecute.EXECUTE)
+                    else if (form.openExecute == OpenExecute.EXECUTE)
                     {
-                        if(DB.IsConnectedToDatabaseAndAfterReconnect(this))
+                        if (DB.IsConnectedToDatabaseAndAfterReconnect(this))
                         {
                             new ExecuteScriptForm(GetSqlConnection(), ofd.FileName).Show();
-                        } else
+                        }
+                        else
                         {
                             StatementExecuted?.Invoke(this, new ExecutionQueryEvent(Status.FINISHED));
                         }
@@ -233,7 +240,7 @@ namespace Firedump.usercontrols
                 }
                 else
                 {
-                    AddQueryTab(File.ReadAllText(ofd.FileName), ofd.FileName,true);
+                    AddQueryTab(File.ReadAllText(ofd.FileName), ofd.FileName, true);
                 }
             }
         }

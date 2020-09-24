@@ -12,7 +12,7 @@ namespace Firedump.models.events
         public sqlservers server;
         public DbConnection con;
 
-        public ConnectionEventArgs(DbConnection c,sqlservers s)
+        public ConnectionEventArgs(DbConnection c, sqlservers s)
         {
             this.server = s;
             this.con = c;

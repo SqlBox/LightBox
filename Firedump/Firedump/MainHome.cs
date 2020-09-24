@@ -46,7 +46,7 @@ namespace Firedump
             foreach (UserControlReference uc in ChildControls)
             {
                 uc.InitComponent(this);
-                if(uc is Editor)
+                if (uc is Editor)
                 {
                     ((Editor)uc).StatementExecuted += OnStatementExecuted;
                     ((Editor)uc).EnableUi = EnableUi;
@@ -71,12 +71,12 @@ namespace Firedump
 
         private void InitHomeEvents()
         {
-            this.FormClosed += (sender,e) =>
+            this.FormClosed += (sender, e) =>
             {
                 // Disconnect/close connection when app closes
                 try
                 {
-                    if(this.con != null)
+                    if (this.con != null)
                     {
                         if (DB.IsConnected(con))
                         {
@@ -99,14 +99,14 @@ namespace Firedump
                 };
                 //save window size and location
                 // Copy window location to app settings
-                Settings.Default.WindowLocation = this.Location; 
+                Settings.Default.WindowLocation = this.Location;
                 // Copy window size to app settings
                 if (this.WindowState == FormWindowState.Normal)
                 {
                     Settings.Default.WindowSize = this.Size;
-                    if(Settings.Default.WindowSize.Width < 250 || Settings.Default.WindowSize.Height < 250)
+                    if (Settings.Default.WindowSize.Width < 250 || Settings.Default.WindowSize.Height < 250)
                     {
-                        Settings.Default.WindowSize = new Size(1100,800);
+                        Settings.Default.WindowSize = new Size(1100, 800);
                     }
                 }
                 else
@@ -123,28 +123,29 @@ namespace Firedump
 
         private void InitControlEvents()
         {
-            foreach(UserControlReference uc in ChildControls)
+            foreach (UserControlReference uc in ChildControls)
             {
                 uc.Disconnected += new EventHandler(onDisconnected);
-                uc.ConnectionChanged += new EventHandler<ConChangedEventArgs>((sender,e) => {
+                uc.ConnectionChanged += new EventHandler<ConChangedEventArgs>((sender, e) =>
+                {
                     this.con = e.con;
                     //SetAutoCommit(con);
                     this.pushConnection();
                     this.setHomeConnectionStatus();
                 });
-                uc.Reconnect += (sender, e) => Reconnect(); 
+                uc.Reconnect += (sender, e) => Reconnect();
             }
         }
 
         private void Reconnect()
         {
-            if(server != null && con != null)
+            if (server != null && con != null)
             {
                 con.Close();
                 ConnectionResultSet result = DB.TestConnection(server);
                 if (result.wasSuccessful)
                 {
-                    var con = DB.connect(server,this.con.Database);
+                    var con = DB.connect(server, this.con.Database);
                     this.SetReconnectionStatus(con);
                 }
             }
@@ -152,7 +153,7 @@ namespace Firedump
 
         internal void AbandonAndOpenNewConnection()
         {
-            if(server != null && this.con != null)
+            if (server != null && this.con != null)
             {
                 string database = this.con.Database;
                 this.con = null;
@@ -188,14 +189,15 @@ namespace Firedump
 
         private void ConnectToDbClick(object sender, EventArgs e)
         {
-            if(this.server != null)
+            if (this.server != null)
             {
                 this.con = DB.connect(this.server);
                 SetAutoCommit(this.con);
                 this.setHomeConnectionStatus();
                 this.setConnectionAndServerToUserControls();
                 this.EnableDisable(true);
-            } else
+            }
+            else
             {
                 openDatabaseWindow();
             }
@@ -208,7 +210,7 @@ namespace Firedump
             databaseConnector.Show();
             this.EnableDisable(false);
             databaseConnector.onConnect += (sender, e) => SetInitialConnectionStatus(e);
-            databaseConnector.FormClosed += (sender,e) => this.EnableDisable(true);
+            databaseConnector.FormClosed += (sender, e) => this.EnableDisable(true);
         }
 
         private void SetInitialConnectionStatus(ConnectionEventArgs e)
@@ -230,7 +232,7 @@ namespace Firedump
 
         private void setHomeConnectionStatus()
         {
-            if(!core.sql.Utils.IsDbEmbedded(this.server.db_type))
+            if (!core.sql.Utils.IsDbEmbedded(this.server.db_type))
             {
                 this.connectionStatusStripTextbox.Text = this.server.username + "@" + this.server.host + ":" + this.server.port + ":" + this.con.Database;
             }
@@ -244,15 +246,16 @@ namespace Firedump
         private void setConnectionAndServerToUserControls()
         {
             this.pushConnection();
-            if(core.sql.Utils._convert(GetServer().db_type) == sqlbox.commons.DbType.SQLITE)
+            if (core.sql.Utils._convert(GetServer().db_type) == sqlbox.commons.DbType.SQLITE)
             {
-                this.tabView1.setServerDataToComboBox(new List<string>() {"main"});
-            } else
+                this.tabView1.setServerDataToComboBox(new List<string>() { "main" });
+            }
+            else
             {
                 this.tabView1.setServerDataToComboBox(new SqlBuilderFactory(GetServer())
                 .Create(null).removeSystemDatabases(DbDataHelper.getDatabases(this.server, this.con), this.showSystemDatabases));
             }
-            
+
         }
 
         private void pushConnection()
@@ -279,7 +282,7 @@ namespace Firedump
 
         private void ShowHideSystemDbEventClick(object sender, EventArgs e)
         {
-            if(DB.IsConnected(this.con) && !core.sql.Utils.IsDbEmbedded(GetServer().db_type))
+            if (DB.IsConnected(this.con) && !core.sql.Utils.IsDbEmbedded(GetServer().db_type))
             {
                 this.tabView1.setServerDataToComboBox(new SqlBuilderFactory(GetServer())
                 .Create(null).removeSystemDatabases(DbDataHelper.getDatabases(this.server, this.con), this.showSystemDatabases = !this.showSystemDatabases));
@@ -289,10 +292,11 @@ namespace Firedump
 
         private void EnableDisable(bool enable)
         {
-            if(enable && (DB.IsConnected(con)))
+            if (enable && (DB.IsConnected(con)))
             {
                 setConstrolEnableStatus(enable);
-            } else if(!enable)
+            }
+            else if (!enable)
             {
                 setConstrolEnableStatus(enable);
             }
@@ -303,10 +307,11 @@ namespace Firedump
         {
             foreach (var comp in this.ChildControls)
             {
-                if(!(comp is Editor))
+                if (!(comp is Editor))
                 {
                     comp.Enabled = enable;
-                } else if(comp is Editor)
+                }
+                else if (comp is Editor)
                 {
                     comp.Enabled = true;
                 }
@@ -315,7 +320,7 @@ namespace Firedump
 
         private void SetAutoCommit(DbConnection con)
         {
-            if(DB.IsConnected(con))
+            if (DB.IsConnected(con))
             {
                 applySettingsAfterOpen();
             }
@@ -334,7 +339,8 @@ namespace Firedump
                 {
                     DbDataHelper.executeNonQuery(con, Properties.Settings.Default.option_sqlite_sqlafteropen);
                 }
-            } else
+            }
+            else
             {
                 DbDataHelper.executeNonQuery(con, "set autocommit=" + (Properties.Settings.Default.option_general_autocommit == true ? "1" : "0"));
             }
@@ -343,10 +349,10 @@ namespace Firedump
 
         private void disconnectEventClick(object sender, EventArgs e)
         {
-            if(this.con != null)
+            if (this.con != null)
             {
                 this.con.Close();
-                onDisconnected(null,null);
+                onDisconnected(null, null);
                 setConstrolEnableStatus(false);
             }
         }

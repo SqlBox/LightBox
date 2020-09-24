@@ -9,7 +9,7 @@ namespace Firedump.core.models
     public class ToolStripItemDbType
     {
         public int db_type;
-        public ToolStripItemDbType(int type) 
+        public ToolStripItemDbType(int type)
         {
             this.db_type = type;
         }

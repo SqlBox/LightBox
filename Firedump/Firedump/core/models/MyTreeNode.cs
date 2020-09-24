@@ -9,7 +9,7 @@ namespace Firedump.core.models
 {
     public class MyTreeNode : TreeNode
     {
-        public  enum NodeType
+        public enum NodeType
         {
             Table,
             ParentTrigger,
@@ -18,7 +18,7 @@ namespace Firedump.core.models
             Other
         }
         public NodeType Type = NodeType.Other;
-        public MyTreeNode() : base() 
+        public MyTreeNode() : base()
         {
         }
     }

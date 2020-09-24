@@ -1,19 +1,19 @@
-﻿using System;
+﻿using Firedump.core.attributes;
+using Firedump.core.sql;
+using Firedump.models;
+using Firedump.ui.usercontrols;
+using MySql.Data.MySqlClient;
+using sqlbox.commons;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using System.Linq;
-using System.Windows.Forms;
-using Firedump.core.attributes;
-using Firedump.core.sql;
-using Firedump.models;
-using System.Text;
-using System.Diagnostics;
-using System.Threading;
-using sqlbox.commons;
-using MySql.Data.MySqlClient;
 using System.Data.SQLite;
-using Firedump.ui.usercontrols;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace Firedump.core.db
 {
@@ -43,7 +43,7 @@ namespace Firedump.core.db
                 sql = new SqlBuilderFactory(con).Create(null).getDatabases();
                 data = getStringData(con, sql);
             }
-            catch(DbException ex)
+            catch (DbException ex)
             {
                 sql = ex.Message;
 #if DEBUG
@@ -235,10 +235,10 @@ namespace Firedump.core.db
             return data;
         }
 
-        internal static List<string> getTableInfo(DbConnection con,string table)
+        internal static List<string> getTableInfo(DbConnection con, string table)
         {
             var data = new List<string>();
-            if(!sql.Utils.IsDbEmbedded(sql.Utils.GetDbTypeEnum(con)))
+            if (!sql.Utils.IsDbEmbedded(sql.Utils.GetDbTypeEnum(con)))
             {
                 string command = "";
                 try
@@ -269,7 +269,7 @@ namespace Firedump.core.db
             return data;
         }
 
-        internal static string getCreateTable(DbConnection con,string table)
+        internal static string getCreateTable(DbConnection con, string table)
         {
             string res = "";
             string sql = "";
@@ -379,7 +379,8 @@ namespace Firedump.core.db
                     command.ExecuteNonQuery();
                     Terminal.MainTerminal.AppendText(sql);
                 }
-            }catch(DbException ex)
+            }
+            catch (DbException ex)
             {
                 Terminal.MainTerminal.AppendText(ex.Message);
 #if DEBUG

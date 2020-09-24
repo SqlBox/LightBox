@@ -9,8 +9,8 @@ namespace Firedump.core.sql
     class PostgreSqlBuilder : ISqlBuilder
     {
         private readonly string SCHEMA;
-        
-        public PostgreSqlBuilder(string schema) 
+
+        public PostgreSqlBuilder(string schema)
         {
             this.SCHEMA = schema;
         }

@@ -24,9 +24,9 @@ namespace Firedump
 
         internal T GetUserControl<T>() where T : UserControlReference
         {
-            foreach(UserControlReference c in ChildControls)
+            foreach (UserControlReference c in ChildControls)
             {
-                if(c is T)
+                if (c is T)
                 {
                     return (T)c;
                 }
@@ -94,7 +94,7 @@ namespace Firedump
             GetUserControl<Editor>().AddQueryTab();
         }
 
-       
+
 
         // Closes selected open tab
         private void closeTabClick(object sender, EventArgs e)
@@ -149,7 +149,7 @@ namespace Firedump
             GetUserControl<Editor>().FindText(text, hasChanged, isNext);
         }
 
-        private void ToUpperClick(object sender,EventArgs e)
+        private void ToUpperClick(object sender, EventArgs e)
         {
             GetUserControl<Editor>().ToUpper();
         }
@@ -169,14 +169,15 @@ namespace Firedump
             GetUserControl<Editor>().PrintSelected();
         }
 
-        private void ExecuteScript(object sender,EventArgs e)
+        private void ExecuteScript(object sender, EventArgs e)
         {
             EnableUi(false);
             try
             {
                 GetUserControl<Editor>().ExecuteScript(null);
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 //LOG
                 //If something out of control goes wrong at least re enable the ui
                 EnableUi(false);
@@ -206,7 +207,7 @@ namespace Firedump
             {
                 Process.Start(RegistryUtils.getFiredumpPath());
             }
-            catch (Exception) 
+            catch (Exception)
             {
                 MessageBox.Show("Firedump not installed");
             }
@@ -269,13 +270,13 @@ namespace Firedump
 
         private void toolStripButtonOpenExecuteFileForm_Click(object sender, EventArgs e)
         {
-            if(DB.IsConnectedToDatabase(this.con))
+            if (DB.IsConnectedToDatabase(this.con))
             {
                 OpenFileDialog ofd = new OpenFileDialog();
                 var res = ofd.ShowDialog();
-                if(res == DialogResult.OK)
+                if (res == DialogResult.OK)
                 {
-                    new ExecuteScriptForm(this.con,ofd.FileName).Show();
+                    new ExecuteScriptForm(this.con, ofd.FileName).Show();
                 }
             }
         }

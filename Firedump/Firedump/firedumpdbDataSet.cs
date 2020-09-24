@@ -34,7 +34,7 @@ namespace Firedump.firedumpdbDataSetTableAdapters
     public partial class sql_serversTableAdapter
     {
         // new insert query with db type
-        public virtual int InsertQuery(string name, long port, string host, string username, string password, string database,int db_type,string path = null)
+        public virtual int InsertQuery(string name, long port, string host, string username, string password, string database, int db_type, string path = null)
         {
 
             if ((name == null))
@@ -79,7 +79,7 @@ namespace Firedump.firedumpdbDataSetTableAdapters
                 this.Adapter.InsertCommand.Parameters[5].Value = ((string)(database));
             }
             this.Adapter.InsertCommand.Parameters[6].Value = db_type;
-            if(path != null && path.Trim().Length < 2)
+            if (path != null && path.Trim().Length < 2)
             {
                 path = null;
             }

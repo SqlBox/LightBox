@@ -88,7 +88,7 @@ namespace Firedump.core.sql
          */
         public List<string> removeSystemDatabases(List<string> databases, bool showSystemDb = false) =>
             !showSystemDb
-                ? databases.Where(i => i.ToLower() != "sys" && i.ToLower() != "performance_schema" && i.ToLower() != "mysql" 
+                ? databases.Where(i => i.ToLower() != "sys" && i.ToLower() != "performance_schema" && i.ToLower() != "mysql"
                     && i.ToLower() != "information_schema").ToList()
                 : databases;
 
@@ -111,7 +111,7 @@ namespace Firedump.core.sql
 
         public string GetTableTriggers(string table)
         {
-            return "SELECT trigger_name, action_timing, event_manipulation FROM information_schema.triggers WHERE event_object_table = '" +table+ "' order by  trigger_name,action_timing, event_manipulation";
+            return "SELECT trigger_name, action_timing, event_manipulation FROM information_schema.triggers WHERE event_object_table = '" + table + "' order by  trigger_name,action_timing, event_manipulation";
         }
 
         public string GetAllViews()
@@ -121,12 +121,12 @@ namespace Firedump.core.sql
 
         public string GetProcedures()
         {
-            return "SHOW PROCEDURE STATUS WHERE Db = '"+SCHEMA+"'";
+            return "SHOW PROCEDURE STATUS WHERE Db = '" + SCHEMA + "'";
         }
 
         public string GetFunctions()
         {
-            return "SHOW FUNCTION STATUS WHERE Db = '" +SCHEMA+ "'";
+            return "SHOW FUNCTION STATUS WHERE Db = '" + SCHEMA + "'";
         }
 
         public string GetTriggerCreateStatement(string table, string triggerName)

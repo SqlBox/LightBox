@@ -1,23 +1,23 @@
-﻿using System;
+﻿using com.protectsoft.SqlStatementParser.formatter;
+using Firedump.core;
+using Firedump.core.db;
+using Firedump.core.models;
+using Firedump.core.sql;
+using Firedump.core.sql.executor;
+using Firedump.models;
+using Firedump.models.events;
+using Firedump.ui.usercontrols;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
-using Firedump.core;
-using Firedump.core.db;
-using Firedump.core.sql;
-using Firedump.models;
-using Firedump.models.events;
-using Firedump.core.sql.executor;
-using Firedump.core.models;
 using static Firedump.core.models.MyTreeNode;
-using Firedump.ui.usercontrols;
-using com.protectsoft.SqlStatementParser.formatter;
 
 namespace Firedump.usercontrols
 {
@@ -40,7 +40,7 @@ namespace Firedump.usercontrols
             TableTriggersMenu.MenuItems.AddRange(menuItemBuilder.BuildTableTriggerMenuItems());
         }
 
-        public void setServerDataToComboBox(List<string> databases,int selectedIndex = 0)
+        public void setServerDataToComboBox(List<string> databases, int selectedIndex = 0)
         {
             this.comboBoxServers.BeginUpdate();
             this.comboBoxServers.Items.Clear();
@@ -276,7 +276,7 @@ namespace Firedump.usercontrols
             {
                 Point p = new Point(e.X, e.Y);
                 MyTreeNode node = treeViewTables.GetNodeAt(p) as MyTreeNode;
-                if(node != null)
+                if (node != null)
                 {
                     switch (node.Type)
                     {
@@ -294,12 +294,13 @@ namespace Firedump.usercontrols
                             break;
                     }
                 }
-            } else if(e.Button == MouseButtons.Left && !GetMainHome().GetUserControl<Editor>().GetQueryExecutor().IsAlive())
+            }
+            else if (e.Button == MouseButtons.Left && !GetMainHome().GetUserControl<Editor>().GetQueryExecutor().IsAlive())
             {
                 MyTreeNode node = treeViewTables.GetNodeAt(new Point(e.X, e.Y)) as MyTreeNode;
-                if(node != null && node.Type == NodeType.Table && e.X > node.Bounds.Left - 15)
+                if (node != null && node.Type == NodeType.Table && e.X > node.Bounds.Left - 15)
                 {
-                    GetMainHome().GetUserControl<TableView>().setTableInfo(node.Text,DbDataHelper.getTableFields(GetSqlConnection(), node.Text)
+                    GetMainHome().GetUserControl<TableView>().setTableInfo(node.Text, DbDataHelper.getTableFields(GetSqlConnection(), node.Text)
                         , DbDataHelper.getTableInfo(GetSqlConnection(), node.Text));
                 }
             }
@@ -404,9 +405,9 @@ namespace Firedump.usercontrols
 
         internal void TreeViewTableTriggers_MenuItem_DropTrigger(object sender, EventArgs e)
         {
-            if(IsNodeSelected())
+            if (IsNodeSelected())
             {
-                DbDataHelper.executeNonQuery(GetSqlConnection(), "drop trigger "+treeViewTables.SelectedNode.Text);
+                DbDataHelper.executeNonQuery(GetSqlConnection(), "drop trigger " + treeViewTables.SelectedNode.Text);
                 treeViewTables.SelectedNode.Parent.Collapse();
             }
         }

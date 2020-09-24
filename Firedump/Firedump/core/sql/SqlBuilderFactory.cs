@@ -1,13 +1,13 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Firedump.core.db;
+using MySql.Data.MySqlClient;
 using Oracle.ManagedDataAccess.Client;
+using sqlbox.commons;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Firedump.core.db;
-using sqlbox.commons;
 
 namespace Firedump.core.sql
 {
@@ -36,23 +36,23 @@ namespace Firedump.core.sql
             {
                 return new OracleSqlBuilder(database);
             }
-            else if(dbType == DbType.POSTGRES)
+            else if (dbType == DbType.POSTGRES)
             {
                 return new PostgreSqlBuilder(database);
             }
-            else if(dbType == DbType.SQLITE)
+            else if (dbType == DbType.SQLITE)
             {
                 return new SqliteSqlBuilder();
             }
-            else if(dbType == DbType.SQLSERVER)
+            else if (dbType == DbType.SQLSERVER)
             {
                 return new SqlServerSqlBuilder(database);
             }
-            else if(dbType == DbType.DB2)
+            else if (dbType == DbType.DB2)
             {
                 return new Db2SqlBuilder(database);
             }
-            else if(dbType == DbType.FIREBIRD)
+            else if (dbType == DbType.FIREBIRD)
             {
                 return new FirebirdSqlBuilder(database);
             }

@@ -18,21 +18,21 @@ namespace Firedump.core.sql
             }
             else if (server.db_type == (int)DbType.ORACLE)
             {
-            } 
-            else if(server.db_type == (int)DbType.POSTGRES)
+            }
+            else if (server.db_type == (int)DbType.POSTGRES)
             {
             }
-            else if(server.db_type == (int)DbType.SQLITE)
+            else if (server.db_type == (int)DbType.SQLITE)
             {
                 return SqliteConnectionStringFactory.ConnectionStringBuilder(server.path, server.password);
             }
-            else if(server.db_type == (int)DbType.SQLSERVER)
+            else if (server.db_type == (int)DbType.SQLSERVER)
             {
             }
-            else if(server.db_type == (int)DbType.DB2)
+            else if (server.db_type == (int)DbType.DB2)
             {
             }
-            else if(server.db_type == (int)DbType.FIREBIRD)
+            else if (server.db_type == (int)DbType.FIREBIRD)
             {
             }
 

@@ -19,7 +19,7 @@ namespace Firedump.ui.forms
             FormUtils.setFormIcon(this);
         }
 
-        public TerminalForm(MainHome mh):this()
+        public TerminalForm(MainHome mh) : this()
         {
             this.terminal1.SetMainHome(mh);
         }

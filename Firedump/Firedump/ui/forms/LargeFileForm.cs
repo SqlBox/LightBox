@@ -21,7 +21,7 @@ namespace Firedump.ui.forms
     {
         private long mbytes;
         public OpenExecute openExecute;
-        public LargeFileForm(long bytes,string file)
+        public LargeFileForm(long bytes, string file)
         {
             InitializeComponent();
             //bytes to megabytes

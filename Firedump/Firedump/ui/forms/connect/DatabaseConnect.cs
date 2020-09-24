@@ -1,5 +1,7 @@
-﻿using Firedump.models.events;
-using Firedump.core;
+﻿using Firedump.core;
+using Firedump.core.db;
+using Firedump.models.events;
+using Firedump.ui.forms;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -10,8 +12,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Firedump.core.db;
-using Firedump.ui.forms;
 
 namespace Firedump.Forms.mysql.connect
 {
@@ -30,7 +30,7 @@ namespace Firedump.Forms.mysql.connect
         {
             InitializeComponent();
             FormUtils.setFormIcon(this);
-            this.InitDataFormData(this,null);
+            this.InitDataFormData(this, null);
         }
 
         private void InitDataFormData(object sender, EventArgs e)
@@ -46,7 +46,7 @@ namespace Firedump.Forms.mysql.connect
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            if(serverData.Count > 0)
+            if (serverData.Count > 0)
             {
                 var server = sqlservers.CreateSqlServerFromDataTable(serverData, comboBox1);
                 if (server != null)
@@ -65,7 +65,8 @@ namespace Firedump.Forms.mysql.connect
                         MessageBox.Show("Connection failed: \n" + result.errorMessage, "Test Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-            } else
+            }
+            else
             {
                 WarnNoServersSaved();
             }
@@ -101,17 +102,17 @@ namespace Firedump.Forms.mysql.connect
 
         private void WarnNoServersSaved()
         {
-            MessageBox.Show("No saved servers. Go to Database->Add New Server","", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show("No saved servers. Go to Database->Add New Server", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(serverData.Count > 0)
+            if (serverData.Count > 0)
             {
-                if(comboBox1.SelectedItem != null)
+                if (comboBox1.SelectedItem != null)
                 {
                     var server = sqlservers.CreateSqlServerFromDataTable(serverData, comboBox1);
-                    if (server != null) 
+                    if (server != null)
                     {
                         textBoxPassword.Text = server.password;
                     }

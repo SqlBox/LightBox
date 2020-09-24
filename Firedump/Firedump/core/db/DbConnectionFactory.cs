@@ -41,23 +41,23 @@ namespace Firedump.core.db
             {
                 return string.IsNullOrEmpty(ConnectionString) ? new OracleConnection() : new OracleConnection(ConnectionString);
             }
-            else if(dbType == DbType.POSTGRES)
+            else if (dbType == DbType.POSTGRES)
             {
                 return string.IsNullOrEmpty(ConnectionString) ? new Npgsql.NpgsqlConnection() : new Npgsql.NpgsqlConnection(ConnectionString);
             }
-            else if(dbType == DbType.SQLITE)
+            else if (dbType == DbType.SQLITE)
             {
                 return string.IsNullOrEmpty(ConnectionString) ? new SQLiteConnection() : new SQLiteConnection(ConnectionString);
             }
-            else if(dbType == DbType.SQLSERVER)
+            else if (dbType == DbType.SQLSERVER)
             {
                 return string.IsNullOrEmpty(ConnectionString) ? new SqlConnection() : new SqlConnection(ConnectionString);
             }
-            else if(dbType == DbType.DB2)
+            else if (dbType == DbType.DB2)
             {
                 return string.IsNullOrEmpty(ConnectionString) ? new DB2Connection() : new DB2Connection(ConnectionString);
             }
-            else if(dbType == DbType.FIREBIRD)
+            else if (dbType == DbType.FIREBIRD)
             {
                 return string.IsNullOrEmpty(ConnectionString) ? new FbConnection() : new FbConnection(ConnectionString);
             }

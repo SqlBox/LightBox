@@ -1,15 +1,15 @@
 ﻿using FastColoredTextBoxNS;
+using Firedump.core.models.dbinfo;
+using Firedump.core.models.events;
+using Firedump.core.sql;
 using Firedump.models;
 using Firedump.usercontrols;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Drawing;
-using Firedump.core.sql;
 using sqlbox.commons;
-using System.Data;
-using Firedump.core.models.events;
-using Firedump.core.models.dbinfo;
 using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Firedump.core
 {
@@ -59,10 +59,10 @@ namespace Firedump.core
 
         internal static AutocompleteMenu CreateAutoCompleteMenu(FastColoredTextBox editor, ImageList imageList, List<AutocompleteItem> menuItems)
         {
-            return CreateAutoCompleteMenu(editor, imageList, menuItems,StringUtils.REGEX);
+            return CreateAutoCompleteMenu(editor, imageList, menuItems, StringUtils.REGEX);
         }
 
-        internal static AutocompleteMenu CreateAutoCompleteMenu(FastColoredTextBox editor, ImageList imageList,List<AutocompleteItem> menuItems, string searchPattern)
+        internal static AutocompleteMenu CreateAutoCompleteMenu(FastColoredTextBox editor, ImageList imageList, List<AutocompleteItem> menuItems, string searchPattern)
         {
             var menu = new AutocompleteMenu(editor)
             {
@@ -130,7 +130,8 @@ namespace Firedump.core
                 row["Status"] = IconHelper.status_info_arr;
                 info = "Canceled";
 
-            } else if(e.Status == Status.ABORTED)
+            }
+            else if (e.Status == Status.ABORTED)
             {
                 row["Status"] = IconHelper.status_info_arr;
                 info = "Aborted";
@@ -143,7 +144,7 @@ namespace Firedump.core
             row["Query"] = query;
             row["Rows affected"] = e.recordsAffected;
             row["Info"] = e.Ex != null ? e.Ex.Message : info;
-            row["Secs/Millis"] = (int)e.duration.TotalSeconds +"/" + (int) e.duration.TotalMilliseconds;
+            row["Secs/Millis"] = (int)e.duration.TotalSeconds + "/" + (int)e.duration.TotalMilliseconds;
             row["Executed At"] = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
             data.Rows.Add(row);
             return data;

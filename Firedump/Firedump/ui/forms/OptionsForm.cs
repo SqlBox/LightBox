@@ -29,7 +29,7 @@ namespace Firedump.ui.forms
             loadGenericSettings();
             loadMySqlSettings();
             loadSqliteSettings();
-            if(!DB.IsConnected(con) || !(Utils.GetDbTypeEnum(con) == sqlbox.commons.DbType.SQLITE))
+            if (!DB.IsConnected(con) || !(Utils.GetDbTypeEnum(con) == sqlbox.commons.DbType.SQLITE))
             {
                 groupBoxPragmaEditor.Enabled = false;
             }
@@ -70,7 +70,7 @@ namespace Firedump.ui.forms
 
         private void loadSqliteSettings()
         {
-            checkBoxBeginTransAfterCommit.Checked   =   Properties.Settings.Default.option_sqlite_begintranscommit;
+            checkBoxBeginTransAfterCommit.Checked = Properties.Settings.Default.option_sqlite_begintranscommit;
             checkBoxBeginTransAfterDbOpens.Checked = Properties.Settings.Default.option_sqlite_begintransdbopen;
             fastColoredTextBoxSqlAfterDbOpens.Text = Properties.Settings.Default.option_sqlite_sqlafteropen;
             checkBoxForeignKeys.Checked = Properties.Settings.Default.option_sqlite_foreign_keys;
@@ -78,7 +78,7 @@ namespace Firedump.ui.forms
             if (DB.IsConnected(con) && Utils.GetDbTypeEnum(con) == sqlbox.commons.DbType.SQLITE)
             {
                 var intList = DbDataHelper.getIntData(con, "PRAGMA auto_vacuum");
-                if(intList.Count > 0)
+                if (intList.Count > 0)
                 {
                     int val = intList[0];
                     //0 none,1 full, 2 INCREMENTAL
@@ -96,37 +96,37 @@ namespace Firedump.ui.forms
                     }
                 }
                 intList = DbDataHelper.getIntData(con, "PRAGMA automatic_index");
-                if(intList.Count > 0)
+                if (intList.Count > 0)
                 {
                     checkBoxAutoIndex.Checked = intList[0] == 0 ? false : true;
                 }
                 intList = DbDataHelper.getIntData(con, "PRAGMA cell_size_check");
-                if(intList.Count > 0)
+                if (intList.Count > 0)
                 {
                     checkBoxCellSizeCheck.Checked = intList[0] == 0 ? false : true;
                 }
                 intList = DbDataHelper.getIntData(con, "PRAGMA checkpoint_fullfsync");
-                if(intList.Count > 0)
+                if (intList.Count > 0)
                 {
                     checkBoxCheckFullSync.Checked = intList[0] == 0 ? false : true;
                 }
                 intList = DbDataHelper.getIntData(con, "PRAGMA defer_foreign_keys");
-                if(intList.Count > 0)
+                if (intList.Count > 0)
                 {
                     checkBoxDeferForeignKeys.Checked = intList[0] == 0 ? false : true;
                 }
                 intList = DbDataHelper.getIntData(con, "PRAGMA ignore_check_constraints");
-                if(intList.Count > 0)
+                if (intList.Count > 0)
                 {
                     checkBoxIgnoreCheckConstraints.Checked = intList[0] == 0 ? false : true;
                 }
                 var stringList = DbDataHelper.getStringData(con, "PRAGMA journal_mode");
-                if(stringList.Count > 0)
+                if (stringList.Count > 0)
                 {
                     comboBoxJournalMode.SelectedItem = stringList[0].ToUpper();
                 }
                 intList = DbDataHelper.getIntData(con, "PRAGMA journal_size_limit");
-                if(intList.Count > 0)
+                if (intList.Count > 0)
                 {
                     numericUpDownJournalSizeLimit.Value = intList[0];
                 }
@@ -136,7 +136,7 @@ namespace Firedump.ui.forms
                     comboBoxLockMode.SelectedItem = stringList[0].ToUpper();
                 }
                 intList = DbDataHelper.getIntData(con, "PRAGMA max_page_count");
-                if(intList.Count > 0)
+                if (intList.Count > 0)
                 {
                     numericMaxPageCount.Value = intList[0];
                 }
@@ -155,7 +155,7 @@ namespace Firedump.ui.forms
                 {
                     checkBoxSecureDelete.Checked = intList[0] == 0 ? false : true;
                 }
-                 intList = DbDataHelper.getIntData(con, "PRAGMA synchronous");
+                intList = DbDataHelper.getIntData(con, "PRAGMA synchronous");
                 if (intList.Count > 0)
                 {
                     int val = intList[0];
@@ -199,12 +199,13 @@ namespace Firedump.ui.forms
             {
                 var dialog = new CommitRollbackForm();
                 dialog.ShowDialog();
-                if(dialog.action != null)
+                if (dialog.action != null)
                 {
-                    if(dialog.action == DbData.COMMIT)
+                    if (dialog.action == DbData.COMMIT)
                     {
                         DB.Commit(con);
-                    } else if(dialog.action == DbData.ROLLBACK)
+                    }
+                    else if (dialog.action == DbData.ROLLBACK)
                     {
                         DB.Rollback(con);
                     }

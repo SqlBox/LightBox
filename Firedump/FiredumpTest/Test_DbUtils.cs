@@ -1,10 +1,4 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MySql.Data.MySqlClient;
-using Oracle.ManagedDataAccess.Client;
-using Firedump.core.db;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using sqlbox.commons;
 
 namespace FiredumpTest

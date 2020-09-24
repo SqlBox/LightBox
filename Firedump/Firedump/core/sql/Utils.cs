@@ -97,7 +97,7 @@ namespace Firedump.core.sql
             return statementList;
         }
 
-        internal static void selectCurrent(FastColoredTextBox tb,bool moveToNext = false)
+        internal static void selectCurrent(FastColoredTextBox tb, bool moveToNext = false)
         {
             var sel = tb.Selection;
             int line = 0;

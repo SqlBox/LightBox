@@ -15,7 +15,7 @@ namespace Firedump.core.sql.executor
         private List<string> statements;
         private DbConnection _con;
         public string CurrentQuery;
-        
+
         public QueryParams QueryParams;
 
         //Event handlers
@@ -28,19 +28,20 @@ namespace Firedump.core.sql.executor
         internal List<string> Statements() => this.statements;
         internal DbConnection Con() => this._con;
 
-        internal void Start(List<string> statements,DbConnection con,QueryParams parameters)
+        internal void Start(List<string> statements, DbConnection con, QueryParams parameters)
         {
-            if(this._thread == null || (this._thread != null && this._thread.ThreadState == ThreadState.Stopped))
+            if (this._thread == null || (this._thread != null && this._thread.ThreadState == ThreadState.Stopped))
             {
                 this.QueryParams = parameters;
                 this.statements = statements;
                 this._con = con;
                 this._thread = new Thread(new ThreadStart(run));
                 this._thread.Start();
-            } else
+            }
+            else
             {
                 StatementExecuted?.Invoke(this, new ExecutionQueryEvent(models.dbinfo.Status.HIDDEN) { });
-            } 
+            }
         }
 
 
@@ -61,7 +62,7 @@ namespace Firedump.core.sql.executor
         protected abstract void cancel();
 
         protected abstract void _abort();
-        
+
         protected virtual void OnStatementExecuted(object t, ExecutionQueryEvent e)
         {
             StatementExecuted?.Invoke(t, e);

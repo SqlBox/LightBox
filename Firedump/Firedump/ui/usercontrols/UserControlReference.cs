@@ -64,7 +64,8 @@ namespace Firedump.usercontrols
         {
             Disconnected?.Invoke(t, e);
         }
-        internal virtual void onConnected() {
+        internal virtual void onConnected()
+        {
         }
 
         internal virtual void onDisconnect()

@@ -136,7 +136,7 @@ namespace Firedump.usercontrols
         internal void Undo()
         {
             var tb = GetSelectedTabEditor();
-            if(tb != null)
+            if (tb != null)
             {
                 tb.Undo();
             }
@@ -145,7 +145,7 @@ namespace Firedump.usercontrols
         internal void Redo()
         {
             var tb = GetSelectedTabEditor();
-            if(tb != null)
+            if (tb != null)
             {
                 tb.Redo();
             }

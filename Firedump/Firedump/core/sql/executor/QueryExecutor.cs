@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Firedump.core.sql
 {
- 
+
     public class QueryExecutor
     {
         private BaseThread queryThread;
@@ -26,26 +26,26 @@ namespace Firedump.core.sql
         {
         }
 
-        internal void OnStatementExecuted(object t,ExecutionQueryEvent e)
+        internal void OnStatementExecuted(object t, ExecutionQueryEvent e)
         {
             StatementExecuted?.Invoke(t, e);
-            if(e.Status != Status.RUNNING && this.queryThread != null)
+            if (e.Status != Status.RUNNING && this.queryThread != null)
             {
-                lock(this.queryThread)
+                lock (this.queryThread)
                 {
                     this.queryThread.StatementExecuted -= OnStatementExecuted;
                     this.queryThread = null;
                 }
             }
         }
-        
 
-        internal void Execute(List<string> statements, DbConnection con,QueryParams qp,bool contExecutingOnFail)
+
+        internal void Execute(List<string> statements, DbConnection con, QueryParams qp, bool contExecutingOnFail)
         {
-            if(this.queryThread == null)
+            if (this.queryThread == null)
             {
                 this.queryThread = new ExecutorThread() { ContinueExecutingNextOnFail = contExecutingOnFail };
-                lock(this.queryThread)
+                lock (this.queryThread)
                 {
                     this.queryThread.StatementExecuted += OnStatementExecuted;
                     this.queryThread.Start(statements, con, qp);
@@ -54,8 +54,9 @@ namespace Firedump.core.sql
         }
 
         //Abandon thread and let it close
-        internal void Cancel() {
-            if(this.queryThread != null)
+        internal void Cancel()
+        {
+            if (this.queryThread != null)
             {
                 lock (this.queryThread)
                 {
@@ -81,7 +82,7 @@ namespace Firedump.core.sql
                     this.queryThread.Abort();
                     this.queryThread = null;
                 }
-                StatementExecuted?.Invoke(this, new ExecutionQueryEvent(Status.ABORTED) { QueryParams = queryParams , TAG = queryParams.Hash ,query = query });
+                StatementExecuted?.Invoke(this, new ExecutionQueryEvent(Status.ABORTED) { QueryParams = queryParams, TAG = queryParams.Hash, query = query });
             }
         }
     }

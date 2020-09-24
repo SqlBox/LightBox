@@ -15,8 +15,8 @@ namespace Firedump.core
             string firedump = null;
             if (key != null)
             {
-               firedump = (string)key.GetValue("firedump_path");
-               key.Close();
+                firedump = (string)key.GetValue("firedump_path");
+                key.Close();
             }
             return firedump;
         }

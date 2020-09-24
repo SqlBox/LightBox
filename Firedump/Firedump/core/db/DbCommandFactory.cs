@@ -29,7 +29,7 @@ namespace Firedump.core.db
             DbType dbType = Firedump.core.sql.Utils.GetDbTypeEnum(Connection);
             if (dbType == DbType.MYSQL || dbType == DbType.MARIADB)
             {
-                var com =  new MySqlCommand(Sql, (MySqlConnection)Connection);
+                var com = new MySqlCommand(Sql, (MySqlConnection)Connection);
                 com.CommandTimeout = Properties.Settings.Default.option_mysql_conreadtimeout;
                 return com;
             }
@@ -47,13 +47,13 @@ namespace Firedump.core.db
             }
             else if (dbType == DbType.SQLSERVER)
             {
-                return new SqlCommand(Sql,(SqlConnection)Connection);
+                return new SqlCommand(Sql, (SqlConnection)Connection);
             }
-            else if(dbType == DbType.DB2)
+            else if (dbType == DbType.DB2)
             {
                 return new DB2Command(Sql, (DB2Connection)Connection);
             }
-            else if(dbType == DbType.FIREBIRD)
+            else if (dbType == DbType.FIREBIRD)
             {
                 return new FbCommand(Sql, (FbConnection)Connection);
             }

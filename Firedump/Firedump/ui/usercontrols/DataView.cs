@@ -1,21 +1,21 @@
-﻿using System;
+﻿using Firedump.core;
+using Firedump.core.db;
+using Firedump.core.models.dbinfo;
+using Firedump.core.models.events;
+using Firedump.core.sql;
+using Firedump.core.sql.executor;
+using Firedump.models.events;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Data.Common;
+using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Threading;
-using Firedump.core.sql;
-using Firedump.models.events;
-using System.Data.Common;
-using Firedump.core.db;
-using Firedump.core.models.events;
-using Firedump.core.models.dbinfo;
-using Firedump.core.sql.executor;
-using Firedump.core;
 using System.Windows.Media;
 
 namespace Firedump.usercontrols
@@ -42,7 +42,7 @@ namespace Firedump.usercontrols
             this.editor = editor;
         }
 
-        public void SetData(DataTable data,string sql)
+        public void SetData(DataTable data, string sql)
         {
             this.SuspendLayout();
             this.SQL = sql;
@@ -57,7 +57,7 @@ namespace Firedump.usercontrols
 
         public void AppendData(DataTable data)
         {
-            if(this.dataGridView1.DataSource != null && data != null && data.Rows.Count > 0)
+            if (this.dataGridView1.DataSource != null && data != null && data.Rows.Count > 0)
             {
                 this.SuspendLayout();
                 this.dataGridView1.SuspendLayout();
@@ -84,7 +84,7 @@ namespace Firedump.usercontrols
             DataTable data = ControlBuilder.HistoryDataTableBuilder(e);
             int firstdisplayidx = this.dataGridViewHistory.FirstDisplayedScrollingRowIndex;
             ((DataTable)this.dataGridViewHistory.DataSource).Merge(data);
-            if(firstdisplayidx > 1)
+            if (firstdisplayidx > 1)
             {
                 this.dataGridViewHistory.FirstDisplayedScrollingRowIndex = firstdisplayidx;
             }
@@ -92,12 +92,12 @@ namespace Firedump.usercontrols
             this.ResumeLayout();
         }
 
-        private void DataGridViewKeyDownEvent(object sender,KeyEventArgs e)
+        private void DataGridViewKeyDownEvent(object sender, KeyEventArgs e)
         {
             //prevent control+shift+ up or down
             //that selects all table, in large data it could be very slow to ui not responding at all
             //datagridview rowheader corner click selects all table that apparently and for some unknown reason is fast even in 10 millions rows
-            if((e.KeyCode == Keys.Up || e.KeyCode == Keys.Down) && (e.Shift && e.Control))
+            if ((e.KeyCode == Keys.Up || e.KeyCode == Keys.Down) && (e.Shift && e.Control))
             {
                 e.Handled = true;
             }
@@ -119,9 +119,9 @@ namespace Firedump.usercontrols
         private void dataGridView1_Scroll(object sender, ScrollEventArgs e)
         {
             if (e.ScrollOrientation == ScrollOrientation.VerticalScroll && dataGridView1.DisplayedRowCount(false) + dataGridView1.FirstDisplayedScrollingRowIndex
-                >= dataGridView1.RowCount-1 && !this.editor.GetQueryExecutor().IsAlive())
+                >= dataGridView1.RowCount - 1 && !this.editor.GetQueryExecutor().IsAlive())
             {
-                this.editor.Fetch(new QueryParams() { Limit = this.editor.GetMainHome().GetLimitFromToolStripComboBoxLimit(), Offset = dataGridView1.RowCount, Hash = this.GetHashCode(),Sql = SQL });
+                this.editor.Fetch(new QueryParams() { Limit = this.editor.GetMainHome().GetLimitFromToolStripComboBoxLimit(), Offset = dataGridView1.RowCount, Hash = this.GetHashCode(), Sql = SQL });
             }
         }
 

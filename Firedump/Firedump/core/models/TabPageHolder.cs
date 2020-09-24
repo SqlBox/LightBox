@@ -16,14 +16,14 @@ namespace Firedump.models
         private readonly DataView dataView;
         private readonly bool isFile;
 
-        public TabPageHolder(FastColoredTextBox fastColoredTextBox, AutocompleteMenu menu,DataView dataView,bool isFile)
+        public TabPageHolder(FastColoredTextBox fastColoredTextBox, AutocompleteMenu menu, DataView dataView, bool isFile)
         {
             this.fastColoredTextBox = fastColoredTextBox;
             this.menu = menu;
             this.dataView = dataView;
             this.isFile = isFile;
         }
-        
+
 
         public FastColoredTextBox GetFastColoredTextBox()
         {

@@ -9,7 +9,7 @@ namespace Firedump.core.sql
     class FirebirdSqlBuilder : ISqlBuilder
     {
         private readonly string SCHEMA;
-        public FirebirdSqlBuilder(string s) 
+        public FirebirdSqlBuilder(string s)
         {
             this.SCHEMA = s;
         }
