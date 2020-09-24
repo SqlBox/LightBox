@@ -205,6 +205,7 @@
     <Compile Include="core\db\DbConnectionFactory.cs" />
     <Compile Include="core\db\SqliteHelpers.cs" />
     <Compile Include="core\EditorAdapter.cs" />
+    <Compile Include="core\FileIO.cs" />
     <Compile Include="core\models\dbinfo\Status.cs" />
     <Compile Include="core\models\events\ExecutionEventArgs.cs" />
     <Compile Include="core\models\MyToolStripItem.cs" />

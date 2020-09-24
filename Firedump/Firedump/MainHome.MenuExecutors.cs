@@ -280,5 +280,20 @@ namespace Firedump
                 }
             }
         }
+
+        private void saveScriptAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GetUserControl<Editor>().SaveAs();
+        }
+
+        private void saveToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            GetUserControl<Editor>().Save();
+        }
+
+        private void saveAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GetUserControl<Editor>().SaveAll();
+        }
     }
 }

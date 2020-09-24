@@ -27,7 +27,12 @@ namespace Firedump.ui.forms
             FormUtils.setFormIcon(this);
             this.con = c;
             this.file = file;
-            this.label1.Text = "File: " + file;
+            try
+            {
+                this.label1.Text = "File: " + file + "\n" +
+                "Size: " + ((File.OpenRead(file).Length) / 1024) / 1024 + " Mb's";
+            }
+            catch (IOException ex) { Close(); }
             worker.DoWork += loadAndExecute;
         }
 
@@ -95,7 +100,5 @@ namespace Firedump.ui.forms
                 });
             }
         }
-
-
     }
 }

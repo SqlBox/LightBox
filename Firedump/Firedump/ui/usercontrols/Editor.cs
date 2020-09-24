@@ -216,31 +216,43 @@ namespace Firedump.usercontrols
             OpenFileDialog ofd = new OpenFileDialog();
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                long bytes = new FileInfo(ofd.FileName).Length;
-                if (bytes > 10_000_000)
+                var fileInfo = FileIO.FileInfo(ofd.FileName);
+                if(fileInfo != null)
                 {
-                    var form = new LargeFileForm(bytes, ofd.FileName);
-                    form.ShowDialog();
-                    if (form.openExecute == OpenExecute.OPEN)
+                    long bytes = fileInfo.Length;
+                    if (bytes > 10_000_000)
                     {
-                        AddQueryTab(" ", ofd.FileName, true);
-                        GetSelectedTabEditor().OpenBindingFile(ofd.FileName, System.Text.Encoding.UTF8);
+                        var form = new LargeFileForm(bytes, ofd.FileName);
+                        form.ShowDialog();
+                        if (form.openExecute == OpenExecute.OPEN)
+                        {
+                            AddQueryTab(" ", ofd.FileName, true);
+                            try
+                            {
+                                GetSelectedTabEditor().OpenBindingFile(ofd.FileName, System.Text.Encoding.UTF8);
+                            }
+                            catch (IOException ex) { /*case try to re open same binding file again or a locked opened file*/}
+                        }
+                        else if (form.openExecute == OpenExecute.EXECUTE)
+                        {
+                            if (DB.IsConnectedToDatabaseAndAfterReconnect(this))
+                            {
+                                new ExecuteScriptForm(GetSqlConnection(), ofd.FileName).Show();
+                            }
+                            else
+                            {
+                                StatementExecuted?.Invoke(this, new ExecutionQueryEvent(Status.FINISHED));
+                            }
+                        }
                     }
-                    else if (form.openExecute == OpenExecute.EXECUTE)
+                    else
                     {
-                        if (DB.IsConnectedToDatabaseAndAfterReconnect(this))
+                        var text = FileIO.ReadAllText(ofd.FileName);
+                        if(text != null)
                         {
-                            new ExecuteScriptForm(GetSqlConnection(), ofd.FileName).Show();
-                        }
-                        else
-                        {
-                            StatementExecuted?.Invoke(this, new ExecutionQueryEvent(Status.FINISHED));
+                            AddQueryTab(text, ofd.FileName, true);
                         }
                     }
-                }
-                else
-                {
-                    AddQueryTab(File.ReadAllText(ofd.FileName), ofd.FileName, true);
                 }
             }
         }
@@ -256,5 +268,46 @@ namespace Firedump.usercontrols
         }
 
 
+        internal void SaveAll()
+        {
+            foreach (TabPageHolder dv in tabControl1.Controls)
+            {
+                if(dv.IsFile)
+                {
+                    FileIO.Save(dv.GetFastColoredTextBox(), dv.Text);
+                }
+            }
+        }
+
+        internal void Save()
+        {
+            var tp = ((TabPageHolder)tabControl1.SelectedTab);
+            if(tp != null)
+            {
+                if(tp.IsFile)
+                {
+                    FileIO.Save(tp.GetFastColoredTextBox(), tp.Text);
+                } else
+                {
+                    SaveAs();
+                }
+            }
+        }
+
+        internal void SaveAs()
+        {
+            var tb = GetSelectedTabEditor();
+            if(tb != null)
+            {
+                using (SaveFileDialog dialog = new SaveFileDialog())
+                {
+                    dialog.Filter = "sql files (*.sql)|*.sql|All files (*.*)|*.*";
+                    if (dialog.ShowDialog() == DialogResult.OK)
+                    {
+                        FileIO.Save(tb, dialog.FileName);
+                    }
+                }
+            }
+        }
     }
 }

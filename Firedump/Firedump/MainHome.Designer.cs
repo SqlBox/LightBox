@@ -85,6 +85,8 @@ namespace Firedump
             this.toolStripButton16 = new System.Windows.Forms.ToolStripButton();
             this.toolStripTextBoxSearch = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripButton19 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonOpenExecuteFileForm = new System.Windows.Forms.ToolStripButton();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripButtonHistoryEraser = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -96,6 +98,7 @@ namespace Firedump
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.saveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.saveScriptAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.printToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.exportHTMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -135,8 +138,6 @@ namespace Firedump
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.toolStripButtonOpenExecuteFileForm = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMainParent)).BeginInit();
             this.splitContainerMainParent.Panel1.SuspendLayout();
@@ -561,6 +562,7 @@ namespace Firedump
             this.toolStripButton22.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton22.Text = "toolStripButtonSave";
             this.toolStripButton22.ToolTipText = "Save";
+            this.toolStripButton22.Click += new System.EventHandler(this.saveToolStripMenuItem1_Click);
             // 
             // toolStripButtonSaveAll
             // 
@@ -571,6 +573,7 @@ namespace Firedump
             this.toolStripButtonSaveAll.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonSaveAll.Text = "toolStripButtonSaveAll";
             this.toolStripButtonSaveAll.ToolTipText = "Save all";
+            this.toolStripButtonSaveAll.Click += new System.EventHandler(this.saveAllToolStripMenuItem_Click);
             // 
             // toolStripSeparator16
             // 
@@ -710,6 +713,22 @@ namespace Firedump
             this.toolStripButton19.ToolTipText = "Find Next";
             this.toolStripButton19.Click += new System.EventHandler(this.FindNextClick);
             // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButtonOpenExecuteFileForm
+            // 
+            this.toolStripButtonOpenExecuteFileForm.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonOpenExecuteFileForm.Image = global::Firedump.Properties.Resources.Script_16x;
+            this.toolStripButtonOpenExecuteFileForm.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonOpenExecuteFileForm.Name = "toolStripButtonOpenExecuteFileForm";
+            this.toolStripButtonOpenExecuteFileForm.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonOpenExecuteFileForm.Text = "toolStripButton1";
+            this.toolStripButtonOpenExecuteFileForm.ToolTipText = "Open execute script form";
+            this.toolStripButtonOpenExecuteFileForm.Click += new System.EventHandler(this.toolStripButtonOpenExecuteFileForm_Click);
+            // 
             // toolStripProgressBar1
             // 
             this.toolStripProgressBar1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -757,6 +776,7 @@ namespace Firedump
             this.toolStripSeparator4,
             this.saveToolStripMenuItem1,
             this.saveScriptAsToolStripMenuItem,
+            this.saveAllToolStripMenuItem,
             this.toolStripSeparator5,
             this.printToolStripMenuItem1,
             this.exportHTMLToolStripMenuItem,
@@ -807,6 +827,7 @@ namespace Firedump
             this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
             this.saveToolStripMenuItem1.Size = new System.Drawing.Size(143, 22);
             this.saveToolStripMenuItem1.Text = "Save";
+            this.saveToolStripMenuItem1.Click += new System.EventHandler(this.saveToolStripMenuItem1_Click);
             // 
             // saveScriptAsToolStripMenuItem
             // 
@@ -814,6 +835,15 @@ namespace Firedump
             this.saveScriptAsToolStripMenuItem.Name = "saveScriptAsToolStripMenuItem";
             this.saveScriptAsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.saveScriptAsToolStripMenuItem.Text = "Save As";
+            this.saveScriptAsToolStripMenuItem.Click += new System.EventHandler(this.saveScriptAsToolStripMenuItem_Click);
+            // 
+            // saveAllToolStripMenuItem
+            // 
+            this.saveAllToolStripMenuItem.Image = global::Firedump.Properties.Resources.save_all_icon;
+            this.saveAllToolStripMenuItem.Name = "saveAllToolStripMenuItem";
+            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.saveAllToolStripMenuItem.Text = "Save All";
+            this.saveAllToolStripMenuItem.Click += new System.EventHandler(this.saveAllToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
@@ -1113,22 +1143,6 @@ namespace Firedump
             this.imageList1.Images.SetKeyName(2, "expand.png");
             this.imageList1.Images.SetKeyName(3, "collapse.png");
             // 
-            // toolStripButtonOpenExecuteFileForm
-            // 
-            this.toolStripButtonOpenExecuteFileForm.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonOpenExecuteFileForm.Image = global::Firedump.Properties.Resources.Script_16x;
-            this.toolStripButtonOpenExecuteFileForm.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonOpenExecuteFileForm.Name = "toolStripButtonOpenExecuteFileForm";
-            this.toolStripButtonOpenExecuteFileForm.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonOpenExecuteFileForm.Text = "toolStripButton1";
-            this.toolStripButtonOpenExecuteFileForm.ToolTipText = "Open execute script form";
-            this.toolStripButtonOpenExecuteFileForm.Click += new System.EventHandler(this.toolStripButtonOpenExecuteFileForm_Click);
-            // 
-            // toolStripSeparator10
-            // 
-            this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 25);
-            // 
             // MainHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1270,5 +1284,6 @@ namespace Firedump
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripButton toolStripButtonOpenExecuteFileForm;
+        private System.Windows.Forms.ToolStripMenuItem saveAllToolStripMenuItem;
     }
 }
