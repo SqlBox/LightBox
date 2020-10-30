@@ -61,7 +61,7 @@ const PageData = {
         description:'Downloads are available for 32bit and 64bit executables.',
         requirements:'Minimum requirement to run the app is to have installed .NET 4.6.1 and above',
         links:[
-            {title:'DebugX64 exe',link:'https://github.com/SqlBox/LightBox/releases/download/debug64/debug64.zip',active:true},
+            {title:'DebugX64 exe',link:'https://github.com/SqlBox/LightBox/releases/download/demo-29-10-20/lightbox.zip',active:true},
             {title:'DebugX86 exe',link:'https://github.com/SqlBox/LightBox/releases/download/debug64/debug64.zip',active:false}
         ]
     },
