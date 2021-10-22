@@ -26,7 +26,7 @@ const PageData = {
             {title:'SqlStatementParser',link:'https://github.com/SqlBox/SqlStatementParser'}
         ],
         copyright:{
-            caption:'© 2020 Copyright:'
+            caption:'© 2021 Copyright:'
         }
     },
     features:{
