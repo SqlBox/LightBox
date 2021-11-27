@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Firedump.usercontrols
 {
-    public class UserControlReference : UserControl
+    public abstract class UserControlReference : UserControl
     {
         private IConnectionServerRef parent;
 

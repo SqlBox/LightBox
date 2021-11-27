@@ -46,16 +46,6 @@ namespace Firedump.core
             };
         }
 
-        internal static Panel CreatePanel(Control c)
-        {
-            return new Panel()
-            {
-                Dock = DockStyle.Fill,
-                Location = new System.Drawing.Point(3, 3),
-                TabIndex = c.Controls.Count,
-                Name = "panel" + (c.Controls.Count + 1)
-            };
-        }
 
         internal static AutocompleteMenu CreateAutoCompleteMenu(FastColoredTextBox editor, ImageList imageList, List<AutocompleteItem> menuItems)
         {

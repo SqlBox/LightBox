@@ -173,7 +173,7 @@ namespace Firedump
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1169, 653);
+            this.panel1.Size = new System.Drawing.Size(1169, 639);
             this.panel1.TabIndex = 4;
             // 
             // splitContainerMainParent
@@ -187,8 +187,8 @@ namespace Firedump
             // splitContainerMainParent.Panel1
             // 
             this.splitContainerMainParent.Panel1.Controls.Add(this.splitContainerMiddle);
-            this.splitContainerMainParent.Size = new System.Drawing.Size(1169, 579);
-            this.splitContainerMainParent.SplitterDistance = 550;
+            this.splitContainerMainParent.Size = new System.Drawing.Size(1169, 565);
+            this.splitContainerMainParent.SplitterDistance = 536;
             this.splitContainerMainParent.TabIndex = 5;
             // 
             // splitContainerMiddle
@@ -201,7 +201,7 @@ namespace Firedump
             // 
             this.splitContainerMiddle.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
             this.splitContainerMiddle.Panel2.Controls.Add(this.splitContainerMiddleChild);
-            this.splitContainerMiddle.Size = new System.Drawing.Size(1169, 550);
+            this.splitContainerMiddle.Size = new System.Drawing.Size(1169, 536);
             this.splitContainerMiddle.SplitterDistance = 250;
             this.splitContainerMiddle.TabIndex = 4;
             // 
@@ -214,7 +214,7 @@ namespace Firedump
             // splitContainerMiddleChild.Panel1
             // 
             this.splitContainerMiddleChild.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
-            this.splitContainerMiddleChild.Size = new System.Drawing.Size(915, 550);
+            this.splitContainerMiddleChild.Size = new System.Drawing.Size(915, 536);
             this.splitContainerMiddleChild.SplitterDistance = 725;
             this.splitContainerMiddleChild.TabIndex = 0;
             // 
@@ -1148,7 +1148,7 @@ namespace Firedump
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(241)))));
-            this.ClientSize = new System.Drawing.Size(1169, 653);
+            this.ClientSize = new System.Drawing.Size(1169, 639);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.Name = "MainHome";

@@ -1,6 +1,6 @@
 SELECT COUNT(price), price FROM orders 
 WHERE price < 70 GROUP BY price ORDER BY price;
-
+-- Sample sql text to play
 select * from images;
 
 select * from movie;
