@@ -1,0 +1,216 @@
+SELECT COUNT(price), price FROM orders 
+WHERE price < 70 GROUP BY price ORDER BY price;
+-- Sample sql text to play
+select * from images;
+
+select * from movie;
+
+select * from (
+    select rownum offset, rs.* from (
+       SELECT MAX(t.category) as category, 
+              COUNT(t.category) as count 
+         FROM tb_test_1 t 
+        GROUP BY t.category
+        /* add order by clause here if needed */
+   ) rs
+) where rownum <= 10 /* limit */
+    and offset >= 0 /* offset */
+
+/* This query below is commented so it won't execute*/
+/*
+SELECT item FROM Orders 
+WHERE date ALL = (SELECT Order_ID FROM Orders
+WHERE quantity > 50)
+*/
+ 
+/* the sql query below the will be executed 
+ignoring the text after "--"
+*/
+ 
+SELECT item -- single comment  
+FROM Orders -- another single comment
+WHERE id 
+ALL = (SELECT ID FROM Orders
+WHERE quantity > 25)
+
+SELECT eno,
+dno,
+salary,
+DENSE_RANK() OVER (PARTITION BY dno ORDER BY salary) AS ranking
+FROM   employee;
+
+SHOW DATABASES;
+USE ORG;
+
+CREATE TABLE Worker (
+	WORKER_ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	FIRST_NAME CHAR(25),
+	LAST_NAME CHAR(25),
+	SALARY INT(15),
+	JOINING_DATE DATETIME,
+	DEPARTMENT CHAR(25)
+);
+
+INSERT INTO Worker 
+	(WORKER_ID, FIRST_NAME, LAST_NAME, SALARY, JOINING_DATE, DEPARTMENT) VALUES
+		(001, 'Monika', 'Arora', 100000, '14-02-20 09.00.00', 'HR'),
+		(002, 'Niharika', 'Verma', 80000, '14-06-11 09.00.00', 'Admin'),
+		(003, 'Vishal', 'Singhal', 300000, '14-02-20 09.00.00', 'HR'),
+		(004, 'Amitabh', 'Singh', 500000, '14-02-20 09.00.00', 'Admin'),
+		(005, 'Vivek', 'Bhati', 500000, '14-06-11 09.00.00', 'Admin'),
+		(006, 'Vipul', 'Diwan', 200000, '14-06-11 09.00.00', 'Account'),
+		(007, 'Satish', 'Kumar', 75000, '14-01-20 09.00.00', 'Account'),
+		(008, 'Geetika', 'Chauhan', 90000, '14-04-11 09.00.00', 'Admin');
+
+
+INSERT INTO Bonus 
+	(WORKER_REF_ID, BONUS_AMOUNT, BONUS_DATE) VALUES
+		(001, 5000, '16-02-20'),
+		(002, 3000, '16-06-11'),
+		(003, 4000, '16-02-20'),
+		(001, 4500, '16-02-20'),
+		(002, 3500, '16-06-11');
+
+	SELECT Salary
+	FROM Worker W1
+	WHERE n-1 = (
+	 SELECT COUNT( DISTINCT ( W2.Salary ) )
+	 FROM Worker W2
+	 WHERE W2.Salary >= W1.Salary
+	 );
+
+SELECT *
+FROM series
+MATCH_RECOGNIZE (
+	/*
+  -- Pattern matching is done in this order
+  ORDER BY ...
+ 
+  -- These are the columns produced by matches
+  MEASURES ...
+ 
+  -- A short specification of what rows are
+  -- returned from each match
+  ALL ROWS PER MATCH
+ 
+  -- «Regular expressions» of events to match
+  PATTERN (...)
+ 
+  -- The definitions of «what is an event»
+  DEFINE ... 
+  */
+)
+
+SELECT
+  id, value_date, amount, 
+  CASE trg WHEN 'X' THEN 'X' END trg
+FROM series
+MATCH_RECOGNIZE (
+  ORDER BY id
+  MEASURES classifier() AS trg
+  ALL ROWS PER MATCH
+  PATTERN (S (R X R+)?)
+  DEFINE
+    R AS sign(R.amount) = prev(sign(R.amount)),
+    X AS sign(X.amount) = prev(sign(X.amount))
+)
+
+WITH RECURSIVE q(r, i, rx, ix, g) AS (
+  SELECT r::DOUBLE PRECISION * 0.02, i::DOUBLE PRECISION * 0.02, 
+        .0::DOUBLE PRECISION      , .0::DOUBLE PRECISION, 0
+  FROM generate_series(-60, 20) r, generate_series(-50, 50) i
+  UNION ALL
+  SELECT r, i, CASE WHEN abs(rx * rx + ix * ix) <= 2 THEN rx * rx - ix * ix END + r, 
+               CASE WHEN abs(rx * rx + ix * ix) <= 2 THEN 2 * rx * ix END + i, g + 1
+  FROM q
+  WHERE rx IS NOT NULL AND g < 99
+)
+SELECT array_to_string(array_agg(s ORDER BY r), '')
+FROM (
+  SELECT i, r, substring(' .:-=+*#%@', max(g) / 10 + 1, 1) s
+  FROM q
+  GROUP BY i, r
+) q
+GROUP BY i
+ORDER BY i
+
+
+
+DBCC TRACEOFF(9481)
+SELECT  DISTINCT t_08.puid 
+FROM PWORKSPACEOBJECT t_06 
+, PRELEASE_STATUS_LIST t_07 
+, PITEMREVISION t_08 
+, PRELEASESTATUS t_02 
+, PE9_MANUFACTURERSTORAGE t_09 
+, PEN_ITEMREVMASTER t_01 
+, PFORM t_05 
+, PIMANRELATION t_03 
+, PIMANRELATION t_04 
+WHERE ( (  UPPER(t_06.pobject_type)  IN  ( UPPER( 'EN_Item Revision' ) ,  UPPER( 'EN_Item Revision' )  ) 
+AND ( ( ( t_07.pvalu_0 = t_02.puid ) 
+AND  UPPER(t_02.pname)  IN  ( UPPER( 'V' ) ,  UPPER( 'E9_D' ) ,  UPPER( 'F' ) ,  UPPER( 'E9_to_F' ) ,  UPPER( 'E9_M' )  ) ) 
+AND ( ( ( t_08.puid = t_03.rprimary_objectu ) 
+AND ( ( t_03.rrelation_typeu = 'gMx8h03uVJFL2B' ) 
+AND ( ( t_03.rsecondary_objectu = t_05.puid ) 
+AND ( ( t_05.rdata_fileu = t_01.puid ) 
+AND ( ( t_01.re9_manufactureru = t_09.puid ) 
+AND  ( UPPER(t_09.pe9_id)  =  UPPER( '7300007' )  ) ) ) ) ) ) 
+AND ( ( t_08.puid = t_04.rprimary_objectu ) 
+AND ( ( t_04.rrelation_typeu = 'gMx8h03uVJFL2B' ) 
+AND ( ( t_04.rsecondary_objectu = t_05.puid ) 
+AND ( ( t_05.rdata_fileu = t_01.puid ) 
+AND  ( UPPER(t_01.phersteller_artikelnr)  =  UPPER( '00100893' )  ) ) ) ) ) ) ) ) AND ( t_06.puid = t_07.puid AND t_07.puid = t_08.puid ) );
+
+
+
+WITH cte_00000000059A53B0_17 AS (
+         SELECT t_03.puid AS revPuid
+               ,t_04.pdate_released AS revDateRel
+               ,t_03.ritems_tagu AS myItem
+               ,t_04.puid AS rlsPuid
+               ,t_04.pname AS rlsName
+         FROM   PWORKSPACEOBJECT t_01
+               ,PRELEASE_STATUS_LIST t_02
+               ,PITEMREVISION t_03
+               ,PRELEASESTATUS t_04
+               ,#PRefbindtag3
+         WHERE  (
+                    (
+                        (
+                            (
+                                (
+                                    t_03.ritems_tagu = #PRefbindtag3.puid
+                                    AND (t_04.pdate_released <= @P1)
+                                )
+                                AND (t_04.pname = @P2)
+                            )
+                            AND (t_02.pvalu_0 = t_04.puid)
+                        )
+                        AND (t_01.pactive_seq != 0)
+                    )
+                    AND (t_01.puid = t_02.puid AND t_02.puid = t_03.puid)
+                )
+     )
+
+SELECT DISTINCT t_07.myItem
+      ,t_07.revPuid
+      ,t_06.rDate
+      ,t_07.rlsPuid
+FROM   cte_00000000059A53B0_17 t_07
+      ,(
+           SELECT MAX(t_05.revDateRel) AS rDate
+                 ,t_05.myItem AS dtItem
+           FROM   cte_00000000059A53B0_17 t_05
+           GROUP BY
+                  t_05.myItem
+       ) t_06
+WHERE  (
+           (
+               (t_07.myItem = t_06.dtItem)
+               AND (t_07.revDateRel = t_06.rDate)
+           )
+           AND (t_07.rlsName = @P3)
+       )
+ORDER BY
+       t_06.rDate DESC

@@ -1,0 +1,113 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lightbox.core.sql
+{
+    class OracleSqlBuilder : ISqlBuilder
+    {
+        private readonly string SCHEMA;
+
+        public OracleSqlBuilder(string schema)
+        {
+            SCHEMA = schema;
+        }
+
+        public string getDatabaseIndexes()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string getAllFieldsFromAllTablesInDb()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string getDatabaseForeignKeys()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string getDatabasePrimaryKeys()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string getTableInfo(string table)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string getDatabaseUniques()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string getDatabases()
+        {
+            return "show databases;";
+        }
+
+        public List<string> getTables()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<string> getTableFields()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<string> removeSystemDatabases(List<string> databases, bool showSystemDb = false)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string showTablesSql()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string describeTableSql(string table)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string ShowCreateStatement(string table)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetAllTriggers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetTableTriggers(string table)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetAllViews()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetProcedures()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetFunctions()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetTriggerCreateStatement(string table, string triggerName)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

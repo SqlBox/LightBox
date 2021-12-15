@@ -1,0 +1,4 @@
+# antlr4.jar will compile .g4 files into cs parser code.
+# Replace self.isVersion10() and self.isVersion12() with this.isVersion10() and this.isVersion12() after compile.
+java -jar antlr-4.9.3-complete.jar PlSqlLexer.g4 -Dlanguage=CSharp -no-listener -no-visitor
+java -jar antlr-4.9.3-complete.jar PlSqlParser.g4 -Dlanguage=CSharp -no-listener -no-visitor
