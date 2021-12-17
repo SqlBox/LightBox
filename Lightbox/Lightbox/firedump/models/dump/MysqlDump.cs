@@ -10,7 +10,6 @@ using Firedump.models.dump;
 using System.IO;
 using System.Text.RegularExpressions;
 using Firedump.models.databaseUtils;
-using Firedump.utils;
 
 namespace Firedump.models.dump
 {
@@ -352,14 +351,7 @@ namespace Firedump.models.dump
             Console.WriteLine(arguments.ToString());
             
             string mysqldumpfile = "resources/mysqldump/mysqldump.exe";
-            //now we can run test localy and on server
-            //localy visual studio test suite will handle process mapping
-            if (IsTest)
-            {
-                if(OS.IsWindowsServer())
-                    mysqldumpfile = BUILD_SERVER_MYSQLDUMP_PATH;
-            }
-                
+               
             proc = new Process
             {
                 StartInfo = new ProcessStartInfo
@@ -456,11 +448,6 @@ namespace Firedump.models.dump
                 if (configurationManagerInstance.compressConfigInstance.enableCompression)
                 {
                     comp = new Compression();
-                    if (IsTest)
-                    {
-                        if (OS.IsWindowsServer())
-                            comp.IsTest = true;
-                    }
 
                     comp.absolutePath = resultObj.fileAbsPath;
                     comp.CompressProgress += onCompressProgressHandler;

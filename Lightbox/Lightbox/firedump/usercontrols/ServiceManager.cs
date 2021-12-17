@@ -27,9 +27,9 @@ namespace Firedump.usercontrols
         public void setPictureIcon(bool isActive)
         {
             if (isActive)
-                pbStatus.Image = Properties.Resources.greencircle;
+                pbStatus.Image = Lightbox.Properties.Resources.greencircle;
             else
-                pbStatus.Image = Properties.Resources.redcircle;
+                pbStatus.Image = Lightbox.Properties.Resources.redcircle;
         }
 
         public void setStatusText(string info)

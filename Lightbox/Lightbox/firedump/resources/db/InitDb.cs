@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
-using Firedump.utils;
 
 namespace Firedump.db
 {
@@ -72,15 +71,7 @@ namespace Firedump.db
         public static void createDbTables()
         {
             string datasource = "Data Source=.//resources//firedumpdb.db";
-            if (IsTest)
-            {
-                if (OS.IsWindowsServer())
-                {
-                    conn = BUILD_SERVER_SQLITEDB;
-                    datasource = BUILD_SERVER_DATASOURCE;
-                }
-            }
-            
+           
             if (!System.IO.File.Exists(conn))
             {
                 SQLiteConnection.CreateFile(conn);
@@ -105,14 +96,6 @@ namespace Firedump.db
         public static bool isTableExists(string table)
         {
             string datasource = "Data Source=.//resources//firedumpdb.db";
-            if (IsTest)
-            {
-                if (OS.IsWindowsServer())
-                {
-                    conn = BUILD_SERVER_SQLITEDB;
-                    datasource = BUILD_SERVER_DATASOURCE;
-                }
-            }
 
             string count = "0";
             if(table == null)

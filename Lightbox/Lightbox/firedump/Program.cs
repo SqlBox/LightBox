@@ -7,7 +7,6 @@ using System.Threading;
 using Topshelf.ServiceConfigurators;
 using Firedump.Forms;
 using Microsoft.Win32;
-using Firedump.utils;
 
 namespace Firedump
 {
@@ -23,10 +22,11 @@ namespace Firedump
         /// The main entry point for the application.
         /// args can be install start stop uninstall
         /// </summary>
+        /// 
+        //UNUSED Now
         [STAThread]
         public static void Main(string[] args)
         {
-            RegistryUtils.registerPath();
             if (args.Length == 0)
             {
                 Application.EnableVisualStyles();

@@ -39,8 +39,8 @@
             this.delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.bapplychanges = new System.Windows.Forms.Button();
             this.schedulesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.firedumpdbDataSet = new Firedump.firedumpdbDataSet();
-            this.schedulesTableAdapter = new Firedump.firedumpdbDataSetTableAdapters.schedulesTableAdapter();
+            this.firedumpdbDataSet = new Lightbox.LightboxdbDataSet();
+            this.schedulesTableAdapter = new Lightbox.LightboxdbDataSetTableAdapters.schedulesTableAdapter();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.emailScheduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serviceManager1 = new Firedump.usercontrols.ServiceManager();
@@ -213,9 +213,9 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button bapplychanges;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private firedumpdbDataSet firedumpdbDataSet;
+        private Lightbox.LightboxdbDataSet firedumpdbDataSet;
         private System.Windows.Forms.BindingSource schedulesBindingSource;
-        private firedumpdbDataSetTableAdapters.schedulesTableAdapter schedulesTableAdapter;
+        private Lightbox.LightboxdbDataSetTableAdapters.schedulesTableAdapter schedulesTableAdapter;
         private System.Windows.Forms.Button bnewjob;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewCheckBoxColumn activated;

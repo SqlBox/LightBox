@@ -21,14 +21,15 @@ using Firedump.Forms.sqlimport;
 using Firedump.Forms.schedule;
 using Firedump.Forms;
 using Firedump.models.configuration.jsonconfig;
+using Lightbox;
 
 namespace Firedump
 {
     public partial class Home : Form
     {
-        private firedumpdbDataSet.mysql_serversDataTable serverData;
-        private firedumpdbDataSetTableAdapters.mysql_serversTableAdapter mysql_serversAdapter = new firedumpdbDataSetTableAdapters.mysql_serversTableAdapter();
-        private List<firedumpdbDataSet.backup_locationsRow> backuplocations;
+        private Lightbox.LightboxdbDataSet.sql_serversDataTable serverData;
+        private Lightbox.LightboxdbDataSetTableAdapters.sql_serversTableAdapter mysql_serversAdapter = new Lightbox.LightboxdbDataSetTableAdapters.sql_serversTableAdapter();
+        private List<Lightbox.LightboxdbDataSet.backup_locationsRow> backuplocations;
         private LocationAdapterManager adapterLocation;
         private BinlogDumpAdapter logadapter;
         private MySqlDumpAdapter adapter;
@@ -97,8 +98,8 @@ namespace Firedump
 
         private void loadServerData()
         {
-            serverData = new firedumpdbDataSet.mysql_serversDataTable();
-            mysql_serversAdapter = new firedumpdbDataSetTableAdapters.mysql_serversTableAdapter();
+            serverData = new Lightbox.LightboxdbDataSet.sql_serversDataTable();
+            mysql_serversAdapter = new Lightbox.LightboxdbDataSetTableAdapters.sql_serversTableAdapter();
             mysql_serversAdapter.Fill(serverData);
             cmbServers.DataSource = serverData;           
             cmbServers.DisplayMember = "name";
@@ -180,7 +181,7 @@ namespace Firedump
             string username = (string)serverData.Rows[cmbServers.SelectedIndex]["username"];
             string password = (string)serverData.Rows[cmbServers.SelectedIndex]["password"];
 
-            mysql_servers server = new mysql_servers();
+            sqlservers server = new sqlservers();
             server.host = Host;
             server.port = port;
             server.username = username;
@@ -220,7 +221,7 @@ namespace Firedump
 
         public void addToLbSaveLocation(BackupLocation loc)
         {
-            firedumpdbDataSet.backup_locationsRow row = (firedumpdbDataSet.backup_locationsRow)loc.Tag;          
+            Lightbox.LightboxdbDataSet.backup_locationsRow row = (Lightbox.LightboxdbDataSet.backup_locationsRow)loc.Tag;          
             int imageindex;
             switch (row.service_type)
             {
@@ -243,7 +244,7 @@ namespace Firedump
             }
             ListViewItem item = new ListViewItem(row.name,imageindex);
             item.SubItems.Add(loc.path);
-            item.Tag = (firedumpdbDataSet.backup_locationsRow)loc.Tag;
+            item.Tag = (Lightbox.LightboxdbDataSet.backup_locationsRow)loc.Tag;
             ListViewItem saveItem = findItemSaveLoc(loc);
             if (lbSaveLocations.Items.Contains(saveItem))
             {
@@ -446,13 +447,13 @@ namespace Firedump
             configtest1.username = (string)serverData.Rows[cmbServers.SelectedIndex]["username"];
             configtest1.password = (string)serverData.Rows[cmbServers.SelectedIndex]["password"];
             
-            backuplocations = new List<firedumpdbDataSet.backup_locationsRow>();
+            backuplocations = new List<Lightbox.LightboxdbDataSet.backup_locationsRow>();
             List<int> locationIds1 = new List<int>();
             foreach (ListViewItem item in lbSaveLocations.Items)
             {
                 Object loc = item.Tag;
-                backuplocations.Add((firedumpdbDataSet.backup_locationsRow)loc);
-                locationIds1.Add((int)((firedumpdbDataSet.backup_locationsRow)loc).id);
+                backuplocations.Add((Lightbox.LightboxdbDataSet.backup_locationsRow)loc);
+                locationIds1.Add((int)((Lightbox.LightboxdbDataSet.backup_locationsRow)loc).id);
             }
             configtest1.locationIds = locationIds1.ToArray();
             configtest1.isIncrementalDelta = true;
@@ -534,13 +535,13 @@ namespace Firedump
                 config.database = databases[0]; //if here only one database is selected due to above checks
                 config.isIncrementalDelta = rbIncDelta.Checked;
 
-                backuplocations = new List<firedumpdbDataSet.backup_locationsRow>();
+                backuplocations = new List<Lightbox.LightboxdbDataSet.backup_locationsRow>();
                 List<int> locationIds = new List<int>();
                 foreach (ListViewItem item in lbSaveLocations.Items)
                 {
                     Object loc = item.Tag;
-                    backuplocations.Add((firedumpdbDataSet.backup_locationsRow)loc);
-                    locationIds.Add((int)((firedumpdbDataSet.backup_locationsRow)loc).id);
+                    backuplocations.Add((Lightbox.LightboxdbDataSet.backup_locationsRow)loc);
+                    locationIds.Add((int)((Lightbox.LightboxdbDataSet.backup_locationsRow)loc).id);
                 }
                 config.locationIds = locationIds.ToArray();
 
@@ -652,7 +653,7 @@ namespace Firedump
                 //cancel all the other locations
                 if(backuplocations != null && backuplocations.Count > 0)
                 {
-                    foreach(firedumpdbDataSet.backup_locationsRow row in backuplocations)
+                    foreach(Lightbox.LightboxdbDataSet.backup_locationsRow row in backuplocations)
                     {
                         if (!adapterLocation.isLocationFinished(row))
                         {
@@ -685,7 +686,7 @@ namespace Firedump
         {
             if (cmbServers.Items.Count > 0 && cmbServers.SelectedIndex >= 0)
             {
-                firedumpdbDataSet.mysql_serversRow server = ((firedumpdbDataSet.mysql_serversDataTable)cmbServers.DataSource).ElementAt(cmbServers.SelectedIndex);
+                Lightbox.LightboxdbDataSet.sql_serversRow server = ((Lightbox.LightboxdbDataSet.sql_serversDataTable)cmbServers.DataSource).ElementAt(cmbServers.SelectedIndex);
                 NewMySQLServer newServer = new NewMySQLServer(true, server);
                 newServer.ReloadServerData += reloadserverData;
                 newServer.Show();
@@ -697,7 +698,7 @@ namespace Firedump
         {            
             mysql_serversAdapter.Fill(serverData);
             int i = 0;
-            foreach(firedumpdbDataSet.mysql_serversRow row in serverData)
+            foreach(Lightbox.LightboxdbDataSet.sql_serversRow row in serverData)
             {
                 if(row.id == id)
                 {
@@ -766,7 +767,7 @@ namespace Firedump
                             foreach (ListViewItem item in lbSaveLocations.Items)
                             {
                                 Object loc = item.Tag;
-                                locations.Add(Convert.ToInt32(((firedumpdbDataSet.backup_locationsRow)loc).id));
+                                locations.Add(Convert.ToInt32(((Lightbox.LightboxdbDataSet.backup_locationsRow)loc).id));
                             }
                             BinlogDumpCredentialsConfig config = new BinlogDumpCredentialsConfig();
                             config.host = (string)serverData.Rows[cmbServers.SelectedIndex]["host"];
@@ -907,7 +908,7 @@ namespace Firedump
         {
             //EDW KALEITAI TO SAVE STA LOCATIONS
             List<int> locations = new List<int>();
-            backuplocations = new List<firedumpdbDataSet.backup_locationsRow>();
+            backuplocations = new List<Lightbox.LightboxdbDataSet.backup_locationsRow>();
             dataGridView1.Invoke((MethodInvoker)delegate ()
             {
                 dataGridView1.Rows.Clear();
@@ -921,8 +922,8 @@ namespace Firedump
                 foreach (ListViewItem item in lbSaveLocations.Items)
                 {
                     Object loc = item.Tag;
-                    locations.Add(Convert.ToInt32(((firedumpdbDataSet.backup_locationsRow)loc).id));
-                    backuplocations.Add((firedumpdbDataSet.backup_locationsRow)loc);
+                    locations.Add(Convert.ToInt32(((Lightbox.LightboxdbDataSet.backup_locationsRow)loc).id));
+                    backuplocations.Add((Lightbox.LightboxdbDataSet.backup_locationsRow)loc);
                     addToGridView(loc);
                 }
 
@@ -1018,7 +1019,7 @@ namespace Firedump
           
             while (!foundflag && i < lbSaveLocations.Items.Count)
             {
-                firedumpdbDataSet.backup_locationsRow tag = (firedumpdbDataSet.backup_locationsRow)lbSaveLocations.Items[i].Tag;
+                Lightbox.LightboxdbDataSet.backup_locationsRow tag = (Lightbox.LightboxdbDataSet.backup_locationsRow)lbSaveLocations.Items[i].Tag;
                 tag.BeginEdit();
                 if (tag.id == loc.id)
                 {
@@ -1117,10 +1118,10 @@ namespace Firedump
             {
                 bStartDump.Enabled = true;
             });
-            backuplocations = new List<firedumpdbDataSet.backup_locationsRow>();
+            backuplocations = new List<Lightbox.LightboxdbDataSet.backup_locationsRow>();
 
-            firedumpdbDataSetTableAdapters.logsTableAdapter logAdapter = new firedumpdbDataSetTableAdapters.logsTableAdapter();
-
+            Lightbox.LightboxdbDataSetTableAdapters.logsTableAdapter logAdapter = new Lightbox.LightboxdbDataSetTableAdapters.logsTableAdapter();
+            
             if (koble)
             {
                 logAdapter.Insert(0,1, "Dump was completed successfully."+results.ToString(),DateTime.Now,0);
@@ -1213,7 +1214,7 @@ namespace Firedump
                 
                 if ((string)dataGridView1.Rows[e.RowIndex].Cells[1].Value != "Cancelled")
                 {
-                    firedumpdbDataSet.backup_locationsRow row = (firedumpdbDataSet.backup_locationsRow)dataGridView1.Rows[e.RowIndex].Tag;
+                    Lightbox.LightboxdbDataSet.backup_locationsRow row = (Lightbox.LightboxdbDataSet.backup_locationsRow)dataGridView1.Rows[e.RowIndex].Tag;
                     if (row != null)
                     {
                         if (!adapterLocation.isLocationFinished(row))
@@ -1240,7 +1241,7 @@ namespace Firedump
             /*
             DataGridViewRow dataRow = (DataGridViewRow)dataGridView1.Rows[0].Clone();
             dataRow.Tag = tag;
-            firedumpdbDataSet.backup_locationsRow row = (firedumpdbDataSet.backup_locationsRow)tag;
+            Lightbox.LightboxdbDataSet.backup_locationsRow row = (Lightbox.LightboxdbDataSet.backup_locationsRow)tag;
             dataRow.Cells[0].Value = row.name;
             dataGridView1.Invoke((MethodInvoker)delegate ()
             {
@@ -1263,7 +1264,7 @@ namespace Firedump
             /*
             for(int i =0; i < dataGridView1.RowCount; i++)
             {
-                firedumpdbDataSet.backup_locationsRow row = (firedumpdbDataSet.backup_locationsRow) dataGridView1.Rows[i].Tag;
+                Lightbox.LightboxdbDataSet.backup_locationsRow row = (Lightbox.LightboxdbDataSet.backup_locationsRow) dataGridView1.Rows[i].Tag;
                 if(row.name == locationName)
                 {
                     dataGridView1.Invoke((MethodInvoker)delegate ()

@@ -4,7 +4,6 @@ using Firedump.models.databaseUtils;
 using Firedump.models.dump;
 using Firedump.models.location;
 using Firedump.models.sqlimport;
-using Firedump.utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,7 +39,7 @@ namespace Firedump.Forms.sqlimport
             // TODO: This line of code loads data into the 'firedumpdbDataSet.backup_locations' table. You can move, or remove it, as needed.
             this.backup_locationsTableAdapter.Fill(this.firedumpdbDataSet.backup_locations);
             // TODO: This line of code loads data into the 'firedumpdbDataSet.mysql_servers' table. You can move, or remove it, as needed.
-            this.mysql_serversTableAdapter.Fill(this.firedumpdbDataSet.mysql_servers);
+            this.sql_serversTableAdapter.Fill(this.firedumpdbDataSet.sql_servers);
 
             cbEncryptedFile_CheckedChanged(null, null);
             cmbDatabases.DataSource = databases;
@@ -228,7 +227,7 @@ namespace Firedump.Forms.sqlimport
                 });
 
                 DbConnection con = new DbConnection();
-                DataRow row = firedumpdbDataSet.mysql_servers.Rows[selectedindex];
+                DataRow row = firedumpdbDataSet.sql_servers.Rows[selectedindex];
                 con.Host = (string)row["host"];
                 con.port = unchecked((int)(Int64)row["port"]);
                 con.username = (string)row["username"];
@@ -334,7 +333,7 @@ namespace Firedump.Forms.sqlimport
             this.UseWaitCursor = true;
             bStartImport.Enabled = false;
 
-            DataRow serverdata = firedumpdbDataSet.mysql_servers.Rows[cmbServers.SelectedIndex];
+            DataRow serverdata = firedumpdbDataSet.sql_servers.Rows[cmbServers.SelectedIndex];
             ImportCredentialsConfig config = new ImportCredentialsConfig();
             config.database = (string)serverdata["database"];
             if (cmbDatabases.SelectedIndex != 0)
@@ -409,7 +408,7 @@ namespace Firedump.Forms.sqlimport
                 {
                     path = pathsToImport[0];
                 }
-                lStatus.Text = "Status: Executing sql file "+StringUtils.splitPath(path)[1]+" ...";
+                lStatus.Text = "Status: Executing sql file "+ sqlbox.commons.StringUtils.splitPath(path)[1]+" ...";
             });
         }
 

@@ -13,7 +13,7 @@ namespace Firedump.models.pojos
 
         public string Name { get; set; }
 
-        public firedumpdbDataSet.mysql_serversRow Server { get; set; }
+        public Lightbox.LightboxdbDataSet.sql_serversRow Server { get; set; }
 
         public List<string> Tables { get; set; }
 

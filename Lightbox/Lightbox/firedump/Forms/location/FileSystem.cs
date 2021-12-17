@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Lightbox;
 
 namespace Firedump.Forms.location
 {
@@ -18,7 +19,7 @@ namespace Firedump.Forms.location
     {
         private LocationSwitchboard locswitch;
         private DataRow locallocation;
-        private firedumpdbDataSetTableAdapters.backup_locationsTableAdapter adapter;
+        private Lightbox.LightboxdbDataSetTableAdapters.backup_locationsTableAdapter adapter;
         public bool isEditor { set; get; }
         public bool loadData { set; get; }
         private FileSystem() { }
@@ -58,7 +59,7 @@ namespace Firedump.Forms.location
                 return;
             }
 
-            adapter = new firedumpdbDataSetTableAdapters.backup_locationsTableAdapter();
+            adapter = new Lightbox.LightboxdbDataSetTableAdapters.backup_locationsTableAdapter();
             if ((Int64)adapter.numberOfOccurances(tbName.Text) != 0)
             {
                 MessageBox.Show("A save location with this name already exists", "New file system location", MessageBoxButtons.OK, MessageBoxIcon.Error);

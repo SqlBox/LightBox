@@ -442,7 +442,7 @@
             // bSave
             // 
             this.bSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.bSave.Image = global::Firedump.Properties.Resources.save_image1;
+            this.bSave.Image = global::Lightbox.Properties.Resources.save_image1;
             this.bSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bSave.Location = new System.Drawing.Point(78, 808);
             this.bSave.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);

@@ -107,7 +107,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Firedump.Properties.Resources.emailicon;
+            this.pictureBox1.Image = global::Lightbox.Properties.Resources.emailicon;
             this.pictureBox1.Location = new System.Drawing.Point(12, 215);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 90);
@@ -135,10 +135,10 @@
 
         #endregion
 
-        private firedumpdbDataSet firedumpdbDataSet;
+        private Lightbox.LightboxdbDataSet firedumpdbDataSet;
         private System.Windows.Forms.BindingSource schedulesBindingSource;
-        private firedumpdbDataSetTableAdapters.schedulesTableAdapter schedulesTableAdapter;
-        private firedumpdbDataSetTableAdapters.TableAdapterManager tableAdapterManager;
+        private Lightbox.LightboxdbDataSetTableAdapters.schedulesTableAdapter schedulesTableAdapter;
+        private Lightbox.LightboxdbDataSetTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.BindingNavigator schedulesBindingNavigator;
         private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
@@ -152,10 +152,10 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.ToolStripButton schedulesBindingNavigatorSaveItem;
-        private firedumpdbDataSet firedumpdbDataSet1;
+        private Lightbox.LightboxdbDataSet firedumpdbDataSet1;
         private System.Windows.Forms.BindingSource schedulesBindingSource1;
-        private firedumpdbDataSetTableAdapters.schedulesTableAdapter schedulesTableAdapter1;
-        private firedumpdbDataSetTableAdapters.TableAdapterManager tableAdapterManager1;
+        private Lightbox.LightboxdbDataSetTableAdapters.schedulesTableAdapter schedulesTableAdapter1;
+        private Lightbox.LightboxdbDataSetTableAdapters.TableAdapterManager tableAdapterManager1;
         private System.Windows.Forms.BindingNavigator schedulesBindingSource1BindingNavigator;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;

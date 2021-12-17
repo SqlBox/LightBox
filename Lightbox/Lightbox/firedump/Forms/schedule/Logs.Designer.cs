@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Logs));
-            this.firedumpdbDataSet = new Firedump.firedumpdbDataSet();
+            this.firedumpdbDataSet = new Lightbox.LightboxdbDataSet();
             this.logsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.logsTableAdapter = new Firedump.firedumpdbDataSetTableAdapters.logsTableAdapter();
-            this.tableAdapterManager = new Firedump.firedumpdbDataSetTableAdapters.TableAdapterManager();
+            this.logsTableAdapter = new Lightbox.LightboxdbDataSetTableAdapters.logsTableAdapter();
+            this.tableAdapterManager = new Lightbox.LightboxdbDataSetTableAdapters.TableAdapterManager();
             this.logsBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
@@ -80,10 +80,10 @@
             this.tableAdapterManager.backup_locationsTableAdapter = null;
             this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
             this.tableAdapterManager.logsTableAdapter = this.logsTableAdapter;
-            this.tableAdapterManager.mysql_serversTableAdapter = null;
+            this.tableAdapterManager.sql_serversTableAdapter = null;
             this.tableAdapterManager.schedule_save_locationsTableAdapter = null;
             this.tableAdapterManager.schedulesTableAdapter = null;
-            this.tableAdapterManager.UpdateOrder = Firedump.firedumpdbDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            this.tableAdapterManager.UpdateOrder = Lightbox.LightboxdbDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             this.tableAdapterManager.userinfoTableAdapter = null;
             // 
             // logsBindingNavigator
@@ -290,10 +290,10 @@
 
         #endregion
 
-        private firedumpdbDataSet firedumpdbDataSet;
+        private Lightbox.LightboxdbDataSet firedumpdbDataSet;
         private System.Windows.Forms.BindingSource logsBindingSource;
-        private firedumpdbDataSetTableAdapters.logsTableAdapter logsTableAdapter;
-        private firedumpdbDataSetTableAdapters.TableAdapterManager tableAdapterManager;
+        private Lightbox.LightboxdbDataSetTableAdapters.logsTableAdapter logsTableAdapter;
+        private Lightbox.LightboxdbDataSetTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.BindingNavigator logsBindingNavigator;
         private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;

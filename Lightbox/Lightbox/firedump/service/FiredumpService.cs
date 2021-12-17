@@ -20,10 +20,10 @@ namespace Firedump.service
         private static Thread serviceThread;
         private static bool run = true;
 
-        private firedumpdbDataSet.schedulesDataTable schedules;
-        private firedumpdbDataSetTableAdapters.schedulesTableAdapter schedulesAdapter;
+        private Lightbox.LightboxdbDataSet.schedulesDataTable schedules;
+        private Lightbox.LightboxdbDataSetTableAdapters.schedulesTableAdapter schedulesAdapter;
         private ScheduleManager schedulemanager;
-        private List<firedumpdbDataSet.schedulesRow> scheduleRowList;
+        private List<Lightbox.LightboxdbDataSet.schedulesRow> scheduleRowList;
         private Queue<ScheduleManager> scheduleQueue;
         
         public FiredumpService()
@@ -86,7 +86,7 @@ namespace Firedump.service
                                 
                                 schedulemanager = new ScheduleManager();
                                 schedulemanager.setSchedule(scheduleRowList[0]);
-                                firedumpdbDataSet.schedulesRow row = scheduleRowList[0];
+                                Lightbox.LightboxdbDataSet.schedulesRow row = scheduleRowList[0];
                                 scheduleRowList.Remove(row);
                                 schedulemanager.Start();
                                 scheduleQueue.Enqueue(schedulemanager);
@@ -113,13 +113,13 @@ namespace Firedump.service
         {
             scheduleQueue?.Clear();
             scheduleQueue = new Queue<ScheduleManager>();
-            schedules = new firedumpdbDataSet.schedulesDataTable();
-            schedulesAdapter = new firedumpdbDataSetTableAdapters.schedulesTableAdapter();
+            schedules = new Lightbox.LightboxdbDataSet.schedulesDataTable();
+            schedulesAdapter = new Lightbox.LightboxdbDataSetTableAdapters.schedulesTableAdapter();
 
             //FillByDateOrder
             schedulesAdapter.FillOrderByDate(schedules);
 
-            scheduleRowList = new List<firedumpdbDataSet.schedulesRow>();
+            scheduleRowList = new List<Lightbox.LightboxdbDataSet.schedulesRow>();
             //copy schedules to List<>scheduleRowList
             for(int i =0; i < schedules.Count; i++)
             {

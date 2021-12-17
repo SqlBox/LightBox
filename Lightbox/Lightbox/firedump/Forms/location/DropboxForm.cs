@@ -2,6 +2,7 @@
 using Dropbox.Api.Files;
 using Dropbox.Api.Users;
 using Firedump.models;
+using Lightbox;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,9 +32,9 @@ namespace Firedump.Forms.location
         private List<DropBoxItem> boxItems = new List<DropBoxItem>();
 
         private bool isEditor;
-        private firedumpdbDataSet.backup_locationsRow row;
+        private LightboxdbDataSet.backup_locationsRow row;
 
-        public DropboxForm(LocationSwitchboard locswitch,bool isedit, firedumpdbDataSet.backup_locationsRow row)
+        public DropboxForm(LocationSwitchboard locswitch,bool isedit, LightboxdbDataSet.backup_locationsRow row)
         {
             InitializeComponent();
             isEditor = isedit;
@@ -248,7 +249,7 @@ namespace Firedump.Forms.location
             }
 
             try {
-                firedumpdbDataSetTableAdapters.backup_locationsTableAdapter backup_adapter = new firedumpdbDataSetTableAdapters.backup_locationsTableAdapter();
+                Lightbox.LightboxdbDataSetTableAdapters.backup_locationsTableAdapter backup_adapter = new Lightbox.LightboxdbDataSetTableAdapters.backup_locationsTableAdapter();
                 if (isEditor)
                 {
                     backup_adapter.Update(tbsavename.Text, "", "", path, tbfilename.Text, (int)ServiceType.Type.DropBox, 0, "", "", "", "", "", "", "", 0, 0, tbtoken.Text, "", 0, "", 0,row.id);

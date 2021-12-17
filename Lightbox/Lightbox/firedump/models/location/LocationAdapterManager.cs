@@ -66,7 +66,7 @@ namespace Firedump.models.location
         private List<int> locations;
         private List<LocationResultSet> results;
         private LocationAdapter adapter;
-        private firedumpdbDataSetTableAdapters.backup_locationsTableAdapter backup_adapter = new firedumpdbDataSetTableAdapters.backup_locationsTableAdapter(); //malon tha xreiastei adapter pou tha einai join pinakwn tha doume
+        private Lightbox.LightboxdbDataSetTableAdapters.backup_locationsTableAdapter backup_adapter = new Lightbox.LightboxdbDataSetTableAdapters.backup_locationsTableAdapter(); //malon tha xreiastei adapter pou tha einai join pinakwn tha doume
         private int currentProgress = 0;
         private string sourcePath;
         private string fnamePrefix;
@@ -211,7 +211,7 @@ namespace Firedump.models.location
             onLocationProgress(progress,speed);
         }
 
-        internal void cancelSaveLocation(firedumpdbDataSet.backup_locationsRow tag)
+        internal void cancelSaveLocation(Lightbox.LightboxdbDataSet.backup_locationsRow tag)
         {           
                 if (locations.Contains((Int32)tag.id))
                 {
@@ -220,13 +220,13 @@ namespace Firedump.models.location
                 }                 
         }
 
-        internal bool isLocationFinished(firedumpdbDataSet.backup_locationsRow row)
+        internal bool isLocationFinished(Lightbox.LightboxdbDataSet.backup_locationsRow row)
         {
             
             return (!locations.Contains((int)row.id) && !adapter.isLocationRunning((int)row.id));
         }
 
-        internal bool isLocationRunning(firedumpdbDataSet.backup_locationsRow row)
+        internal bool isLocationRunning(Lightbox.LightboxdbDataSet.backup_locationsRow row)
         {
             return adapter.isLocationRunning(row.id);
         }

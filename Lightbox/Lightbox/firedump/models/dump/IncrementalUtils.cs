@@ -2,7 +2,6 @@
 using Firedump.models.configuration.jsonconfig;
 using Firedump.models.databaseUtils;
 using Firedump.models.location;
-using Firedump.utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -69,13 +68,13 @@ namespace Firedump.models.dump
         {
             string prefix="";
             //<filename_prefix>
-            firedumpdbDataSetTableAdapters.backup_locationsTableAdapter adapter = new firedumpdbDataSetTableAdapters.backup_locationsTableAdapter();
-            List<firedumpdbDataSet.backup_locationsRow> locations = new List<firedumpdbDataSet.backup_locationsRow>();
+            Lightbox.LightboxdbDataSetTableAdapters.backup_locationsTableAdapter adapter = new Lightbox.LightboxdbDataSetTableAdapters.backup_locationsTableAdapter();
+            List<Lightbox.LightboxdbDataSet.backup_locationsRow> locations = new List<Lightbox.LightboxdbDataSet.backup_locationsRow>();
             foreach (int id in locationIds)
             {
                 locations.Add(adapter.GetDataByID(id)[0]);
             }
-
+            
             int index = -1;
             int j = 0;
             while (index == -1 && j < locations.Count())
@@ -86,13 +85,12 @@ namespace Firedump.models.dump
                 }
                 j++;
             }
-
             List<string[]> splitBpFnames = new List<string[]>();
             if (index == -1)
             {
                 //periptwsi p den iparxei save location local fix argotera
                 string path = locations[0].path; //dialegw tixea to prwto location
-                string[] splitpath = StringUtils.splitPath(path);
+                string[] splitpath = sqlbox.commons.StringUtils.splitPath(path);
                 List<string> fnames = new List<string>();
                 switch (locations[0].service_type)
                 {
@@ -111,7 +109,7 @@ namespace Firedump.models.dump
             else
             {
                 string path = locations[index].path;   
-                string[] splitpath = StringUtils.splitPath(path);
+                string[] splitpath = sqlbox.commons.StringUtils.splitPath(path);
                 List<string> fnames = new List<string>();
                 foreach (string fname in Directory.GetFiles(splitpath[0]))
                 {
@@ -281,7 +279,7 @@ namespace Firedump.models.dump
             try
             {  
 
-                string[] tmp = StringUtils.splitPath(path);
+                string[] tmp = sqlbox.commons.StringUtils.splitPath(path);
                 string initpath = tmp[0];
                 string initfname = tmp[1];
 
@@ -301,8 +299,8 @@ namespace Firedump.models.dump
                 string[] filesindir = new string[1];
                 if (locid != -1)
                 {
-                    firedumpdbDataSetTableAdapters.backup_locationsTableAdapter adapter = new firedumpdbDataSetTableAdapters.backup_locationsTableAdapter();
-                    firedumpdbDataSet.backup_locationsRow location = adapter.GetDataByID(locid)[0];
+                    Lightbox.LightboxdbDataSetTableAdapters.backup_locationsTableAdapter adapter = new Lightbox.LightboxdbDataSetTableAdapters.backup_locationsTableAdapter();
+                    Lightbox.LightboxdbDataSet.backup_locationsRow location = adapter.GetDataByID(locid)[0];
                     switch (location.service_type)
                     {
                         case 0: //Local
@@ -348,7 +346,7 @@ namespace Firedump.models.dump
                 int indexC = Convert.ToInt32(splitinitbpindexes[2]);
 
                 List<int> chainedIndexes = new List<int>();
-                int idx = StringUtils.indexOfContained(bpFnames, splitinitbpindexes[0] + "." + "0.0");
+                int idx = sqlbox.commons.StringUtils.indexOfContained(bpFnames, splitinitbpindexes[0] + "." + "0.0");
                 if (idx != -1)
                 {
                     filesChain.Add(initpath + bpFnames[idx]);
@@ -363,7 +361,7 @@ namespace Firedump.models.dump
                 {
                     for (int i = 0; i <= indexC; i++)
                     {
-                        idx = StringUtils.indexOfContained(bpFnames, splitinitbpindexes[0] + "." + splitinitbpindexes[1] + "." + i);
+                        idx = sqlbox.commons.StringUtils.indexOfContained(bpFnames, splitinitbpindexes[0] + "." + splitinitbpindexes[1] + "." + i);
                         if (idx != -1)
                         {
                             filesChain.Add(initpath + bpFnames[idx]);
@@ -391,7 +389,7 @@ namespace Firedump.models.dump
             return filesChain;
         }
 
-        private List<string> getFtpDirectoryListing(firedumpdbDataSet.backup_locationsRow location, string path)
+        private List<string> getFtpDirectoryListing(Lightbox.LightboxdbDataSet.backup_locationsRow location, string path)
         {
             List<string> filesindir = new List<string>();
             FTPCredentialsConfig ftpConfig = new FTPCredentialsConfig();

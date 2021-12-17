@@ -19,8 +19,6 @@ namespace sqlbox.commons
             dataencrypt.KeySize = size;
             dataencrypt.GenerateKey();
             dataencrypt.GenerateIV();
-            Console.WriteLine(Convert.ToBase64String(dataencrypt.Key));
-            Console.WriteLine(Convert.ToBase64String(dataencrypt.IV));
         }
 
         /// <summary>
@@ -49,7 +47,7 @@ namespace sqlbox.commons
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                Console.WriteLine("EncryptionUtils.encrypt");
             }
             return res;
         }
@@ -80,7 +78,7 @@ namespace sqlbox.commons
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                Console.WriteLine("EncryptionUtils.decrypt");
             }
             return res;
         }
@@ -144,11 +142,7 @@ namespace sqlbox.commons
 
         public static string hashSHA256(string data)
         {
-            string res = "";
-            SHA256CryptoServiceProvider hasher = new SHA256CryptoServiceProvider();
-            byte[] hashedBytes = hasher.ComputeHash(Encoding.UTF8.GetBytes(data));
-            res = Convert.ToBase64String(hashedBytes);
-            return res;
+            return Convert.ToBase64String(new SHA256CryptoServiceProvider().ComputeHash(Encoding.UTF8.GetBytes(data)));
         }
 
     }

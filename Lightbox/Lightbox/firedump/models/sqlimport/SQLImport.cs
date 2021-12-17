@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Firedump.models.configuration.dynamicconfig;
 using MySql.Data.MySqlClient;
-using Firedump.utils;
 using System.Diagnostics;
 using System.IO;
 
@@ -204,7 +203,7 @@ namespace Firedump.models.sqlimport
         private void scriptStatementExecuted(object sender, MySqlScriptEventArgs e)
         {
             //to testara ligo to apo katw fenete na doulevei swsta
-            commandCounter += StringUtils.countOccurances(e.StatementText, config.scriptDelimeter) + 1; //to +1 einai to delimeter(semicolon) sto telos kathe statement 
+            commandCounter += sqlbox.commons.StringUtils.countOccurances(e.StatementText, config.scriptDelimeter) + 1; //to +1 einai to delimeter(semicolon) sto telos kathe statement 
             onProgress(commandCounter);
         }
 

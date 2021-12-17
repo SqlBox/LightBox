@@ -204,6 +204,7 @@ namespace Lightbox
         private void startLightboxprocess(object sender, EventArgs e)
         {
             //Firedump.Program.Main(new string[] { });
+            Firedump.models.configuration.jsonconfig.ConfigurationManager.getInstance().initializeConfig();
             new Firedump.Home().Show();
         }
 

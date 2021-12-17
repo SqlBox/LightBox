@@ -23,7 +23,7 @@ namespace Firedump.usercontrols
         public void add(object tag)
         {
            
-                firedumpdbDataSet.backup_locationsRow row = (firedumpdbDataSet.backup_locationsRow)tag;
+                Lightbox.LightboxdbDataSet.backup_locationsRow row = (Lightbox.LightboxdbDataSet.backup_locationsRow)tag;
                 ProgressItemLoc progItemloc = new ProgressItemLoc();
                 progItemloc.Tag = tag;
                 progItemloc.initProgressBar();
@@ -43,7 +43,7 @@ namespace Firedump.usercontrols
                 if(panel1.Controls[i] is ProgressItemLoc)
                 {
                     ProgressItemLoc loc = (ProgressItemLoc)panel1.Controls[i];
-                    firedumpdbDataSet.backup_locationsRow row = (firedumpdbDataSet.backup_locationsRow)loc.Tag;
+                    Lightbox.LightboxdbDataSet.backup_locationsRow row = (Lightbox.LightboxdbDataSet.backup_locationsRow)loc.Tag;
                     if(row.name == locationName)
                     {
                         ((ProgressItemLoc)panel1.Controls[i]).updateProgress(progress);

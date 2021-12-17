@@ -1,5 +1,4 @@
 ﻿using Firedump.models.configuration.dynamicconfig;
-using Firedump.utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -121,7 +120,7 @@ namespace Firedump.models.location
 
         private void saveFingerprint(string fingerprint)
         {
-            firedumpdbDataSetTableAdapters.backup_locationsTableAdapter adapter = new firedumpdbDataSetTableAdapters.backup_locationsTableAdapter();
+            Lightbox.LightboxdbDataSetTableAdapters.backup_locationsTableAdapter adapter = new Lightbox.LightboxdbDataSetTableAdapters.backup_locationsTableAdapter();
             adapter.UpdateFingerprint(fingerprint, config.id);
         }
 
@@ -205,9 +204,9 @@ namespace Firedump.models.location
                     tmppath = config.locationPath + "_" +  config.fnamePrefix;
                 }
 
-                string[] locationinfo = StringUtils.splitPath(tmppath);
-                string[] sourceinfo = StringUtils.splitPath(config.sourcePath);
-                string ext = StringUtils.getExtension(sourceinfo[1]);
+                string[] locationinfo = sqlbox.commons.StringUtils.splitPath(tmppath);
+                string[] sourceinfo = sqlbox.commons.StringUtils.splitPath(config.sourcePath);
+                string ext = sqlbox.commons.StringUtils.getExtension(sourceinfo[1]);
 
                 session.Open(sessionOptions);
                 

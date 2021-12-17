@@ -418,8 +418,6 @@
     <Compile Include="firedump\models\configuration\jsonconfig\MysqlexeConfig.cs" />
     <Compile Include="firedump\models\databaseUtils\ConnectionResultSet.cs" />
     <Compile Include="firedump\models\databaseUtils\DbConnection.cs" />
-    <Compile Include="firedump\models\databaseUtils\FiredumpContext.cs" />
-    <Compile Include="firedump\models\databaseUtils\SqlUtils.cs" />
     <Compile Include="firedump\models\dbinfo\ColumnInfo.cs" />
     <Compile Include="firedump\models\dbinfo\Indexes.cs" />
     <Compile Include="firedump\models\dbinfo\TableInfo.cs" />
@@ -459,10 +457,6 @@
     <Compile Include="firedump\resources\db\InitDb.cs" />
     <Compile Include="firedump\service\FiredumpService.cs" />
     <Compile Include="firedump\service\ScheduleManager.cs" />
-    <Compile Include="firedump\tests\FiredumpContextTest.cs" />
-    <Compile Include="firedump\tests\IFireDumpContext.cs" />
-    <Compile Include="firedump\tests\TestContext.cs" />
-    <Compile Include="firedump\tests\TestMysql_serverDbSet.cs" />
     <Compile Include="firedump\usercontrols\CredentialsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -487,10 +481,6 @@
     <Compile Include="firedump\usercontrols\ServiceManager.Designer.cs">
       <DependentUpon>ServiceManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="firedump\utils\EncryptionUtils.cs" />
-    <Compile Include="firedump\utils\OS.cs" />
-    <Compile Include="firedump\utils\RegistryUtils.cs" />
-    <Compile Include="firedump\utils\StringUtils.cs" />
     <Compile Include="MainHome.UI.cs">
       <SubType>Form</SubType>
     </Compile>

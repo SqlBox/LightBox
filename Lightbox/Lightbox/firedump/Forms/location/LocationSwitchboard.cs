@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Lightbox;
+using Lightbox.LightboxdbDataSetTableAdapters;
 
 namespace Firedump.Forms.location
 {
@@ -112,7 +114,7 @@ namespace Firedump.Forms.location
                             
                 loc.Tag = findRow(loc.id);
 
-                DialogResult res = MessageBox.Show("Are you sure you want to delete save location: "+ ((firedumpdbDataSet.backup_locationsRow)loc.Tag).name, "Delete Save Location", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult res = MessageBox.Show("Are you sure you want to delete save location: "+ ((LightboxdbDataSet.backup_locationsRow)loc.Tag).name, "Delete Save Location", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res != DialogResult.Yes)
                 {
                     return;
@@ -130,14 +132,14 @@ namespace Firedump.Forms.location
             catch(Exception ex) { }
         }
 
-        private firedumpdbDataSet.backup_locationsRow findRow(int id)
+        private LightboxdbDataSet.backup_locationsRow findRow(int id)
         {
             int i = 0;
             bool foundflag = false;
-            firedumpdbDataSet.backup_locationsRow row = firedumpdbDataSet.backup_locations[0];
+            LightboxdbDataSet.backup_locationsRow row = firedumpdbDataSet.backup_locations[0];
             while (!foundflag && i < firedumpdbDataSet.backup_locations.Count)
             {
-                firedumpdbDataSet.backup_locationsRow temprow = firedumpdbDataSet.backup_locations[i];
+                LightboxdbDataSet.backup_locationsRow temprow = firedumpdbDataSet.backup_locations[i];
                 if (temprow.id == id)
                 {
                     row = temprow;
@@ -194,7 +196,7 @@ namespace Firedump.Forms.location
                     ftploc.ShowDialog();
                     break;
                 case 2: //dropbox
-                    DropboxForm boxform = new DropboxForm(this,true,(firedumpdbDataSet.backup_locationsRow)row);
+                    DropboxForm boxform = new DropboxForm(this,true,(LightboxdbDataSet.backup_locationsRow)row);
                     boxform.Show();
                     break;
                 case 3: //google drive

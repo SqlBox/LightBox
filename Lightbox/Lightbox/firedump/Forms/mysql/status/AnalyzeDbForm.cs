@@ -11,16 +11,17 @@ using MySql.Data;
 using MySql.Data.MySqlClient;
 using Firedump.models.databaseUtils;
 using Firedump.models.dbinfo;
+using Lightbox;
 
 namespace Firedump.Forms.mysql.status
 {
     public partial class AnalyzeDbForm : Form
     {
         
-        private mysql_servers server;
+        private sqlservers server;
         private string database;
         private List<MyTable> tables;
-        public AnalyzeDbForm(mysql_servers server,string database)
+        public AnalyzeDbForm(sqlservers server,string database)
         {
             InitializeComponent();
             this.server = server;

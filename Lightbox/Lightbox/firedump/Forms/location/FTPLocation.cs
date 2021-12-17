@@ -154,7 +154,7 @@ namespace Firedump.Forms.location
                 }
             }
 
-            firedumpdbDataSetTableAdapters.backup_locationsTableAdapter backup_adapter = new firedumpdbDataSetTableAdapters.backup_locationsTableAdapter();
+            Lightbox.LightboxdbDataSetTableAdapters.backup_locationsTableAdapter backup_adapter = new Lightbox.LightboxdbDataSetTableAdapters.backup_locationsTableAdapter();
             int protocol = cmbProtocol.SelectedIndex;
             try
             {

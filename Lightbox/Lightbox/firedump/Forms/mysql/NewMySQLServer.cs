@@ -1,4 +1,5 @@
 ﻿using Firedump.models.databaseUtils;
+using Lightbox;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,17 +20,17 @@ namespace Firedump.Forms.mysql
         {
             ReloadServerData?.Invoke(id);
         }
-
+        //LightboxdbDataSet
         private DbConnection con = new DbConnection();
         private bool isUpdate = false;
-        private firedumpdbDataSet.mysql_serversRow mysqlserver; 
-
+        private LightboxdbDataSet.sql_serversRow mysqlserver;
+        
         public NewMySQLServer()
         {
             InitializeComponent();           
         }
 
-        public NewMySQLServer(bool update,firedumpdbDataSet.mysql_serversRow server)
+        public NewMySQLServer(bool update,LightboxdbDataSet.sql_serversRow server)
         {
             InitializeComponent();
             bSave.Text = "Update";
@@ -127,7 +128,7 @@ namespace Firedump.Forms.mysql
 
         private void bSave_Click(object sender, EventArgs e)
         {
-            firedumpdbDataSetTableAdapters.mysql_serversTableAdapter adapter = new firedumpdbDataSetTableAdapters.mysql_serversTableAdapter();
+            Lightbox.LightboxdbDataSetTableAdapters.sql_serversTableAdapter adapter = new Lightbox.LightboxdbDataSetTableAdapters.sql_serversTableAdapter();
             if (string.IsNullOrEmpty(tbName.Text))
             {
                 MessageBox.Show("Type a name for the new server", "Test Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);

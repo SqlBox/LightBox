@@ -35,7 +35,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cmbServers = new System.Windows.Forms.ComboBox();
             this.mysqlserversBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.firedumpdbDataSet = new Firedump.firedumpdbDataSet();
+            this.firedumpdbDataSet = new Lightbox.LightboxdbDataSet();
             this.cmbDatabases = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -62,8 +62,8 @@
             this.backuplocationsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bStartImport = new System.Windows.Forms.Button();
             this.bCancel = new System.Windows.Forms.Button();
-            this.mysql_serversTableAdapter = new Firedump.firedumpdbDataSetTableAdapters.mysql_serversTableAdapter();
-            this.backup_locationsTableAdapter = new Firedump.firedumpdbDataSetTableAdapters.backup_locationsTableAdapter();
+            this.sql_serversTableAdapter = new Lightbox.LightboxdbDataSetTableAdapters.sql_serversTableAdapter();
+            this.backup_locationsTableAdapter = new Lightbox.LightboxdbDataSetTableAdapters.backup_locationsTableAdapter();
             this.gbCompressed = new System.Windows.Forms.GroupBox();
             this.lPassHelp = new System.Windows.Forms.Label();
             this.tbConfirmPass = new System.Windows.Forms.TextBox();
@@ -134,7 +134,7 @@
             // 
             // mysqlserversBindingSource
             // 
-            this.mysqlserversBindingSource.DataMember = "mysql_servers";
+            this.mysqlserversBindingSource.DataMember = "sql_servers";
             this.mysqlserversBindingSource.DataSource = this.firedumpdbDataSet;
             // 
             // firedumpdbDataSet
@@ -435,9 +435,9 @@
             this.bCancel.UseVisualStyleBackColor = true;
             this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
             // 
-            // mysql_serversTableAdapter
+            // sql_serversTableAdapter
             // 
-            this.mysql_serversTableAdapter.ClearBeforeFill = true;
+            this.sql_serversTableAdapter.ClearBeforeFill = true;
             // 
             // backup_locationsTableAdapter
             // 
@@ -603,11 +603,11 @@
         private System.Windows.Forms.ComboBox cmbSaveLocations;
         private System.Windows.Forms.Button bStartImport;
         private System.Windows.Forms.Button bCancel;
-        private firedumpdbDataSet firedumpdbDataSet;
+        private Lightbox.LightboxdbDataSet firedumpdbDataSet;
         private System.Windows.Forms.BindingSource mysqlserversBindingSource;
-        private firedumpdbDataSetTableAdapters.mysql_serversTableAdapter mysql_serversTableAdapter;
+        private Lightbox.LightboxdbDataSetTableAdapters.sql_serversTableAdapter sql_serversTableAdapter;
         private System.Windows.Forms.BindingSource backuplocationsBindingSource;
-        private firedumpdbDataSetTableAdapters.backup_locationsTableAdapter backup_locationsTableAdapter;
+        private Lightbox.LightboxdbDataSetTableAdapters.backup_locationsTableAdapter backup_locationsTableAdapter;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox gbCompressed;

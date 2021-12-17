@@ -17,25 +17,25 @@ namespace Firedump.Forms.schedule
 {
     public partial class SchedulerForm : Form
     {
-        private firedumpdbDataSetTableAdapters.mysql_serversTableAdapter serverAdapter = new firedumpdbDataSetTableAdapters.mysql_serversTableAdapter();
-        private firedumpdbDataSet.mysql_serversRow server;
-        private firedumpdbDataSet.mysql_serversDataTable serverdataTable = new firedumpdbDataSet.mysql_serversDataTable();
-
+        private Lightbox.LightboxdbDataSetTableAdapters.sql_serversTableAdapter serverAdapter = new Lightbox.LightboxdbDataSetTableAdapters.sql_serversTableAdapter();
+        private Lightbox.LightboxdbDataSet.sql_serversRow server;
+        private Lightbox.LightboxdbDataSet.sql_serversDataTable serverdataTable = new Lightbox.LightboxdbDataSet.sql_serversDataTable();
+        
         private List<JobDetail> newJobs = new List<JobDetail>();
-
+        
         public SchedulerForm()
-        {
+        {   
             InitializeComponent();
-            firedumpdbDataSetTableAdapters.schedulesTableAdapter scheduleAdapter = new firedumpdbDataSetTableAdapters.schedulesTableAdapter();
-            firedumpdbDataSet.schedulesDataTable scheduleTable = new firedumpdbDataSet.schedulesDataTable();
+            Lightbox.LightboxdbDataSetTableAdapters.schedulesTableAdapter scheduleAdapter = new Lightbox.LightboxdbDataSetTableAdapters.schedulesTableAdapter();
+            Lightbox.LightboxdbDataSet.schedulesDataTable scheduleTable = new Lightbox.LightboxdbDataSet.schedulesDataTable();
             scheduleAdapter.FillOrderByDate(scheduleTable);
 
             dataGridView1.DataSource = scheduleTable;
         }
-
+        
         private void SchedulerForm_Load(object sender, EventArgs e)
         {
-            //this.schedulesTableAdapter.Fill(this.firedumpdbDataSet.schedules);
+            //this.schedulesTableAdapter.Fill(this.Lightbox.LightboxdbDataSet.schedules);
             ServiceController sc = serviceManager1.GetServiceStatus();
             if(sc == null)
             {
@@ -105,7 +105,7 @@ namespace Firedump.Forms.schedule
             newJobs.Add(jobDetails);
             Console.WriteLine(jobDetails.DayOfWeek);
             
-            firedumpdbDataSetTableAdapters.schedulesTableAdapter scheduleAdapter = new firedumpdbDataSetTableAdapters.schedulesTableAdapter();
+            Lightbox.LightboxdbDataSetTableAdapters.schedulesTableAdapter scheduleAdapter = new Lightbox.LightboxdbDataSetTableAdapters.schedulesTableAdapter();
             string tmptables = "-";
             if (jobDetails.Tables[0] == "inc_enabled")
             {
@@ -116,17 +116,17 @@ namespace Firedump.Forms.schedule
             }
             
             scheduleAdapter.Insert((int)jobDetails.Server.id, jobDetails.Name,DateTime.Now,jobDetails.Activate, jobDetails.Hour, jobDetails.Database,tmptables,jobDetails.Minute,jobDetails.Second,jobDetails.DayOfWeek);           
-            firedumpdbDataSet.schedulesDataTable scheduleTable = new firedumpdbDataSet.schedulesDataTable();
+            Lightbox.LightboxdbDataSet.schedulesDataTable scheduleTable = new Lightbox.LightboxdbDataSet.schedulesDataTable();
            
             scheduleAdapter.FillIdByName(scheduleTable,jobDetails.Name);
             int scheduleId = (int)scheduleTable[0].id;
             int locId = jobDetails.LocationId;
-
-            firedumpdbDataSetTableAdapters.schedule_save_locationsTableAdapter savelocAdapter = new firedumpdbDataSetTableAdapters.schedule_save_locationsTableAdapter();
+            
+            Lightbox.LightboxdbDataSetTableAdapters.schedule_save_locationsTableAdapter savelocAdapter = new Lightbox.LightboxdbDataSetTableAdapters.schedule_save_locationsTableAdapter();
             savelocAdapter.Insert(scheduleId, locId);
-
-            firedumpdbDataSetTableAdapters.backup_locationsTableAdapter backAdapter = new firedumpdbDataSetTableAdapters.backup_locationsTableAdapter();
-            firedumpdbDataSet.backup_locationsDataTable backuptable = new firedumpdbDataSet.backup_locationsDataTable();
+            
+            Lightbox.LightboxdbDataSetTableAdapters.backup_locationsTableAdapter backAdapter = new Lightbox.LightboxdbDataSetTableAdapters.backup_locationsTableAdapter();
+            Lightbox.LightboxdbDataSet.backup_locationsDataTable backuptable = new Lightbox.LightboxdbDataSet.backup_locationsDataTable();
             backuptable = backAdapter.GetDataByID(locId);
             dataGridViewlocs.DataSource = backuptable;
 
@@ -140,7 +140,7 @@ namespace Firedump.Forms.schedule
             /*
             serverAdapter.Fill(serverdataTable);
             int i = 0;
-            foreach (firedumpdbDataSet.mysql_serversRow row in serverdataTable)
+            foreach (Lightbox.LightboxdbDataSet.sql_serversRow row in serverdataTable)
             {
                 if (row.id == id)
                 {
@@ -241,21 +241,21 @@ namespace Firedump.Forms.schedule
                         {
                             //delete from userinfo, schedule_save_location and logs first
                             //userinfo
-                            firedumpdbDataSetTableAdapters.userinfoTableAdapter userAdapter = new firedumpdbDataSetTableAdapters.userinfoTableAdapter();
+                            Lightbox.LightboxdbDataSetTableAdapters.userinfoTableAdapter userAdapter = new Lightbox.LightboxdbDataSetTableAdapters.userinfoTableAdapter();
                             userAdapter.DeleteQueryByScheduleid(scheduleId);
                             
                             //logs
-                            firedumpdbDataSetTableAdapters.logsTableAdapter logAdapter = new firedumpdbDataSetTableAdapters.logsTableAdapter();
+                            Lightbox.LightboxdbDataSetTableAdapters.logsTableAdapter logAdapter = new Lightbox.LightboxdbDataSetTableAdapters.logsTableAdapter();
                             logAdapter.DeleteQueryByScheduleid(scheduleId);
                             
                             //save_locations
-                            firedumpdbDataSetTableAdapters.schedule_save_locationsTableAdapter saveLocAdapter = new firedumpdbDataSetTableAdapters.schedule_save_locationsTableAdapter();
+                            Lightbox.LightboxdbDataSetTableAdapters.schedule_save_locationsTableAdapter saveLocAdapter = new Lightbox.LightboxdbDataSetTableAdapters.schedule_save_locationsTableAdapter();
                             saveLocAdapter.DeleteQueryByScheduleId(scheduleId);
 
                             //last delete from schedule
                             schedulesTableAdapter.DeleteQueryById(scheduleId);
 
-                            firedumpdbDataSet.schedulesDataTable scheduleTable = new firedumpdbDataSet.schedulesDataTable();
+                            Lightbox.LightboxdbDataSet.schedulesDataTable scheduleTable = new Lightbox.LightboxdbDataSet.schedulesDataTable();
                             schedulesTableAdapter.FillOrderByDate(scheduleTable);
                             dataGridView1.DataSource = scheduleTable;
                         }
@@ -268,11 +268,11 @@ namespace Firedump.Forms.schedule
                 {
                     if (scheduleId != -1)
                     {
-                        firedumpdbDataSetTableAdapters.schedule_save_locationsTableAdapter savelocAdapter = new firedumpdbDataSetTableAdapters.schedule_save_locationsTableAdapter();
-                        firedumpdbDataSetTableAdapters.backup_locationsTableAdapter backAdapter = new firedumpdbDataSetTableAdapters.backup_locationsTableAdapter();
-                        firedumpdbDataSet.schedule_save_locationsDataTable saveloctable = new firedumpdbDataSet.schedule_save_locationsDataTable();
+                        Lightbox.LightboxdbDataSetTableAdapters.schedule_save_locationsTableAdapter savelocAdapter = new Lightbox.LightboxdbDataSetTableAdapters.schedule_save_locationsTableAdapter();
+                        Lightbox.LightboxdbDataSetTableAdapters.backup_locationsTableAdapter backAdapter = new Lightbox.LightboxdbDataSetTableAdapters.backup_locationsTableAdapter();
+                        Lightbox.LightboxdbDataSet.schedule_save_locationsDataTable saveloctable = new Lightbox.LightboxdbDataSet.schedule_save_locationsDataTable();
                         savelocAdapter.FillByScheduleId(saveloctable, scheduleId);
-                        firedumpdbDataSet.backup_locationsDataTable backuptable = new firedumpdbDataSet.backup_locationsDataTable();
+                        Lightbox.LightboxdbDataSet.backup_locationsDataTable backuptable = new Lightbox.LightboxdbDataSet.backup_locationsDataTable();
                         if(saveloctable.Count > 0)
                         {
                             backuptable = backAdapter.GetDataByID(saveloctable[0].backup_location_id);

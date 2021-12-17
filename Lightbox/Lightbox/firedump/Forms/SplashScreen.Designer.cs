@@ -53,7 +53,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::Firedump.Properties.Resources.firedump;
+            this.BackgroundImage = global::Lightbox.Properties.Resources.lighthouse_logo1;
             this.ClientSize = new System.Drawing.Size(561, 359);
             this.Controls.Add(this.lstatus);
             this.Controls.Add(this.progressBar1);

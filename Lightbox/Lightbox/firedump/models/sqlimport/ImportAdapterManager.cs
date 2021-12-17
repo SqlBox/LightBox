@@ -2,7 +2,6 @@
 using Firedump.models.configuration.jsonconfig;
 using Firedump.models.dump;
 using Firedump.models.location;
-using Firedump.utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -76,7 +75,7 @@ namespace Firedump.models.sqlimport
         private ImportAdapterManager() { }
         public ImportAdapterManager(string path, bool isLocal, bool isCompressed,bool isEncrypted, string password, DataRow locationdata,ImportCredentialsConfig importconfig)
         {
-            string[] splitpath = StringUtils.splitPath(path);
+            string[] splitpath = sqlbox.commons.StringUtils.splitPath(path);
             this.path = splitpath[0];
             this.filename = splitpath[1];
             this.isLocal = isLocal;
@@ -117,7 +116,7 @@ namespace Firedump.models.sqlimport
                 else
                 {
                     Random rnd = new Random();
-                    string extension = StringUtils.getExtension(filename);
+                    string extension = sqlbox.commons.StringUtils.getExtension(filename);
                     templocalfilename = "Temp" + rnd.Next(1000000, 9999999) + extension;
 
                     Directory.CreateDirectory(templocalpath);
@@ -203,7 +202,7 @@ namespace Firedump.models.sqlimport
                 {
                     config.absolutePath = templocalpath + templocalfilename;
                 }
-                decompressDirectory = templocalpath + templocalfilename.Replace(StringUtils.getExtension(templocalfilename), "") + "\\";
+                decompressDirectory = templocalpath + templocalfilename.Replace(sqlbox.commons.StringUtils.getExtension(templocalfilename), "") + "\\";
                 config.decompressDirectory = decompressDirectory;
                 config.isEncrypted = isEncrypted;
                 config.password = password;
@@ -326,7 +325,7 @@ namespace Firedump.models.sqlimport
                     if (file.EndsWith(".sql"))
                     {
                         sqlcounter++;
-                        filetoimport = StringUtils.splitPath(file)[1];
+                        filetoimport = sqlbox.commons.StringUtils.splitPath(file)[1];
                     }
                 }
                 if (sqlcounter!=1)

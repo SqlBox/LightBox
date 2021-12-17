@@ -217,7 +217,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Firedump.Properties.Resources.Database_128;
+            this.pictureBox1.Image = global::Lightbox.Properties.Resources.Database_128;
             this.pictureBox1.Location = new System.Drawing.Point(21, 27);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(119, 123);

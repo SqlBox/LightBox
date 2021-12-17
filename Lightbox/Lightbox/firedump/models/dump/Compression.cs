@@ -1,6 +1,5 @@
 ﻿using Firedump.models.configuration.dynamicconfig;
 using Firedump.models.configuration.jsonconfig;
-using Firedump.utils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -181,20 +180,10 @@ namespace Firedump.models.dump
             Console.WriteLine("Compression7z arguments: "+arguments.ToString());
 
             string f7zip = "resources\\7z64\\7z.exe";
-            if (IsTest)
-            {
-                if (OS.IsWindowsServer())
-                    f7zip = BUILD_SERVER_ZIP_PATH64;
-            }
               
             if (configurationManagerInstance.compressConfigInstance.use32bit)
             {
-                f7zip = "resources\\7z\\7z.exe";
-                if (IsTest)
-                {
-                    if (OS.IsWindowsServer())
-                        f7zip = BUILD_SERVER_ZIP_PATH32;
-                }                    
+                f7zip = "resources\\7z\\7z.exe";                 
             }
 
             proc = new Process
@@ -279,20 +268,10 @@ namespace Firedump.models.dump
             Directory.CreateDirectory(config.decompressDirectory);
 
             string f7zip = "resources\\7z64\\7z.exe";
-            if (IsTest)
-            {
-                if (OS.IsWindowsServer())
-                    f7zip = BUILD_SERVER_ZIP_PATH64;
-            }
 
             if (configurationManagerInstance.compressConfigInstance.use32bit)
             {
                 f7zip = "resources\\7z\\7z.exe";
-                if (IsTest)
-                {
-                    if (OS.IsWindowsServer())
-                        f7zip = BUILD_SERVER_ZIP_PATH32;
-                }
             }
 
             proc = new Process

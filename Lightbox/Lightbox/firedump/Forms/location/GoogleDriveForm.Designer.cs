@@ -139,7 +139,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Firedump.Properties.Resources.googeldriveicon;
+            this.pictureBox1.Image = global::Lightbox.Properties.Resources.googeldriveicon;
             this.pictureBox1.Location = new System.Drawing.Point(663, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(40, 38);

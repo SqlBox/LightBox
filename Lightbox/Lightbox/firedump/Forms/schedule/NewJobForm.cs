@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Lightbox;
 
 namespace Firedump.Forms.schedule
 {
@@ -17,15 +18,15 @@ namespace Firedump.Forms.schedule
         public delegate void onSetJobDetails(JobDetail jobDetail);
         public event onSetJobDetails setJobDetails;
         private List<string> tables;
-        private firedumpdbDataSet.backup_locationsDataTable loctable;
+        private LightboxdbDataSet.backup_locationsDataTable loctable;
 
         private void OnSetJobDetails(JobDetail jobDetail)
         {
             setJobDetails?.Invoke(jobDetail);
         }
 
-        private firedumpdbDataSet.mysql_serversDataTable serverData;
-        private firedumpdbDataSetTableAdapters.mysql_serversTableAdapter mysql_serversAdapter = new firedumpdbDataSetTableAdapters.mysql_serversTableAdapter();
+        private Lightbox.LightboxdbDataSet.sql_serversDataTable serverData;
+        private Lightbox.LightboxdbDataSetTableAdapters.sql_serversTableAdapter mysql_serversAdapter = new Lightbox.LightboxdbDataSetTableAdapters.sql_serversTableAdapter();
 
         public NewJobForm()
         {
@@ -37,8 +38,8 @@ namespace Firedump.Forms.schedule
 
         private void loadlocationsCombobox()
         {
-            firedumpdbDataSetTableAdapters.backup_locationsTableAdapter locAdapter = new firedumpdbDataSetTableAdapters.backup_locationsTableAdapter();
-            loctable = new firedumpdbDataSet.backup_locationsDataTable();
+            Lightbox.LightboxdbDataSetTableAdapters.backup_locationsTableAdapter locAdapter = new Lightbox.LightboxdbDataSetTableAdapters.backup_locationsTableAdapter();
+            loctable = new Lightbox.LightboxdbDataSet.backup_locationsDataTable();
             locAdapter.Fill(loctable);
             cblocation.DataSource = loctable;
             cblocation.DisplayMember = "name";
@@ -51,8 +52,8 @@ namespace Firedump.Forms.schedule
 
         private void loadComboBoxServers()
         {
-            serverData = new firedumpdbDataSet.mysql_serversDataTable();
-            mysql_serversAdapter = new firedumpdbDataSetTableAdapters.mysql_serversTableAdapter();
+            serverData = new Lightbox.LightboxdbDataSet.sql_serversDataTable();
+            mysql_serversAdapter = new Lightbox.LightboxdbDataSetTableAdapters.sql_serversTableAdapter();
             mysql_serversAdapter.Fill(serverData);
             cmbServers.DataSource = serverData;
             cmbServers.DisplayMember = "name";
@@ -124,7 +125,7 @@ namespace Firedump.Forms.schedule
                         jobdetails.Tables.Insert(0, ibinterval.ToString());
                         jobdetails.Tables.Insert(0, "inc_enabled");
                     }
-                    jobdetails.Server = (firedumpdbDataSet.mysql_serversRow)serverData.Rows[cmbServers.SelectedIndex];
+                    jobdetails.Server = (Lightbox.LightboxdbDataSet.sql_serversRow)serverData.Rows[cmbServers.SelectedIndex];
                     jobdetails.LocationId = id;
                     jobdetails.LocationName = locname;
                     int activate = 0;
@@ -150,12 +151,12 @@ namespace Firedump.Forms.schedule
         private bool isTimeValid(int day, int hour, int minute)
         {
 
-            firedumpdbDataSetTableAdapters.schedulesTableAdapter scheduleAdapter = new firedumpdbDataSetTableAdapters.schedulesTableAdapter();
-            firedumpdbDataSet.schedulesDataTable scheduletable = new firedumpdbDataSet.schedulesDataTable();
+            Lightbox.LightboxdbDataSetTableAdapters.schedulesTableAdapter scheduleAdapter = new Lightbox.LightboxdbDataSetTableAdapters.schedulesTableAdapter();
+            Lightbox.LightboxdbDataSet.schedulesDataTable scheduletable = new Lightbox.LightboxdbDataSet.schedulesDataTable();
             scheduleAdapter.FillOrderByDate(scheduletable);
             if(scheduletable.Count > 0)
             {
-                foreach(firedumpdbDataSet.schedulesRow row in scheduletable)
+                foreach(Lightbox.LightboxdbDataSet.schedulesRow row in scheduletable)
                 {
                     if (isScheduleOverLap(row, day, hour, minute))
                         return false;
@@ -165,7 +166,7 @@ namespace Firedump.Forms.schedule
             return true;
         }
 
-        private bool isScheduleOverLap(firedumpdbDataSet.schedulesRow row,int day,int hour,int minute)
+        private bool isScheduleOverLap(Lightbox.LightboxdbDataSet.schedulesRow row,int day,int hour,int minute)
         {
             if (row.day == day && row.hours == hour && row.minutes == minute)
                 return true;

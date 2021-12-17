@@ -11,6 +11,7 @@ using MySql.Data;
 using MySql.Data.MySqlClient;
 using Firedump.models.databaseUtils;
 using System.Runtime.InteropServices;
+using Lightbox;
 
 namespace Firedump.Forms.mysql.sqlviewer
 {
@@ -27,7 +28,7 @@ namespace Firedump.Forms.mysql.sqlviewer
         private Point point = new Point();
         private IntelliSense intellform;
 
-        private mysql_servers server;
+        private sqlservers server;
         //merge whene database mysql_server gets database field
         private string database;
 
@@ -40,7 +41,7 @@ namespace Firedump.Forms.mysql.sqlviewer
             "No Limit"
         };
 
-        public SqlDbViewerForm(mysql_servers server,string database)
+        public SqlDbViewerForm(sqlservers server,string database)
         {
             InitializeComponent();          
             DbConnection connection = DbConnection.Instance();

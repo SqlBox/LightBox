@@ -17,8 +17,8 @@ namespace Firedump.service
         private MySqlDumpAdapter mysqldumpAdapter;
         private LocationAdapterManager locationAdapterManager;
         private DumpResultSet result;
-        private firedumpdbDataSet.schedulesRow schedulesRow;
-        private firedumpdbDataSet.mysql_serversRow server;
+        private Lightbox.LightboxdbDataSet.schedulesRow schedulesRow;
+        private Lightbox.LightboxdbDataSet.sql_serversRow server;
 
 
         public ScheduleManager()
@@ -31,7 +31,7 @@ namespace Firedump.service
             //cancel location/upload process
         }
 
-        internal void setSchedule(firedumpdbDataSet.schedulesRow schedulesRow)
+        internal void setSchedule(Lightbox.LightboxdbDataSet.schedulesRow schedulesRow)
         {
             this.schedulesRow = schedulesRow;
         }
@@ -39,10 +39,10 @@ namespace Firedump.service
        
         internal void Start()
         {
-            List<string> tables = utils.StringUtils.extractTableListFromString(schedulesRow.tables);
+            List<string> tables =  sqlbox.commons.StringUtils.extractTableListFromString(schedulesRow.tables);
             string database = schedulesRow.database;
-            firedumpdbDataSetTableAdapters.mysql_serversTableAdapter serveradapter = new firedumpdbDataSetTableAdapters.mysql_serversTableAdapter();
-            firedumpdbDataSet.mysql_serversDataTable servertable = new firedumpdbDataSet.mysql_serversDataTable();
+            Lightbox.LightboxdbDataSetTableAdapters.sql_serversTableAdapter serveradapter = new Lightbox.LightboxdbDataSetTableAdapters.sql_serversTableAdapter();
+            Lightbox.LightboxdbDataSet.sql_serversDataTable servertable = new Lightbox.LightboxdbDataSet.sql_serversDataTable();
             serveradapter.FillById(servertable, schedulesRow.server_id);
 
            
@@ -117,20 +117,20 @@ namespace Firedump.service
                 {
                     List<int> locations = new List<int>();
                     //get schedule_save_location data table by schedule ID
-                    firedumpdbDataSetTableAdapters.schedule_save_locationsTableAdapter savelocAdapter = new firedumpdbDataSetTableAdapters.schedule_save_locationsTableAdapter();
-                    firedumpdbDataSet.schedule_save_locationsDataTable saveloctable = new firedumpdbDataSet.schedule_save_locationsDataTable();
+                    Lightbox.LightboxdbDataSetTableAdapters.schedule_save_locationsTableAdapter savelocAdapter = new Lightbox.LightboxdbDataSetTableAdapters.schedule_save_locationsTableAdapter();
+                    Lightbox.LightboxdbDataSet.schedule_save_locationsDataTable saveloctable = new Lightbox.LightboxdbDataSet.schedule_save_locationsDataTable();
                     savelocAdapter.FillByScheduleId(saveloctable,schedulesRow.id);
-
+                    
                     if(saveloctable.Count > 0)
                     {
                         //File.AppendAllText(@"servicelog.txt", "saveloctable.Count > 0");
                         //now get backuplocations by backuplocationID
                         try {
-                            firedumpdbDataSetTableAdapters.backup_locationsTableAdapter backupAdapter = new firedumpdbDataSetTableAdapters.backup_locationsTableAdapter();
-                            firedumpdbDataSet.backup_locationsDataTable backuptable = new firedumpdbDataSet.backup_locationsDataTable();
+                            Lightbox.LightboxdbDataSetTableAdapters.backup_locationsTableAdapter backupAdapter = new Lightbox.LightboxdbDataSetTableAdapters.backup_locationsTableAdapter();
+                            Lightbox.LightboxdbDataSet.backup_locationsDataTable backuptable = new Lightbox.LightboxdbDataSet.backup_locationsDataTable();
                             for (int i = 0; i < saveloctable.Count; i++)
                             {
-                                firedumpdbDataSet.backup_locationsDataTable temp = backupAdapter.GetDataByID(saveloctable[i].backup_location_id);
+                                Lightbox.LightboxdbDataSet.backup_locationsDataTable temp = backupAdapter.GetDataByID(saveloctable[i].backup_location_id);
                                 locations.Add((int)temp[0].id);
                                 //File.AppendAllText(@"servicelog.txt", "Addbackup_locationsRow " + temp[0].id + temp[0].name);
                             }

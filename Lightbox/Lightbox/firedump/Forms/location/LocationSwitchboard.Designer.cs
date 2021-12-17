@@ -40,13 +40,13 @@
             this.bGoogleDrive = new System.Windows.Forms.Button();
             this.cmbName = new System.Windows.Forms.ComboBox();
             this.backuplocationsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.firedumpdbDataSet = new Firedump.firedumpdbDataSet();
+            this.firedumpdbDataSet = new Lightbox.LightboxdbDataSet();
             this.bAdd = new System.Windows.Forms.Button();
             this.tbPath = new System.Windows.Forms.TextBox();
             this.lName = new System.Windows.Forms.Label();
             this.lPath = new System.Windows.Forms.Label();
             this.bDelete = new System.Windows.Forms.Button();
-            this.backup_locationsTableAdapter = new Firedump.firedumpdbDataSetTableAdapters.backup_locationsTableAdapter();
+            this.backup_locationsTableAdapter = new Lightbox.LightboxdbDataSetTableAdapters.backup_locationsTableAdapter();
             this.bEdit = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
@@ -108,7 +108,7 @@
             // 
             // pictureBox5
             // 
-            this.pictureBox5.Image = global::Firedump.Properties.Resources.ftpicon;
+            this.pictureBox5.Image = global::Lightbox.Properties.Resources.ftpicon;
             this.pictureBox5.Location = new System.Drawing.Point(21, 116);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(52, 52);
@@ -119,7 +119,7 @@
             // 
             // pictureBox4
             // 
-            this.pictureBox4.Image = global::Firedump.Properties.Resources.mycomputericon;
+            this.pictureBox4.Image = global::Lightbox.Properties.Resources.mycomputericon;
             this.pictureBox4.Location = new System.Drawing.Point(21, 39);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(52, 52);
@@ -130,7 +130,7 @@
             // 
             // pictureBox3
             // 
-            this.pictureBox3.Image = global::Firedump.Properties.Resources.googeldriveicon;
+            this.pictureBox3.Image = global::Lightbox.Properties.Resources.googeldriveicon;
             this.pictureBox3.Location = new System.Drawing.Point(279, 116);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(52, 52);
@@ -141,7 +141,7 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = global::Firedump.Properties.Resources.dropboxicon;
+            this.pictureBox2.Image = global::Lightbox.Properties.Resources.dropboxicon;
             this.pictureBox2.Location = new System.Drawing.Point(279, 39);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(52, 52);
@@ -246,7 +246,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Firedump.Properties.Resources.delete_icon;
+            this.pictureBox1.Image = global::Lightbox.Properties.Resources.delete_icon;
             this.pictureBox1.Location = new System.Drawing.Point(33, 191);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(29, 23);
@@ -297,9 +297,9 @@
         private System.Windows.Forms.Label lName;
         private System.Windows.Forms.Label lPath;
         private System.Windows.Forms.Button bDelete;
-        private firedumpdbDataSet firedumpdbDataSet;
+        private Lightbox.LightboxdbDataSet firedumpdbDataSet;
         private System.Windows.Forms.BindingSource backuplocationsBindingSource;
-        private firedumpdbDataSetTableAdapters.backup_locationsTableAdapter backup_locationsTableAdapter;
+        private Lightbox.LightboxdbDataSetTableAdapters.backup_locationsTableAdapter backup_locationsTableAdapter;
         private System.Windows.Forms.Button bEdit;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
